@@ -3,7 +3,7 @@ import spacSpaceLogo from '../../../public/icons/spacSpaceLogo.svg';
 
 export default function Footer() {
   return (
-    <footer className="relative bottom-0 flex flex-col w-full h-[32.4rem] text-[#3F3F3F] font-[500]  pl-[8rem] bg-[url('/icons/footerBackground.svg')]">
+    <footer className="relative bottom-0 flex flex-col w-full h-[32.4rem] text-[#3F3F3F] font-[500] pl-[8rem] bg-[url('/icons/footerBackground.svg')]">
       <Image src={spacSpaceLogo} alt="spacspace" className="mt-[6rem]" />
       <span className="text-[2rem] font-[600] mt-[3.7rem]">CONTACT</span>
       <div className="flex justify-between">
