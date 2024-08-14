@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import spacSpaceLogo from '../../../public/icons/spacSpaceLogo.svg';
+import spacSpaceLogo from '@/public/icons/spacSpaceLogo.svg';
 
 export default function Footer() {
   return (
