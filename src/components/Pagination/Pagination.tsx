@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 import Image from 'next/image';
-import rightArrow from '../../../public/icons/rightArrow.svg';
+import paginationArrow from '@/public/icons/paginationArrow.svg';
 
 type PaginationProps = {
   nowPage: number;
@@ -29,7 +29,7 @@ export default function Pagination({ nowPage, totalPage, setNowPage, name }: Pag
         }}
         disabled={nowPage === 1}
       >
-        <Image src={rightArrow} className="rotate-180" alt="leftArrow" />
+        <Image src={paginationArrow} className="rotate-180" alt="leftArrow" />
       </button>
       {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(i =>
         firstNum + i <= totalPage ? (
@@ -59,7 +59,7 @@ export default function Pagination({ nowPage, totalPage, setNowPage, name }: Pag
         }}
         disabled={nowPage === totalPage}
       >
-        <Image src={rightArrow} alt="rightArrow" />
+        <Image src={paginationArrow} alt="rightArrow" />
       </button>
     </div>
   );
