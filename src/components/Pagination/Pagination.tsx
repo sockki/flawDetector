@@ -15,6 +15,7 @@ type PaginationProps = {
 
 export default function Pagination({ nowPage, totalPage, setNowPage, name }: PaginationProps) {
   const [currentPage, setCurrentPage] = useState<number>(nowPage);
+  const pageContent = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   const router = useRouter();
   const firstNum = currentPage - (((currentPage - 1) % 10) + 1) + 1;
   return (
@@ -31,7 +32,7 @@ export default function Pagination({ nowPage, totalPage, setNowPage, name }: Pag
       >
         <Image src={paginationArrow} className="rotate-180" alt="leftArrow" />
       </button>
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(i =>
+      {pageContent.map(i =>
         firstNum + i <= totalPage ? (
           <button
             type="button"
