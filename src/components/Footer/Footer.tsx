@@ -4,11 +4,11 @@ import spacSpaceLogo from '@/public/icons/spacSpaceLogo.svg';
 
 export default function Footer() {
   return (
-    <footer className="relative bottom-0 flex flex-col w-full h-[32.4rem] text-[#3F3F3F] font-[500] pl-[8rem] bg-[url('/icons/footerBackground.svg')]">
+    <footer className="relative bottom-0 flex flex-col w-full h-[32.4rem] bg-[#FAF8FF] text-[#3F3F3F] font-medium pl-[8rem] bg-[url('/icons/footerBackground.svg')]">
       <h1>
         <Image src={spacSpaceLogo} alt="spacspace" className="mt-[6rem]" />
       </h1>
-      <span className="text-[2rem] font-[600] mt-[3.7rem]">CONTACT</span>
+      <span className="text-[2rem] font-bold mt-[3.7rem]">CONTACT</span>
       <div className="flex justify-between text-[1.6rem]">
         <address className="mt-[0.8rem] flex not-italic">
           <div className="flex flex-col gap-[0.4rem]">
