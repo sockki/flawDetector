@@ -1,5 +1,5 @@
-import TestPagination from '@/components/Pagination/TestPagination';
+import Pagination from '@/components/Pagination/Pagination';
 
 export default function page({ params }: { params: { id: string } }) {
-  return <TestPagination params={params} />;
+  return <Pagination nowPage={Number(params.id)} name="min" totalPage={20} />;
 }
