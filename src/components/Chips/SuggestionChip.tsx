@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 
 type SuggestionChipProps = {
-  variant: 'new' | 'hot' | 'warm' | 'notification' | 'report';
+  variant: 'new' | 'hot' | 'warn' | 'notification' | 'report';
   label: string;
   isActive?: boolean;
 };
@@ -12,7 +12,7 @@ export default function SuggestionChip({ variant, label, isActive = true }: Sugg
   const variantClasses = {
     new: 'text-white bg-system-assist',
     hot: 'text-white bg-system-warning',
-    warm: 'text-system-warning bg-red-light',
+    warn: 'text-system-warning bg-red-light',
     notification: 'text-primary-500 bg-primary-50',
     report: 'text-gray-default bg-gray-light',
   };
