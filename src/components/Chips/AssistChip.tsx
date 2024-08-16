@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 
 type AssistChipProps = {
-  variant: 'outline' | 'elevated' | 'outline-primary';
+  variant?: 'outline' | 'elevated' | 'outline-primary';
   label: string;
   disabled?: boolean;
 };
