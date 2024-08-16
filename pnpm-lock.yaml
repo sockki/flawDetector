@@ -8743,6 +8743,12 @@ packages:
       }
     engines: { node: ^14.18.0 || >=16.0.0 }
 
+  tailwind-merge@2.5.2:
+    resolution:
+      {
+        integrity: sha512-kjEBm+pvD+6eAwzJL2Bi+02/9LFLal1Gs61+QB7HvTfQQ0aXwC5LGT8PEt1gS0CWKktKe6ysPTAy3cBC5MeiIg==,
+      }
+
   tailwindcss@3.4.9:
     resolution:
       {
