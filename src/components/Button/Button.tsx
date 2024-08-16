@@ -10,11 +10,11 @@ interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
 export default function Button({
   className,
   children,
-  type,
+  type = 'button',
   variant = 'filled',
   shape = 'rounded',
   size = 'default',
-  disabled = false,
+  disabled,
   ...rest
 }: ButtonProps) {
   const baseStyle = 'flex items-center justify-center outline-none';
