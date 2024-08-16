@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import PaginationArrow from '@/public/icons/paginationArrow.svg';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import Image from 'next/image';
-import paginationArrow from '@/public/icons/paginationArrow.svg';
 
 type PaginationProps = {
   nowPage: number;
@@ -28,7 +27,7 @@ export default function Pagination({ nowPage, totalPage, name }: PaginationProps
         }}
         disabled={nowPage === 1}
       >
-        <Image src={paginationArrow} className="rotate-180" alt="leftArrow" />
+        <PaginationArrow className="rotate-180" />
       </button>
       {pageContent.map(i =>
         firstNum + i <= totalPage ? (
@@ -56,7 +55,7 @@ export default function Pagination({ nowPage, totalPage, name }: PaginationProps
         }}
         disabled={nowPage === totalPage}
       >
-        <Image src={paginationArrow} alt="rightArrow" />
+        <PaginationArrow />
       </button>
     </div>
   );
