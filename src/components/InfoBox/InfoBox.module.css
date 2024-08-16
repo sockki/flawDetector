@@ -1,0 +1,90 @@
+.component {
+  width: 100%;
+  height: auto;
+  padding: 1em;
+  margin: 1em auto;
+  gap: 0.5em;
+  border-radius: 12px;
+  color: var(--Text-gray-dark, #3F3F3F);
+  background-color: #fff;
+  border: 2px solid transparent;
+  cursor: default;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+  gap: 1em;
+  flex-wrap: nowrap;
+}
+
+.title {
+  font-family: Inter, sans-serif;
+  font-size: 1.5em;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.location {
+  font-weight: bold;
+  padding: 0.5em 1em;
+  border-radius: 16px;
+  font-size: 0.875em;
+  border: 2px solid;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.content p {
+  font-family: Inter, sans-serif;
+  font-size: 1.125em;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  text-align: left;
+  margin: 0.5em 0;
+}
+
+.red {
+  background: var(--Background-red-light, #FFEFEF);
+}
+
+.red .title, .red .location {
+  color: var(--Accent-red, #FF6D6D);
+}
+
+.red .location {
+  border-color: var(--Accent-red, #FF6D6D);
+}
+
+.primary {
+  background: var(--Background-purple-light, #FAF8FF);
+}
+
+.primary .title, .primary .location {
+  color: #6100FF;
+}
+
+.primary .location {
+  border-color: #6100FF;
+}
+
+.grey {
+  background: var(--Background-gray-light, #F1F1F1);
+}
+
+.grey .title {
+  color: var(--Text-gray-dark, #3F3F3F);
+}
+
+.grey .location {
+  color: var(--Text-gray-dark, #3F3F3F);
+  border-color: var(--Text-gray-dark, #3F3F3F);
+}
+
+.grey .content p {
+  color: #969696;
+}
