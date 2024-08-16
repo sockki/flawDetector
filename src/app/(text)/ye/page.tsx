@@ -1,20 +1,20 @@
-'use client';
+// 'use client';
 
 import AssistChip from '@/components/Chips/AssistChip';
 import FilterChip from '@/components/Chips/FilterChip';
 import InputChip from '@/components/Chips/InputChip';
 import SuggestionChip from '@/components/Chips/SuggestionChip';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const OPTION = ['옵션', '옵션1', '옵션2'];
 
 export default function TestPage() {
-  const [option, setOption] = useState('');
+  // const [option, setOption] = useState('');
 
-  const handleSelect = (v: string) => {
-    setOption(() => v);
-  };
-  console.log(option);
+  // const handleSelect = (v: string) => {
+  //   setOption(() => v);
+  // };
+  // console.log(option);
 
   return (
     <>
@@ -50,8 +50,8 @@ export default function TestPage() {
       <hr />
       <br />
       <h1 className="mb-3 text-xl font-bold">FilterChip</h1>
-      <FilterChip label="label" options={OPTION} hasIcon onSelect={handleSelect} />
-      <FilterChip label="label" options={OPTION} onSelect={handleSelect} />
+      <FilterChip label="label" options={OPTION} hasIcon onSelect={() => {}} />
+      <FilterChip label="label" options={OPTION} onSelect={() => {}} />
     </>
   );
 }
