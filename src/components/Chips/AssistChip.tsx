@@ -14,14 +14,14 @@ export default function AssistChip({ variant = 'outline', label, disabled }: Ass
     outline: 'border border-[#3F3F3F] bg-black bg-opacity-0',
     elevated: 'bg-purple-light hover:bg-[#7E5AFF] focus:bg-[#7E5AFF]',
     'outline-primary':
-      'border border-primary-300 bg-purple-light text-primary-500 hover:bg-[#7E5AFF] focus:bg-[#7E5AFF]',
+      'border border-primary-300 bg-purple-light text-primary-500 hover:bg-[#7E5AFF] focus:bg-[#7E5AFF] focus:border-primary-500 ',
   };
 
   const disabledClasses = {
     outline: 'bg-white border-gray-default text-gray-default',
     elevated: 'bg-purple-light text-purple-dark hover:bg-opacity-1',
     'outline-primary':
-      'bg-purple-light border border-primary-300 text-purple-dark hover:bg-purple-light hover:bg-opacity-1',
+      'border border-primary-300 text-purple-dark hover:bg-purple-light bg-opacity-0',
   };
 
   return (
