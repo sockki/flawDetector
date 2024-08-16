@@ -7,12 +7,12 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    fontWeight: {
-      regular: '400',
-      medium: '500',
-      bold: '600',
-    },
     extend: {
+      backgroundOpacity: {
+        8: '0.08',
+        12: '0.12',
+        16: '0.16',
+      },
       boxShadow: {
         button: '0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.25)',
         drop: '0 0.2rem 1.6rem 0 rgba(0,0,0,0.25)',
@@ -51,6 +51,12 @@ const config: Config = {
         'red-light': '#ffefef',
         'gray-light': '#f1f1f1',
         'gray-dark': '#c2c2c2',
+        'gray-default': '#969696',
+      },
+      fontWeight: {
+        regular: '400',
+        medium: '500',
+        bold: '600',
       },
     },
   },
