@@ -4,17 +4,17 @@ import spacSpaceLogo from '@/public/icons/spacSpaceLogo.svg';
 
 export default function Footer() {
   return (
-    <footer className="relative bottom-0 flex flex-col w-full h-[32.4rem] bg-[#FAF8FF] text-[#3F3F3F] font-medium pl-[8rem] bg-[url('/icons/footerBackground.svg')]">
+    <footer className="relative bottom-0 flex h-[32.4rem] w-full flex-col bg-[#FAF8FF] bg-[url('/icons/footerBackground.svg')] pl-[8rem] font-medium text-[#3F3F3F]">
       <h1>
         <Image src={spacSpaceLogo} alt="spacspace" className="mt-[6rem]" />
       </h1>
-      <span className="text-[2rem] font-bold mt-[3.7rem]">CONTACT</span>
+      <span className="mt-[3.7rem] text-[2rem] font-bold">CONTACT</span>
       <div className="flex justify-between text-[1.6rem]">
         <address className="mt-[0.8rem] flex not-italic">
           <div className="flex flex-col gap-[0.4rem]">
             <div className="flex">
               <span className="text-[#969696]">(주)스팩스페이스</span>
-              <div className="flex ml-[2.6rem]">
+              <div className="ml-[2.6rem] flex">
                 <span className="text-[#969696]">대표자</span>
                 <span className="ml-[1.1rem]">염민호</span>
               </div>
@@ -22,7 +22,7 @@ export default function Footer() {
             <span>서울 강서구 마곡중앙2로 11, 3층 303호</span>
             <div>
               <span className="text-[#969696]">Email</span>
-              <a href="mailto:admin@sfacspace.com" className="text-[1.6rem] ml-[2.3rem]">
+              <a href="mailto:admin@sfacspace.com" className="ml-[2.3rem] text-[1.6rem]">
                 admin@sfacspace.com
               </a>
             </div>
@@ -42,8 +42,8 @@ export default function Footer() {
             </div>
           </div>
         </address>
-        <div className="mt-[2.2rem] mr-[8rem]">
-          <nav className="text-[#969696] underline cursor-pointer">
+        <div className="mr-[8rem] mt-[2.2rem]">
+          <nav className="cursor-pointer text-[#969696] underline">
             <ul className="flex gap-[3.2rem]">
               <li>
                 <Link href="/">회사소개</Link>
@@ -56,7 +56,7 @@ export default function Footer() {
               </li>
             </ul>
           </nav>
-          <div className="w-full text-end mt-[1.2rem]">
+          <div className="mt-[1.2rem] w-full text-end">
             <span className="text-[1.2rem]">Ⓒ Spacspace.All right reserved.</span>
           </div>
         </div>
