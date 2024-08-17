@@ -1,4 +1,5 @@
 import DBCard from '@/components/Card/DBCard';
+import DetectFileCard from '@/components/Card/DetectFileCard';
 
 export default function page() {
   return (
@@ -19,6 +20,9 @@ export default function page() {
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
           id={3}
         />
+      </div>
+      <div className="flex gap-[2.8rem]">
+        <DetectFileCard title="" caption="" detected={false} />
       </div>
     </div>
   );

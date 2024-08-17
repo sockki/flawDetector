@@ -10,7 +10,7 @@ type DBCardProps = {
 export default function DBCard({ title, date, id }: DBCardProps) {
   return (
     <div
-      className={`group flex h-[39rem] w-[31.6rem] rounded-[2rem] bg-[linear-gradient(360deg,rgba(0,0,0,0.7),rgba(255,255,255,0)),url('/images/DBCardDummyImg${id}.png')] bg-cover p-[3.6rem] transition-all duration-500 ease-in-out hover:w-[62.5rem]`}
+      className={`group flex h-[39rem] w-[31.6rem] rounded-[2rem] bg-dbCardBackground${id} bg-cover p-[3.6rem] transition-all duration-500 ease-in-out hover:w-[62.5rem]`}
     >
       <div className="flex w-full items-end justify-between">
         <div className="flex w-[13.6rem] flex-col gap-[0.8rem] group-hover:w-[42rem]">
