@@ -28,15 +28,15 @@ export default function Footer() {
           </div>
           <div className="ml-[4rem] flex flex-col gap-[0.4rem]">
             <div>
-              <span className="text-[#969696]">사업자 등록번호</span>
+              <span className="text-gray-lightText">사업자 등록번호</span>
               <span className="ml-[0.7rem]">450-87-01864</span>
             </div>
             <div>
-              <span className="text-[#969696]">대표전화</span>
+              <span className="text-gray-lightText">대표전화</span>
               <span className="ml-[1.3rem]">02-6217-1119</span>
             </div>
             <div>
-              <span className="text-[#969696]">팩스</span>
+              <span className="text-gray-lightText">팩스</span>
               <span className="ml-[3rem]">02-6217-1115</span>
             </div>
           </div>
