@@ -8,7 +8,7 @@ type ModalRootProps = {
 };
 
 export default function ModalRoot({ children, gap }: ModalRootProps) {
-  const gapSize = gap * 0.1;
+  const gapSize = gap && gap * 0.1;
   return (
     <>
       <Dimmed />
