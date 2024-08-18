@@ -15,7 +15,7 @@ export default function FilterChip({ label, options, hasIcon, onSelect }: Filter
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>('');
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const toggleDropdown = () => setIsOpen(() => !isOpen);
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false);
