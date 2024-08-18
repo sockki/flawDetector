@@ -1,5 +1,8 @@
+'use client';
+
 import { useState } from 'react';
 import Image from 'next/image';
+import { twMerge } from 'tailwind-merge';
 import { ChatBot } from '../ChatBot/ChatBot';
 
 type FloatingButtonProps = {
@@ -42,12 +45,14 @@ export function FloatingButton({ type }: FloatingButtonProps) {
         onClick={handleClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`fixed bottom-4 ${
-          type === 'ask' ? 'right-40' : 'right-4'
-        } flex items-center justify-center w-[76px] h-[76px] rounded-full shadow-lg focus:outline-none bg-white text-[#6100FF] hover:bg-[#6100FF] hover:text-white`}
+        className={twMerge(
+          'fixed bottom-4 flex items-center justify-center w-[7.6rem] h-[7.6rem] rounded-full shadow-lg focus:outline-none',
+          type === 'ask' ? 'right-40' : 'right-4',
+          isHovered ? 'bg-primary-500 text-white' : 'bg-white text-primary-500',
+        )}
       >
         {type === 'ask' ? (
-          <div className="w-[42px] h-[42px] flex items-center justify-center">
+          <div className="w-[4.2rem] h-[4.2rem] flex items-center justify-center">
             <Image
               src={isHovered ? icons.ask.hovered : icons.ask.default}
               alt="Chat Icon"
@@ -67,14 +72,14 @@ export function FloatingButton({ type }: FloatingButtonProps) {
               layout="fixed"
               objectFit="contain"
             />
-            <span className="text-[15px] font-bold">TOP</span>
+            <span className="text-[1.5rem] font-bold">TOP</span>
           </div>
         )}
       </button>
 
       {type === 'ask' && isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white w-[400px] h-[600px] rounded-lg shadow-lg flex flex-col p-4">
+          <div className="bg-white w-[40rem] h-[60rem] rounded-lg shadow-lg flex flex-col p-4">
             <button type="button" onClick={handleClick} className="self-end mb-4 p-2">
               닫기
             </button>
