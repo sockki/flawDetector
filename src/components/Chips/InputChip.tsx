@@ -40,7 +40,7 @@ export default function InputChip({
     >
       {leftIcon && <DocumentIcon />}
       <span>{label}</span>
-      {percentage !== undefined && <span className="font-medium">{percentage}%</span>}
+      {percentage && <span className="font-medium">{percentage}%</span>}
       {isRemovable && (
         <button type="button" onClick={handleRemoveClick}>
           <RemoveIcon />
