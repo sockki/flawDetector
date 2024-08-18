@@ -1,5 +1,6 @@
 import DBCard from '@/components/Card/DBCard';
 import DetectFileCard from '@/components/Card/DetectFileCard';
+import ScrapCard from '@/components/Card/ScrapCard';
 
 export default function page() {
   return (
@@ -24,6 +25,7 @@ export default function page() {
       <div className="flex gap-[2.8rem]">
         <DetectFileCard title="title" caption="caption" detected={false} />
         <DetectFileCard title="title" caption="caption" detected />
+        <ScrapCard />
       </div>
     </div>
   );
