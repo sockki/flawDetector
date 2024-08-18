@@ -19,7 +19,7 @@ export default function DetectFileCard({ caption, title, detected }: DetectFileC
       <div className="flex items-center justify-between p-[2rem]">
         <label
           className={twMerge(
-            'flex h-[3rem] w-[6rem] items-center justify-center rounded-full border-[0.1rem] border-gray-text bg-white text-[1.6rem] font-regular',
+            'flex h-[3rem] w-[6rem] items-center justify-center rounded-full border-[0.1rem] border-gray-darkText bg-white text-[1.6rem] font-regular',
             detected && 'border-primary-300 text-primary-500',
           )}
         >
@@ -34,7 +34,7 @@ export default function DetectFileCard({ caption, title, detected }: DetectFileC
         </button>
       </div>
       {dropDown && (
-        <div className="absolute right-[1.4rem] top-[5.7rem] grid h-[10.4rem] w-[7.7rem] grid-rows-2 rounded-[0.8rem] bg-white text-[2rem] font-medium leading-[2.8rem] text-gray-text shadow-[0px_4px_12px_0px_#00000014]">
+        <div className="absolute right-[1.4rem] top-[5.7rem] grid h-[10.4rem] w-[7.7rem] grid-rows-2 rounded-[0.8rem] bg-white text-[2rem] font-medium leading-[2.8rem] text-gray-darkText shadow-[0px_4px_12px_0px_#00000014]">
           <button type="button">삭제</button>
           <button type="button">공유</button>
         </div>
