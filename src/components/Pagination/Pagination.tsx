@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import PaginationArrow from '@/public/icons/paginationArrow.svg';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import Image from 'next/image';
-import paginationArrow from '@/public/icons/paginationArrow.svg';
 
 type PaginationProps = {
   nowPage: number;
@@ -21,14 +20,14 @@ export default function Pagination({ nowPage, totalPage, name }: PaginationProps
     <div className="flex w-fit gap-[0.8rem]">
       <button
         type="button"
-        className="flex justify-center items-center w-[2rem] h-[2rem] bg-none text-[1.4rem] font-[400]"
+        className="flex h-[2rem] w-[2rem] items-center justify-center bg-none text-[1.4rem] font-[400]"
         onClick={() => {
           setCurrentPage(nowPage - 1);
           router.push(`/${name}/${nowPage - 1}`);
         }}
         disabled={nowPage === 1}
       >
-        <Image src={paginationArrow} className="rotate-180" alt="leftArrow" />
+        <PaginationArrow className="rotate-180" />
       </button>
       {pageContent.map(i =>
         firstNum + i <= totalPage ? (
@@ -36,7 +35,7 @@ export default function Pagination({ nowPage, totalPage, name }: PaginationProps
             type="button"
             key={i + 1}
             className={twMerge(
-              'flex justify-center items-center w-[2rem] h-[2rem] bg-none text-[1.4rem] font-[400]',
+              'flex h-[2rem] w-[2rem] items-center justify-center bg-none text-[1.4rem] font-[400]',
               firstNum + i === nowPage ? 'text-primary-300' : '',
             )}
             onClick={() => {
@@ -48,7 +47,7 @@ export default function Pagination({ nowPage, totalPage, name }: PaginationProps
         ) : null,
       )}
       <button
-        className="flex justify-center items-center w-[2rem] h-[2rem] bg-none text-[1.4rem] font-[400]"
+        className="flex h-[2rem] w-[2rem] items-center justify-center bg-none text-[1.4rem] font-[400]"
         type="button"
         onClick={() => {
           setCurrentPage(nowPage + 1);
@@ -56,7 +55,7 @@ export default function Pagination({ nowPage, totalPage, name }: PaginationProps
         }}
         disabled={nowPage === totalPage}
       >
-        <Image src={paginationArrow} alt="rightArrow" />
+        <PaginationArrow />
       </button>
     </div>
   );
