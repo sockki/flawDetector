@@ -2,8 +2,8 @@ import Button from '@/components/Button/Button';
 
 export default function Page() {
   return (
-    <div className="flex flex-col gap-10 justify-center items-center h-screen">
-      <div className="text-center mb-4">
+    <div className="h-screen flex-col items-center justify-center gap-10">
+      <div className="mb-4 text-center">
         <p>Filled</p>
       </div>
       <div className="flex gap-10">
@@ -22,7 +22,7 @@ export default function Page() {
         </Button>
       </div>
 
-      <div className="text-center mb-4">
+      <div className="mb-4 text-center">
         <p>Outlined</p>
       </div>
       <div className="flex gap-10">
@@ -40,7 +40,7 @@ export default function Page() {
           button
         </Button>
       </div>
-      <div className="text-center mb-4">
+      <div className="mb-4 text-center">
         <p>Tonal</p>
       </div>
       <div className="flex gap-10">
