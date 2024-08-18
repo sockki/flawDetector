@@ -4,7 +4,7 @@ import Dimmed from '../common/Dimmed';
 
 type ModalRootProps = {
   children: ReactNode;
-  gap: number;
+  gap?: number;
 };
 
 export default function ModalRoot({ children, gap }: ModalRootProps) {
