@@ -6,7 +6,7 @@ interface InputProps extends ComponentPropsWithRef<'input'> {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { className, variant = 'default', disabled, ...rest },
+  { className, variant = 'default', disabled = false, ...rest },
   ref,
 ) {
   const baseStyle =
