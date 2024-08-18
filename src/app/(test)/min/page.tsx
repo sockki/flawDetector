@@ -25,7 +25,10 @@ export default function page() {
       <div className="flex gap-[2.8rem]">
         <DetectFileCard title="title" caption="caption" detected={false} />
         <DetectFileCard title="title" caption="caption" detected />
-        <ScrapCard />
+        <ScrapCard
+          title="Microsoft의 여러 보안 취약점에 대한 CNNVD의 보고서 및 기타 취약점에 대한 보고서"
+          date="2024.03.08 13:30:24"
+        />
       </div>
     </div>
   );
