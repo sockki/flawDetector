@@ -3,6 +3,7 @@ import DBCard from '@/components/Card/DBCard';
 import DetectFileCard from '@/components/Card/DetectFileCard';
 import ScrapCard from '@/components/Card/ScrapCard';
 import Pagination from '@/components/Pagination/Pagination';
+import dummyImg from '@/public/images/DBCardDummyImg1.png';
 
 export default function page({ searchParams }: { searchParams: { page: string } }) {
   return (
@@ -32,8 +33,22 @@ export default function page({ searchParams }: { searchParams: { page: string } 
           date="2024.03.08 13:30:24"
         />
       </div>
-      <div className="flex gap-[2.8rem]">
-        <ArticleCard />
+      <div className="flex flex-col gap-[2.8rem]">
+        <ArticleCard
+          label="HOT"
+          title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
+          company="Microsoft"
+          content="그런 일은"
+          date="2일 전"
+        />
+        <ArticleCard
+          label="HOT"
+          title="2023년 12월 CNNVD 호환 서비스 신제품 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표"
+          company="Microsoft"
+          content="그런 일은 그런 일은 그런 일은 그런 일은 그런 일은"
+          date="2일 전"
+          imageSrc={dummyImg}
+        />
       </div>
       <Pagination nowPage={searchParams.page ? Number(searchParams.page) : 1} totalPage={20} />
     </div>
