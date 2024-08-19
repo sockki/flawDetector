@@ -3,11 +3,11 @@
 import { twMerge } from 'tailwind-merge';
 import { ComponentPropsWithoutRef } from 'react';
 
-interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
+type ButtonProps = ComponentPropsWithoutRef<'button'> & {
   variant?: 'filled' | 'outlined' | 'tonal';
   shape?: 'rectangle' | 'rounded';
   size?: 'small' | 'default' | 'large';
-}
+};
 
 export default function Button({
   className,
