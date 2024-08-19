@@ -33,7 +33,7 @@ export default function DBCard({ title, date, bgId }: DBCardProps) {
             {date}
           </span>
         </div>
-        <DBCardArrowIcon alt="dbCardArrow" className="z-20 cursor-pointer" />
+        <DBCardArrowIcon className="z-20 cursor-pointer" />
       </div>
     </div>
   );

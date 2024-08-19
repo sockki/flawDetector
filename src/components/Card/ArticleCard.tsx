@@ -37,10 +37,10 @@ export default function ArticleCard({
       )}
       <div className={twMerge('flex w-full flex-col gap-[2.4rem]', imageSrc && 'w-[45.9rem]')}>
         <div className="flex flex-col">
-          <header
+          <div
             className={twMerge('flex items-end gap-[0.8rem]', imageSrc && 'flex-col items-start')}
           >
-            <SuggestionChip label={label} variant={label} />
+            <SuggestionChip variant={label} />
             <div className={twMerge('w-full', imageSrc && 'flex h-[4.8rem] items-center')}>
               <h1
                 className={twMerge(
@@ -51,29 +51,29 @@ export default function ArticleCard({
                 {title}
               </h1>
             </div>
-          </header>
+          </div>
           <address className="mt-[0.8rem] text-[1.6rem] font-regular not-italic leading-[1.946rem] text-[#adadad]">
             {company}
           </address>
         </div>
-        <main className="h-fit w-full rounded-[1.6rem] bg-gray-light p-[2rem]">
+        <div className="h-fit w-full rounded-[1.6rem] bg-gray-light p-[2rem]">
           <span className="line-clamp-2 text-[1.6rem] font-regular leading-[1.936rem] text-[#797979]">
             {content}
           </span>
-        </main>
-        <footer className="flex justify-between">
+        </div>
+        <div className="flex justify-between">
           <div className="flex gap-[1.2rem]">
             <button type="button">
-              <PinIcon alt="PinIcon" />
+              <PinIcon />
             </button>
             <button type="button">
-              <ExternalLinkIcon alt="ExternalLinkIcon" />
+              <ExternalLinkIcon />
             </button>
           </div>
           <span className="text-[1.6rem] font-regular leading-[1.936rem] text-[#a2a2a2]">
             {date}
           </span>
-        </footer>
+        </div>
       </div>
     </article>
   );
