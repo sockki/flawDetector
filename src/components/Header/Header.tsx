@@ -13,9 +13,9 @@ export default function Header() {
             <LogoIcon />
           </Link>
         </h1>
-        <span className="ml-[10rem] text-[1.8rem] font-[500] text-[#3f3f3f]">취약점 DB</span>
+        <span className="ml-[10rem] text-[1.8rem] font-[500] text-gray-black">취약점 DB</span>
       </div>
-      <div className="mr-[8rem] text-[1.8rem] font-[500] text-[#3f3f3f]">MY 저장소</div>
+      <div className="mr-[8rem] text-[1.8rem] font-[500] text-gray-black">MY 저장소</div>
     </header>
   );
 }
