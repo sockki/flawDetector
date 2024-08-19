@@ -6,6 +6,3 @@ export default function page() {
       <Input placeholder="Placeholder" />
       <Input placeholder="Placeholder" variant="error" />
       <Input placeholder="Placeholder" disabled />
-    </div>
-  );
-}
