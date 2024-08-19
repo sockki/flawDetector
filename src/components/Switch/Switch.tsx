@@ -7,16 +7,16 @@ import SwitchCross from '../../../public/icons/switchCross.svg';
 
 type SwitchProps = ComponentProps<typeof SwitchPrimitive.Root> & {
   onCheckedChange: (checked: boolean) => void;
-  checked: boolean;
+  isChecked: boolean;
   disabled?: boolean;
-  Icon?: boolean;
+  hasIcon?: boolean;
 };
 
 export function Switch({
   onCheckedChange,
-  checked,
+  isChecked,
   disabled = false,
-  Icon = false,
+  hasIcon = false,
   ...rest
 }: SwitchProps) {
   const rootStyles = twMerge(
@@ -30,7 +30,7 @@ export function Switch({
 
   const secondThumbStyles = twMerge(
     'absolute flex rounded-full items-center justify-center transition-transform duration-300 data-[state=checked]:w-[2.4rem] data-[state=checked]:h-[2.4rem] data-[state=checked]:translate-x-[2.0rem] data-[state=unchecked]:translate-x-0 data-[state=checked]:bg-white data-[state=unchecked]:bg-[#79747E] data-[state=unchecked]:group-hover:bg-[#3F3F3F] data-[state=unchecked]:group-active:z-20 data-[state=checked]:group-active:h-[2.8rem] data-[state=unchecked]:group-active:h-[2.8rem] data-[state=checked]:group-active:w-[2.8rem] data-[state=unchecked]:group-active:w-[2.8rem] data-[state=checked]:group-active:translate-x-[1.8rem] data-[state=unchecked]:group-active:translate-x-[-0.4rem] data-[state=unchecked]:group-active:bg-[#3F3F3F] data-[state=checked]:group-active:duration-0 data-[state=unchecked]:group-active:duration-0',
-    Icon
+    hasIcon
       ? 'data-[state=unchecked]:h-[2.4rem] data-[state=unchecked]:w-[2.4rem]'
       : 'data-[state=unchecked]:h-[1.6rem] data-[state=unchecked]:w-[1.6rem]',
   );
@@ -38,14 +38,14 @@ export function Switch({
   return (
     <SwitchPrimitive.Root
       onCheckedChange={onCheckedChange}
-      checked={checked}
+      checked={isChecked}
       disabled={disabled}
       className={rootStyles}
       {...rest}
     >
-      <SwitchPrimitive.SwitchThumb className={firstThumbStyles} />
+      <SwitchPrimitive.Thumb className={firstThumbStyles} />
       <SwitchPrimitive.Thumb className={secondThumbStyles}>
-        {Icon && <Image src={checked ? SwitchCheck : SwitchCross} alt="" />}
+        {hasIcon && <Image src={isChecked ? SwitchCheck : SwitchCross} alt="" />}
       </SwitchPrimitive.Thumb>
     </SwitchPrimitive.Root>
   );
