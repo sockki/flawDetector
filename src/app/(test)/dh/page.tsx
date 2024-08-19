@@ -11,7 +11,7 @@ export default function Dh() {
   };
   return (
     <div>
-      <Switch onCheckedChange={handleCheckedChange} checked={isChecked} />
+      <Switch onCheckedChange={handleCheckedChange} isChecked={isChecked} />
       test
     </div>
   );
