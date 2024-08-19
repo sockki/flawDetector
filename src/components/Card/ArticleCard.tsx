@@ -1,10 +1,11 @@
 import Image, { StaticImageData } from 'next/image';
-import PinIcon from '@/public/icons/pinIcon.svg';
-import ExternalLinkIcon from '@/public/icons/externalLinkIcon.svg';
+
 import { twMerge } from 'tailwind-merge';
+import { ExternalLinkIcon, PinIcon } from '@/public/index';
+import SuggestionChip from '../Chips/SuggestionChip';
 
 type ArticleCardProps = {
-  label: 'HOT' | 'NEW';
+  label: 'new' | 'hot' | 'warn' | 'notification' | 'report';
   imageSrc?: StaticImageData;
   title: string;
   company: string;
@@ -39,9 +40,7 @@ export default function ArticleCard({
           <header
             className={twMerge('flex items-end gap-[0.8rem]', imageSrc && 'flex-col items-start')}
           >
-            <label className="flex h-[3.5rem] w-[5.9rem] items-center justify-center rounded-full bg-system-warning px-[1.2] py-[0.8rem] text-[1.6rem] font-bold leading-[1.936rem] text-white">
-              {label}
-            </label>
+            <SuggestionChip label={label} variant={label} />
             <div className={twMerge('w-full', imageSrc && 'flex h-[4.8rem] items-center')}>
               <h1
                 className={twMerge(
@@ -65,10 +64,10 @@ export default function ArticleCard({
         <footer className="flex justify-between">
           <div className="flex gap-[1.2rem]">
             <button type="button">
-              <Image src={PinIcon} alt="PinIcon" />
+              <PinIcon alt="PinIcon" />
             </button>
             <button type="button">
-              <Image src={ExternalLinkIcon} alt="ExternalLinkIcon" />
+              <ExternalLinkIcon alt="ExternalLinkIcon" />
             </button>
           </div>
           <span className="text-[1.6rem] font-regular leading-[1.936rem] text-[#a2a2a2]">

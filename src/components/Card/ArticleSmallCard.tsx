@@ -1,10 +1,10 @@
 import Image, { StaticImageData } from 'next/image';
-import PinIcon from '@/public/icons/pinIcon.svg';
-import ShareIcon from '@/public/icons/ShareIcon.svg';
 import { twMerge } from 'tailwind-merge';
+import { BigPinIcon, ShareIcon } from '@/public/index';
+import SuggestionChip from '../Chips/SuggestionChip';
 
 type ArticleSmallCardProps = {
-  label: 'HOT' | 'NEW';
+  label: 'new' | 'hot' | 'warn' | 'notification' | 'report';
   imageSrc?: StaticImageData;
   title: string;
   content: string;
@@ -37,9 +37,7 @@ export default function ArticleSmallCard({
       )}
       <div className="flex flex-col">
         <header className={twMerge('flex flex-col gap-[0.8rem]')}>
-          <label className="flex h-[3.5rem] w-[5.9rem] items-center justify-center rounded-full bg-system-warning px-[1.2] py-[0.8rem] text-[1.6rem] font-bold leading-[1.936rem] text-white">
-            {label}
-          </label>
+          <SuggestionChip label={label} variant={label} />
           <div className="flex h-fit w-full items-center">
             <h1 className="line-clamp-2 text-[2.4rem] font-medium leading-[3.6rem]">{title}</h1>
           </div>
@@ -51,10 +49,10 @@ export default function ArticleSmallCard({
       <footer className="flex items-center justify-between">
         <div className="flex gap-[1.2rem]">
           <button type="button">
-            <Image src={PinIcon} alt="PinIcon" className="h-[3.2rem] w-[3.2rem]" />
+            <BigPinIcon alt="PinIcon" className="h-[3.2rem] w-[3.2rem]" />
           </button>
           <button type="button">
-            <Image src={ShareIcon} alt="ExternalLinkIcon" />
+            <ShareIcon alt="ExternalLinkIcon" />
           </button>
         </div>
         <span className="text-[1.6rem] font-regular leading-[1.936rem] text-[#a2a2a2]">{date}</span>

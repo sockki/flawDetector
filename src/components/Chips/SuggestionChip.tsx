@@ -7,7 +7,7 @@ type SuggestionChipProps = {
 };
 export default function SuggestionChip({ variant, label, isActive = true }: SuggestionChipProps) {
   const baseClasses =
-    'py-[0.8rem] px-[1.2rem] rounded-full bg-[#e8e8e8] text-gray-dark font-bold text-[1.6rem] inline-block';
+    'py-[0.8rem] px-[1.2rem] rounded-full bg-[#e8e8e8] text-gray-dark font-bold text-[1.6rem] inline-block w-[5.9rem]';
 
   const variantClasses = {
     new: 'text-white bg-system-assist',
@@ -17,5 +17,9 @@ export default function SuggestionChip({ variant, label, isActive = true }: Sugg
     report: 'text-gray-default bg-gray-light',
   };
 
-  return <span className={twMerge(baseClasses, isActive && variantClasses[variant])}>{label}</span>;
+  return (
+    <span className={twMerge(baseClasses, isActive && variantClasses[variant])}>
+      {label.toUpperCase()}
+    </span>
+  );
 }

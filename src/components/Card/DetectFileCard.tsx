@@ -1,9 +1,8 @@
 'use client';
 
-import Image from 'next/image';
-import detectFileCardButton from '@/public/icons/detectFileCardButton.svg';
 import { twMerge } from 'tailwind-merge';
 import { useState } from 'react';
+import { DetectFileCardButtonIcon } from '@/public/index';
 
 type DetectFileCardProps = {
   title: string;
@@ -30,7 +29,7 @@ export default function DetectFileCard({ caption, title, isDetected }: DetectFil
           className="-mr-[1.3rem] flex h-[2rem] w-[3rem] items-center justify-center"
           onClick={() => setDropDown(prev => !prev)}
         >
-          <Image src={detectFileCardButton} alt="detectFileCardButton" />
+          <DetectFileCardButtonIcon alt="detectFileCardButton" />
         </button>
       </div>
       {dropDown && (

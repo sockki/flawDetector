@@ -1,11 +1,11 @@
-import SpecLogo from '@/public/icons/spacSpaceLogo.svg';
+import { SpacSpaceLogoIcon } from '@/public/index';
 import Link from 'next/link';
 
 export default function Footer() {
   return (
     <footer className="relative bottom-0 flex h-[32.4rem] w-full flex-col bg-[#FAF8FF] bg-[url('/icons/footerBackground.svg')] pl-[8rem] font-medium text-gray-black">
       <h1>
-        <SpecLogo />
+        <SpacSpaceLogoIcon />
       </h1>
       <span className="mt-[3.7rem] text-[2rem] font-bold">CONTACT</span>
       <div className="flex justify-between text-[1.6rem]">

@@ -1,3 +1,5 @@
+'use client';
+
 import ArticleCard from '@/components/Card/ArticleCard';
 import ArticleSmallCard from '@/components/Card/ArticleSmallCard';
 import DBCard from '@/components/Card/DBCard';
@@ -36,14 +38,14 @@ export default function page({ searchParams }: { searchParams: { page: string } 
       </div>
       <div className="flex flex-col gap-[2.8rem]">
         <ArticleCard
-          label="HOT"
+          label="hot"
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
           company="Microsoft"
           content="그런 일은"
           date="2일 전"
         />
         <ArticleCard
-          label="HOT"
+          label="new"
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표"
           company="Microsoft"
           content="그런 일은 그런 일은 그런 일은 그런 일은 그런 일은"
@@ -53,13 +55,13 @@ export default function page({ searchParams }: { searchParams: { page: string } 
       </div>
       <div className="flex gap-[2.8rem]">
         <ArticleSmallCard
-          label="HOT"
+          label="hot"
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표"
           content="그런 일은 그런 일은 그런 일은 그런 일은 그런 일은"
           date="2일 전"
         />
         <ArticleSmallCard
-          label="HOT"
+          label="new"
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표"
           content="그런 일은 그런 일은 그런 일은 그런 일은 그런 일은"
           date="2일 전"
