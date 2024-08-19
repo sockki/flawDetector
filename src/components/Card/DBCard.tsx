@@ -11,11 +11,11 @@ type DBCardProps = {
 export default function DBCard({ title, date, bgId }: DBCardProps) {
   const backgroundById = (id: number) => {
     if (id === 1) {
-      return 'bg-dbCardBackground1';
+      return 'bg-[linear-gradient(360deg,rgba(0,0,0,0.7),rgba(255,255,255,0)),url(/images/DBCardDummyImg1.png)]';
     } else if (id === 2) {
-      return 'bg-dbCardBackground2';
+      return 'bg-[linear-gradient(360deg,rgba(0,0,0,0.7),rgba(255,255,255,0)),url(/images/DBCardDummyImg2.png)]';
     } else {
-      return 'bg-dbCardBackground3';
+      return 'bg-[linear-gradient(360deg,rgba(0,0,0,0.7),rgba(255,255,255,0)),url(/images/DBCardDummyImg3.png)]';
     }
   };
   return (
