@@ -1,9 +1,9 @@
 import { forwardRef, ComponentPropsWithRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-interface InputProps extends ComponentPropsWithRef<'input'> {
+type InputProps = ComponentPropsWithRef<'input'> & {
   variant?: 'default' | 'error';
-}
+};
 
 const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   { className, variant = 'default', disabled = false, ...rest },
