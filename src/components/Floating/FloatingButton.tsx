@@ -58,7 +58,7 @@ export function FloatingButton({ type }: FloatingButtonProps) {
             alt={type === 'ask' ? 'Chat Icon' : 'Top Icon'}
             width={icon.width}
             height={icon.height}
-            className="brightness-0 group-hover:`brightness-0·group-hover:invert·group-hover:filter"
+            className="group-hover:`brightness-0·group-hover:invert·group-hover:filter·brightness-0"
           />
           {icon.label && <span className="text-[1.5rem] font-bold">{icon.label}</span>}
         </div>
