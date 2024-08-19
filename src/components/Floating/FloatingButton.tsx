@@ -47,7 +47,7 @@ export function FloatingButton({ type }: FloatingButtonProps) {
         type="button"
         onClick={handleClick}
         className={twMerge(
-          'fixed bottom-4 flex items-center justify-center w-[7.6rem] h-[7.6rem] rounded-full shadow-lg focus:outline-none group',
+          'group fixed bottom-4 flex h-[7.6rem] w-[7.6rem] items-center justify-center rounded-full shadow-lg focus:outline-none',
           icon.rightClass,
           'bg-white text-primary-500 hover:bg-primary-500 hover:text-white',
         )}
@@ -58,15 +58,15 @@ export function FloatingButton({ type }: FloatingButtonProps) {
             alt={type === 'ask' ? 'Chat Icon' : 'Top Icon'}
             width={icon.width}
             height={icon.height}
-            className="group-hover:filter group-hover:brightness-0 group-hover:invert"
+            className="brightness-0 group-hover:invert group-hover:filter group-hover:brightness-0"
           />
           {icon.label && <span className="text-[1.5rem] font-bold">{icon.label}</span>}
         </div>
       </button>
 
       {type === 'ask' && isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white w-[40rem] h-[60rem] rounded-lg shadow-lg flex flex-col p-[0.25rem]">
+        <div className="flex items-center justify-center bg-black bg-opacity-50 fixed inset-0">
+          <div className="flex h-[60rem] w-[40rem] flex-col rounded-lg bg-white p-[0.25rem] shadow-lg">
             <ChatBot />
           </div>
         </div>

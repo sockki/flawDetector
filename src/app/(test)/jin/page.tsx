@@ -20,10 +20,7 @@ export default function HomeApp() {
         </div>
       </div>
 
-      {/* Floating button for scrolling to top */}
       <FloatingButton type="top" />
-
-      {/* Floating button for chat functionality */}
       <FloatingButton type="ask" />
     </div>
   );
