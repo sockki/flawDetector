@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import dbCardArrow from '@/public/icons/dbCardArrow.svg';
+import { DBCardArrowIcon } from '@/public/index';
 import { twMerge } from 'tailwind-merge';
 
 type DBCardProps = {
@@ -34,7 +33,7 @@ export default function DBCard({ title, date, bgId }: DBCardProps) {
             {date}
           </span>
         </div>
-        <Image src={dbCardArrow} alt="dbCardArrow" className="cursor-pointer" />
+        <DBCardArrowIcon alt="dbCardArrow" className="z-20 cursor-pointer" />
       </div>
     </div>
   );

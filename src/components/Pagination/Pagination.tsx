@@ -1,5 +1,6 @@
 'use client';
 
+import { PaginationArrowIcon } from '@/public/index';
 import { usePathname, useRouter } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 
@@ -22,7 +23,7 @@ export default function Pagination({ nowPage, totalPage }: PaginationProps) {
         }}
         disabled={nowPage === 1}
       >
-        <PaginationArrow className="rotate-180" />
+        <PaginationArrowIcon className="rotate-180" />
       </button>
       {Array.from({ length: 10 }, (_, number) => number).map(
         pageNumber =>
@@ -50,7 +51,7 @@ export default function Pagination({ nowPage, totalPage }: PaginationProps) {
         }}
         disabled={nowPage === totalPage}
       >
-        <PaginationArrow />
+        <PaginationArrowIcon />
       </button>
     </div>
   );
