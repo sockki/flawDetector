@@ -43,7 +43,7 @@ export default function InfoBox({ theme, location, bullet, description }: InfoBo
         {location && (
           <span
             className={twMerge(
-              'inline-block whitespace-nowrap·rounded-full·border-[0.2rem]·px-[0.6rem]·py-[0.3rem]·text-[1.6rem]·font-bold·leading-[1.4]·tracking-[-0.01em]',
+              'whitespace-nowrap·rounded-full·border-[0.2rem]·px-[0.6rem]·py-[0.3rem]·text-[1.6rem]·font-bold·leading-[1.4]·tracking-[-0.01em]·inline-block',
               themeClasses.location[theme],
             )}
           >
