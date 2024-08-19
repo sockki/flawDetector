@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
@@ -58,15 +56,14 @@ export function FloatingButton({ type }: FloatingButtonProps) {
             alt={type === 'ask' ? 'Chat Icon' : 'Top Icon'}
             width={icon.width}
             height={icon.height}
-            className="group-hover:`brightness-0·group-hover:invert·group-hover:filter·brightness-0"
-          />
-          {icon.label && <span className="text-[1.5rem] font-bold">{icon.label}</span>}
+            className="group-hover:brightness-0 group-hover:invert group-hover:filter"
+          />{' '}
         </div>
       </button>
 
       {type === 'ask' && isOpen && (
-        <div className="fixed·inset-0·flex·items-center·justify-center·bg-black·bg-opacity-5">
-          <div className="flex h-[60rem] w-[40rem] flex-col rounded-lg bg-white p-[0.25rem] shadow-lg">
+        <div className="">
+          <div className="">
             <ChatBot />
           </div>
         </div>
