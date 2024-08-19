@@ -29,7 +29,7 @@ export default function DetectFileCard({ caption, title, isDetected }: DetectFil
           className="-mr-[1.3rem] flex h-[2rem] w-[3rem] items-center justify-center"
           onClick={() => setDropDown(prev => !prev)}
         >
-          <DetectFileCardButtonIcon alt="detectFileCardButton" />
+          <DetectFileCardButtonIcon />
         </button>
       </div>
       {dropDown && (

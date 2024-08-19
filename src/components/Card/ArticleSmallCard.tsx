@@ -26,37 +26,39 @@ export default function ArticleSmallCard({
       )}
     >
       {imageSrc && (
-        <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0">
           <Image
             src={imageSrc}
             alt="backgroundImage"
-            className="object-cover object-center opacity-[0.16]"
+            className="object-cover opacity-[0.16]"
             fill
           />
         </div>
       )}
       <div className="flex flex-col">
-        <header className={twMerge('flex flex-col gap-[0.8rem]')}>
-          <SuggestionChip label={label} variant={label} />
+        <div className={twMerge('flex flex-col gap-[0.8rem]')}>
+          <div className="w-fit">
+            <SuggestionChip variant={label} />
+          </div>
           <div className="flex h-fit w-full items-center">
             <h1 className="line-clamp-2 text-[2.4rem] font-medium leading-[3.6rem]">{title}</h1>
           </div>
-        </header>
+        </div>
       </div>
       <span className="line-clamp-1 text-[2rem] font-regular leading-[2.42rem] text-gray-default">
         {content}
       </span>
-      <footer className="flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <div className="flex gap-[1.2rem]">
           <button type="button">
-            <BigPinIcon alt="PinIcon" className="h-[3.2rem] w-[3.2rem]" />
+            <BigPinIcon className="h-[3.2rem] w-[3.2rem]" />
           </button>
           <button type="button">
-            <ShareIcon alt="ExternalLinkIcon" />
+            <ShareIcon />
           </button>
         </div>
         <span className="text-[1.6rem] font-regular leading-[1.936rem] text-[#a2a2a2]">{date}</span>
-      </footer>
+      </div>
     </article>
   );
 }

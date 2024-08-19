@@ -3,10 +3,7 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header
-      title="Header"
-      className="fixed top-0 z-50 flex h-[13.7rem] w-full items-center justify-between backdrop-blur-sm"
-    >
+    <header className="fixed top-0 z-50 flex h-[13.7rem] w-full items-center justify-between backdrop-blur-sm">
       <div className="text- ml-[8rem] flex items-center">
         <h1>
           <Link href="/">
