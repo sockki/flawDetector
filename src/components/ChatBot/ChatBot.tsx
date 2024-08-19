@@ -1,4 +1,4 @@
-export function ChatBot(): React.ReactElement {
+export function ChatBot() {
   return (
     <div className="w-[40rem] h-[60rem] p-4">
       <h2 className="text-xl font-bold">ChatBot</h2>
