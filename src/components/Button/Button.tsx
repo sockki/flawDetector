@@ -28,8 +28,8 @@ export default function Button({
   };
 
   const variantDisabledStyles = {
-    filled: 'bg-gray-light text-[#969696]',
-    outlined: 'bg-gray-light text-[#969696] border-[#c3c3c3] border-[0.1rem]',
+    filled: 'bg-gray-light text-gray-default',
+    outlined: 'bg-gray-light text-gray-default border-[#c3c3c3] border-[0.1rem]',
     tonal: 'bg-purple-light text-primary-100',
   };
 
