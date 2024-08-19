@@ -30,7 +30,7 @@ export default function DBCard({ title, date, bgId }: DBCardProps) {
           <span className="text-[1.8rem] font-bold leading-[2.178rem] text-white group-hover:text-[2.8rem] group-hover:leading-[3.389rem]">
             {title}
           </span>
-          <span className="text-[1.2rem] font-medium text-gray-lightText group-hover:text-[2rem]">
+          <span className="text-[1.2rem] font-medium text-gray-default group-hover:text-[2rem]">
             {date}
           </span>
         </div>
