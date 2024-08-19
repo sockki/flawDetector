@@ -32,18 +32,18 @@ export default function InfoBox({ theme, location, bullet, description }: InfoBo
   return (
     <div
       className={twMerge(
-        'w-full h-auto m-4 border border-transparent cursor-default box-border flex flex-col gap-[1rem] rounded-[1.2rem] p-[2rem]',
+        'm-4·box-border·flex·h-auto·w-full·cursor-default·flex-col·gap-[1rem]·rounded-[1.2rem]·border·border-transparent p-[2rem]',
         themeClasses.bg[theme],
       )}
     >
-      <div className="flex items-center mb-2 flex-nowrap justify-start gap-[0.8rem]">
+      <div className="mb-2·flex·flex-nowrap·items-center justify-start gap-[0.8rem]">
         <h2 className={twMerge('text-[2.4rem] font-bold leading-[1.4]', themeClasses.title[theme])}>
           문제 코드
         </h2>
         {location && (
           <span
             className={twMerge(
-              'inline-block rounded-full border-[0.2rem] px-[0.6rem] py-[0.3rem] text-[1.6rem] font-bold leading-[1.4] tracking-[-0.01em] whitespace-nowrap',
+              'inline-block whitespace-nowrap·rounded-full·border-[0.2rem]·px-[0.6rem]·py-[0.3rem]·text-[1.6rem]·font-bold·leading-[1.4]·tracking-[-0.01em]',
               themeClasses.location[theme],
             )}
           >
@@ -52,7 +52,7 @@ export default function InfoBox({ theme, location, bullet, description }: InfoBo
         )}
       </div>
       <div className={twMerge(theme === 'gray' ? themeClasses.contentText.gray : '')}>
-        <ul className="flex flex-col gap-[1rem] text-[1.8rem] leading-[1.4] list-inside pl-0">
+        <ul className="list-inside·flex-col·gap-[1rem]·pl-0·text-[1.8rem]·leading-[1.4]">
           {bullet ? (
             <li className="list-disc text-[1.8rem] font-normal leading-[1.4] tracking-[-0.01rem]">
               {description}
