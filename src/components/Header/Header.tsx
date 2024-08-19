@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import headerLogo from '@/public/icons/headerLogo.svg';
+import { LogoIcon } from '@/public/index';
+import Link from 'next/link';
 
 export default function Header() {
   return (
@@ -9,7 +9,9 @@ export default function Header() {
     >
       <div className="text- ml-[8rem] flex items-center">
         <h1>
-          <Image src={headerLogo} alt="logo" />
+          <Link href="/">
+            <LogoIcon />
+          </Link>
         </h1>
         <span className="ml-[10rem] text-[1.8rem] font-[500] text-[#3f3f3f]">취약점 DB</span>
       </div>
