@@ -1,4 +1,5 @@
 import ArticleCard from '@/components/Card/ArticleCard';
+import ArticleSmallCard from '@/components/Card/ArticleSmallCard';
 import DBCard from '@/components/Card/DBCard';
 import DetectFileCard from '@/components/Card/DetectFileCard';
 import ScrapCard from '@/components/Card/ScrapCard';
@@ -45,6 +46,21 @@ export default function page({ searchParams }: { searchParams: { page: string } 
           label="HOT"
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표"
           company="Microsoft"
+          content="그런 일은 그런 일은 그런 일은 그런 일은 그런 일은"
+          date="2일 전"
+          imageSrc={dummyImg}
+        />
+      </div>
+      <div className="flex gap-[2.8rem]">
+        <ArticleSmallCard
+          label="HOT"
+          title="2023년 12월 CNNVD 호환 서비스 신제품 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표"
+          content="그런 일은 그런 일은 그런 일은 그런 일은 그런 일은"
+          date="2일 전"
+        />
+        <ArticleSmallCard
+          label="HOT"
+          title="2023년 12월 CNNVD 호환 서비스 신제품 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표"
           content="그런 일은 그런 일은 그런 일은 그런 일은 그런 일은"
           date="2일 전"
           imageSrc={dummyImg}
