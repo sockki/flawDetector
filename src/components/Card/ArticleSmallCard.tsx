@@ -1,6 +1,8 @@
 import Image, { StaticImageData } from 'next/image';
 import { twMerge } from 'tailwind-merge';
 import { BigPinIcon, ShareIcon } from '@/public/index';
+import { formatDistanceToNow } from 'date-fns';
+import { ko } from 'date-fns/locale/ko';
 import SuggestionChip from '../Chips/SuggestionChip';
 
 type ArticleSmallCardProps = {
@@ -8,7 +10,7 @@ type ArticleSmallCardProps = {
   imageSrc?: StaticImageData;
   title: string;
   content: string;
-  date: string;
+  date: Date;
 };
 
 export default function ArticleSmallCard({
@@ -18,6 +20,12 @@ export default function ArticleSmallCard({
   content,
   date,
 }: ArticleSmallCardProps) {
+  const nowDate = Date.now();
+  const timeDifference =
+    (nowDate - date.getTime()) / 1000 < 60
+      ? '방금 전'
+      : formatDistanceToNow(date, { addSuffix: true, locale: ko });
+
   return (
     <article
       className={twMerge(
@@ -57,7 +65,9 @@ export default function ArticleSmallCard({
             <ShareIcon />
           </button>
         </div>
-        <span className="text-[1.6rem] font-regular leading-[1.936rem] text-[#a2a2a2]">{date}</span>
+        <span className="text-[1.6rem] font-regular leading-[1.936rem] text-[#a2a2a2]">
+          {timeDifference}
+        </span>
       </div>
     </article>
   );

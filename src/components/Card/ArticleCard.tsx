@@ -2,6 +2,8 @@ import Image, { StaticImageData } from 'next/image';
 
 import { twMerge } from 'tailwind-merge';
 import { ExternalLinkIcon, PinIcon } from '@/public/index';
+import { formatDistanceToNow } from 'date-fns';
+import { ko } from 'date-fns/locale/ko';
 import SuggestionChip from '../Chips/SuggestionChip';
 
 type ArticleCardProps = {
@@ -10,7 +12,7 @@ type ArticleCardProps = {
   title: string;
   company: string;
   content: string;
-  date: string;
+  date: Date;
 };
 
 export default function ArticleCard({
@@ -21,6 +23,11 @@ export default function ArticleCard({
   content,
   date,
 }: ArticleCardProps) {
+  const nowDate = Date.now();
+  const timeDifference =
+    (nowDate - date.getTime()) / 1000 < 60
+      ? '방금 전'
+      : formatDistanceToNow(date, { addSuffix: true, locale: ko });
   return (
     <article
       className={twMerge(
@@ -71,7 +78,7 @@ export default function ArticleCard({
             </button>
           </div>
           <span className="text-[1.6rem] font-regular leading-[1.936rem] text-[#a2a2a2]">
-            {date}
+            {timeDifference}
           </span>
         </div>
       </div>
