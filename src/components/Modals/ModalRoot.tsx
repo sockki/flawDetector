@@ -1,25 +1,45 @@
-import { ReactNode } from 'react';
+import { ReactNode, forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Dimmed from '../common/Dimmed';
 
 type ModalRootProps = {
   children: ReactNode;
-  gap?: number;
+  gap?: 24 | 32 | 40;
+  padding?: 32 | 40 | 48;
+  hasShadow?: boolean;
+  hasDimmed?: boolean;
 };
 
-export default function ModalRoot({ children, gap }: ModalRootProps) {
-  const gapSize = gap && gap * 0.1;
+export default forwardRef<HTMLDivElement, ModalRootProps>(function ModalRoot(
+  { children, gap, hasDimmed, hasShadow, padding = 48 }: ModalRootProps,
+  ref,
+) {
+  const modalRootStyles = {
+    gapSize: {
+      24: 'gap-[2.4rem]',
+      32: 'gap-[3.2rem]',
+      40: 'gap-[4.0rem]',
+    },
+    paddingSize: {
+      32: 'p-[3.2rem]',
+      40: 'px-[6rem] py-[4rem]',
+      48: 'p-[4.8rem]',
+    },
+  };
   return (
     <>
-      <Dimmed />
+      {hasDimmed && <Dimmed />}
       <div
+        ref={ref}
         className={twMerge(
-          'absolute left-1/2 top-1/2 z-[100] flex -translate-x-1/2 -translate-y-1/2 transform flex-col bg-white p-[4.8rem]',
+          'absolute left-1/2 top-1/2 z-[100] flex -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center rounded-[2rem] bg-white p-[4.8rem]',
+          gap && modalRootStyles.gapSize[gap],
+          modalRootStyles.paddingSize[padding],
+          hasShadow && 'shadow-drop',
         )}
-        style={{ gap: `${gapSize}rem` }}
       >
         {children}
       </div>
     </>
   );
-}
+});
