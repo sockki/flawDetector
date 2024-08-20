@@ -5,3 +5,9 @@ export { default as RemoveIcon } from './icons/remove.svg';
 export { default as CheckIcon } from './icons/switchCheck.svg';
 export { default as CrossIcon } from './icons/switchCross.svg';
 export { default as ListIcon } from './icons/listLibrary.svg'
+export { default as SucessIcon } from './icons/success.svg';
+export { default as ListCheckIcon } from './icons/listCheck.svg';
+export { default as ErrorIcon } from './icons/error.svg';
+export { default as AnalyzeIcon } from './icons/analyze.svg';
+export { default as ListDocumentIcon } from './icons/listDocument.svg';
+export { default as FolderIcon } from './icons/folder.svg'
