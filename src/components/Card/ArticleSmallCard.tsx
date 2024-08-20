@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from 'next/image';
 import { twMerge } from 'tailwind-merge';
 import { BigPinIcon, ShareIcon } from '@/public/index';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
 import SuggestionChip from '../Chips/SuggestionChip';
 
@@ -24,7 +24,7 @@ export default function ArticleSmallCard({
   const timeDifference =
     (nowDate - date.getTime()) / 1000 < 60
       ? '방금 전'
-      : formatDistanceToNow(date, { addSuffix: true, locale: ko });
+      : formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
 
   return (
     <article
