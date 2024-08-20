@@ -19,10 +19,12 @@ export default function ModalButton({ variant, buttonText, onClick }: ModalButto
     <div className="flex items-center justify-between gap-[1.2rem]">
       {variant === 'doubleButton' ? (
         <>
-          <Button variant="outlined" onClick={onClick.left}>
+          <Button variant="outlined" shape="rectangle" onClick={onClick.left}>
             {buttonText.left}
           </Button>
-          <Button onClick={onClick.right}>{buttonText.right}</Button>
+          <Button shape="rectangle" onClick={onClick.right}>
+            {buttonText.right}
+          </Button>
         </>
       ) : (
         <Button variant="filled" onClick={onClick}>
