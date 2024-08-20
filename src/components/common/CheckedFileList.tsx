@@ -27,9 +27,14 @@ export default function CheckedFileList() {
       subTitle: 'Weekly Team Meeting',
       createdAt: new Date(2024, 7, 15, 11, 0),
     },
+    {
+      fileName: 'Agenda_2024_08_15.docx',
+      subTitle: 'Weekly Team Meeting',
+      createdAt: new Date(2024, 7, 15, 11, 0),
+    },
   ];
   return (
-    <ul className="min-w-[59rem] rounded-[0.8rem] border border-gray-dark">
+    <ul className="max-h-[23.1rem] min-w-[59rem] overflow-auto rounded-[0.8rem] border border-gray-dark">
       {checkedData.map(item => (
         <CheckedFileItem key={item.fileName} {...item} />
       ))}
