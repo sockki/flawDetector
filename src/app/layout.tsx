@@ -1,8 +1,8 @@
+import Footer from '@/components/Footer/Footer';
+import Header from '@/components/Header/Header';
+import '@/styles/globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import '@/styles/globals.css';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,11 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className={inter.className}>
-        <Header />
-        <div className="mt-[13.7rem]">{children}</div>
-        <Footer />
+        <div id="modal" />
+        <div className="flex min-h-screen flex-col">
+          <Header />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </div>
       </body>
     </html>
   );
