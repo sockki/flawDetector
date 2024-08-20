@@ -1,5 +1,6 @@
 import { useOutsideClick } from '@/hooks/useOutsideClick';
-import { ReactNode, useRef } from 'react';
+import { PropsWithChildren, ReactNode, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { twMerge } from 'tailwind-merge';
 import Dimmed from '../common/Dimmed';
 
@@ -10,7 +11,22 @@ type ModalRootProps = {
   hasShadow?: boolean;
   hasDimmed?: boolean;
   setIsModalOpen: () => void;
+  isOpen: boolean;
 };
+
+function ModalPortal({ children }: PropsWithChildren) {
+  const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setPortalElement(document.getElementById('modal'));
+  }, []);
+
+  if (!portalElement) {
+    return null;
+  }
+
+  return createPortal(children, portalElement);
+}
 
 export default function ModalRoot({
   children,
@@ -19,10 +35,23 @@ export default function ModalRoot({
   hasShadow,
   padding = 48,
   setIsModalOpen,
+  isOpen,
 }: ModalRootProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useOutsideClick(ref, setIsModalOpen);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.setAttribute('style', 'overflow: hidden');
+    }
+
+    return () => document.body.setAttribute('style', 'overflow: auto');
+  }, [isOpen]);
+
+  if (!isOpen) {
+    return null;
+  }
 
   const modalRootStyles = {
     gapSize: {
@@ -37,7 +66,7 @@ export default function ModalRoot({
     },
   };
   return (
-    <>
+    <ModalPortal>
       {hasDimmed && <Dimmed />}
       <div
         ref={ref}
@@ -50,6 +79,6 @@ export default function ModalRoot({
       >
         {children}
       </div>
-    </>
+    </ModalPortal>
   );
 }
