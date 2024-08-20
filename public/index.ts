@@ -4,3 +4,4 @@ export { default as LogoIcon } from './icons/headerLogo.svg';
 export { default as RemoveIcon } from './icons/remove.svg';
 export { default as CheckIcon } from './icons/switchCheck.svg';
 export { default as CrossIcon } from './icons/switchCross.svg';
+export { default as ListIcon } from './icons/listLibrary.svg'
