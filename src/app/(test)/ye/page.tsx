@@ -1,10 +1,10 @@
 'use client';
 
-import Dialog from '@/components/Modals/Dialog';
-import { useState } from 'react';
+import { Modal } from '@/components/Modals';
+import { useModal } from '@/hooks/useModal';
 
 export default function TestPage() {
-  const [close, setClose] = useState(true);
+  const [isModalOpen, handleClickTrigger] = useModal();
 
   return (
     // <ModalRoot hasDimmed gap={24}>
@@ -34,10 +34,15 @@ export default function TestPage() {
     //   <CheckedFileList />
     // </ModalRoot>
     <>
-      <button onClick={() => setClose(false)} type="button">
+      <button onClick={handleClickTrigger} type="button">
         모달 띄우는 창
       </button>
-      {!close && <Dialog setClose={setClose} />}
+      {isModalOpen && (
+        <Modal gap={24} padding={32} hasShadow hasDimmed setIsModalOpen={handleClickTrigger}>
+          <Modal.Title size="sm">모달테스트 중 입니다.</Modal.Title>
+          <Modal.Button buttonText="djd" variant="singleButton" onClick={() => {}} />
+        </Modal>
+      )}
     </>
   );
 }

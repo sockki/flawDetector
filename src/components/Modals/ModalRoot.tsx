@@ -1,4 +1,5 @@
-import { ReactNode, forwardRef } from 'react';
+import { useOutsideClick } from '@/hooks/useOutsideClick';
+import { ReactNode, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Dimmed from '../common/Dimmed';
 
@@ -8,12 +9,21 @@ type ModalRootProps = {
   padding?: 32 | 40 | 48;
   hasShadow?: boolean;
   hasDimmed?: boolean;
+  setIsModalOpen: () => void;
 };
 
-export default forwardRef<HTMLDivElement, ModalRootProps>(function ModalRoot(
-  { children, gap, hasDimmed, hasShadow, padding = 48 }: ModalRootProps,
-  ref,
-) {
+export default function ModalRoot({
+  children,
+  gap,
+  hasDimmed,
+  hasShadow,
+  padding = 48,
+  setIsModalOpen,
+}: ModalRootProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useOutsideClick(ref, setIsModalOpen);
+
   const modalRootStyles = {
     gapSize: {
       24: 'gap-[2.4rem]',
@@ -42,4 +52,4 @@ export default forwardRef<HTMLDivElement, ModalRootProps>(function ModalRoot(
       </div>
     </>
   );
-});
+}
