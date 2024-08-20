@@ -1,6 +1,8 @@
+import { format } from 'date-fns';
+
 type ScrapCardProps = {
   title: string;
-  date: string;
+  date: Date;
 };
 
 export default function ScrapCard({ title, date }: ScrapCardProps) {
@@ -15,7 +17,7 @@ export default function ScrapCard({ title, date }: ScrapCardProps) {
         </span>
       </div>
       <span className="absolute bottom-[2.8rem] text-[1.6rem] font-regular leading-[2.24rem] text-gray-default">
-        {date}
+        {format(date, 'yyyy.MM.dd hh:mm:ss')}
       </span>
     </div>
   );

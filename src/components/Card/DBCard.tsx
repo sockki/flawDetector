@@ -1,9 +1,10 @@
 import { DBCardArrowIcon } from '@/public/index';
+import { format } from 'date-fns';
 import { twMerge } from 'tailwind-merge';
 
 type DBCardProps = {
   title: string;
-  date: string;
+  date: Date;
   bgId: number;
 };
 
@@ -30,7 +31,7 @@ export default function DBCard({ title, date, bgId }: DBCardProps) {
             {title}
           </span>
           <span className="text-[1.2rem] font-medium text-gray-default group-hover:text-[2rem]">
-            {date}
+            {format(date, 'yyyy.MM.dd hh:mm:ss')}
           </span>
         </div>
         <DBCardArrowIcon className="z-20 cursor-pointer" />
