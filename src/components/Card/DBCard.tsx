@@ -5,10 +5,10 @@ import { twMerge } from 'tailwind-merge';
 type DBCardProps = {
   title: string;
   date: Date;
-  bgId: number;
+  backgroundId: number;
 };
 
-export default function DBCard({ title, date, bgId }: DBCardProps) {
+export default function DBCard({ title, date, backgroundId }: DBCardProps) {
   const backgroundById = (id: number) => {
     if (id === 1) {
       return 'bg-[linear-gradient(360deg,rgba(0,0,0,0.7),rgba(255,255,255,0)),url(/images/DBCardDummyImg1.png)]';
@@ -22,7 +22,7 @@ export default function DBCard({ title, date, bgId }: DBCardProps) {
     <div
       className={twMerge(
         `group flex h-[39rem] w-[31.6rem] rounded-[2rem] bg-cover p-[3.6rem] transition-all duration-500 ease-in-out hover:w-[62.5rem]`,
-        backgroundById(bgId),
+        backgroundById(backgroundId),
       )}
     >
       <div className="flex w-full items-end justify-between">
