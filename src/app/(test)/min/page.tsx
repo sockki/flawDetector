@@ -37,6 +37,7 @@ export default function page({ searchParams }: { searchParams: { page: string } 
       </div>
       <div className="flex flex-col gap-[2.8rem]">
         <ArticleCard
+          id={1}
           label="hot"
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
           company="Microsoft"
@@ -44,6 +45,7 @@ export default function page({ searchParams }: { searchParams: { page: string } 
           date={dummyDate}
         />
         <ArticleCard
+          id={2}
           label="new"
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표 발표"
           company="Microsoft"

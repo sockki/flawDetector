@@ -10,7 +10,9 @@ export default function Header() {
             <LogoIcon />
           </Link>
         </h1>
-        <span className="ml-[10rem] text-[1.8rem] font-[500] text-gray-black">취약점 DB</span>
+        <Link href="/vulnerability-db?page=1">
+          <span className="ml-[10rem] text-[1.8rem] font-[500] text-gray-black">취약점 DB</span>
+        </Link>
       </div>
       <div className="mr-[8rem] text-[1.8rem] font-[500] text-gray-black">MY 저장소</div>
     </header>
