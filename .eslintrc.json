@@ -15,7 +15,8 @@
     "node_modules/",
     "next.config.mjs",
     "stories",
-    "src/components/Floating/FloatingButton.tsx"
+    "src/components/Floating/FloatingButton.tsx",
+    "src/components/ChatBot/ChatBot.tsx"
   ],
   "extends": [
     "airbnb",
