@@ -1,5 +1,3 @@
-'use client';
-
 import ArticleCard from '@/components/Card/ArticleCard';
 import ArticleSmallCard from '@/components/Card/ArticleSmallCard';
 import DBCard from '@/components/Card/DBCard';
@@ -9,7 +7,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import dummyImg from '@/public/images/DBCardDummyImg1.png';
 
 export default function page({ searchParams }: { searchParams: { page: string } }) {
-  const dummyDate = new Date(2024, 7, 21, 12, 43, 0);
+  const dummyDate = new Date(2024, 7, 21, 17, 16, 0);
   return (
     <div className="flex flex-col gap-[2rem] p-[1rem]">
       <div className="flex gap-[2.8rem]">

@@ -20,12 +20,7 @@ export default function ArticleSmallCard({
   content,
   date,
 }: ArticleSmallCardProps) {
-  const nowDate = Date.now();
-  const timeDifference =
-    (nowDate - date.getTime()) / 1000 < 60
-      ? '방금 전'
-      : formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
-
+  const timeDifference = formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
   return (
     <article
       className={twMerge(
