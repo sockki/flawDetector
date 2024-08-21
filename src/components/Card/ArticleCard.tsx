@@ -1,19 +1,11 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
 import { twMerge } from 'tailwind-merge';
 import { ExternalLinkIcon, PinIcon } from '@/public/index';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
+import { ArticleCardProps } from '@/types/ArticleCardProps';
 import SuggestionChip from '../Chips/SuggestionChip';
-
-type ArticleCardProps = {
-  label: 'new' | 'hot' | 'warn' | 'notification' | 'report';
-  imageSrc?: StaticImageData;
-  title: string;
-  company: string;
-  content: string;
-  date: Date;
-};
 
 export default function ArticleCard({
   label,
