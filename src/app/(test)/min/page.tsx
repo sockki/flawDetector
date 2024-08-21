@@ -9,13 +9,25 @@ import Pagination from '@/components/Pagination/Pagination';
 import dummyImg from '@/public/images/DBCardDummyImg1.png';
 
 export default function page({ searchParams }: { searchParams: { page: string } }) {
-  const dummyDate = new Date(2024, 7, 20, 14, 24, 0);
+  const dummyDate = new Date(2024, 7, 21, 12, 43, 0);
   return (
     <div className="flex flex-col gap-[2rem] p-[1rem]">
       <div className="flex gap-[2.8rem]">
-        <DBCard date={dummyDate} title="2023년 12월 CNNVD 호환 서비스 신제품 발표" bgId={1} />
-        <DBCard date={dummyDate} title="2023년 12월 CNNVD 호환 서비스 신제품 발표" bgId={2} />
-        <DBCard date={dummyDate} title="2023년 12월 CNNVD 호환 서비스 신제품 발표" bgId={3} />
+        <DBCard
+          date={dummyDate}
+          title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
+          backgroundId={1}
+        />
+        <DBCard
+          date={dummyDate}
+          title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
+          backgroundId={2}
+        />
+        <DBCard
+          date={dummyDate}
+          title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
+          backgroundId={3}
+        />
       </div>
       <div className="flex gap-[2.8rem]">
         <DetectFileCard title="title" caption="caption" isDetected={false} />
