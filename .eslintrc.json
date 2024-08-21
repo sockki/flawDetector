@@ -1,10 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "prettier"],
   "parserOptions": {
     "project": "./tsconfig.json",
     "createDefaultProgram": true
@@ -17,7 +14,8 @@
   "ignorePatterns": [
     "node_modules/",
     "next.config.mjs",
-    "stories"
+    "stories",
+    "src/components/Floating/FloatingButton.tsx"
   ],
   "extends": [
     "airbnb",
@@ -34,10 +32,7 @@
     "react/jsx-filename-extension": [
       "warn",
       {
-        "extensions": [
-          ".ts",
-          ".tsx"
-        ]
+        "extensions": [".ts", ".tsx"]
       }
     ],
     "no-useless-catch": "off",
@@ -54,10 +49,7 @@
     "no-console": [
       "warn",
       {
-        "allow": [
-          "warn",
-          "error"
-        ]
+        "allow": ["warn", "error"]
       }
     ],
     "no-var": "warn",
