@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
-import { ChatBot } from '../ChatBot/ChatBot';
+import { ChatBot } from '../ChatBot/ChatBot'; // ChatBot.tsx 파일 경로를 맞게 설정하세요
 
 type FloatingButtonProps = {
   type: 'top' | 'ask';
@@ -12,12 +12,14 @@ export function FloatingButton({ type }: FloatingButtonProps) {
 
   const handleClick = () => {
     if (type === 'top') {
-      if (typeof window !== 'undefined') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (type === 'ask') {
       setIsOpen(prev => !prev);
     }
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
   };
 
   const icons = {
@@ -62,8 +64,15 @@ export function FloatingButton({ type }: FloatingButtonProps) {
       </button>
 
       {type === 'ask' && isOpen && (
-        <div className="">
-          <div className="">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="relative w-full max-w-lg rounded-lg bg-white p-6 shadow-lg">
+            <button
+              type="button"
+              className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
+              onClick={closeModal}
+            >
+              &times;
+            </button>
             <ChatBot />
           </div>
         </div>
