@@ -25,7 +25,7 @@ export default function InfoBox({ theme, location, bullet, description }: InfoBo
       gray: 'border-[#3f3f3f] text-[#3f3f3f] border-[0.2rem]',
     },
     contentText: {
-      gray: 'text-[#969696]',
+      gray: 'text-gray-default',
     },
   };
 
