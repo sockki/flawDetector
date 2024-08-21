@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
-import { ChatBot } from '../ChatBot/ChatBot'; // ChatBot.tsx 파일 경로를 맞게 설정하세요
+import { ChatBot } from '../ChatBot/ChatBot';
 
 type FloatingButtonProps = {
   type: 'top' | 'ask';
