@@ -1,18 +1,9 @@
-'use client';
-
-import { Switch } from '@/components/Switch/Switch';
-import { useState } from 'react';
+import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 
 export default function Dh() {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckedChange = (checked: boolean) => {
-    setIsChecked(checked);
-  };
   return (
     <div>
-      <Switch onCheckedChange={handleCheckedChange} isChecked={isChecked} />
-      test
+      <ProgressBar progress={70} />8
     </div>
   );
 }
