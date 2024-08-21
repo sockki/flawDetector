@@ -11,13 +11,7 @@
     "node": true,
     "es6": true
   },
-  "ignorePatterns": [
-    "node_modules/",
-    "next.config.mjs",
-    "stories",
-    "src/components/Floating/FloatingButton.tsx",
-    "src/components/ChatBot/ChatBot.tsx"
-  ],
+  "ignorePatterns": ["node_modules/", "next.config.mjs", "stories"],
   "extends": [
     "airbnb",
     "airbnb-typescript",
