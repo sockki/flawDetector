@@ -17,12 +17,12 @@ export default function InfoBox({ theme, location, bullet, description }: InfoBo
     title: {
       red: 'text-system-warning',
       primary: 'text-primary-500',
-      gray: 'text-[#3f3f3f]',
+      gray: 'text-gray-black',
     },
     location: {
       red: 'border-system-warning text-system-warning border-[0.2rem]',
       primary: 'border-primary-500 text-primary-500 border-[0.2rem]',
-      gray: 'border-[#3f3f3f] text-[#3f3f3f] border-[0.2rem]',
+      gray: 'border-gray-black text-gray-black border-[0.2rem]',
     },
     contentText: {
       gray: 'text-gray-default',
