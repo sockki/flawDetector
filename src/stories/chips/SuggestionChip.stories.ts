@@ -4,8 +4,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta: Meta<typeof SuggestionChip> = {
   component: SuggestionChip,
   args: {
-    label: 'label',
-  },
+
+    variant:"hot"
+  }
 };
 export default meta;
 

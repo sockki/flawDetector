@@ -53,6 +53,8 @@ const config: Config = {
         'gray-light': '#f1f1f1',
         'gray-dark': '#c2c2c2',
         'gray-default': '#969696',
+        'gray-black': '#3F3F3F',
+
       },
       fontWeight: {
         regular: '400',

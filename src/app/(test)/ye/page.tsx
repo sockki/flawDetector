@@ -39,12 +39,14 @@ export default function TestPage() {
       <hr />
       <br />
       <h1 className="mb-3 text-xl font-bold">SuggestionChip</h1>
-      <SuggestionChip variant="new" label="label" />
-      <SuggestionChip variant="hot" label="label" />
-      <SuggestionChip variant="warn" label="label" />
-      <SuggestionChip variant="notification" label="label" />
-      <SuggestionChip variant="report" label="label" />
-      <SuggestionChip variant="new" label="label" isActive={false} />
+
+      <SuggestionChip variant="new" />
+      <SuggestionChip variant="hot" />
+      <SuggestionChip variant="warn" />
+      <SuggestionChip variant="notification" />
+      <SuggestionChip variant="report" />
+      <SuggestionChip variant="new" isActive={false} />
+
       <br />
       <br />
       <hr />
