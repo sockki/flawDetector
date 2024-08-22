@@ -30,7 +30,7 @@ export default function InfoBox({ theme, location, bullet, description }: InfoBo
   };
 
   return (
-    <div className={twMerge(themeClasses.bg[theme], 'p-[1rem]', 'rounded-lg')}>
+    <div className={twMerge(themeClasses.bg[theme], 'p-[2rem]', 'rounded-[1.2rem]')}>
       <div className="flex items-center gap-[0.8rem]">
         <h2 className={twMerge('text-[2.4rem] font-bold', themeClasses.title[theme])}>문제 코드</h2>
         {location && (
