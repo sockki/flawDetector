@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 import { ExternalLinkIcon, PinIcon } from '@/public/index';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
-import { ArticleCardProps } from '@/types/ArticleCardProps';
+import { ArticleCardProps } from '@/types/articleCard';
 import SuggestionChip from '../Chips/SuggestionChip';
 
 export default function ArticleCard({
