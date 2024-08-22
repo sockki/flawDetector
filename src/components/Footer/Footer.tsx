@@ -1,21 +1,17 @@
-
 import { SpacSpaceLogoIcon } from '@/public/index';
 import Link from 'next/link';
 
 export default function Footer() {
   return (
-
     <footer className="relative bottom-0 flex h-[32.4rem] w-full flex-col bg-[#FAF8FF] bg-[url('/icons/footerBackground.svg')] pl-[8rem] font-medium text-gray-black">
       <h1>
         <SpacSpaceLogoIcon />
-
       </h1>
       <span className="mt-[3.7rem] text-[2rem] font-bold">CONTACT</span>
       <div className="flex justify-between text-[1.6rem]">
         <address className="mt-[0.8rem] flex not-italic">
           <div className="flex flex-col gap-[0.4rem]">
             <div className="flex">
-
               <span className="text-gray-default">(주)스팩스페이스</span>
               <div className="ml-[2.6rem] flex">
                 <span className="text-gray-default">대표자</span>
@@ -25,7 +21,6 @@ export default function Footer() {
             </div>
             <span>서울 강서구 마곡중앙2로 11, 3층 303호</span>
             <div>
-
               <span className="text-gray-default">Email</span>
 
               <a href="mailto:admin@sfacspace.com" className="ml-[2.3rem] text-[1.6rem]">
@@ -49,9 +44,7 @@ export default function Footer() {
           </div>
         </address>
         <div className="mr-[8rem] mt-[2.2rem]">
-
           <nav className="cursor-pointer text-gray-default underline">
-
             <ul className="flex gap-[3.2rem]">
               <li>
                 <Link href="/">회사소개</Link>
