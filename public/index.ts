@@ -11,3 +11,11 @@ export { default as ErrorIcon } from './icons/error.svg';
 export { default as AnalyzeIcon } from './icons/analyze.svg';
 export { default as ListDocumentIcon } from './icons/listDocument.svg';
 export { default as FolderIcon } from './icons/folder.svg'
+export { default as PaginationArrowIcon } from "./icons/paginationArrow.svg"
+export { default as DBCardArrowIcon } from "./icons/dbCardArrow.svg"
+export { default as DetectFileCardButtonIcon } from "./icons/detectFileCardButton.svg"
+export { default as ExternalLinkIcon } from "./icons/externalLinkIcon.svg"
+export { default as PinIcon } from "./icons/pinIcon.svg"
+export { default as BigPinIcon } from "./icons/bigPinIcon.svg"
+export { default as ShareIcon } from "./icons/sharingIcon.svg"
+export { default as SpacSpaceLogoIcon } from "./icons/spacSpaceLogo.svg"
