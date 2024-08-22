@@ -30,7 +30,7 @@ export default function InfoBox({ theme, location, bullet, description }: InfoBo
   };
 
   return (
-    <div className={twMerge(themeClasses.bg[theme], 'p-[2rem]', 'rounded-[1.2rem]')}>
+    <div className={twMerge(themeClasses.bg[theme], 'p-[1rem]', 'rounded-lg')}>
       <div className="flex items-center gap-[0.8rem]">
         <h2 className={twMerge('text-[2.4rem] font-bold', themeClasses.title[theme])}>문제 코드</h2>
         {location && (
@@ -45,8 +45,10 @@ export default function InfoBox({ theme, location, bullet, description }: InfoBo
         )}
       </div>
       <div className={twMerge(theme === 'gray' && themeClasses.contentText.gray)}>
-        <ul className="list-inside pl-0 text-[1.8rem]">
-          {bullet ? <li className="list-disc">{description}</li> : <li>{description}</li>}
+        <ul className={twMerge('list-inside text-[1.8rem]', bullet ? 'list-disc' : 'list-none')}>
+          {description.map(item => (
+            <li key={item}>{item}</li>
+          ))}
         </ul>
       </div>
     </div>
