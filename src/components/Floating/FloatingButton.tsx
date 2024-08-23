@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 
@@ -8,13 +7,13 @@ type FloatingButtonProps = {
 };
 
 export function FloatingButton({ type, onClick }: FloatingButtonProps) {
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     if (type === 'top') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (type === 'ask' && onClick) {
       onClick();
     }
-  }, [type, onClick]);
+  };
 
   const iconSrc = type === 'top' ? '/icons/floatVector.svg' : '/icons/floatChat.svg';
   const iconAlt = type === 'top' ? 'Top Icon' : 'Chat Icon';
