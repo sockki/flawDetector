@@ -12,3 +12,9 @@ export { default as PinIcon } from "./icons/pinIcon.svg"
 export { default as BigPinIcon } from "./icons/bigPinIcon.svg"
 export { default as ShareIcon } from "./icons/sharingIcon.svg"
 export { default as SpacSpaceLogoIcon } from "./icons/spacSpaceLogo.svg"
+export { default as LeftIcon} from'./icons/careLeft.svg'
+export { default as ScanCrossIcon} from'./icons/scanCross.svg'
+export { default as ScanErrorIcon} from'./icons/scanError.svg'
+export { default as ScanSuccessIcon} from'./icons/scanSuccess.svg'
+export { default as ReadingGlassesIcon} from'./icons/readingGlasses.svg'
+export { default as EmptyFileIcon} from'./icons/emptyFile.svg'
