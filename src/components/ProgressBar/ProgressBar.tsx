@@ -6,7 +6,7 @@ type ProgressBarProps = ComponentProps<typeof ProgressPrimitive.Root> & {
 };
 
 export function ProgressBar({ progress = 0, ...rest }: ProgressBarProps) {
-  const rootStyles = 'relative h-[1.2rem] w-[139.2rem] overflow-hidden rounded-full bg-neutral-10';
+  const rootStyles = 'relative h-[1.2rem] w-[144.4rem] overflow-hidden rounded-full bg-neutral-10';
 
   const indicatorStyles =
     'h-full w-full rounded-full bg-system-success transition-transform duration-300';
