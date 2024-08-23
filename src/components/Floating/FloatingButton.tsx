@@ -16,6 +16,10 @@ export function FloatingButton({ type, onClick }: FloatingButtonProps) {
     }
   }, [type, onClick]);
 
+  const iconSrc = type === 'top' ? '/icons/floatVector.svg' : '/icons/floatChat.svg';
+  const iconAlt = type === 'top' ? 'Top Icon' : 'Chat Icon';
+  const iconSize = type === 'top' ? 32 : 35;
+
   return (
     <button
       type="button"
@@ -27,10 +31,10 @@ export function FloatingButton({ type, onClick }: FloatingButtonProps) {
     >
       <div className="flex flex-col items-center justify-center">
         <Image
-          src={type === 'top' ? '/icons/floatVector.svg' : '/icons/floatChat.svg'}
-          alt={type === 'top' ? 'Top Icon' : 'Chat Icon'}
-          width={type === 'top' ? 32 : 35}
-          height={type === 'top' ? 32 : 35}
+          src={iconSrc}
+          alt={iconAlt}
+          width={iconSize}
+          height={iconSize}
           className="group-hover:brightness-0 group-hover:invert group-hover:filter"
         />
         {type === 'top' && <span className="text-[1.5rem] font-bold">TOP</span>}
