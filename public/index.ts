@@ -1,4 +1,5 @@
 export { default as BigPinIcon } from "./icons/bigPinIcon.svg";
+export { default as BugIcon } from './icons/bug.svg';
 export { default as CaretIcon } from './icons/caret.svg';
 export { default as SelectedIcon } from './icons/check.svg';
 export { default as CloseIcon } from './icons/close.svg';

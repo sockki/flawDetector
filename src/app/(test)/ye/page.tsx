@@ -18,6 +18,7 @@ export default function TestPage() {
 
     return () => unsubscribe();
   }, []);
+
   return (
     <>
       <Button onClick={signInWithGithub}>로그인 버튼</Button>
