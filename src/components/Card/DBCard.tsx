@@ -3,21 +3,23 @@
 import { DBCardArrowIcon } from '@/public/index';
 import { useDBCardStore } from '@/stores/DBCardStore';
 import { format } from 'date-fns';
+import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 
 type DBCardProps = {
+  id: number;
   title: string;
   date: Date;
   backgroundId: number;
 };
 
-export default function DBCard({ title, date, backgroundId }: DBCardProps) {
+export default function DBCard({ id, title, date, backgroundId }: DBCardProps) {
   const { isHoverFirstCard, setIsHoverFirstCard } = useDBCardStore();
   const conditionOfFirstDBCard = backgroundId === 1 && isHoverFirstCard;
-  const backgroundById = (id: number) => {
-    if (id === 1) {
+  const backgroundById = (bgId: number) => {
+    if (bgId === 1) {
       return 'bg-[linear-gradient(360deg,rgba(0,0,0,0.7),rgba(255,255,255,0)),url(/images/DBCardDummyImg1.png)]';
-    } else if (id === 2) {
+    } else if (bgId === 2) {
       return 'bg-[linear-gradient(360deg,rgba(0,0,0,0.7),rgba(255,255,255,0)),url(/images/DBCardDummyImg2.png)]';
     } else {
       return 'bg-[linear-gradient(360deg,rgba(0,0,0,0.7),rgba(255,255,255,0)),url(/images/DBCardDummyImg3.png)]';
@@ -72,7 +74,9 @@ export default function DBCard({ title, date, backgroundId }: DBCardProps) {
             {format(date, 'yyyy.MM.dd hh:mm:ss')}
           </span>
         </div>
-        <DBCardArrowIcon className="z-20 cursor-pointer" />
+        <Link href={`/vulnerability-db/${id}`}>
+          <DBCardArrowIcon className="z-20 cursor-pointer" />
+        </Link>
       </div>
     </div>
   );
