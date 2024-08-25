@@ -12,16 +12,19 @@ export default function page({ searchParams }: { searchParams: { page: string } 
     <div className="flex flex-col gap-[2rem] p-[1rem]">
       <div className="flex gap-[2.8rem]">
         <DBCard
+          id={1}
           date={dummyDate}
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
           backgroundId={1}
         />
         <DBCard
+          id={2}
           date={dummyDate}
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
           backgroundId={2}
         />
         <DBCard
+          id={3}
           date={dummyDate}
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
           backgroundId={3}
