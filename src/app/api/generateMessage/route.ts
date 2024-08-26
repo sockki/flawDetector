@@ -42,6 +42,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Failed to generate response' }, { status: 500 });
   }
 
-  const generatedMessage = await generateResponse.text();
-  return NextResponse.json({ generatedMessage });
+  // const test = await generateResponse.json();
+  const data = await generateResponse.text();
+  console.log(generateResponse);
+  return NextResponse.json(data);
 }

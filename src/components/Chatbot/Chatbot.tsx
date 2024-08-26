@@ -1,81 +1,63 @@
 'use client';
 
-import { useState } from 'react';
+import { ChatIcon, SendIcon } from '@/public/index';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
-// Message 인터페이스 정의
-type Message = {
-  sender: 'user' | 'bot';
-  content: string;
-};
+export default function Chatbot() {
+  // const [message, setMessage] = useState([]);
+  const [inputText, setInputText] = useState('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-export default function ChatBot() {
-  // messages 상태를 Message[] 타입으로 정의
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState<string>('');
+  // const messageStyles = {
+  //   user: '',
+  //   bot: '',
+  // };
 
-  const sendMessage = async () => {
-    if (!input) return;
-
-    const newMessage: Message = { sender: 'user', content: input };
-    setMessages(prevMessages => [...prevMessages, newMessage]);
-
-    const response = await fetch('/api/generateMessage', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user_message: input,
-        temperature: 0.9,
-        top_p: 0.9,
-      }),
-    });
-
-    if (!response.ok) {
-      setMessages(prevMessages => [
-        ...prevMessages,
-        { sender: 'bot', content: 'Error: Failed to generate response' },
-      ]);
-      return;
+  const autoResizeTextarea = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight * 0.1}rem`;
     }
-
-    const data = await response.json();
-
-    const botMessage: Message = { sender: 'bot', content: data.generatedMessage };
-    setMessages(prevMessages => [...prevMessages, botMessage]);
-    console.log(data);
-    setInput(''); // 입력 필드 초기화
   };
 
+  const handleOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setInputText(e.target.value);
+    autoResizeTextarea();
+  };
+
+  // 컴포넌트가 마운트될 때 한 번 실행하여 textarea의 초기 크기를 맞춤
+  useEffect(() => {
+    autoResizeTextarea();
+  }, []);
+
   return (
-    <div className="flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md rounded border p-4">
-        <div className="mb-4">
-          {messages.map((msg, index) => (
-            <div
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              className={`my-2 rounded p-2 ${msg.sender === 'user' ? 'bg-blue-100 text-right' : 'bg-gray-100 text-left'}`}
-            >
-              {msg.content}
-            </div>
-          ))}
+    <div className="shadow-chatbot flex h-[72.6rem] w-[55.8rem] flex-col justify-between overflow-hidden rounded-[2.4rem] bg-white">
+      <div className="flex items-center gap-[1rem] bg-primary-500 p-[2.4rem]">
+        <ChatIcon />
+        <h2 className="text-[2.4rem] text-white">플로디텍터 운영자</h2>
+      </div>
+      <div>메세지 영역</div>
+      <div className="p-[2rem]">
+        <div className="flex items-end justify-center gap-[1rem] rounded-[4rem] bg-[#F8F8F9] px-[1.6rem]">
+          <div className="flex min-w-0 flex-1 flex-col">
+            <textarea
+              ref={textareaRef}
+              className="m-0 max-h-[8rem] resize-none border-0 bg-transparent px-0 py-[1.2rem] text-[2rem] leading-none placeholder:text-[#B3B6BA] focus:outline-none focus:ring-0 focus-visible:ring-0"
+              value={inputText}
+              onChange={handleOnChange}
+              placeholder="챗봇에게 궁금한 점을 물어보세요!"
+              rows={1}
+              style={{ overflowY: 'hidden' }} // 스크롤바를 숨김
+            />
+          </div>
+          <button
+            type="button"
+            aria-label="Send prompt"
+            className="my-[1.8rem] flex h-[3.64rem] w-[4.6rem] items-center justify-center rounded-full bg-primary-500 text-white transition-colors hover:opacity-70 focus-visible:outline-none focus-visible:outline-black disabled:bg-[#D7D7D7] disabled:text-[#f4f4f4] disabled:hover:opacity-100"
+          >
+            <SendIcon />
+          </button>
         </div>
-        <input
-          type="text"
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && sendMessage()}
-          placeholder="메시지를 입력하세요"
-          className="mb-2 w-full rounded border p-2"
-        />
-        <button
-          type="button"
-          onClick={sendMessage}
-          className="w-full rounded bg-blue-500 p-2 text-white"
-        >
-          전송
-        </button>
       </div>
     </div>
   );
