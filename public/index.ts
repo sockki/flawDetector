@@ -5,7 +5,7 @@ export { default as RemoveIcon } from './icons/remove.svg';
 export { default as CheckIcon } from './icons/switchCheck.svg';
 export { default as CrossIcon } from './icons/switchCross.svg';
 export { default as ListIcon } from './icons/listLibrary.svg'
-export { default as SucessIcon } from './icons/success.svg';
+export { default as SuccessIcon } from './icons/success.svg';
 export { default as ListCheckIcon } from './icons/listCheck.svg';
 export { default as ErrorIcon } from './icons/error.svg';
 export { default as AnalyzeIcon } from './icons/analyze.svg';
@@ -19,3 +19,5 @@ export { default as PinIcon } from "./icons/pinIcon.svg"
 export { default as BigPinIcon } from "./icons/bigPinIcon.svg"
 export { default as ShareIcon } from "./icons/sharingIcon.svg"
 export { default as SpacSpaceLogoIcon } from "./icons/spacSpaceLogo.svg"
+export { default as BookMarkIcon } from "./icons/bookMark.svg"
+export { default as DoubleCheckIcon } from "./icons/doubleCheck.svg"
