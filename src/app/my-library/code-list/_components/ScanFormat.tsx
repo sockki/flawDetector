@@ -15,7 +15,7 @@ export function ScanFormat() {
         </div>
       </div>
       <div className={formatStyles}>
-        <div className={containerStyles}>
+        <div className={contentStyles}>
           <EmptyFileIcon />
           분석할 파일이 없어요!
         </div>
