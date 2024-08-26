@@ -25,23 +25,23 @@ export default function DBCard({ id, title, date, backgroundId }: DBCardProps) {
       return 'bg-[linear-gradient(360deg,rgba(0,0,0,0.7),rgba(255,255,255,0)),url(/images/DBCardDummyImg3.png)]';
     }
   };
-  const onMouseOver2And3 = () => {
+
+  const handleHover = (isHovering: boolean) => {
     if (backgroundId !== 1) {
-      setIsHoverFirstCard(false);
+      setIsHoverFirstCard(isHovering);
     }
   };
-  const onMouseOut2And3 = () => {
-    if (backgroundId !== 1) {
-      setIsHoverFirstCard(true);
-    }
+
+  const hoverHandlers = {
+    onMouseOver: () => handleHover(false),
+    onFocus: () => handleHover(false),
+    onMouseOut: () => handleHover(true),
+    onBlur: () => handleHover(true),
   };
 
   return (
     <div
-      onMouseOver={onMouseOver2And3}
-      onFocus={onMouseOver2And3}
-      onMouseOut={onMouseOut2And3}
-      onBlur={onMouseOut2And3}
+      {...hoverHandlers}
       className={twMerge(
         `group flex h-[39rem] rounded-[2rem] bg-cover p-[3.6rem] transition-all duration-500 ease-in-out hover:w-[62.5rem]`,
         backgroundById(backgroundId),
