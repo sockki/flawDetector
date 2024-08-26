@@ -31,18 +31,18 @@ export default function Chatbot() {
   }, []);
 
   return (
-    <div className="shadow-chatbot flex h-[72.6rem] w-[55.8rem] flex-col justify-between overflow-hidden rounded-[2.4rem] bg-white">
+    <div className="shadow-chatbot flex h-[72.6rem] w-[55.8rem] flex-col justify-between overflow-hidden rounded-[3.6rem] bg-white">
       <div className="flex items-center gap-[1rem] bg-primary-500 p-[2.4rem]">
         <ChatIcon />
         <h2 className="text-[2.4rem] text-white">플로디텍터 운영자</h2>
       </div>
       <div>메세지 영역</div>
       <div className="p-[2rem]">
-        <div className="flex items-end justify-center gap-[1rem] rounded-[4rem] bg-[#F8F8F9] px-[1.6rem]">
+        <div className="flex items-end justify-center gap-[1rem] rounded-[2.4rem] bg-[#F8F8F9] px-[1.6rem] py-[1.2rem]">
           <div className="flex min-w-0 flex-1 flex-col">
             <textarea
               ref={textareaRef}
-              className="m-0 max-h-[8rem] resize-none border-0 bg-transparent px-0 py-[1.2rem] text-[2rem] leading-none placeholder:text-[#B3B6BA] focus:outline-none focus:ring-0 focus-visible:ring-0"
+              className="m-0 max-h-[8rem] resize-none border-0 bg-transparent px-0 py-[0.8rem] text-[2rem] leading-none placeholder:text-[#B3B6BA] focus:outline-none focus:ring-0 focus-visible:ring-0"
               value={inputText}
               onChange={handleOnChange}
               placeholder="챗봇에게 궁금한 점을 물어보세요!"
@@ -53,7 +53,7 @@ export default function Chatbot() {
           <button
             type="button"
             aria-label="Send prompt"
-            className="my-[1.8rem] flex h-[3.64rem] w-[4.6rem] items-center justify-center rounded-full bg-primary-500 text-white transition-colors hover:opacity-70 focus-visible:outline-none focus-visible:outline-black disabled:bg-[#D7D7D7] disabled:text-[#f4f4f4] disabled:hover:opacity-100"
+            className="flex h-[3.64rem] w-[4.6rem] items-center justify-center rounded-full bg-primary-500 text-white transition-colors hover:opacity-70 focus-visible:outline-none focus-visible:outline-black disabled:bg-[#D7D7D7] disabled:text-[#f4f4f4] disabled:hover:opacity-100"
           >
             <SendIcon />
           </button>
