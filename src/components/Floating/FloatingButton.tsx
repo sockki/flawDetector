@@ -25,7 +25,7 @@ export function FloatingButton({ type, onClick }: FloatingButtonProps) {
       onClick={handleClick}
       className={twMerge(
         'group fixed bottom-4 flex h-[7.6rem] w-[7.6rem] items-center justify-center rounded-full shadow-lg focus:outline-none',
-        'bg-white text-primary-500 hover:bg-primary-500 hover:text-white',
+        'border border-primary-500 bg-white text-primary-500 hover:border-primary-500 hover:bg-primary-500 hover:text-white',
       )}
     >
       <div className="flex flex-col items-center justify-center">
