@@ -1,3 +1,4 @@
+import { ScanButton } from './_components/ScanButton';
 import { ScanEntireFolder } from './_components/ScanEntireFolder';
 import { ScanFormat } from './_components/ScanFormat';
 import { ScanProgress } from './_components/ScanProgress';
@@ -14,6 +15,7 @@ export default function CodeList() {
         <ScanStatus detectedCount={14} errorCount={8} successCount={23} />
         <ScanFormat />
       </div>
+      <ScanButton />
     </div>
   );
 }
