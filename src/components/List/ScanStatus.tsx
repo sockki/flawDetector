@@ -1,6 +1,3 @@
-'use client';
-
-import { useState } from 'react';
 import {
   AnalyzeIcon,
   SuccessIcon,
@@ -22,13 +19,11 @@ type StateConfig = {
 
 type ScanStatusProps = {
   type: ScanStatusType;
-  onBookmarkClick: () => void;
   isMarked?: boolean;
+  onBookMarkClick: () => void;
 };
 
-export function ScanStatus({ type, onBookmarkClick, isMarked: initialIsMarked }: ScanStatusProps) {
-  const [isMarked, setIsMarked] = useState(initialIsMarked);
-
+export function ScanStatus({ type, isMarked, onBookMarkClick }: ScanStatusProps) {
   const baseStyles = 'flex h-fit w-fit items-center gap-[0.4rem] text-[1.6rem] text-gray-black';
 
   const stateConfig: StateConfig = {
@@ -45,15 +40,8 @@ export function ScanStatus({ type, onBookmarkClick, isMarked: initialIsMarked }:
 
   const { icon, text, additionalClasses } = stateConfig[type];
 
-  const handleClick = () => {
-    if (type === 'enabled') {
-      onBookmarkClick();
-      setIsMarked(prevIsMarked => !prevIsMarked);
-    }
-  };
-
   return (
-    <div className={twMerge(baseStyles, additionalClasses)} onClick={handleClick}>
+    <div className={twMerge(baseStyles, additionalClasses)} onClick={onBookMarkClick}>
       {icon} {text}
     </div>
   );
