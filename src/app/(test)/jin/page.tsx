@@ -1,11 +1,17 @@
-import InfoBox from '../../../components/InfoBox/InfoBox';
+'use client';
 
-export default function App() {
+import { FloatingButton } from '../../../components/Floating/FloatingButton';
+
+export default function HomeApp() {
   return (
-    <div className="p-[1rem]">
-      <InfoBox theme="red" location bullet description={[' ']} />
-      <InfoBox theme="primary" location={false} bullet description={['a']} />
-      <InfoBox theme="gray" location bullet description={['a', 'b']} />
+    <div>
+      <div className="h-[100rem]">아무글자</div>
+      <FloatingButton
+        type="ask"
+        onClick={() => alert('Ask Button Clicked!')}
+        className="fixed bottom-4 right-4"
+      />
+      <FloatingButton type="top" className="fixed bottom-4 left-4" />
     </div>
   );
 }
