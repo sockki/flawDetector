@@ -1,57 +1,82 @@
 'use client';
 
-import AssistChip from '@/components/Chips/AssistChip';
-import FilterChip from '@/components/Chips/FilterChip';
-import InputChip from '@/components/Chips/InputChip';
-import SuggestionChip from '@/components/Chips/SuggestionChip';
-import { useState } from 'react';
+import { Modal } from '@/components/Modals';
+import CheckedFileList from '@/components/common/CheckedFileList';
+import { useModal } from '@/hooks/useModal';
 
-const OPTION = ['옵션', '옵션1', '옵션2'];
+const checkedData = [
+  {
+    fileName: 'Report_2024_08_19dddddsdhaskjdlkaj.pdf',
+    subTitle: 'Quarterly Financial Report',
+    createdAt: new Date(2024, 7, 19, 10, 30),
+  },
+  {
+    fileName: 'Presentation_2024_08_18.pptx',
+    subTitle: 'Project Kickoff Meeting',
+    createdAt: new Date(2024, 7, 18, 15, 45),
+  },
+  {
+    fileName: 'Notes_2024_08_17.docx',
+    subTitle: 'Meeting Notes',
+    createdAt: new Date(2024, 7, 17, 9, 0),
+  },
+  {
+    fileName: 'Invoice_2024_08_16.pdf',
+    subTitle: 'Client Invoice August',
+    createdAt: new Date(2024, 7, 16, 14, 20),
+  },
+  {
+    fileName: 'Agenda_2024_08_15.docx',
+    subTitle: 'Weekly Team Meeting',
+    createdAt: new Date(2024, 7, 15, 11, 0),
+  },
+  {
+    fileName: 'Agenda_2024_08_15.docx',
+    subTitle: 'Weekly Team Meeting',
+    createdAt: new Date(2024, 7, 15, 11, 0),
+  },
+];
 
 export default function TestPage() {
-  const [option, setOption] = useState('');
-
-  const handleSelect = (v: string) => {
-    setOption(() => v);
-  };
-  console.log(option);
+  const [isModalOpen, handleClickTrigger] = useModal();
 
   return (
-    <>
-      <h1 className="mb-3 text-xl font-bold">InputChip</h1>
-      <InputChip label=".eslintrc.json" />
-      <InputChip label=".eslintrc.json" leftIcon percentage={20} isRemovable />
-      <InputChip label=".eslintrc.json" leftIcon isRemovable />
-      <InputChip label=".eslintrc.json" leftIcon />
-      <br />
-      <hr />
-      <br />
-      <h1 className="mb-3 text-xl font-bold">AssistChip</h1>
+    <div className="h-[2020rem]">
+      <button onClick={handleClickTrigger} type="button">
+        모달 띄우는 창
+      </button>
 
-      <AssistChip variant="outline" label="label" />
-      <AssistChip variant="elevated" label="label" />
-      <AssistChip variant="outline-primary" label="label" />
-      <AssistChip variant="outline" label="label" disabled />
-      <AssistChip variant="elevated" label="label" disabled />
-      <AssistChip variant="outline-primary" label="label" disabled />
-      <br />
-      <br />
-      <hr />
-      <br />
-      <h1 className="mb-3 text-xl font-bold">SuggestionChip</h1>
-      <SuggestionChip variant="new" />
-      <SuggestionChip variant="hot" />
-      <SuggestionChip variant="warn" />
-      <SuggestionChip variant="notification" />
-      <SuggestionChip variant="report" />
-      <SuggestionChip variant="new" isActive={false} />
-      <br />
-      <br />
-      <hr />
-      <br />
-      <h1 className="mb-3 text-xl font-bold">FilterChip</h1>
-      <FilterChip label="label" options={OPTION} hasIcon onSelect={handleSelect} />
-      <FilterChip label="label" options={OPTION} onSelect={handleSelect} />
-    </>
+      <Modal
+        gap={24}
+        padding={32}
+        hasShadow
+        hasDimmed
+        setIsModalOpen={handleClickTrigger}
+        isOpen={isModalOpen}
+      >
+        <Modal.Title size="sm">모달테스트 중 입니다.</Modal.Title>
+        <CheckedFileList checkedData={checkedData} />
+        <Modal.Text subtitle={['뭐라 적으실?', '두줄일경우']} helpText="그밑에 들어가는 텍스트" />
+        <Modal.Button
+          buttonText={{ left: 'left', right: 'right' }}
+          variant="doubleButton"
+          onClick={{
+            left: () => {
+              console.log('왼쪽');
+            },
+            right: () => {
+              console.log('오른쪽');
+            },
+          }}
+        />
+        {/* <Modal.Button
+            buttonText="button"
+            variant="singleButton"
+            onClick={() => {
+              console.log('gi');
+            }}
+          /> */}
+      </Modal>
+    </div>
   );
 }
