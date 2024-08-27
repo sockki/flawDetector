@@ -1,3 +1,4 @@
+export { default as BugIcon } from './icons/bug.svg';
 export { default as CaretIcon } from './icons/caret.svg';
 export { default as DocumentIcon } from './icons/document.svg';
 export { default as LogoIcon } from './icons/headerLogo.svg';
@@ -11,6 +12,8 @@ export { default as ErrorIcon } from './icons/error.svg';
 export { default as AnalyzeIcon } from './icons/analyze.svg';
 export { default as ListDocumentIcon } from './icons/listDocument.svg';
 export { default as FolderIcon } from './icons/folder.svg'
+export { default as ChatIcon } from './icons/floatChat.svg';
+export { default as TopIcon } from './icons/floatVector.svg';
 export { default as PaginationArrowIcon } from "./icons/paginationArrow.svg"
 export { default as DBCardArrowIcon } from "./icons/dbCardArrow.svg"
 export { default as DetectFileCardButtonIcon } from "./icons/detectFileCardButton.svg"
