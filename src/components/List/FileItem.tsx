@@ -1,12 +1,15 @@
 import { ListDocumentIcon, ListCheckIcon } from '@/public/index';
 import { twMerge } from 'tailwind-merge';
 import { ScanStatus } from './ScanStatus';
+import { ProgressBar } from '../ProgressBar/ProgressBar';
 
 type FileItemProps = {
   fileName: string;
-  type: 'enabled' | 'analye' | 'waiting' | 'success' | 'error' | 'bookmark';
+  type: 'enabled' | 'analye' | 'waiting' | 'success' | 'error';
   isSelected?: boolean;
   isLast?: boolean;
+  isMarked?: boolean;
+  handleBookmarkClick: () => void;
 };
 
 export function FileItem({
@@ -14,20 +17,30 @@ export function FileItem({
   type = 'enabled',
   isSelected = false,
   isLast = false,
+  isMarked = false,
+  handleBookmarkClick,
 }: FileItemProps) {
   const containerStyles = twMerge(
-    'flex h-[4.4rem] w-[24.7rem] justify-between border-l border-r gap-[1rem] border-b border-gray-300  p-[1rem] align-middle hover:bg-purple-light',
+    'group flex h-[5.2rem] w-[24.7rem] flex-col justify-center gap-[0.4rem] border-b border-l border-r border-gray-300 p-[1rem] align-middle hover:bg-purple-light',
     isSelected ? 'bg-purple-dark' : 'bg-[#ffffff]',
     isLast && 'rounded-bl-[0.8rem] rounded-br-[0.8rem]',
   );
+
+  const itemStyles = 'flex h-fit w-full justify-between align-middle';
+
+  const infoStyles = 'flex gap-[0.4rem] align-middle text-[1.6rem] text-gray-black';
+
   return (
     <div className={containerStyles}>
-      <div className="flex gap-[0.4rem] align-middle text-[1.6rem] text-gray-black">
-        {isSelected && <ListCheckIcon />}
-        <ListDocumentIcon />
-        {fileName}
+      <div className={itemStyles}>
+        <div className={infoStyles}>
+          {isSelected && <ListCheckIcon />}
+          <ListDocumentIcon />
+          {fileName}
+        </div>
+        <ScanStatus type={type} onBookmarkClick={handleBookmarkClick} isMarked={isMarked} />
       </div>
-      <ScanStatus type={type} />
+      {type === 'enabled' ? '' : <ProgressBar isList />}
     </div>
   );
 }
