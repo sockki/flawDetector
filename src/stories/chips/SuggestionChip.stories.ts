@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta: Meta<typeof SuggestionChip> = {
   component: SuggestionChip,
   args: {
+
     variant:"hot"
   }
 };
