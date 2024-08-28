@@ -1,12 +1,10 @@
 const getData = async () => {
-  const data = await (
-    await fetch(`http://localhost:3000/api/vulnerability-db`, {
-      cache: 'no-cache',
-    })
-  ).json();
+  const data = fetch('localhost:3000/api/get');
   return data;
 };
-export default function page() {
+
+export default async function page() {
   const data = getData();
-  return <>{data}</>;
+  console.log(data);
+  return <div />;
 }
