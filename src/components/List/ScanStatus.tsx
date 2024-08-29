@@ -11,8 +11,7 @@ type ScanStatusType = 'enabled' | 'analye' | 'waiting' | 'success' | 'error';
 
 type StateConfig = {
   [key in ScanStatusType]: {
-    icon: JSX.Element | null;
-    text: string;
+    icon: JSX.Element | null | string;
     additionalClasses?: string;
   };
 };
@@ -27,22 +26,21 @@ export function ScanStatus({ type, isMarked, onBookMarkClick }: ScanStatusProps)
   const baseStyles = 'flex h-fit w-fit items-center gap-[0.4rem] text-[1.6rem] text-gray-black';
 
   const stateConfig: StateConfig = {
-    analye: { icon: <AnalyzeIcon />, text: '분석중' },
-    waiting: { icon: null, text: '대기중..', additionalClasses: 'text-neutral-40' },
-    success: { icon: <SuccessIcon />, text: '완료' },
-    error: { icon: <ErrorIcon />, text: '오류' },
+    analye: { icon: <AnalyzeIcon /> },
+    waiting: { icon: '대기중..', additionalClasses: 'text-neutral-40' },
+    success: { icon: <SuccessIcon /> },
+    error: { icon: <ErrorIcon /> },
     enabled: {
       icon: isMarked ? <FullBookMarkIcon /> : <EmptyBookMarkIcon />,
-      text: '',
       additionalClasses: twMerge(isMarked ? 'block' : 'hidden group-hover:block'),
     },
   };
 
-  const { icon, text, additionalClasses } = stateConfig[type];
+  const { icon, additionalClasses } = stateConfig[type];
 
   return (
     <div className={twMerge(baseStyles, additionalClasses)} onClick={onBookMarkClick}>
-      {icon} {text}
+      {icon}
     </div>
   );
 }
