@@ -54,7 +54,7 @@ export function FolderItem({
         </div>
         <ScanStatus type={type} onBookMarkClick={handleClick} isMarked={isMarked} />
       </div>
-      {type === 'enabled' ? '' : <ProgressBar isList />}
+      {type === 'enabled' ? '' : <ProgressBar type={type} />}
     </div>
   );
 }
