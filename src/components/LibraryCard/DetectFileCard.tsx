@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  DetectFileCardArrowIcon,
-  DetectFileCardBookStar,
-  DetectFileCardBugIcon,
-  DetectFileCardColorStar,
-} from '@/public/index';
+import { DetectFileCardArrowIcon, DetectFileCardBugIcon, DetectFileCardStar } from '@/public/index';
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
@@ -38,6 +33,11 @@ export default function DetectFileCard({ title, label, date, isBookmarked }: Det
     else return '검사하기';
   };
 
+  const buttonStyle = (labelData: DetectFileLabelType) => {
+    if (labelData === 'done') return 'bg-neutral-100';
+    else return 'bg-primary-500';
+  };
+
   const onClickBookmark = () => {
     setIsBookmark(prev => !prev);
   };
@@ -46,7 +46,7 @@ export default function DetectFileCard({ title, label, date, isBookmarked }: Det
     <div className="group relative flex h-[20rem] w-[31rem] cursor-pointer flex-col justify-between rounded-[1.2rem] border-[0.1rem] border-primary-100 p-[2rem]">
       <div className="flex justify-between">
         <div className="flex h-[3.9rem] items-center gap-[0.8rem]">
-          {isBookmark && <DetectFileCardColorStar />}
+          {isBookmark && <DetectFileCardStar className="fill-primary-200" />}
           <span className="text-[2.8rem] font-medium leading-[3.9rem] text-gray-black">
             {title}
           </span>
@@ -64,7 +64,10 @@ export default function DetectFileCard({ title, label, date, isBookmarked }: Det
       <div className="flex items-end justify-between">
         <button
           type="button"
-          className="flex items-center gap-[0.7rem] rounded-[1.4rem] bg-primary-500 p-[1rem]"
+          className={twMerge(
+            'flex items-center gap-[0.7rem] rounded-[1.4rem] p-[1rem]',
+            buttonStyle(label),
+          )}
         >
           <DetectFileCardBugIcon />
           <span className="text-[2rem] font-regular leading-[2.8rem] text-white">
@@ -77,13 +80,14 @@ export default function DetectFileCard({ title, label, date, isBookmarked }: Det
         </span>
         <div
           onClick={onClickBookmark}
-          className="hidden h-[4.8rem] w-[4.8rem] items-center justify-center rounded-[1.2rem] border-[0.2rem] border-purple-200 hover:bg-primary-50 group-hover:flex"
+          className="hidden h-[4.8rem] w-[4.8rem] items-center justify-center rounded-[1.2rem] border-[0.2rem] border-primary-200 group-hover:flex"
         >
-          {isBookmark ? (
-            <DetectFileCardColorStar className="mt-[0.1rem] h-[2.8rem] w-[2.8rem]" />
-          ) : (
-            <DetectFileCardBookStar className="z-10" />
-          )}
+          <DetectFileCardStar
+            className={twMerge(
+              'ml-[0.15rem] mt-[0.15rem] h-[2.8rem] w-[2.8rem] stroke-primary-200 stroke-1',
+              isBookmark ? 'fill-primary-200 hover:fill-none' : 'hover:fill-primary-200',
+            )}
+          />
         </div>
       </div>
     </div>
