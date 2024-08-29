@@ -1,33 +1,43 @@
-import ArticleCard from '@/components/Card/ArticleCard';
-import ArticleSmallCard from '@/components/Card/ArticleSmallCard';
-import DBCard from '@/components/Card/DBCard';
-import DetectFileCard from '@/components/Card/DetectFileCard';
-import ScrapCard from '@/components/Card/ScrapCard';
-import Pagination from '@/components/Pagination/Pagination';
-import dummyImg from '@/public/images/DBCardDummyImg1.png';
+'use client';
 
-export default function page({ searchParams }: { searchParams: { page: string } }) {
+import ArticleCard from '@/components/VulDbCard/ArticleCard';
+import ArticleSmallCard from '@/components/VulDbCard/ArticleSmallCard';
+import DetectFileCard from '@/components/LibraryCard/DetectFileCard';
+import ScrapCard from '@/components/LibraryCard/ScrapCard';
+import Pagination from '@/components/Pagination/Pagination';
+import dummyImg from '@/public/images/BannerCardDummyImg1.png';
+import BannerCard from '@/components/VulDbCard/BannerCard';
+import { useState } from 'react';
+
+export default function MinTextPage({ searchParams }: { searchParams: { page: string } }) {
   const dummyDate = new Date(2024, 7, 21, 17, 16, 0);
+  const [isHoverFirstCard, setIsHoverFirstCard] = useState<boolean>(true);
   return (
     <div className="flex flex-col gap-[2rem] p-[1rem]">
       <div className="flex gap-[2.8rem]">
-        <DBCard
+        <BannerCard
           id={1}
           date={dummyDate}
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
           backgroundId={1}
+          isHoverFirstCard={isHoverFirstCard}
+          setIsHoverFirstCard={setIsHoverFirstCard}
         />
-        <DBCard
+        <BannerCard
           id={2}
           date={dummyDate}
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
           backgroundId={2}
+          isHoverFirstCard={isHoverFirstCard}
+          setIsHoverFirstCard={setIsHoverFirstCard}
         />
-        <DBCard
+        <BannerCard
           id={3}
           date={dummyDate}
           title="2023년 12월 CNNVD 호환 서비스 신제품 발표"
           backgroundId={3}
+          isHoverFirstCard={isHoverFirstCard}
+          setIsHoverFirstCard={setIsHoverFirstCard}
         />
       </div>
       <div className="flex gap-[2.8rem]">
