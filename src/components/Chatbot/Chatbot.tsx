@@ -3,7 +3,7 @@
 import { BugIcon, ChatIcon, SendIcon } from '@/public/index';
 import { format } from 'date-fns/format';
 import { ko } from 'date-fns/locale';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export default function Chatbot() {
@@ -16,22 +16,31 @@ export default function Chatbot() {
   //   bot: '',
   // };
 
-  const autoResizeTextarea = () => {
+  const handleOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setInputText(e.target.value);
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight * 0.1}rem`;
     }
   };
 
-  const handleOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setInputText(e.target.value);
-    autoResizeTextarea();
+  const handleSendMessage = () => {
+    if (inputText.trim()) {
+      // 메세지 전송로직
+      console.log('전송~!');
+      setInputText('');
+      if (textareaRef.current) {
+        textareaRef.current.style.height = 'auto';
+      }
+    }
   };
 
-  // 컴포넌트가 마운트될 때 한 번 실행하여 textarea의 초기 크기를 맞춤
-  useEffect(() => {
-    autoResizeTextarea();
-  }, []);
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
 
   const messages = [
     {
@@ -131,9 +140,10 @@ export default function Chatbot() {
           <div className="flex min-w-0 flex-1 flex-col">
             <textarea
               ref={textareaRef}
-              className="m-0 max-h-[8rem] resize-none border-0 bg-transparent px-0 py-[0.8rem] text-[2rem] leading-none text-gray-black placeholder:text-[#B3B6BA] focus:outline-none focus:ring-0 focus-visible:ring-0"
+              className="m-0 max-h-[11.6rem] resize-none border-0 bg-transparent px-0 py-[0.8rem] text-[2rem] leading-none text-gray-black placeholder:text-[#B3B6BA] focus:outline-none focus:ring-0 focus-visible:ring-0"
               value={inputText}
               onChange={handleOnChange}
+              onKeyDown={handleKeyDown}
               placeholder="챗봇에게 궁금한 점을 물어보세요!"
               rows={1}
               style={{ overflowY: 'hidden' }}
@@ -143,6 +153,7 @@ export default function Chatbot() {
             type="button"
             aria-label="Send prompt"
             className="flex h-[3.64rem] w-[4.6rem] items-center justify-center rounded-full bg-primary-500 text-white transition-colors hover:bg-primary-300 focus-visible:outline-none focus-visible:outline-black disabled:bg-[#D7D7D7] disabled:text-[#f4f4f4] disabled:hover:opacity-100"
+            onClick={handleSendMessage}
           >
             <SendIcon />
           </button>
