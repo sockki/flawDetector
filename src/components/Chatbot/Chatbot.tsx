@@ -3,13 +3,29 @@
 import { BugIcon, ChatIcon, SendIcon } from '@/public/index';
 import { format } from 'date-fns/format';
 import { ko } from 'date-fns/locale';
-import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
+type Message = {
+  sender: 'user' | 'bot';
+  content: string;
+  sentAt: string;
+};
+
+const news = {
+  title: '[취약성 보고서] Microsoft의 다양한 보안 취약점에 대한 CNNVD의 보고서',
+  desc: `
+  Microsoft는 2024년 8월 13일에 총 89개의 보안 취약점에 대한 패치를 포함한 2024년 8월 보안 업데이트를 출시했습니다. 이 업데이트는 Microsoft Windows, Microsoft Azure Connected Machine Agent, Microsoft Visual Studio 및 Microsoft .NET 등을 포함한 다양한 제품과 시스템을 대상으로 합니다. CNNVD는 이들 중 7개를 매우 중요한 취약점으로, 66개를 고위험, 16개를 중간 위험 수준으로 평가했습니다.
+  이번 보안 업데이트에는 새로운 취약점에 대한 패치 81개, 기존 취약점에 대한 패치 3개, Microsoft 제품에 영향을 미치는 타사 제품의 취약점에 대한 패치 5개가 포함되었습니다. 주요 취약점으로는 Microsoft Windows TCP/IP 구성 요소 숫자 오류, Microsoft Azure Stack 교차 사이트 스크립팅 취약점, Microsoft Azure 코드 문제 등이 있으며, 이러한 취약점들은 매우 심각한 위험 수준으로 평가되었습니다.
+  또한 Microsoft는 타사 제품에서 발생하는 취약점에 대한 패치도 발표했습니다. GNU 커뮤니티의 grub2 보안 취약점, 개인 개발자의 심 버퍼 오류 취약점 등이 포함되어 있습니다.
+  Microsoft는 이 취약점들을 해결하기 위한 패치를 공식적으로 발표했으며, 사용자들은 가능한 빨리 패치를 적용하는 것이 권장됩니다. 자세한 정보와 패치 다운로드는 Microsoft의 [보안 업데이트 가이드](https://msrc.microsoft.com/update-guide/en-us)에서 확인할 수 있습니다.`,
+};
+
 export default function Chatbot() {
-  // const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   // const messageStyles = {
   //   user: '',
@@ -26,9 +42,11 @@ export default function Chatbot() {
 
   const handleSendMessage = () => {
     if (inputText.trim()) {
-      // 메세지 전송로직
-      console.log('전송~!');
+      const content = inputText;
       setInputText('');
+
+      // 메세지 전송로직
+      setMessage([...message, { sender: 'user', content, sentAt: new Date().toISOString() }]);
       if (textareaRef.current) {
         textareaRef.current.style.height = 'auto';
       }
@@ -37,33 +55,18 @@ export default function Chatbot() {
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
+      if (e.nativeEvent.isComposing === false) {
+        e.preventDefault();
+        handleSendMessage();
+      }
     }
   };
 
-  const messages = [
-    {
-      sender: 'user',
-      content: '번역이 좀 잘못된 것 같아요. 이해하기 어려워요.',
-      sentAt: '2024-08-30T09:15:00Z',
-    },
-    {
-      sender: 'bot',
-      content: '죄송합니다. 어떤 부분이 이해하기 어려우셨나요?',
-      sentAt: '2024-08-30T09:16:00Z',
-    },
-    {
-      sender: 'user',
-      content: '이 문장의 의미가 불명확해요.',
-      sentAt: '2024-08-30T09:17:00Z',
-    },
-    {
-      sender: 'bot',
-      content: '알겠습니다. 해당 문장을 다시 확인해보겠습니다.',
-      sentAt: '2024-08-30T09:18:00Z',
-    },
-  ];
+  useEffect(() => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  }, [message]);
 
   return (
     <div className="flex h-[72.6rem] w-[55.8rem] flex-col justify-between overflow-hidden rounded-[2.4rem] bg-white shadow-chatbot">
@@ -71,8 +74,10 @@ export default function Chatbot() {
         <ChatIcon />
         <h2 className="text-[2.4rem] font-bold text-white">플로디텍터 운영자</h2>
       </div>
-      <div className="flex flex-1 flex-col gap-[2.4rem] overflow-hidden overflow-y-scroll px-[2rem] pt-[2rem] text-[1.6rem]">
-        {/* 하나는 기본 세팅 나머지는 map */}
+      <div
+        ref={messagesContainerRef}
+        className="flex flex-1 flex-col gap-[2.4rem] overflow-hidden overflow-y-scroll px-[2rem] pt-[2rem] text-[1.6rem]"
+      >
         <article>
           <h4 className="sr-only">bot의 말</h4>
           <div className="flex w-full gap-[0.8rem]">
@@ -82,11 +87,9 @@ export default function Chatbot() {
             <div className="flex items-end justify-center gap-[0.4rem]">
               <div className="flex flex-col">
                 <div className="text-[2rem]">플로디텍터 운영자</div>
-                {/* 기본말풍선 */}
                 <div className="max-w-[21.5rem] rounded-[2rem] rounded-tl-none bg-[#f7f7f7] px-[1.2rem] py-[0.8rem]">
                   <p className="break-words text-[#575757]">
-                    <b>[취약성 경고] Microsoft의 여러 보안 취약점에 대한 CNNVD</b>의 보고서에서
-                    모르는게 생겼나요? <br /> <br />
+                    <b>{news.title}</b>에서 모르는게 생겼나요? <br /> <br />
                     보고서에서 궁금한 점을 물어봐주세요!
                   </p>
                 </div>
@@ -95,8 +98,7 @@ export default function Chatbot() {
             </div>
           </div>
         </article>
-        {/* 나머지 map */}
-        {messages.map(({ sender, content, sentAt }) => (
+        {message.map(({ sender, content, sentAt }) => (
           <article key={`${sender} ${sentAt}`}>
             <h4 className="sr-only">{sender}의 말</h4>
             <div
