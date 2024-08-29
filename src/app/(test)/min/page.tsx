@@ -31,13 +31,28 @@ export default function page({ searchParams }: { searchParams: { page: string } 
         />
       </div>
       <div className="flex gap-[2.8rem]">
-        <DetectFileCard title="title" caption="caption" isDetected={false} />
-        <DetectFileCard title="title" caption="caption" isDetected />
+        <DetectFileCard title="Project-1" date={dummyDate} label="before" isBookmarked={false} />
+        <DetectFileCard title="Project-1" date={dummyDate} label="under" isBookmarked={false} />
+        <DetectFileCard title="Project-1" date={dummyDate} label="done" isBookmarked />
+      </div>
+      <div className="flex gap-[2.8rem]">
         <ScrapCard
           title="Microsoft의 여러 보안 취약점에 대한 CNNVD의 보고서 및 기타 취약점에 대한 보고서"
           date={dummyDate}
+          label="warning"
+        />
+        <ScrapCard
+          title="Microsoft의 여러 보안 취약점에 대한 CNNVD의 보고서 및 기타 취약점에 대한 보고서"
+          date={dummyDate}
+          label="notification"
+        />
+        <ScrapCard
+          title="Microsoft의 여러 보안 취약점에 대한 CNNVD의 보고서 및 기타 취약점에 대한 보고서"
+          date={dummyDate}
+          label="report"
         />
       </div>
+
       <div className="flex flex-col gap-[2.8rem]">
         <ArticleCard
           id={1}
