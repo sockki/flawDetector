@@ -1,0 +1,48 @@
+'use client';
+
+import { useState } from 'react';
+import FilterChip from '@/components/Chips/FilterChip';
+import Pagination from '@/components/Pagination/Pagination';
+import ScrapCard from '@/components/Card/ScrapCard';
+
+type ScrapListProps = {
+  nowPage: number;
+  totalPage: number;
+  scrapData: { id: string; title: string; date: Date }[];
+};
+
+const typeOptions = ['취약성 보고서', '취약성 알림', '취약성 경고', '기타'];
+const sortOptions = ['최신순', '오래된순', '이름순'];
+
+export default function ScrapList({ nowPage, totalPage, scrapData }: ScrapListProps) {
+  const [, setSelectedType] = useState<string>('');
+  const [, setSelectedSort] = useState<string>('');
+
+  const handleTypeSelect = (value: string) => {
+    setSelectedType(value);
+  };
+
+  const handleSortSelect = (value: string) => {
+    setSelectedSort(value);
+  };
+
+  return (
+    <section className="flex min-h-screen flex-col gap-[2.4rem]">
+      <div className="flex items-center justify-between">
+        <h3 className="text-[3.2rem] font-medium text-gray-black">Library</h3>
+        <div className="flex gap-[1rem]">
+          <FilterChip label="Type" options={typeOptions} hasIcon onSelect={handleTypeSelect} />
+          <FilterChip label="Sort" options={sortOptions} hasIcon onSelect={handleSortSelect} />
+        </div>
+      </div>
+      <div className="grid grid-cols-4 gap-[2.4rem]">
+        {scrapData.map(scrap => (
+          <ScrapCard key={scrap.id} title={scrap.title} date={scrap.date} />
+        ))}
+      </div>
+      <div className="mx-auto">
+        <Pagination nowPage={nowPage} totalPage={totalPage} />
+      </div>
+    </section>
+  );
+}
