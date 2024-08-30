@@ -5,7 +5,7 @@ import DetectFileCard from '@/components/Card/DetectFileCard';
 import FilterChip from '@/components/Chips/FilterChip';
 import Pagination from '@/components/Pagination/Pagination';
 
-type LibraryListProps = {
+type RepositoryListProps = {
   nowPage: number;
   totalPage: number;
   repoData: { id: string; title: string; caption: string }[];
@@ -14,7 +14,7 @@ type LibraryListProps = {
 const typeOptions = ['검사완료', '검사중'];
 const sortOptions = ['최신순', '오래된순', '이름순'];
 
-export default function RepositoryList({ nowPage, totalPage, repoData }: LibraryListProps) {
+export default function RepositoryList({ nowPage, totalPage, repoData }: RepositoryListProps) {
   const [, setSelectedType] = useState<string>('');
   const [, setSelectedSort] = useState<string>('');
 
