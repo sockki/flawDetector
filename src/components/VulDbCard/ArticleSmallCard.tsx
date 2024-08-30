@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import { BigPinIcon, ShareIcon } from '@/public/index';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
-import { ArticleCardProps } from '@/types/articleCard';
+import type { ArticleCardProps } from '@/types/articleCard';
 import SuggestionChip from '../Chips/SuggestionChip';
 
 export default function ArticleSmallCard({
