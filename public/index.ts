@@ -20,3 +20,4 @@ export { default as RightArrowIcon } from './icons/caretRight.svg'
 export { default as FolderSimpleStarIcon } from './icons/folderSimpleStar.svg';
 export { default as ClockCounterIcon } from './icons/clockCounterClockwise.svg'
 export { default as HeaderBackgroundImg } from './images/headerBackground.svg';
+export { default as SignOutIcon } from './icons/signOut.svg'
