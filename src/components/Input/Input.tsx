@@ -17,7 +17,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     default: 'border-neutral-10 text-gray-dark',
     error: 'bg-red-light border-system-warning text-[#3f3f3f]',
   };
-  const disabledStyles = 'bg-gray-light text-[#d6d6d6] cursor-not-allowed';
+  const disabledStyles = 'bg-gray-light placeholder:text-[#d6d6d6] cursor-not-allowed';
 
   const combinedClasses = twMerge(
     baseStyle,
