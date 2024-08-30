@@ -1,6 +1,6 @@
+import MyPageTitle from '@/app/me/_components/MyPageTitle';
 import UserCard from '@/app/repos/_components/UserCard';
 import UserInfo from '@/app/me/_components/UserInfo';
-import MyPageTitle from '@/app/me/_components/MyPageTitle';
 import MyPageLinks from '@/app/me/_components/MyPageLinks';
 
 export default function page() {

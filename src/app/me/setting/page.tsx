@@ -1,6 +1,6 @@
+import MyPageTitle from '@/app/me/_components/MyPageTitle';
 import UserCard from '@/app/repos/_components/UserCard';
-import MyPageTitle from '../_components/MyPageTitle';
-import UserSetting from '../_components/UserSetting';
+import UserSetting from '@/app/me/_components/UserSetting';
 
 export default function Page() {
   const avatarUrl = '/images/AvatarDummyImg.png';

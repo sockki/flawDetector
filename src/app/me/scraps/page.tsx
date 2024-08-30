@@ -1,8 +1,8 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import MyPageTitle from '../_components/MyPageTitle';
-import ScrapList from '../_components/ScrapList';
+import MyPageTitle from '@/app/me/_components/MyPageTitle';
+import ScrapList from '@/app/me/_components/ScrapList';
 
 const dummyData = [
   { id: '1', title: 'Folder name 1', date: new Date('2024-03-08T13:30:24') },

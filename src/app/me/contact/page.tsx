@@ -1,5 +1,5 @@
-import ContactSection from '@/app/me/_components/ContactSection';
 import MyPageTitle from '@/app/me/_components/MyPageTitle';
+import ContactSection from '@/app/me/_components/ContactSection';
 
 export default function page() {
   return (

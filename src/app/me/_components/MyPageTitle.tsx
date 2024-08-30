@@ -1,7 +1,7 @@
 'use client';
 
-import { BackIcon } from '@/public/index';
 import { useRouter } from 'next/navigation';
+import { BackIcon } from '@/public/index';
 
 type MyPageTitleProps = {
   title: string;
