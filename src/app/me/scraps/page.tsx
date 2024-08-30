@@ -1,8 +1,9 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { Suspense, useState } from 'react';
 import MyPageTitle from '@/app/me/_components/MyPageTitle';
 import ScrapList from '@/app/me/_components/ScrapList';
+import SearchParams from '@/app/repos/_components/SearchParams';
 
 const dummyData = [
   { id: '1', title: 'Folder name 1', date: new Date('2024-03-08T13:30:24') },
@@ -28,8 +29,8 @@ const dummyData = [
 ];
 
 export default function Page() {
-  const searchParams = useSearchParams();
-  const nowPage = searchParams.get('page') ? Number(searchParams.get('page')) : 1;
+  const [nowPage, setNowPage] = useState(1);
+
   const pageItems = 16;
   const pageData = dummyData.slice((nowPage - 1) * pageItems, nowPage * pageItems);
   const totalPage = Math.ceil(dummyData.length / pageItems);
@@ -38,6 +39,9 @@ export default function Page() {
     <div className="mx-auto flex min-h-screen flex-col items-center gap-[12.4rem]">
       <MyPageTitle title="Clipping Article" />
       <ScrapList nowPage={nowPage} totalPage={totalPage} scrapData={pageData} />
+      <Suspense>
+        <SearchParams onParamsChange={setNowPage} />
+      </Suspense>
     </div>
   );
 }

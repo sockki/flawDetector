@@ -1,11 +1,11 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-
+import { Suspense, useState } from 'react';
 import ReposPageHeader from '@/app/repos/_components/ReposPageHeader';
 import UserCard from '@/app/repos/_components/UserCard';
 import RepositoryActions from '@/app/repos/_components/RepositoryActions';
 import RepositoryList from '@/app/repos/_components/RepositoryList';
+import SearchParams from '@/app/repos/_components/SearchParams';
 
 const dummyData = [
   { id: '1', title: 'Folder name 1', caption: 'caption 1' },
@@ -34,8 +34,8 @@ export default function Page() {
   const avatarUrl = '/images/AvatarDummyImg.png';
   const email = 'marry@gmail.com';
 
-  const searchParams = useSearchParams();
-  const nowPage = searchParams.get('page') ? Number(searchParams.get('page')) : 1;
+  const [nowPage, setNowPage] = useState(1);
+
   const pageItems = 16;
   const pageData = dummyData.slice((nowPage - 1) * pageItems, nowPage * pageItems);
   const totalPage = Math.ceil(dummyData.length / pageItems);
@@ -50,6 +50,9 @@ export default function Page() {
           <RepositoryList nowPage={nowPage} totalPage={totalPage} repoData={pageData} />
         </div>
       </div>
+      <Suspense>
+        <SearchParams onParamsChange={setNowPage} />
+      </Suspense>
     </div>
   );
 }
