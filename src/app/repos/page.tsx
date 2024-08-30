@@ -1,10 +1,11 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import PageHeader from './_components/PageHeader';
-import UserCard from './_components/UserCard';
-import RepositoryActions from './_components/RepositoryActions';
-import RepositoryList from './_components/RepositoryList';
+
+import ReposPageHeader from '@/app/repos/_components/ReposPageHeader';
+import UserCard from '@/app/repos/_components/UserCard';
+import RepositoryActions from '@/app/repos/_components/RepositoryActions';
+import RepositoryList from '@/app/repos/_components/RepositoryList';
 
 const dummyData = [
   { id: '1', title: 'Folder name 1', caption: 'caption 1' },
@@ -42,7 +43,7 @@ export default function Page() {
   return (
     <div className="mx-auto bg-opacity-70 bg-[url('/images/headerBackground.svg')] bg-contain bg-top bg-no-repeat">
       <div className="mx-auto mt-[21.5rem] flex w-[131.4rem] flex-col items-center gap-[12.4rem]">
-        <PageHeader />
+        <ReposPageHeader />
         <div className="flex flex-col gap-[2.8rem]">
           <UserCard avatar={avatarUrl} email={email} />
           <RepositoryActions />

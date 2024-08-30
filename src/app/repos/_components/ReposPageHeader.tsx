@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function PageHeader() {
+export default function ReposPageHeader() {
   return (
     <div className="flex flex-col items-center gap-[2rem]">
       <h2 className="text-[6rem] font-[300] text-primary-500">containing code files</h2>
