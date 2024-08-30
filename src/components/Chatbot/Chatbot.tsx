@@ -27,11 +27,6 @@ export default function Chatbot() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
-  // const messageStyles = {
-  //   user: '',
-  //   bot: '',
-  // };
-
   const handleOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInputText(e.target.value);
     if (textareaRef.current) {
@@ -40,15 +35,44 @@ export default function Chatbot() {
     }
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputText.trim()) {
       const content = inputText;
       setInputText('');
 
-      // 메세지 전송로직
-      setMessage([...message, { sender: 'user', content, sentAt: new Date().toISOString() }]);
+      setMessage(prevMessages => [
+        ...prevMessages,
+        { sender: 'user', content, sentAt: new Date().toISOString() },
+      ]);
+
       if (textareaRef.current) {
         textareaRef.current.style.height = 'auto';
+      }
+      const promptMessage = `Please read the following report carefully: ${news.desc}. Based on this report, I have a question: "${content}". Please respond **only** with the direct answer in Korean, without any special characters, translations, or additional text. Ensure the response is clean, and do not include any repeated or irrelevant characters, symbols, or formatting.
+      `;
+
+      try {
+        const response = await fetch('/api/generateMessage', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            prompt: promptMessage,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('응답 생성 실패');
+        }
+        const data = await response.json();
+
+        setMessage(prevMessage => [
+          ...prevMessage,
+          { sender: 'bot', content: data.message, sentAt: new Date().toISOString() },
+        ]);
+      } catch (error) {
+        throw new Error('응답 생성 실패');
       }
     }
   };
@@ -118,7 +142,6 @@ export default function Chatbot() {
               >
                 <div className="flex flex-col gap-[0.2rem]">
                   {sender === 'bot' && <div className="text-[2rem]">플로디텍터 운영자</div>}
-                  {/* 기본말풍선 */}
                   <div
                     className={twMerge(
                       'max-w-[30rem] rounded-[2rem] rounded-tl-none bg-[#f7f7f7] px-[1.2rem] py-[0.8rem] text-[#575757]',
