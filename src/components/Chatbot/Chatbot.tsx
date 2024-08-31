@@ -3,6 +3,7 @@
 import { BugIcon, ChatIcon, SendIcon } from '@/public/index';
 import { format } from 'date-fns/format';
 import { ko } from 'date-fns/locale';
+import DOMPurify from 'dompurify';
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
@@ -22,10 +23,22 @@ const news = {
 };
 
 export default function Chatbot() {
-  const [message, setMessage] = useState<Message[]>([]);
+  const initialMessages: Message[] = [
+    {
+      sender: 'bot',
+      content: `<b>${news.title}</b>에서 모르는게 생겼나요? <br /> <br />보고서에서 궁금한 점을 물어봐주세요!`,
+      sentAt: new Date().toISOString(),
+    },
+  ];
+
+  const [message, setMessage] = useState<Message[]>(initialMessages);
   const [inputText, setInputText] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+
+  const createMarkup = (html: string) => {
+    return { __html: DOMPurify.sanitize(html) };
+  };
 
   const handleOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInputText(e.target.value);
@@ -48,8 +61,7 @@ export default function Chatbot() {
       if (textareaRef.current) {
         textareaRef.current.style.height = 'auto';
       }
-      const promptMessage = `Please read the following report carefully: ${news.desc}. Based on this report, I have a question: "${content}". Please respond **only** with the direct answer in Korean, without any special characters, translations, or additional text. Ensure the response is clean, and do not include any repeated or irrelevant characters, symbols, or formatting.
-      `;
+      const promptMessage = `Please read the following report carefully: ${news.desc}. Based on this report, I have a question: "${content}"`;
 
       try {
         const response = await fetch('/api/generateMessage', {
@@ -102,26 +114,6 @@ export default function Chatbot() {
         ref={messagesContainerRef}
         className="flex flex-1 flex-col gap-[2.4rem] overflow-hidden overflow-y-scroll px-[2rem] pt-[2rem] text-[1.6rem]"
       >
-        <article>
-          <h4 className="sr-only">bot의 말</h4>
-          <div className="flex w-full gap-[0.8rem]">
-            <div className="flex h-[6.2rem] w-[6.2rem] items-center justify-center rounded-[1.8rem] bg-primary-500">
-              <BugIcon width={42} height={42} stroke="white" />
-            </div>
-            <div className="flex items-end justify-center gap-[0.4rem]">
-              <div className="flex flex-col">
-                <div className="text-[2rem]">플로디텍터 운영자</div>
-                <div className="max-w-[21.5rem] rounded-[2rem] rounded-tl-none bg-[#f7f7f7] px-[1.2rem] py-[0.8rem]">
-                  <p className="break-words text-[#575757]">
-                    <b>{news.title}</b>에서 모르는게 생겼나요? <br /> <br />
-                    보고서에서 궁금한 점을 물어봐주세요!
-                  </p>
-                </div>
-              </div>
-              <span className="text-[1.4rem] font-regular text-[#8B8F93]">오전 11:35</span>
-            </div>
-          </div>
-        </article>
         {message.map(({ sender, content, sentAt }) => (
           <article key={`${sender} ${sentAt}`}>
             <h4 className="sr-only">{sender}의 말</h4>
@@ -140,7 +132,7 @@ export default function Chatbot() {
                   sender === 'user' && 'flex-row-reverse',
                 )}
               >
-                <div className="flex flex-col gap-[0.2rem]">
+                <div className="flex flex-col items-start gap-[0.2rem]">
                   {sender === 'bot' && <div className="text-[2rem]">플로디텍터 운영자</div>}
                   <div
                     className={twMerge(
@@ -148,9 +140,9 @@ export default function Chatbot() {
                       sender === 'user' &&
                         'rounded-tl-[2rem] rounded-tr-none bg-primary-500 text-white',
                     )}
-                  >
-                    <p className="break-words">{content}</p>
-                  </div>
+                    // eslint-disable-next-line react/no-danger
+                    dangerouslySetInnerHTML={createMarkup(content)}
+                  />
                 </div>
                 <span className="text-[1.4rem] font-regular text-[#8B8F93]">
                   {format(new Date(sentAt), 'aaa h:mm', { locale: ko })}
