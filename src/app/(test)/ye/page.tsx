@@ -1,30 +1,31 @@
 'use client';
 
-import Button from '@/components/Button/Button';
-import FilterChip from '@/components/Chips/FilterChip';
-import { auth } from '@/firebase/firebaseClient';
-import { signInWithGithub } from '@/utils/signInWithGitHub';
 import { useEffect, useState } from 'react';
 
-const options = ['option1', 'optixdasdasokd;laon2'];
-
 export default function TestPage() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setIsLogin(!!user);
-    });
+    const fetchData = async () => {
+      const response = await fetch('/api/firebase', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: 'yyyyy',
+          name: '영은',
+        }),
+      });
+      const data = await response.json();
+      setMessage(data.message);
+    };
 
-    return () => unsubscribe();
+    fetchData();
   }, []);
 
   return (
-    <>
-      <Button onClick={signInWithGithub}>로그인 버튼</Button>
-      <Button onClick={() => auth.signOut()}>로그아웃 버튼</Button>
-      <div>{isLogin ? 'Logged in' : 'Logged out'}</div>
-      <FilterChip label="type" options={options} onSelect={() => {}} hasIcon />
-    </>
+    <div>
+      <h1>파이어베이스 상태</h1>
+      <p>{message}</p>
+    </div>
   );
 }
