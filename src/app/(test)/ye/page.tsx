@@ -1,3 +1,12 @@
+import Alert from '@/components/Alert/Alert';
+
 export default function TestPage() {
-  return <div className="h-[2020rem]" />;
+  return (
+    <>
+      <Alert type="error" />;
+      <Alert type="complete" />;
+      <Alert type="waiting" />;
+      <Alert type="checking" />;
+    </>
+  );
 }
