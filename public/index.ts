@@ -7,6 +7,8 @@ export { default as DBCardArrowIcon } from "./icons/dbCardArrow.svg";
 export { default as DetectFileCardButtonIcon } from "./icons/detectFileCardButton.svg";
 export { default as DocumentIcon } from './icons/document.svg';
 export { default as ExternalLinkIcon } from "./icons/externalLinkIcon.svg";
+export { default as ChatIcon } from './icons/floatChat.svg';
+export { default as TopIcon } from './icons/floatVector.svg';
 export { default as LogoIcon } from './icons/headerLogo.svg';
 export { default as PaginationArrowIcon } from "./icons/paginationArrow.svg";
 export { default as PinIcon } from "./icons/pinIcon.svg";
