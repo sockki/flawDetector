@@ -5,6 +5,13 @@ export { default as LogoIcon } from './icons/headerLogo.svg';
 export { default as RemoveIcon } from './icons/remove.svg';
 export { default as CheckIcon } from './icons/switchCheck.svg';
 export { default as CrossIcon } from './icons/switchCross.svg';
+export { default as ListIcon } from './icons/listLibrary.svg'
+export { default as SuccessIcon } from './icons/success.svg';
+export { default as ListCheckIcon } from './icons/listCheck.svg';
+export { default as ErrorIcon } from './icons/error.svg';
+export { default as AnalyzeIcon } from './icons/analyze.svg';
+export { default as ListDocumentIcon } from './icons/listDocument.svg';
+export { default as FolderIcon } from './icons/folder.svg'
 export { default as ChatIcon } from './icons/floatChat.svg';
 export { default as TopIcon } from './icons/floatVector.svg';
 export { default as PaginationArrowIcon } from "./icons/paginationArrow.svg"
@@ -21,3 +28,6 @@ export { default as ScanErrorIcon} from'./icons/scanError.svg'
 export { default as ScanSuccessIcon} from'./icons/scanSuccess.svg'
 export { default as ReadingGlassesIcon} from'./icons/readingGlasses.svg'
 export { default as EmptyFileIcon} from'./icons/emptyFile.svg'
+export { default as EmptyBookMarkIcon } from "./icons/emptyBookMark.svg"
+export { default as DoubleCheckIcon } from "./icons/doubleCheck.svg"
+export { default as FullBookMarkIcon } from "./icons/fullBookMark.svg"
