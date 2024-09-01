@@ -43,15 +43,19 @@ export default function DetectFileCard({ title, label, date, isBookmarked }: Det
   };
 
   return (
-    <div className="group relative flex h-[20rem] w-[31rem] cursor-pointer flex-col justify-between rounded-[1.2rem] border-[0.1rem] border-primary-100 p-[2rem]">
-      <div className="flex justify-between">
-        <div className="flex h-[3.9rem] items-center gap-[0.8rem]">
-          {isBookmark && <DetectFileCardStar className="fill-primary-200" />}
-          <span className="text-[2.8rem] font-medium leading-[3.9rem] text-gray-black">
-            {title}
-          </span>
-        </div>
-
+    <div className="group relative flex h-[22.5rem] w-[31rem] cursor-pointer flex-col justify-between rounded-[1.2rem] border-[0.1rem] border-primary-100 p-[2rem]">
+      <div
+        onClick={onClickBookmark}
+        className="absolute right-[2rem] flex h-[4.8rem] w-[4.8rem] items-center justify-center rounded-[1.2rem] group-hover:border-[0.2rem] group-hover:border-primary-200"
+      >
+        <DetectFileCardStar
+          className={twMerge(
+            'ml-[0.15rem] mt-[0.15rem] h-[2.8rem] w-[2.8rem] group-hover:stroke-primary-200 group-hover:stroke-1',
+            isBookmark ? 'fill-primary-200 stroke-primary-200 stroke-1' : '',
+          )}
+        />
+      </div>
+      <div className="flex flex-col gap-[0.4rem]">
         <label
           className={twMerge(
             'w-fit rounded-full px-[1.2rem] py-[0.8rem] text-[1.6rem] font-medium leading-[2.24rem]',
@@ -60,6 +64,11 @@ export default function DetectFileCard({ title, label, date, isBookmarked }: Det
         >
           {labelText(label)}
         </label>
+        <div className="flex h-[3.9rem] items-center gap-[0.8rem]">
+          <span className="text-[2.8rem] font-medium leading-[3.9rem] text-gray-black">
+            {title}
+          </span>
+        </div>
       </div>
       <div className="flex items-end justify-between">
         <button
@@ -75,20 +84,9 @@ export default function DetectFileCard({ title, label, date, isBookmarked }: Det
           </span>
           <DetectFileCardArrowIcon />
         </button>
-        <span className="text-[1.6rem] font-medium leading-[2.24rem] text-gray-default group-hover:hidden">
+        <span className="text-[1.6rem] font-medium leading-[2.24rem] text-gray-default">
           {format(date, 'yy.MM.dd')}
         </span>
-        <div
-          onClick={onClickBookmark}
-          className="hidden h-[4.8rem] w-[4.8rem] items-center justify-center rounded-[1.2rem] border-[0.2rem] border-primary-200 group-hover:flex"
-        >
-          <DetectFileCardStar
-            className={twMerge(
-              'ml-[0.15rem] mt-[0.15rem] h-[2.8rem] w-[2.8rem] stroke-primary-200 stroke-1',
-              isBookmark ? 'fill-primary-200 hover:fill-none' : 'hover:fill-primary-200',
-            )}
-          />
-        </div>
       </div>
     </div>
   );
