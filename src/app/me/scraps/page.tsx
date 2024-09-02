@@ -1,9 +1,5 @@
-'use client';
-
-import { Suspense, useState } from 'react';
 import MyPageTitle from '@/app/me/_components/MyPageTitle';
 import ScrapList from '@/app/me/_components/ScrapList';
-import SearchParams from '@/app/repos/_components/SearchParams';
 
 const dummyData = [
   { id: '1', title: 'Folder name 1', date: new Date('2024-03-08T13:30:24') },
@@ -28,20 +24,15 @@ const dummyData = [
   { id: '20', title: 'Folder name 20', date: new Date('2024-03-08T13:30:43') },
 ];
 
-export default function ScrapsPage() {
-  const [nowPage, setNowPage] = useState(1);
-
-  const pageItems = 16;
-  const pageData = dummyData.slice((nowPage - 1) * pageItems, nowPage * pageItems);
-  const totalPage = Math.ceil(dummyData.length / pageItems);
-
+export default function ScrapsPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   return (
     <div className="mx-auto flex min-h-screen flex-col items-center gap-[12.4rem]">
       <MyPageTitle title="Clipping Article" />
-      <ScrapList nowPage={nowPage} totalPage={totalPage} scrapData={pageData} />
-      <Suspense>
-        <SearchParams onParamsChange={setNowPage} />
-      </Suspense>
+      <ScrapList searchParams={searchParams} scrapData={dummyData} />
     </div>
   );
 }

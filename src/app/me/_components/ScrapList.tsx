@@ -6,15 +6,14 @@ import Pagination from '@/components/Pagination/Pagination';
 import ScrapCard from '@/components/Card/ScrapCard';
 
 type ScrapListProps = {
-  nowPage: number;
-  totalPage: number;
+  searchParams: { [key: string]: string | string[] | undefined };
   scrapData: { id: string; title: string; date: Date }[];
 };
 
 const typeOptions = ['취약성 보고서', '취약성 알림', '취약성 경고', '기타'];
 const sortOptions = ['최신순', '오래된순', '이름순'];
 
-export default function ScrapList({ nowPage, totalPage, scrapData }: ScrapListProps) {
+export default function ScrapList({ searchParams, scrapData }: ScrapListProps) {
   const [, setSelectedType] = useState<string>('');
   const [, setSelectedSort] = useState<string>('');
 
@@ -26,6 +25,11 @@ export default function ScrapList({ nowPage, totalPage, scrapData }: ScrapListPr
     setSelectedSort(value);
   };
 
+  const nowPage = searchParams.page ? Number(searchParams.page) : 1;
+  const pageItems = 16;
+  const totalPage = Math.ceil(scrapData.length / pageItems);
+  const pageData = scrapData.slice((nowPage - 1) * pageItems, nowPage * pageItems);
+
   return (
     <section className="flex min-h-screen flex-col gap-[2.4rem]">
       <div className="flex items-center justify-between">
@@ -36,7 +40,7 @@ export default function ScrapList({ nowPage, totalPage, scrapData }: ScrapListPr
         </div>
       </div>
       <div className="grid grid-cols-4 gap-[2.4rem]">
-        {scrapData.map(scrap => (
+        {pageData.map(scrap => (
           <ScrapCard key={scrap.id} title={scrap.title} date={scrap.date} />
         ))}
       </div>

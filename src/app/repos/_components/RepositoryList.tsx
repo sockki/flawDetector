@@ -6,15 +6,14 @@ import FilterChip from '@/components/Chips/FilterChip';
 import Pagination from '@/components/Pagination/Pagination';
 
 type RepositoryListProps = {
-  nowPage: number;
-  totalPage: number;
+  searchParams: { [key: string]: string | string[] | undefined };
   repoData: { id: string; title: string; caption: string }[];
 };
 
 const typeOptions = ['검사완료', '검사중'];
 const sortOptions = ['최신순', '오래된순', '이름순'];
 
-export default function RepositoryList({ nowPage, totalPage, repoData }: RepositoryListProps) {
+export default function RepositoryList({ searchParams, repoData }: RepositoryListProps) {
   const [, setSelectedType] = useState<string>('');
   const [, setSelectedSort] = useState<string>('');
 
@@ -25,6 +24,10 @@ export default function RepositoryList({ nowPage, totalPage, repoData }: Reposit
   const handleSortSelect = (value: string) => {
     setSelectedSort(value);
   };
+  const nowPage = searchParams.page ? Number(searchParams.page) : 1;
+  const pageItems = 16;
+  const totalPage = Math.ceil(repoData.length / pageItems);
+  const pageData = repoData.slice((nowPage - 1) * pageItems, nowPage * pageItems);
 
   return (
     <section className="flex min-h-screen flex-col gap-[2.4rem]">
@@ -36,7 +39,7 @@ export default function RepositoryList({ nowPage, totalPage, repoData }: Reposit
         </div>
       </div>
       <div className="grid grid-cols-4 gap-[2.4rem]">
-        {repoData.map(repo => (
+        {pageData.map(repo => (
           <DetectFileCard
             key={repo.id}
             title={repo.title}

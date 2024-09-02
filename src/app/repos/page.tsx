@@ -1,11 +1,7 @@
-'use client';
-
-import { Suspense, useState } from 'react';
 import ReposPageHeader from '@/app/repos/_components/ReposPageHeader';
 import UserCard from '@/app/repos/_components/UserCard';
 import RepositoryActions from '@/app/repos/_components/RepositoryActions';
 import RepositoryList from '@/app/repos/_components/RepositoryList';
-import SearchParams from '@/app/repos/_components/SearchParams';
 
 const dummyData = [
   { id: '1', title: 'Folder name 1', caption: 'caption 1' },
@@ -30,15 +26,13 @@ const dummyData = [
   { id: '20', title: 'Folder name 20', caption: 'caption 20' },
 ];
 
-export default function ReposPage() {
+export default function ReposPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const avatarUrl = '/images/AvatarDummyImg.png';
   const email = 'marry@gmail.com';
-
-  const [nowPage, setNowPage] = useState(1);
-
-  const pageItems = 16;
-  const pageData = dummyData.slice((nowPage - 1) * pageItems, nowPage * pageItems);
-  const totalPage = Math.ceil(dummyData.length / pageItems);
 
   return (
     <div className="mx-auto bg-opacity-70 bg-[url('/images/headerBackground.svg')] bg-contain bg-top bg-no-repeat">
@@ -47,12 +41,9 @@ export default function ReposPage() {
         <div className="flex flex-col gap-[2.8rem]">
           <UserCard avatar={avatarUrl} email={email} />
           <RepositoryActions />
-          <RepositoryList nowPage={nowPage} totalPage={totalPage} repoData={pageData} />
+          <RepositoryList searchParams={searchParams} repoData={dummyData} />
         </div>
       </div>
-      <Suspense>
-        <SearchParams onParamsChange={setNowPage} />
-      </Suspense>
     </div>
   );
 }
