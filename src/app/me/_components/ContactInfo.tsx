@@ -7,7 +7,7 @@ export default function ContactInfo() {
           <br />
           문제가 생겼나요?
         </h1>
-        <p className="text-[2rem] font-medium leading-[2.4rem] tracking-[-0.01em] text-gray-default">
+        <p className="text-[2rem] font-medium leading-[2.4rem] tracking-[-0.01rem] text-gray-default">
           이용하면서 문제가 생겼다면 언제든지 문의주세요.
           <br />
           서비스 개발과 성장에 큰 도움이 됩니다.

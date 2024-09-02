@@ -15,7 +15,7 @@ export default function MyPageTitle({ title }: MyPageTitleProps) {
       <button onClick={() => router.back()} type="button">
         <BackIcon className="h-[3.6rem] w-[3.6rem] text-center" />
       </button>
-      <h2 className="whitespace-nowrap text-center text-[4rem] font-regular leading-[4.8rem] tracking-[-0.01em] text-primary-500">
+      <h2 className="whitespace-nowrap text-center text-[4rem] font-regular leading-[4.8rem] tracking-[-0.01rem] text-primary-500">
         {title}
       </h2>
     </div>
