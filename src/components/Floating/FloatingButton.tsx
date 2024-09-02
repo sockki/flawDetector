@@ -12,29 +12,18 @@ export function FloatingButton({ type, onClick, className }: FloatingButtonProps
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleClickChat = () => {
-    if (onClick) {
-      onClick();
-    }
-  };
-
-  const handler = {
-    top: handleClickTop,
-    ask: handleClickChat,
-  };
-
   const IconComponent = type === 'top' ? TopIcon : ChatIcon;
 
   return (
     <button
       type="button"
-      onClick={handler[type]}
+      onClick={type === 'top' ? handleClickTop : onClick}
       className={twMerge(
         'group fixed bottom-[7rem] right-[8rem] z-50 flex h-[7.6rem] w-[7.6rem] flex-col items-center justify-center gap-[0.8rem] rounded-full border-[0.14rem] border-primary-500 bg-white text-primary-500 hover:border-primary-500 hover:bg-primary-500 hover:text-white focus:outline-none',
         className,
       )}
     >
-      <IconComponent className="group-hover:brightness-0 group-hover:invert group-hover:filter" />
+      <IconComponent className="fill-primary-500 group-hover:fill-white" />
       {type === 'top' && <span className="text-[1.5rem] font-bold">TOP</span>}
     </button>
   );
