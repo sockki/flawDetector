@@ -26,14 +26,20 @@ export default function UserCard({ avatar, email, hasLogoutButton }: UserCardPro
   };
 
   const baseStyles = 'flex w-full items-center justify-between ';
-
   const logoutStyles = 'border-b border-b-[#e6e6e6]] pb-[8rem]';
   const defaultStyles = 'bg-neutral-5 rounded-[4.2rem] p-[3.2rem]';
 
   return (
     <section className={twMerge(baseStyles, hasLogoutButton ? logoutStyles : defaultStyles)}>
       <div className="flex items-center gap-[4.4rem]">
-        <Image src={avatar} alt="avatar" width={107} height={107} />
+        <div className="relative h-[10.7rem] w-[10.7rem] overflow-hidden rounded-full">
+          <Image
+            src={avatar}
+            alt="avatar"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </div>
         <div className="text-[4rem] font-medium text-gray-black">
           <p>Hello,</p>
           <p>{email}</p>
