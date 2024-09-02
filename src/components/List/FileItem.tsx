@@ -3,14 +3,13 @@
 import { useState } from 'react';
 import { ListDocumentIcon, ListCheckIcon } from '@/public/index';
 import { twMerge } from 'tailwind-merge';
+import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 import { ScanStatus } from './ScanStatus';
-import { ProgressBar } from '../ProgressBar/ProgressBar';
 
 type FileItemProps = {
   fileName: string;
   type: 'enabled' | 'analye' | 'waiting' | 'success' | 'error';
   isSelected?: boolean;
-  isLast?: boolean;
   isMarked?: boolean;
 };
 
@@ -18,18 +17,16 @@ export function FileItem({
   fileName,
   type = 'enabled',
   isSelected = false,
-  isLast = false,
   isMarked: initialIsMarked = false,
 }: FileItemProps) {
   const containerStyles = twMerge(
-    'group flex h-[5.2rem] w-[24.7rem] flex-col justify-center gap-[0.4rem] border-b border-l border-r border-gray-300 p-[1rem] align-middle hover:bg-purple-light',
-    isSelected ? 'bg-purple-dark' : 'bg-[#ffffff]',
-    isLast && 'rounded-bl-[0.8rem] rounded-br-[0.8rem]',
+    'group flex h-[5.2rem] w-[24.7rem] flex-col justify-center gap-[0.4rem] border-b border-gray-300 p-[1rem] align-middle hover:bg-purple-light',
+    isSelected ? 'bg-purple-dark' : 'bg-white',
   );
 
-  const itemStyles = 'flex h-fit w-full justify-between align-middle';
+  const itemStyles = 'flex h-fit w-full justify-between items-center';
 
-  const infoStyles = 'flex gap-[0.4rem] align-middle text-[1.6rem] text-gray-black';
+  const infoStyles = 'flex gap-[0.4rem] items-center text-[1.6rem] text-gray-black';
 
   const [isMarked, setIsMarked] = useState(initialIsMarked);
 
