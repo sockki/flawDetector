@@ -7,7 +7,7 @@ import Pagination from '@/components/Pagination/Pagination';
 
 type RepositoryListProps = {
   searchParams: { [key: string]: string | string[] | undefined };
-  repoData: { id: string; title: string; caption: string }[];
+  repoData: { id: string; title: string; caption: string; isDetected: boolean }[];
 };
 
 const typeOptions = ['검사완료', '검사중'];
@@ -44,7 +44,7 @@ export default function RepositoryList({ searchParams, repoData }: RepositoryLis
             key={repo.id}
             title={repo.title}
             caption={repo.caption || ''}
-            isDetected={false}
+            isDetected={repo.isDetected}
           />
         ))}
       </div>
