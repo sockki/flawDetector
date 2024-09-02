@@ -10,9 +10,13 @@ type MePageTitleProps = {
 export default function MePageTitle({ title }: MePageTitleProps) {
   const router = useRouter();
 
+  const handleClickBack = () => {
+    router.back();
+  };
+
   return (
     <button
-      onClick={() => router.back()}
+      onClick={handleClickBack}
       type="button"
       className="flex w-fit items-center gap-[2.4rem] rounded-full border-[0.4rem] border-primary-500 bg-white px-[1.6rem] py-[1.2rem]"
     >
