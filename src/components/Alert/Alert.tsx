@@ -64,8 +64,8 @@ export default function Alert({ type }: AlertProps) {
       <div className="mt-[1rem] flex flex-1 flex-col gap-[1.2rem] text-[2rem]">
         <h4>{alertType[type].status}</h4>
         <div className="text-gray-default">
-          {alertType[type].subText.map(line => (
-            <p key={line}>{line}</p>
+          {alertType[type].subText.map(message => (
+            <p key={message}>{message}</p>
           ))}
         </div>
         {(type === 'error' || type === 'complete') && (
