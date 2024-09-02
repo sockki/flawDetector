@@ -7,6 +7,15 @@ import { twMerge } from 'tailwind-merge';
 
 type DetectFileLabelType = 'before' | 'under' | 'done';
 
+type ElementByLabel = {
+  [key in DetectFileLabelType]: {
+    labelStyle: string;
+    labelText: string;
+    buttonText: string;
+    buttonStyle: string;
+  };
+};
+
 type DetectFileCardProps = {
   title: string;
   label: DetectFileLabelType;
@@ -16,27 +25,29 @@ type DetectFileCardProps = {
 
 export default function DetectFileCard({ title, label, date, isBookmarked }: DetectFileCardProps) {
   const [isBookmark, setIsBookmark] = useState<boolean>(isBookmarked);
-  const labelStyle = (labelData: DetectFileLabelType) => {
-    if (labelData === 'before') return null;
-    else if (labelData === 'under') return 'bg-gray-light text-gray-default';
-    else return 'bg-primary-50 text-primary-500';
+
+  const elementByLabel: ElementByLabel = {
+    before: {
+      labelStyle: '',
+      labelText: '',
+      buttonStyle: 'bg-primary-500',
+      buttonText: '검사하기',
+    },
+    under: {
+      labelStyle: 'bg-gray-light text-gray-default',
+      labelText: '검사중',
+      buttonStyle: 'bg-primary-500',
+      buttonText: '검사하기',
+    },
+    done: {
+      labelStyle: 'bg-primary-50 text-primary-500',
+      labelText: '검사완료',
+      buttonStyle: 'bg-neutral-100',
+      buttonText: '결과보기',
+    },
   };
 
-  const labelText = (labelData: DetectFileLabelType) => {
-    if (labelData === 'before') return '';
-    else if (labelData === 'under') return '검사중';
-    else return '검사완료';
-  };
-
-  const buttonText = (labelData: DetectFileLabelType) => {
-    if (labelData === 'done') return '결과보기';
-    else return '검사하기';
-  };
-
-  const buttonStyle = (labelData: DetectFileLabelType) => {
-    if (labelData === 'done') return 'bg-neutral-100';
-    else return 'bg-primary-500';
-  };
+  const { labelStyle, labelText, buttonStyle, buttonText } = elementByLabel[label];
 
   const onClickBookmark = () => {
     setIsBookmark(prev => !prev);
@@ -59,10 +70,10 @@ export default function DetectFileCard({ title, label, date, isBookmarked }: Det
         <label
           className={twMerge(
             'w-fit rounded-full px-[1.2rem] py-[0.8rem] text-[1.6rem] font-medium leading-[2.24rem]',
-            labelStyle(label),
+            labelStyle,
           )}
         >
-          {labelText(label)}
+          {labelText}
         </label>
         <div className="flex h-[3.9rem] items-center gap-[0.8rem]">
           <span className="text-[2.8rem] font-medium leading-[3.9rem] text-gray-black">
@@ -75,13 +86,11 @@ export default function DetectFileCard({ title, label, date, isBookmarked }: Det
           type="button"
           className={twMerge(
             'flex items-center gap-[0.7rem] rounded-[1.4rem] p-[1rem]',
-            buttonStyle(label),
+            buttonStyle,
           )}
         >
           <DetectFileCardBugIcon />
-          <span className="text-[2rem] font-regular leading-[2.8rem] text-white">
-            {buttonText(label)}
-          </span>
+          <span className="text-[2rem] font-regular leading-[2.8rem] text-white">{buttonText}</span>
           <DetectFileCardArrowIcon />
         </button>
         <span className="text-[1.6rem] font-medium leading-[2.24rem] text-gray-default">

@@ -48,7 +48,8 @@ export default function BannerCard({
   };
 
   return (
-    <div
+    <Link
+      href={`/vulnerability-db/${id}`}
       {...hoverHandlers}
       className={twMerge(
         `group flex h-[39rem] rounded-[2rem] bg-cover p-[3.6rem] transition-all duration-500 ease-in-out hover:w-[62.5rem]`,
@@ -82,10 +83,8 @@ export default function BannerCard({
             {format(date, 'yyyy.MM.dd hh:mm:ss')}
           </span>
         </div>
-        <Link href={`/vulnerability-db/${id}`}>
-          <BannerCardArrowIcon className="z-20 cursor-pointer" />
-        </Link>
+        <BannerCardArrowIcon className="z-20 cursor-pointer" />
       </div>
-    </div>
+    </Link>
   );
 }
