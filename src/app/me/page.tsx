@@ -3,7 +3,7 @@ import UserCard from '@/app/repos/_components/UserCard';
 import UserInfo from '@/app/me/_components/UserInfo';
 import MyPageLinks from '@/app/me/_components/MyPageLinks';
 
-export default function page() {
+export default function MePage() {
   const avatarUrl = '/images/AvatarDummyImg.png';
   const email = 'marry@gmail.com';
 

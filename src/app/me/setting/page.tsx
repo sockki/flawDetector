@@ -2,7 +2,7 @@ import MyPageTitle from '@/app/me/_components/MyPageTitle';
 import UserCard from '@/app/repos/_components/UserCard';
 import UserSetting from '@/app/me/_components/UserSetting';
 
-export default function Page() {
+export default function SettingPage() {
   const avatarUrl = '/images/AvatarDummyImg.png';
   const email = 'marry@gmail.com';
 

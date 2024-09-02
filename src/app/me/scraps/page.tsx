@@ -28,7 +28,7 @@ const dummyData = [
   { id: '20', title: 'Folder name 20', date: new Date('2024-03-08T13:30:43') },
 ];
 
-export default function Page() {
+export default function ScrapsPage() {
   const [nowPage, setNowPage] = useState(1);
 
   const pageItems = 16;

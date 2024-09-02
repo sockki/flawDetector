@@ -30,7 +30,7 @@ const dummyData = [
   { id: '20', title: 'Folder name 20', caption: 'caption 20' },
 ];
 
-export default function Page() {
+export default function ReposPage() {
   const avatarUrl = '/images/AvatarDummyImg.png';
   const email = 'marry@gmail.com';
 
