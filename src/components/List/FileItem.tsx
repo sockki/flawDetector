@@ -4,11 +4,12 @@ import { useState } from 'react';
 import { ListDocumentIcon, ListCheckIcon } from '@/public/index';
 import { twMerge } from 'tailwind-merge';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
+import { ListStatusType } from '@/types/list';
 import { ScanStatus } from './ScanStatus';
 
 type FileItemProps = {
   fileName: string;
-  type: 'enabled' | 'analye' | 'waiting' | 'success' | 'error';
+  type: ListStatusType;
   isSelected?: boolean;
   isMarked?: boolean;
 };

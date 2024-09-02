@@ -5,17 +5,16 @@ import {
   EmptyBookMarkIcon,
   FullBookMarkIcon,
 } from '@/public/index';
-
-type ScanStatusType = 'enabled' | 'analye' | 'waiting' | 'success' | 'error';
+import { ListStatusType } from '@/types/list';
 
 type StateConfig = {
-  [key in ScanStatusType]: {
+  [key in ListStatusType]: {
     icon: JSX.Element | null | string;
   };
 };
 
 type ScanStatusProps = {
-  type: ScanStatusType;
+  type: ListStatusType;
   isMarked?: boolean;
   onBookMarkClick: () => void;
 };
