@@ -10,18 +10,20 @@ import {
 import { useRouter } from 'next/navigation';
 import Button from '../Button/Button';
 
+type AlertProps = {
+  type: 'waiting' | 'checking' | 'error' | 'complete';
+};
+
 const alertType = {
   waiting: {
     icon: <AlertStatusWaitingIcon />,
     status: '검사 대기중...',
     subText: ['순차적으로 파일 검사가 진행됩니다.', '잠시만 대기해주시면 검사가 시작됩니다.'],
-    buttonText: '',
   },
   checking: {
     icon: <AlertStatusCheckingIcon />,
     status: '검사중...',
     subText: ['코드가 많을수록 처리시간이 길어집니다.'],
-    buttonText: '',
   },
   error: {
     icon: <AlertStatusErrorIcon />,
@@ -35,9 +37,6 @@ const alertType = {
   },
 };
 
-type AlertProps = {
-  type: 'waiting' | 'checking' | 'error' | 'complete';
-};
 export default function Alert({ type }: AlertProps) {
   const router = useRouter();
   const handleClickRetry = () => {
