@@ -14,7 +14,7 @@ type AlertProps = {
   type: 'waiting' | 'checking' | 'error' | 'complete';
 };
 
-const alertType = {
+const alertConfig = {
   waiting: {
     icon: <AlertStatusWaitingIcon />,
     status: '검사 대기중...',
@@ -60,11 +60,11 @@ export default function Alert({ type }: AlertProps) {
   };
   return (
     <div className="flex w-fit min-w-[49.4rem] items-start justify-between gap-[1.8rem] rounded-[1.6rem] p-[3.2rem] shadow-drop">
-      {alertType[type].icon}
+      {alertConfig[type].icon}
       <div className="mt-[1rem] flex flex-1 flex-col gap-[1.2rem] text-[2rem]">
-        <h4>{alertType[type].status}</h4>
+        <h4>{alertConfig[type].status}</h4>
         <div className="text-gray-default">
-          {alertType[type].subText.map(message => (
+          {alertConfig[type].subText.map(message => (
             <p key={message}>{message}</p>
           ))}
         </div>
