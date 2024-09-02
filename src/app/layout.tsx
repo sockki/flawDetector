@@ -1,6 +1,7 @@
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
 import '@/styles/globals.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -15,16 +16,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const queryClient = new QueryClient();
   return (
-    <html lang="ko">
-      <body className={inter.className}>
-        <div id="modal" />
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <div className="flex-1">{children}</div>
-          <Footer />
-        </div>
-      </body>
-    </html>
+    <QueryClientProvider client={queryClient}>
+      <html lang="ko">
+        <body className={inter.className}>
+          <div id="modal" />
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <div className="flex-1">{children}</div>
+            <Footer />
+          </div>
+        </body>
+      </html>
+    </QueryClientProvider>
   );
 }
