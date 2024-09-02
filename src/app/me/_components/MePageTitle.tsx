@@ -14,7 +14,7 @@ export default function MePageTitle({ title }: MePageTitleProps) {
     <button
       onClick={() => router.back()}
       type="button"
-      className="flex h-[7.9rem] w-fit items-center gap-[2.4rem] rounded-full border-[0.4rem] border-primary-500 bg-white p-[2rem]"
+      className="flex w-fit items-center gap-[2.4rem] rounded-full border-[0.4rem] border-primary-500 bg-white px-[1.6rem] py-[1.2rem]"
     >
       <BackIcon className="h-[3.6rem] w-[3.6rem]" />
       <h2 className="text-[4rem] font-regular leading-[4.8rem] tracking-[-0.01rem] text-primary-500">
