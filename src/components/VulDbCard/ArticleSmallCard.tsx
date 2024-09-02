@@ -1,17 +1,10 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 import { BigPinIcon, ShareIcon } from '@/public/index';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
+import type { ArticleCardProps } from '@/types/articleCard';
 import SuggestionChip from '../Chips/SuggestionChip';
-
-type ArticleSmallCardProps = {
-  label: 'new' | 'hot' | 'warn' | 'notification' | 'report';
-  imageSrc?: StaticImageData;
-  title: string;
-  content: string;
-  date: Date;
-};
 
 export default function ArticleSmallCard({
   label,
@@ -19,13 +12,8 @@ export default function ArticleSmallCard({
   title,
   content,
   date,
-}: ArticleSmallCardProps) {
-  const nowDate = Date.now();
-  const timeDifference =
-    (nowDate - date.getTime()) / 1000 < 60
-      ? '방금 전'
-      : formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
-
+}: ArticleCardProps) {
+  const timeDifference = formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
   return (
     <article
       className={twMerge(
@@ -44,11 +32,11 @@ export default function ArticleSmallCard({
         </div>
       )}
       <div className="flex flex-col">
-        <div className={twMerge('flex flex-col gap-[0.8rem]')}>
+        <div className="flex flex-col">
           <div className="w-fit">
             <SuggestionChip variant={label} />
           </div>
-          <div className="flex h-fit w-full items-center">
+          <div className="mt-[1.6rem] flex h-fit w-full items-center">
             <h1 className="line-clamp-2 text-[2.4rem] font-medium leading-[3.6rem]">{title}</h1>
           </div>
         </div>
