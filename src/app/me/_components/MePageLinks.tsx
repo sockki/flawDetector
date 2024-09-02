@@ -9,13 +9,9 @@ export default function MePageLinks() {
 
   return (
     <section className="flex w-full flex-col gap-[3.6rem]">
-      {links.map(link => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className="text-[2.4rem] font-medium text-gray-black"
-        >
-          {link.label}
+      {links.map(({ href, label }) => (
+        <Link key={href} href={href} className="text-[2.4rem] font-medium text-gray-black">
+          {label}
         </Link>
       ))}
     </section>
