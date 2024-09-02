@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import Pagination from '@/components/Pagination/Pagination';
 import DetectFileCard from '@/components/Card/DetectFileCard';
 import FilterChip from '@/components/Chips/FilterChip';
-import Pagination from '@/components/Pagination/Pagination';
 
 type RepositoryListProps = {
   searchParams: { [key: string]: string | string[] | undefined };
