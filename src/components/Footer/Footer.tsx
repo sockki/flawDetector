@@ -47,13 +47,13 @@ export default function Footer() {
           <nav className="cursor-pointer text-gray-default underline">
             <ul className="flex gap-[3.2rem]">
               <li>
-                <Link href="/">회사소개</Link>
+                <Link href="https://www.sfacspace.com/ko">회사소개</Link>
               </li>
               <li>
-                <Link href="/">서비스이용약관</Link>
+                <Link href="/agreements">서비스이용약관</Link>
               </li>
               <li>
-                <Link href="/">개인정보처리방침</Link>
+                <Link href="/ppa">개인정보처리방침</Link>
               </li>
             </ul>
           </nav>
