@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function MyPageLinks() {
+export default function MePageLinks() {
   const links = [
     { href: '/me/scraps', label: '스크랩' },
     { href: '/me/setting', label: '설정' },

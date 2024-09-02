@@ -1,4 +1,4 @@
-import MyPageTitle from '@/app/me/_components/MyPageTitle';
+import MePageTitle from '@/app/me/_components/MePageTitle';
 import ScrapList from '@/app/me/_components/ScrapList';
 
 const dummyData = [
@@ -31,7 +31,7 @@ export default function ScrapsPage({
 }) {
   return (
     <div className="mx-auto flex min-h-screen flex-col items-center gap-[12.4rem]">
-      <MyPageTitle title="Clipping Article" />
+      <MePageTitle title="Clipping Article" />
       <ScrapList searchParams={searchParams} scrapData={dummyData} />
     </div>
   );

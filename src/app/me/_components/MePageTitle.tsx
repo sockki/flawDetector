@@ -3,11 +3,11 @@
 import { useRouter } from 'next/navigation';
 import { BackIcon } from '@/public/index';
 
-type MyPageTitleProps = {
+type MePageTitleProps = {
   title: string;
 };
 
-export default function MyPageTitle({ title }: MyPageTitleProps) {
+export default function MePageTitle({ title }: MePageTitleProps) {
   const router = useRouter();
 
   return (
