@@ -14,7 +14,7 @@ export { default as EmptyBookMarkIcon } from "./icons/emptyBookMark.svg";
 export { default as ErrorIcon } from './icons/error.svg';
 export { default as ExternalLinkIcon } from "./icons/externalLinkIcon.svg";
 export { default as ChatIcon } from './icons/floatChat.svg';
-export { default as TopIcon } from './icons/floatVector.svg';
+export { default as TopIcon } from './icons/floatTop.svg';
 export { default as FolderIcon } from './icons/folder.svg';
 export { default as FullBookMarkIcon } from "./icons/fullBookMark.svg";
 export { default as LogoIcon } from './icons/headerLogo.svg';
