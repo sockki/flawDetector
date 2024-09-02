@@ -1,19 +1,11 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
 import { twMerge } from 'tailwind-merge';
 import { ExternalLinkIcon, PinIcon } from '@/public/index';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
+import type { ArticleCardProps } from '@/types/articleCard';
 import SuggestionChip from '../Chips/SuggestionChip';
-
-type ArticleCardProps = {
-  label: 'new' | 'hot' | 'warn' | 'notification' | 'report';
-  imageSrc?: StaticImageData;
-  title: string;
-  company: string;
-  content: string;
-  date: Date;
-};
 
 export default function ArticleCard({
   label,
@@ -23,11 +15,7 @@ export default function ArticleCard({
   content,
   date,
 }: ArticleCardProps) {
-  const nowDate = Date.now();
-  const timeDifference =
-    (nowDate - date.getTime()) / 1000 < 60
-      ? '방금 전'
-      : formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
+  const timeDifference = formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
   return (
     <article
       className={twMerge(
