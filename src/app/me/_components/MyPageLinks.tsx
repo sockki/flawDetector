@@ -1,17 +1,23 @@
 import Link from 'next/link';
 
 export default function MyPageLinks() {
+  const links = [
+    { href: '/me/scraps', label: '스크랩' },
+    { href: '/me/setting', label: '설정' },
+    { href: '/me/contact', label: '문의하기' },
+  ];
+
   return (
     <section className="flex w-full flex-col gap-[3.6rem]">
-      <Link href="/me/scraps" className="text-[2.4rem] font-medium text-gray-black">
-        스크랩
-      </Link>
-      <Link href="/me/setting" className="text-[2.4rem] font-medium text-gray-black">
-        설정
-      </Link>
-      <Link href="/me/contact" className="text-[2.4rem] font-medium text-gray-black">
-        문의하기
-      </Link>
+      {links.map(link => (
+        <Link
+          key={link.href}
+          href={link.href}
+          className="text-[2.4rem] font-medium text-gray-black"
+        >
+          {link.label}
+        </Link>
+      ))}
     </section>
   );
 }
