@@ -41,7 +41,7 @@ export default function ScrapList({ searchParams, scrapData }: ScrapListProps) {
       </div>
       <div className="grid grid-cols-4 gap-[2.4rem]">
         {pageData.map(scrap => (
-          <ScrapCard key={scrap.id} title={scrap.title} date={scrap.date} />
+          <ScrapCard {...scrap} key={scrap.id} />
         ))}
       </div>
       <div className="mx-auto">

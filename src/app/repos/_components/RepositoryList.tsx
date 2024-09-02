@@ -40,12 +40,7 @@ export default function RepositoryList({ searchParams, repoData }: RepositoryLis
       </div>
       <div className="grid grid-cols-4 gap-[2.4rem]">
         {pageData.map(repo => (
-          <DetectFileCard
-            key={repo.id}
-            title={repo.title}
-            caption={repo.caption || ''}
-            isDetected={repo.isDetected}
-          />
+          <DetectFileCard {...repo} key={repo.id} />
         ))}
       </div>
       <div className="mx-auto">
