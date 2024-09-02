@@ -1,10 +1,12 @@
-import { getRepoItems } from '@/apis/getRepoItems';
+'use client';
+
+import { getRepoItems } from '@/apis/repos/getRepoItems';
 import { useQuery } from '@tanstack/react-query';
 
 export default function Dh() {
   const { data, error } = useQuery({
     queryKey: ['repoData', 'bang-wol', 'Algorithm-Study'],
-    queryFn: () => getRepoItems({ userName: 'bang-wol', repoName: 'Algorithm-Study' }),
+    queryFn: () => getRepoItems({ owner: 'bang-wol', repo: 'Algorithm-Study' }),
   });
 
   if (error) {
@@ -13,9 +15,5 @@ export default function Dh() {
 
   console.log(data);
 
-  return (
-    <div>
-      <div />
-    </div>
-  );
+  return <div />;
 }
