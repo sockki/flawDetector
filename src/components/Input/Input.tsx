@@ -1,15 +1,14 @@
-import { forwardRef, ComponentPropsWithRef, Ref } from 'react';
+import { forwardRef, ComponentPropsWithoutRef, Ref } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-type InputProps = Omit<ComponentPropsWithRef<'input'>, 'ref'> &
-  Omit<ComponentPropsWithRef<'textarea'>, 'ref'> & {
+type InputProps = ComponentPropsWithoutRef<'input'> &
+  ComponentPropsWithoutRef<'textarea'> & {
     variant?: 'default' | 'error';
     isMultiline?: boolean;
-    rows?: number;
   };
 
 const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(function Input(
-  { className, variant = 'default', disabled = false, isMultiline = false, rows = 1, ...rest },
+  { className, variant = 'default', disabled = false, isMultiline = false, ...rest },
   ref,
 ) {
   const baseStyle =
@@ -35,7 +34,6 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(fun
         ref={ref as Ref<HTMLTextAreaElement>}
         className={twMerge(combinedClasses, 'resize-none')}
         disabled={disabled}
-        rows={rows}
         {...rest}
       />
     );
