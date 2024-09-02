@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import Pagination from '@/components/Pagination/Pagination';
-import DetectFileCard from '@/components/Card/DetectFileCard';
+import DetectFileCard from '@/components/LibraryCard/DetectFileCard';
 import FilterChip from '@/components/Chips/FilterChip';
+import type { DetectFileCardProps } from '@/types/detectedFileCard';
 
 type RepositoryListProps = {
   searchParams: { [key: string]: string | string[] | undefined };
-  repoData: { id: string; title: string; caption: string; isDetected: boolean }[];
+  repoData: DetectFileCardProps[];
 };
 
 const typeOptions = ['검사완료', '검사중'];
@@ -40,7 +41,7 @@ export default function RepositoryList({ searchParams, repoData }: RepositoryLis
       </div>
       <div className="grid grid-cols-4 gap-[2.4rem]">
         {pageData.map(repo => (
-          <DetectFileCard {...repo} key={repo.id} />
+          <DetectFileCard {...repo} key={repo.title} />
         ))}
       </div>
       <div className="mx-auto">

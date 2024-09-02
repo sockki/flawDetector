@@ -1,20 +1,6 @@
+import type { ScrapCardProps, ElementByLabel } from '@/types/scrapCard';
 import { format } from 'date-fns';
 import { twMerge } from 'tailwind-merge';
-
-type ScrapLabelType = 'warning' | 'notification' | 'report';
-
-type ElementByLabel = {
-  [key in ScrapLabelType]: {
-    labelStyle: string;
-    labelText: string;
-  };
-};
-
-type ScrapCardProps = {
-  title: string;
-  date: Date;
-  label: ScrapLabelType;
-};
 
 export default function ScrapCard({ title, date, label }: ScrapCardProps) {
   const elementByLabel: ElementByLabel = {

@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import FilterChip from '@/components/Chips/FilterChip';
 import Pagination from '@/components/Pagination/Pagination';
-import ScrapCard from '@/components/Card/ScrapCard';
+import ScrapCard from '@/components/LibraryCard/ScrapCard';
+import type { ScrapCardProps } from '@/types/scrapCard';
 
 type ScrapListProps = {
   searchParams: { [key: string]: string | string[] | undefined };
-  scrapData: { id: string; title: string; date: Date }[];
+  scrapData: ScrapCardProps[];
 };
 
 const typeOptions = ['취약성 보고서', '취약성 알림', '취약성 경고', '기타'];
@@ -41,7 +42,7 @@ export default function ScrapList({ searchParams, scrapData }: ScrapListProps) {
       </div>
       <div className="grid grid-cols-4 gap-[2.4rem]">
         {pageData.map(scrap => (
-          <ScrapCard {...scrap} key={scrap.id} />
+          <ScrapCard {...scrap} key={scrap.title} />
         ))}
       </div>
       <div className="mx-auto">
