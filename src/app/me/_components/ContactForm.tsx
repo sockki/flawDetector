@@ -55,7 +55,6 @@ export default function ContactForm() {
         <Modal.Text subtitle={['문의를 성공적으로 전송했어요. 빠른 시일내에 답변해 드릴게요.']} />
         <Modal.Button buttonText="홈으로 가기" variant="singleButton" onClick={handleContact} />
       </Modal>
-      <div className="cursor-not-allowed bg-gray-light placeholder:text-[#d6d6d6]" />
     </div>
   );
 }
