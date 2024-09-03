@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ListDocumentIcon, ListCheckIcon } from '@/public/index';
+import { FolderIcon, ListCheckIcon } from '@/public/index';
 import { twMerge } from 'tailwind-merge';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 import { ListStatusType } from '@/types/list';
@@ -12,6 +12,7 @@ type FolderItemProps = {
   type: ListStatusType;
   isSelected?: boolean;
   isMarked?: boolean;
+  onFolderClick: () => void;
 };
 
 export function FolderItem({
@@ -19,6 +20,7 @@ export function FolderItem({
   type = 'enabled',
   isSelected = false,
   isMarked: initialIsMarked = false,
+  onFolderClick,
 }: FolderItemProps) {
   const containerStyles = twMerge(
     'group flex h-[5.2rem] w-[24.7rem] flex-col justify-center gap-[0.4rem] border-b border-gray-300 p-[1rem] align-middle hover:bg-purple-light',
@@ -43,11 +45,11 @@ export function FolderItem({
   };
 
   return (
-    <div className={containerStyles}>
+    <div className={containerStyles} onClick={onFolderClick}>
       <div className={itemStyles}>
         <div className={infoStyles}>
           {isSelected && <ListCheckIcon />}
-          <ListDocumentIcon />
+          <FolderIcon />
           {folderName}
         </div>
         <ScanStatus type={type} onBookMarkClick={handleClick} isMarked={isMarked} />

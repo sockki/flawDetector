@@ -27,7 +27,7 @@ export function FileItem({
 
   const itemStyles = 'flex h-fit w-full justify-between items-center';
 
-  const infoStyles = 'flex gap-[0.4rem] items-center text-[1.6rem] text-gray-black';
+  const infoStyles = 'flex gap-[0.7rem] items-center text-[1.6rem] text-gray-black';
 
   const [isMarked, setIsMarked] = useState(initialIsMarked);
 
