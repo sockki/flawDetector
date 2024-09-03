@@ -9,6 +9,7 @@ export default function CombinedComponent() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const secondSectionRef = useRef<HTMLDivElement>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   // 로그인 상태 확인 로직 (예시)
   useEffect(() => {
@@ -17,6 +18,13 @@ export default function CombinedComponent() {
       setIsAuthenticated(auth);
     };
     checkAuth();
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 500);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleButtonClick = () => {
@@ -221,7 +229,13 @@ export default function CombinedComponent() {
             alt="Landing Sample"
             className="absolute left-0 top-[50rem] h-auto w-full object-contain"
           />
-          <div className="absolute left-[33.194rem] top-[247.115rem] z-20 flex items-center justify-center whitespace-nowrap rounded-tl-[1.287rem] bg-primary-300 pt-[1.609rem] text-[2.574rem] font-bold leading-[3.604rem] tracking-tight text-white shadow-drop">
+          <div
+            className={`absolute left-[15rem] top-[75rem] z-20 flex items-center justify-center whitespace-nowrap rounded-[1.287rem] bg-[#A66FFF] text-left text-[2.574rem] font-semibold leading-[3.604rem] tracking-[-0.01em] text-white shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+            style={{
+              padding: '1.609rem',
+              gap: '16.09px',
+            }}
+          >
             Insecure Password Handling
           </div>
         </div>
