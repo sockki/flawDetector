@@ -1,27 +1,10 @@
 'use client';
 
 import { DetectFileCardArrowIcon, DetectFileCardBugIcon, DetectFileCardStar } from '@/public/index';
+import type { DetectFileCardProps, ElementByLabel } from '@/types/detectedFileCard';
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-
-type DetectFileLabelType = 'before' | 'under' | 'done';
-
-type ElementByLabel = {
-  [key in DetectFileLabelType]: {
-    labelStyle: string;
-    labelText: string;
-    buttonText: string;
-    buttonStyle: string;
-  };
-};
-
-type DetectFileCardProps = {
-  title: string;
-  label: DetectFileLabelType;
-  date: Date;
-  isBookmarked: boolean;
-};
 
 export default function DetectFileCard({ title, label, date, isBookmarked }: DetectFileCardProps) {
   const [isBookmark, setIsBookmark] = useState<boolean>(isBookmarked);
