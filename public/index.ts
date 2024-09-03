@@ -25,6 +25,12 @@ export { default as PinIcon } from "./icons/pinIcon.svg"
 export { default as BigPinIcon } from "./icons/bigPinIcon.svg"
 export { default as ShareIcon } from "./icons/sharingIcon.svg"
 export { default as SpacSpaceLogoIcon } from "./icons/spacSpaceLogo.svg"
+export { default as BackIcon }from './icons/caretLeft.svg'
+export { default as RightArrowIcon } from './icons/caretRight.svg'
+export { default as FolderSimpleStarIcon } from './icons/folderSimpleStar.svg';
+export { default as ClockCounterIcon } from './icons/clockCounterClockwise.svg'
+export { default as HeaderBackgroundImg } from './images/headerBackground.svg';
+export { default as SignOutIcon } from './icons/signOut.svg'
 export {default as BannerCardArrowIcon} from "./icons/bannerCardArrow.svg"
 export {default as DetectFileCardArrowIcon} from "./icons/detectFileCardArrow.svg"
 export {default as DetectFileCardBugIcon} from "./icons/detectFileCardBug.svg"
