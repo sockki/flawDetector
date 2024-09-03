@@ -1,8 +1,12 @@
 'use client';
 
+import { Ellipse } from '../../components/Ellipse';
+
 export default function UiLogin() {
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center bg-white">
+      <Ellipse />
+
       <div
         className="relative z-10 flex items-center justify-between"
         style={{ width: '140.6rem', height: '20.3rem' }}

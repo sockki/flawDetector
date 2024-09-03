@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { LandingDownIcon, LandingBugIcon } from '@/public/index';
 import { FloatingButton } from '../../components/Floating/FloatingButton';
+import { Ellipse } from '../../components/Ellipse';
 
 const cards = [
   {
@@ -96,6 +97,7 @@ export default function UiLoginAndSecondPage() {
   return (
     <div>
       <div className="relative h-[102.4rem] w-[192rem] bg-white" ref={sectionRef}>
+        <Ellipse />
         <div className="absolute inset-0 z-0 bg-[url('/icons/landingpageBackground.svg')] bg-contain bg-center bg-no-repeat" />
         <main className="relative z-10 flex min-h-full items-center justify-center">
           <div className="flex flex-col items-center gap-[6.5rem]">

@@ -66,9 +66,26 @@ const config: Config = {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(calc(-100% - 48px))' },
         },
+        spread: {
+          '0%': {
+            width: '166px',
+            height: '50px',
+            top: '487.88px',
+            left: '877.41px',
+            opacity: '1',
+          },
+          '100%': {
+            width: '3856px',
+            height: '1134px',
+            top: '-55px',
+            left: '-968px',
+            opacity: '1',
+          },
+        },
       },
       animation: {
         slide: 'slide 30s linear infinite',
+        spread: 'spread 8s ease-in-out infinite',
       },
     },
   },

@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
+import { Ellipse } from '../../components/Ellipse';
 
 export default function UiMyLibrary() {
   const router = useRouter();
@@ -14,6 +15,8 @@ export default function UiMyLibrary() {
   return (
     <div>
       <div className="relative h-[102.4rem] w-[192rem] bg-white" ref={sectionRef}>
+        <Ellipse />
+
         <div className="absolute inset-0 z-0 bg-[url('/icons/landingpageBackground.svg')] bg-contain bg-center bg-no-repeat" />
 
         <main className="relative z-10 flex min-h-full items-center justify-center">
