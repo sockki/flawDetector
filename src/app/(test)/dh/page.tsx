@@ -1,12 +1,12 @@
 'use client';
 
-import { getRepoItems } from '@/apis/repos/getRepoItems';
+import { getRepoContents } from '@/apis/repos/repository';
 import { useQuery } from '@tanstack/react-query';
 
 export default function Dh() {
   const { data, error } = useQuery({
     queryKey: ['repoData', 'bang-wol', 'Algorithm-Study'],
-    queryFn: () => getRepoItems({ owner: 'bang-wol', repo: 'Algorithm-Study' }),
+    queryFn: () => getRepoContents({ owner: 'bang-wol', repo: 'Algorithm-Study' }),
   });
 
   if (error) {
