@@ -12,6 +12,7 @@ type FileItemProps = {
   type: ListStatusType;
   isSelected?: boolean;
   isMarked?: boolean;
+  onFileClick: () => void;
 };
 
 export function FileItem({
@@ -19,6 +20,7 @@ export function FileItem({
   type = 'enabled',
   isSelected = false,
   isMarked: initialIsMarked = false,
+  onFileClick,
 }: FileItemProps) {
   const containerStyles = twMerge(
     'group flex h-[5.2rem] w-[24.7rem] flex-col justify-center gap-[0.4rem] border-b border-gray-300 p-[1rem] align-middle hover:bg-purple-light',
@@ -43,7 +45,7 @@ export function FileItem({
   };
 
   return (
-    <div className={containerStyles}>
+    <div className={containerStyles} onClick={onFileClick}>
       <div className={itemStyles}>
         <div className={infoStyles}>
           {isSelected && <ListCheckIcon />}
