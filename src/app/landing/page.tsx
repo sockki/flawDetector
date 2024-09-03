@@ -1,6 +1,6 @@
 'use client';
 
-import Ui from './UiMain';
+import Ui from './UiS';
 
 export default function App() {
   return (
