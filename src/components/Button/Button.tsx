@@ -39,9 +39,9 @@ export default function Button({
   };
 
   const sizeStyles = {
-    small: 'w-fit h-[4rem] px-[2rem] py-[0.8rem] text-[2rem] font-[300]',
-    default: 'w-fit h-[5.6rem] px-[2.4rem] py-[1.6rem] text-[2.4rem] font-[300]',
-    large: 'w-fit h-[5.6rem] px-[2rem] py-[1.6rem] text-[2.4rem] font-bold',
+    small: 'min-w-[10.1rem] h-[4rem] px-[2rem] py-[0.8rem] text-[2rem] font-[300]',
+    default: 'min-w-[12.1rem] h-[5.6rem] px-[2.4rem] py-[1.6rem] text-[2.4rem] font-[300]',
+    large: 'min-w-[19.6rem] h-[5.6rem] px-[2rem] py-[1.6rem] text-[2.4rem] font-bold',
   };
 
   const interactionStyles = {
