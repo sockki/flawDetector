@@ -12,7 +12,7 @@ type Message = {
   sentAt: string;
 };
 
-const news = {
+const report = {
   title: '[취약성 보고서] Microsoft의 다양한 보안 취약점에 대한 CNNVD의 보고서',
   desc: `
   Microsoft는 2024년 8월 13일에 총 89개의 보안 취약점에 대한 패치를 포함한 2024년 8월 보안 업데이트를 출시했습니다. 이 업데이트는 Microsoft Windows, Microsoft Azure Connected Machine Agent, Microsoft Visual Studio 및 Microsoft .NET 등을 포함한 다양한 제품과 시스템을 대상으로 합니다. CNNVD는 이들 중 7개를 매우 중요한 취약점으로, 66개를 고위험, 16개를 중간 위험 수준으로 평가했습니다.
@@ -48,7 +48,15 @@ export default function Chatbot() {
       if (textareaRef.current) {
         textareaRef.current.style.height = 'auto';
       }
-      const promptMessage = `Please read the following report carefully: ${news.desc}. Based on this report, I have a question: "${content}"`;
+      const promptMessage = `
+      보고서 제목: ${report.title}
+      보고서 내용: ${report.desc}
+
+      사용자 질문: "${content}"
+
+      사용자가 질문을 하였습니다. 사용자가 인사(안녕,하이, 안녕하세요 등 인삿말을 하지 않았다면)질문에 대한 대답을 바로 해줘. 보고서 내용을 잘 읽어보고 이 보고서에 대해서 대답해주세요. 모든 대화는 높임말로 해주세요. 만약 질문이 인사나 일반적인 대화라면 친근하고 예의 바르게 답변해 주세요. 예를 들어, "안녕하세요?"라는 질문에는 "안녕하세요! 무엇을 도와드릴까요?"라고 응답하세요.
+      만약 질문이 보고서 내용과 관련된 것이라면 정중하고 친근하게 답변해 주세요. 만약 사용자 질문이 보고서와 관련이 없다면, "죄송하지만, 저는 보고서와 관련된 질문에만 답변드릴 수 있어요. 다른 궁금한 점이 있으면 언제든지 말씀해 주세요!"라고 응답해 주세요.
+    `;
 
       try {
         const response = await fetch('/api/generateMessage', {
@@ -111,7 +119,7 @@ export default function Chatbot() {
               <div className="flex flex-col items-start gap-[0.2rem]">
                 <div className="text-[2rem]">플로디텍터 운영자</div>
                 <div className="max-w-[30rem] rounded-[2rem] rounded-tl-none bg-[#f7f7f7] px-[1.2rem] py-[0.8rem] text-[#575757]">
-                  <b>{news.title}</b>보고서에서 모르는게 생겼나요?
+                  <b>{report.title}</b>에서 모르는게 생겼나요?
                   <br /> <br />
                   보고서에서 궁금한 점을 물어봐주세요!
                 </div>
