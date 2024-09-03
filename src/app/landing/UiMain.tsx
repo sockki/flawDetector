@@ -175,6 +175,7 @@ export default function UiLoginAndSecondPage() {
             alt="Landing Sample"
             className="h-auto w-full object-contain"
             layout="fill"
+            style={{ marginTop: '400px' }}
           />
           <div
             className={`absolute left-[15rem] top-[75rem] z-20 flex items-center justify-center whitespace-nowrap rounded-[1.287rem] bg-[#A66FFF] text-left text-[2.574rem] font-semibold leading-[3.604rem] tracking-[-0.01em] text-white shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
