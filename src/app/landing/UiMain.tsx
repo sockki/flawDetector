@@ -95,16 +95,16 @@ export default function UiLoginAndSecondPage() {
 
   return (
     <div>
-      <div className="relative h-[1024px] w-[1920px] bg-white" ref={sectionRef}>
+      <div className="relative h-[102.4rem] w-[192rem] bg-white" ref={sectionRef}>
         <div className="absolute inset-0 z-0 bg-[url('/icons/landingpageBackground.svg')] bg-contain bg-center bg-no-repeat" />
         <main className="relative z-10 flex min-h-full items-center justify-center">
-          <div className="flex flex-col items-center gap-[65px]">
-            <div className="flex flex-col items-center justify-center gap-[40px]">
-              <div className="flex flex-col items-center justify-center gap-[20px]">
+          <div className="flex flex-col items-center gap-[6.5rem]">
+            <div className="flex flex-col items-center justify-center gap-[4rem]">
+              <div className="flex flex-col items-center justify-center gap-[2rem]">
                 <h1 className="text-center text-[6rem] font-normal leading-[7.261rem] tracking-[0.015em] text-primary-500">
                   Find your Flaw,
                 </h1>
-                <div className="flex h-[110px] w-[470px] items-center justify-center gap-[10px] rounded-full border-[4px] border-primary-500 px-[40px]">
+                <div className="flex h-[11rem] w-[47rem] items-center justify-center gap-[1rem] rounded-full border-[0.4rem] border-primary-500 px-[4rem]">
                   <span className="text-center text-[6rem] font-normal leading-[7.261rem] tracking-[0.015em] text-primary-500">
                     FlawDetector
                   </span>
@@ -117,7 +117,7 @@ export default function UiLoginAndSecondPage() {
             <div className="flex flex-col items-center">
               <button
                 type="button"
-                className="flex h-[56px] items-center justify-center gap-[10px] rounded-full bg-primary-500 px-[24px] text-center text-[2.8rem] font-light leading-[3.389rem] tracking-[-0.01em] text-white transition-transform duration-100 ease-out"
+                className="flex h-[5.6rem] items-center justify-center gap-[1rem] rounded-full bg-primary-500 px-[2.4rem] text-center text-[2.8rem] font-light leading-[3.389rem] tracking-[-0.01em] text-white transition-transform duration-100 ease-out"
                 onClick={handleButtonClick}
               >
                 {isAuthenticated ? '파일 분석하러 가기' : 'Login'}
@@ -176,13 +176,13 @@ export default function UiLoginAndSecondPage() {
             alt="Landing Sample"
             className="h-auto w-full object-contain"
             layout="fill"
-            style={{ marginTop: '400px' }}
+            style={{ marginTop: '40rem' }}
           />
           <div
             className={`absolute left-[15rem] top-[75rem] z-20 flex items-center justify-center whitespace-nowrap rounded-[1.287rem] bg-[#A66FFF] text-left text-[2.574rem] font-semibold leading-[3.604rem] tracking-[-0.01em] text-white shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
             style={{
               padding: '1.609rem',
-              gap: '16.09px',
+              gap: '1.609rem',
             }}
           >
             Insecure Password Handling
@@ -209,7 +209,7 @@ export default function UiLoginAndSecondPage() {
 
       <FloatingButton
         type="top"
-        className="fixed bottom-[8.77rem] right-[10.8rem] h-[7.6rem] w-[7.6rem] gap-[6px] rounded-[1460.08px] border-[1.46px] border-primary-500 bg-[#FFFFFF1A] p-[16px]"
+        className="fixed bottom-[8.77rem] right-[10.8rem] h-[7.6rem] w-[7.6rem] gap-[0.6rem] rounded-[146.008rem] border-[0.146rem] border-primary-500 bg-[#FFFFFF1A] p-[1.6rem]"
       />
 
       <section className="flex min-h-screen items-center justify-center bg-primary-500">
@@ -244,8 +244,8 @@ export default function UiLoginAndSecondPage() {
                     height: '4.6rem',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    borderRadius: '999px',
-                    borderWidth: '1px',
+                    borderRadius: '99.9rem',
+                    borderWidth: '0.1rem',
                   }}
                 >
                   <h2 className="text-[2rem] font-medium leading-[3rem] tracking-[-0.011em]">
