@@ -30,3 +30,5 @@ export {default as DetectFileCardArrowIcon} from "./icons/detectFileCardArrow.sv
 export {default as DetectFileCardBugIcon} from "./icons/detectFileCardBug.svg"
 export {default as DetectFileCardStar} from "./icons/detectFileCardStar.svg"
 export {default as SearchIcon} from "./icons/searchIcon.svg"
+export { default as LandingBugIcon } from "./icons/landingpageBug.svg";
+export { default as LandingDownIcon } from "./icons/landingpageDown.svg";
