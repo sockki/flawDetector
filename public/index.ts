@@ -10,8 +10,6 @@ export { default as ErrorIcon } from './icons/error.svg';
 export { default as AnalyzeIcon } from './icons/analyze.svg';
 export { default as ListDocumentIcon } from './icons/listDocument.svg';
 export { default as FolderIcon } from './icons/folder.svg'
-export { default as DBCardArrowIcon } from "./icons/dbCardArrow.svg"
-export { default as DetectFileCardButtonIcon } from "./icons/detectFileCardButton.svg"
 export { default as LeftIcon} from'./icons/careLeft.svg'
 export { default as ScanCrossIcon} from'./icons/scanCross.svg'
 export { default as ScanErrorIcon} from'./icons/scanError.svg'
@@ -33,8 +31,8 @@ export { default as PinIcon } from "./icons/pinIcon.svg"
 export { default as BigPinIcon } from "./icons/bigPinIcon.svg"
 export { default as ShareIcon } from "./icons/sharingIcon.svg"
 export { default as SpacSpaceLogoIcon } from "./icons/spacSpaceLogo.svg"
-export {default as BannerCardArrowIcon} from "./icons/bannerCardArrow.svg"
-export {default as DetectFileCardArrowIcon} from "./icons/detectFileCardArrow.svg"
-export {default as DetectFileCardBugIcon} from "./icons/detectFileCardBug.svg"
-export {default as DetectFileCardStar} from "./icons/detectFileCardStar.svg"
-export {default as SearchIcon} from "./icons/searchIcon.svg"
+export { default as BannerCardArrowIcon} from "./icons/bannerCardArrow.svg"
+export { default as DetectFileCardArrowIcon} from "./icons/detectFileCardArrow.svg"
+export { default as DetectFileCardBugIcon} from "./icons/detectFileCardBug.svg"
+export { default as DetectFileCardStar} from "./icons/detectFileCardStar.svg"
+export { default as SearchIcon} from "./icons/searchIcon.svg"
