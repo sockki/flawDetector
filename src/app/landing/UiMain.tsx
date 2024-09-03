@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { LandingDownIcon, LandingBugIcon } from '@/public/index';
+import { FloatingButton } from '../../components/Floating/FloatingButton';
 
 const cards = [
   {
@@ -205,6 +206,11 @@ export default function UiLoginAndSecondPage() {
           </p>
         </div>
       </section>
+
+      <FloatingButton
+        type="top"
+        className="fixed bottom-[8.77rem] right-[10.8rem] h-[7.6rem] w-[7.6rem] gap-[6px] rounded-[1460.08px] border-[1.46px] border-primary-500 bg-[#FFFFFF1A] p-[16px]"
+      />
 
       <section className="flex min-h-screen items-center justify-center bg-primary-500">
         <div
