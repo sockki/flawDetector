@@ -1,11 +1,11 @@
 'use client';
 
-import Ui from './UiMain';
+import Main from './Main';
 
 export default function App() {
   return (
     <div>
-      <Ui />
+      <Main />
     </div>
   );
 }

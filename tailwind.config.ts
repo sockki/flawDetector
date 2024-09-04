@@ -64,7 +64,7 @@ const config: Config = {
       keyframes: {
         slide: {
           '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(calc(-100% - 48px))' },
+          '100%': { transform: 'translateX(calc(-25% - 48px))' },
         },
         spread: {
           '0%': {
