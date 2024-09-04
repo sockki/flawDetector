@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function Ellipse(): React.ReactElement {
   const ellipses = [];
   const totalEllipses = 16;
