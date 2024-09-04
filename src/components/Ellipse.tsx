@@ -2,7 +2,7 @@ import React from 'react';
 
 export function Ellipse(): React.ReactElement {
   const ellipses = [];
-  const totalEllipses = 8;
+  const totalEllipses = 16;
 
   for (let i = 0; i < totalEllipses; i += 1) {
     ellipses.push(
@@ -10,7 +10,7 @@ export function Ellipse(): React.ReactElement {
         key={i}
         className="animate-spread"
         style={{
-          animationDelay: `${i * 1}s`,
+          animationDelay: `${i * 0.5}s`,
           width: '16.6rem',
           height: '5rem',
           top: '48.788rem',
