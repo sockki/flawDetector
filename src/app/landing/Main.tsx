@@ -357,6 +357,7 @@ export default function UiLoginAndSecondPage() {
               fontWeight: 'bold',
               lineHeight: '7.3rem',
               letterSpacing: '-0.01em',
+              whiteSpace: 'nowrap',
             }}
           >
             최신 보안 동향을
