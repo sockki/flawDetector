@@ -1,15 +1,15 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { LandingDownIcon, LandingBugIcon } from '@/public/index';
-import { FloatingButton } from '@/components/Floating/FloatingButton';
+import Button from '@/components/Button/Button';
 import { Ellipse } from '@/components/Ellipse';
+import { FloatingButton } from '@/components/Floating/FloatingButton';
+import { LandingBugIcon, LandingDownIcon, landingSampleImg } from '@/public/index';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
 const cards = [
   {
-    id: 1,
     title: '사용자 데이터 보호',
     emoji: '✋🏻',
     texts: ['데이터 무단 액세스 및 정보 유출 방지', '개인 정보 안전하게 보호'],
@@ -20,7 +20,6 @@ const cards = [
     },
   },
   {
-    id: 2,
     title: '효율적인 개발',
     emoji: '🔄',
     texts: ['보안 취약점 자동 분석후 수정', '개발 집중 및 생산성 향상'],
@@ -31,7 +30,6 @@ const cards = [
     },
   },
   {
-    id: 3,
     title: '신속한 대응과 수정',
     emoji: '✅️',
     texts: ['발견된 취약점 대응 및 수정', '안전한 소프트웨어 개발 가능'],
@@ -42,7 +40,6 @@ const cards = [
     },
   },
   {
-    id: 4,
     title: '보안 강화',
     emoji: '🔐',
     texts: ['보안 취약점 사전 식별 후 해결', '소프트웨어 보안성 강화'],
@@ -53,7 +50,6 @@ const cards = [
     },
   },
   {
-    id: 5,
     title: '미션 크리티컬한 개발에 적합',
     emoji: '⚙️',
     texts: ['미션 크리티컬한 개발 특별 제작', '안전한 솔루션 제공'],
@@ -64,15 +60,10 @@ const cards = [
     },
   },
   {
-    id: 6,
     title: '실시간 보안 업데이트',
     emoji: '🔏',
     texts: ['최신 보안 동향 및 취약점 정보 실시간 제공', '개발자 보안 강화를 도움'],
-    style: {
-      borderColor: 'border-[#A54CFF]',
-      bgColor: 'bg-[#F5E4FF]',
-      textColor: 'text-[#A54CFF]',
-    },
+    style: 'border-[#A54CFF] bg-[#F5E4FF] text-[#A54CFF]',
   },
 ];
 
@@ -114,10 +105,11 @@ export default function UiLoginAndSecondPage() {
 
   return (
     <div>
-      <div ref={sectionRef} className="relative h-[102.4rem] w-[192rem] bg-white">
+      {/* 첫번째 섹션 시작 */}
+      <div ref={sectionRef} className="relative h-[102.4rem] w-full overflow-hidden">
         <Ellipse />
-        <div className="absolute inset-0 z-0 bg-[url('/icons/landingpageBackground.svg')] bg-contain bg-center bg-no-repeat" />
-        <main className="relative z-10 flex min-h-full items-center justify-center">
+
+        <section className="min-h-full content-center">
           <div className="flex flex-col items-center gap-[6.5rem]">
             <div className="flex flex-col items-center justify-center gap-[4rem]">
               <div className="flex flex-col items-center justify-center gap-[2rem]">
@@ -135,13 +127,9 @@ export default function UiLoginAndSecondPage() {
               </h1>
             </div>
             <div className="flex flex-col items-center">
-              <button
-                type="button"
-                className="flex h-[5.6rem] items-center justify-center rounded-full bg-primary-500 px-[2.4rem] text-[2.8rem] font-light leading-[3.389rem] tracking-[-0.01em] text-white transition-transform duration-100 ease-out"
-                onClick={handleButtonClick}
-              >
+              <Button onClick={handleButtonClick}>
                 {isAuthenticated ? '파일 분석하러 가기' : 'Login'}
-              </button>
+              </Button>
             </div>
             <div
               className="flex h-[5.6rem] w-[5.6rem] cursor-pointer items-center justify-center"
@@ -152,14 +140,14 @@ export default function UiLoginAndSecondPage() {
               </div>
             </div>
           </div>
-        </main>
+        </section>
       </div>
-
+      {/* 2 */}
       <section
         ref={secondSectionRef}
-        className="relative flex h-[108rem] w-[192rem] items-center justify-between overflow-hidden bg-primary-50 px-[192px]"
+        className="flex w-full items-center justify-between bg-primary-50 p-[27.5rem_19.2rem]"
       >
-        <div className="z-10 flex w-[96rem] flex-col gap-[3rem]">
+        <div className="flex w-[60.1rem] flex-col gap-[3rem]">
           <div className="text-left text-[8rem] font-bold leading-[9.6rem] tracking-[-0.01em] text-primary-500">
             쉽고 편하게 <br /> 취약점을 발견
           </div>
@@ -174,30 +162,26 @@ export default function UiLoginAndSecondPage() {
             </div>
           </div>
         </div>
-
-        <div className="relative h-[102rem] w-[77.1rem]">
-          <div className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center justify-center gap-[1rem] rounded-[0.8rem] bg-white p-[9.3rem_9.5rem] shadow-[0_6.0rem_6rem_-2.4rem_rgba(97,0,255,0.25)]">
-            <LandingBugIcon className="h-[19.6rem] w-[19rem]" alt="Bug Icon" />
-          </div>
-          <div className="absolute right-[-30rem] top-0 h-[20rem] w-[20rem] rounded-lg border-primary-500" />
-          <div className="absolute bottom-0 right-[-30rem] h-[20rem] w-[20rem] rounded-lg border-primary-500" />
-          <div className="absolute right-[5rem] top-[20rem] h-[20rem] w-[20rem] rotate-[45.07deg] transform rounded-lg border-primary-500" />
-          <div className="absolute bottom-[20rem] right-[5rem] h-[20rem] w-[20rem] rotate-[45.07deg] transform rounded-lg border-primary-500" />
+        <div className="flex w-fit items-center justify-center rounded-[0.8rem] bg-white p-[9.3rem_9.5rem] shadow-[0_6.0rem_6rem_-2.4rem_rgba(97,0,255,0.25)]">
+          <LandingBugIcon hight={196} width={190} />
         </div>
       </section>
-
-      <section className="relative flex h-[102.3rem] min-h-[102.3rem] w-[192rem] items-center justify-between gap-[8.8rem] overflow-hidden bg-white px-[19.2rem]">
-        <div className="relative h-[182.4rem] w-[98.5rem] overflow-hidden rounded-tl-[3.2rem] border border-gray-200">
-          <Image
-            src="/images/LandingSample.png"
-            alt=""
-            className="mt-[40rem] h-auto w-full object-contain"
-            layout="fill"
-          />
-          <div
-            className={`absolute left-[15rem] top-[75rem] z-20 flex items-center justify-center rounded-[1.287rem] bg-[#A66FFF] px-[2rem] py-[1rem] text-left text-[2.574rem] leading-[3.604rem] text-white shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-          >
-            Insecure Password Handling
+      {/* 3 */}
+      <section className="flex min-h-[102.3rem] w-full items-center justify-between gap-[8.8rem] overflow-hidden bg-white px-[14.5rem]">
+        <div className="h-[102.3rem] flex-1">
+          <div className="relative h-[182.4rem] w-[98.5rem]">
+            <Image src={landingSampleImg} alt="랜딩 이미지" className="absolute top-[17.4rem]" />
+            <span
+              className={`absolute left-[25rem] top-[33.6rem] z-20 flex items-center justify-center rounded-[1.287rem] bg-[#A66FFF] px-[2rem] py-[1rem] text-left text-[2.574rem] leading-[3.604rem] text-white shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+              // eslint-disable-next-line react/jsx-no-comment-textnodes
+            >
+              // 1. XSS (Cross-Site Scripting) Vulnerability
+            </span>
+            <span
+              className={`absolute left-[20.8rem] top-[42.5rem] z-20 flex items-center justify-center rounded-[1.287rem] bg-[#A66FFF] px-[2rem] py-[1rem] text-left text-[2.574rem] leading-[3.604rem] text-white shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+            >
+              Insecure Password Handling
+            </span>
           </div>
         </div>
         <div className="flex flex-col items-end gap-[3.4rem]">
@@ -216,9 +200,9 @@ export default function UiLoginAndSecondPage() {
         </div>
       </section>
 
-      <FloatingButton type="top" className="fixed bottom-[8.77rem] right-[10.8rem]" />
+      <FloatingButton type="top" className="bottom-[8.77rem] right-[10.8rem]" />
 
-      <section className="flex min-h-screen w-[192rem] items-center justify-center bg-primary-500 py-[10rem]">
+      <section className="flex min-h-screen w-full items-center justify-center overflow-hidden bg-primary-500 py-[10rem]">
         <div className="flex flex-col items-center gap-[12.1rem]">
           <h1 className="text-center text-[6rem] font-bold leading-[7.261rem] tracking-[-0.01em] text-white">
             안전과 보호를 우선으로 하는 <br />
@@ -228,11 +212,11 @@ export default function UiLoginAndSecondPage() {
           <div className="relative flex animate-slide gap-[4.8rem] overflow-hidden whitespace-nowrap">
             {[...cards, ...cards, ...cards, ...cards].map(card => (
               <div
-                key={card.id}
-                className={`relative inline-block h-[46.126rem] w-[33.932rem] flex-shrink-0 rounded-[4rem] bg-white shadow-lg ${card.style.borderColor}`}
+                key={card.title}
+                className="relative inline-block h-[46.126rem] w-[33.932rem] flex-shrink-0 rounded-[4rem] bg-white shadow-lg"
               >
                 <div
-                  className={`absolute left-1/2 top-[5.191rem] -translate-x-1/2 transform rounded-full border ${card.style.bgColor} ${card.style.borderColor} ${card.style.textColor} h-[4.6rem] px-[2.4rem] text-center text-[2rem] font-medium leading-[3rem]`}
+                  className={`absolute left-1/2 top-[5.191rem] -translate-x-1/2 transform rounded-full border ${card.style} h-[4.6rem] px-[2.4rem] text-center text-[2rem] font-medium leading-[3rem]`}
                 >
                   {card.title}
                 </div>
@@ -242,7 +226,7 @@ export default function UiLoginAndSecondPage() {
                 <div className="absolute left-1/2 top-[34.251rem] flex h-[5.2rem] -translate-x-1/2 transform flex-col items-center gap-[0.4rem]">
                   {card.texts.map(text => (
                     <p
-                      key={card.id}
+                      key={card.title}
                       className="text-center text-[1.6rem] leading-[2.4rem] tracking-[-0.01em] text-neutral-60"
                     >
                       {text}

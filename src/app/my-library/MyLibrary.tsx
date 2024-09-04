@@ -5,9 +5,9 @@ import { Ellipse } from '@/components/Ellipse';
 export default function MyComponent() {
   return (
     <div>
-      <div className="relative h-[102.4rem] w-[192rem] bg-white">
+      <div className="w-[192rem relative h-[102.4rem]">
         <Ellipse />
-        <main className="relative z-10 flex min-h-full items-center justify-center">
+        <main className="flex min-h-full items-center justify-center">
           <div className="flex flex-col items-center gap-[6.5rem]">
             <div className="flex flex-col items-center justify-center gap-[4rem]">
               <div className="flex flex-col items-center justify-center gap-[2rem]">
