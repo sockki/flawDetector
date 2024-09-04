@@ -9,16 +9,20 @@ import Button from '@/components/Button/Button';
 import { Modal } from '@/components/Modals';
 import { useModal } from '@/hooks/useModal';
 import { RightArrowIcon, SignOutIcon } from '@/public/index';
+import { useSession } from 'next-auth/react';
 
 type UserCardProps = {
-  avatar: string;
-  email: string;
   hasLogoutButton?: boolean;
 };
 
-export default function UserCard({ avatar, email, hasLogoutButton }: UserCardProps) {
+export default function UserCard({ hasLogoutButton }: UserCardProps) {
   const router = useRouter();
   const [isModalOpen, handleClickTrigger] = useModal();
+
+  const { data: session } = useSession();
+
+  const avatar = session?.user?.image || '';
+  const email = session?.user?.email || '';
 
   const handleLogout = () => {
     handleClickTrigger();

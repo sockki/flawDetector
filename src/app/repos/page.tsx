@@ -132,15 +132,12 @@ export default function ReposPage({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const avatarUrl = '/images/AvatarDummyImg.png';
-  const email = 'marry@gmail.com';
-
   return (
     <div className="mx-auto bg-opacity-70 bg-[url('/images/headerBackground.svg')] bg-contain bg-top bg-no-repeat">
       <div className="mx-auto flex w-[131.4rem] flex-col items-center gap-[12.4rem]">
         <ReposPageHeader />
         <div className="flex flex-col gap-[2.8rem]">
-          <UserCard avatar={avatarUrl} email={email} />
+          <UserCard />
           <RepositoryActions />
           <RepositoryList searchParams={searchParams} repoData={dummyData} />
         </div>
