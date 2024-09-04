@@ -68,17 +68,10 @@ const config: Config = {
         },
         spread: {
           '0%': {
-            width: '166px',
-            height: '50px',
-            top: '487.88px',
-            left: '877.41px',
+            width: '166.6rem',
+            height: '5rem',
           },
-          '100%': {
-            width: '3856px',
-            height: '1134px',
-            top: '-55px',
-            left: '-968px',
-          },
+          '100%': {},
         },
       },
       animation: {
