@@ -1,5 +1,5 @@
-import UiService from './UiService';
+import Service from './Service';
 
 export default function Page() {
-  return <UiService />;
+  return <Service />;
 }
