@@ -12,61 +12,67 @@ const cards = [
     id: 1,
     title: '사용자 데이터 보호',
     emoji: '✋🏻',
-    text1: '데이터 무단 액세스 및 정보 유출 방지',
-    text2: '개인 정보 안전하게 보호',
-    borderColor: 'border-[#4C93FF]',
-    bgColor: 'bg-[#E4F2FF]',
-    textColor: 'text-[#4C93FF]',
+    texts: ['데이터 무단 액세스 및 정보 유출 방지', '개인 정보 안전하게 보호'],
+    style: {
+      borderColor: 'border-[#4C93FF]',
+      bgColor: 'bg-[#E4F2FF]',
+      textColor: 'text-[#4C93FF]',
+    },
   },
   {
     id: 2,
     title: '효율적인 개발',
     emoji: '🔄',
-    text1: '보안 취약점 자동 분석후 수정',
-    text2: '개발 집중 및 생산성 향상',
-    borderColor: 'border-[#FF8A00]',
-    bgColor: 'bg-[#FFFBE4]',
-    textColor: 'text-[#FF8A00]',
+    texts: ['보안 취약점 자동 분석후 수정', '개발 집중 및 생산성 향상'],
+    style: {
+      borderColor: 'border-[#FF8A00]',
+      bgColor: 'bg-[#FFFBE4]',
+      textColor: 'text-[#FF8A00]',
+    },
   },
   {
     id: 3,
     title: '신속한 대응과 수정',
     emoji: '✅️',
-    text1: '발견된 취약점 대응 및 수정',
-    text2: '안전한 소프트웨어 개발 가능',
-    borderColor: 'border-[#FF3D00]',
-    bgColor: 'bg-[#FFEAE4]',
-    textColor: 'text-[#FF3D00]',
+    texts: ['발견된 취약점 대응 및 수정', '안전한 소프트웨어 개발 가능'],
+    style: {
+      borderColor: 'border-[#FF3D00]',
+      bgColor: 'bg-[#FFEAE4]',
+      textColor: 'text-[#FF3D00]',
+    },
   },
   {
     id: 4,
     title: '보안 강화',
     emoji: '🔐',
-    text1: '보안 취약점 사전 식별 후 해결',
-    text2: '소프트웨어 보안성 강화',
-    borderColor: 'border-[#FF81A7]',
-    bgColor: 'bg-[#FFF2F7]',
-    textColor: 'text-[#FF81A7]',
+    texts: ['보안 취약점 사전 식별 후 해결', '소프트웨어 보안성 강화'],
+    style: {
+      borderColor: 'border-[#FF81A7]',
+      bgColor: 'bg-[#FFF2F7]',
+      textColor: 'text-[#FF81A7]',
+    },
   },
   {
     id: 5,
     title: '미션 크리티컬한 개발에 적합',
     emoji: '⚙️',
-    text1: '미션 크리티컬한 개발 특별 제작',
-    text2: '안전한 솔루션 제공',
-    borderColor: 'border-[#00987C]',
-    bgColor: 'bg-[#DDFFF3]',
-    textColor: 'text-[#00987C]',
+    texts: ['미션 크리티컬한 개발 특별 제작', '안전한 솔루션 제공'],
+    style: {
+      borderColor: 'border-[#00987C]',
+      bgColor: 'bg-[#DDFFF3]',
+      textColor: 'text-[#00987C]',
+    },
   },
   {
     id: 6,
     title: '실시간 보안 업데이트',
     emoji: '🔏',
-    text1: '최신 보안 동향 및 취약점 정보 실시간 제공',
-    text2: '개발자 보안 강화를 도움',
-    borderColor: 'border-[#A54CFF]',
-    bgColor: 'bg-[#F5E4FF]',
-    textColor: 'text-[#A54CFF]',
+    texts: ['최신 보안 동향 및 취약점 정보 실시간 제공', '개발자 보안 강화를 도움'],
+    style: {
+      borderColor: 'border-[#A54CFF]',
+      bgColor: 'bg-[#F5E4FF]',
+      textColor: 'text-[#A54CFF]',
+    },
   },
 ];
 
@@ -410,7 +416,7 @@ export default function UiLoginAndSecondPage() {
             {[...cards, ...cards, ...cards, ...cards].map(card => (
               <div
                 key={card.id}
-                className={`relative inline-block flex-shrink-0 rounded-[4rem] bg-white ${card.borderColor} shadow-lg`}
+                className={`relative inline-block flex-shrink-0 rounded-[4rem] bg-white ${card.style.borderColor} shadow-lg`}
                 style={{
                   height: '46.126rem',
                   width: '33.932rem',
@@ -418,7 +424,7 @@ export default function UiLoginAndSecondPage() {
                 }}
               >
                 <div
-                  className={`absolute left-1/2 -translate-x-1/2 transform rounded-full border ${card.bgColor} ${card.borderColor} ${card.textColor}`}
+                  className={`absolute left-1/2 -translate-x-1/2 transform rounded-full border ${card.style.bgColor} ${card.style.borderColor} ${card.style.textColor}`}
                   style={{
                     top: '5.191rem',
                     height: '4.6rem',
@@ -434,6 +440,7 @@ export default function UiLoginAndSecondPage() {
                       fontWeight: '500',
                       lineHeight: '3rem',
                       letterSpacing: '-0.011em',
+                      padding: '0.7rem 1rem',
                     }}
                   >
                     {card.title}
@@ -449,28 +456,20 @@ export default function UiLoginAndSecondPage() {
                   className="absolute left-1/2 flex -translate-x-1/2 transform flex-col items-center gap-[0.4rem]"
                   style={{ top: '34.251rem', height: '5.2rem' }}
                 >
-                  <p
-                    className="text-center"
-                    style={{
-                      fontSize: '1.6rem',
-                      lineHeight: '2.4rem',
-                      letterSpacing: '-0.01em',
-                      color: 'neutral-60',
-                    }}
-                  >
-                    {card.text1}
-                  </p>
-                  <p
-                    className="text-center"
-                    style={{
-                      fontSize: '1.6rem',
-                      lineHeight: '2.4rem',
-                      letterSpacing: '-0.01em',
-                      color: 'neutral-60',
-                    }}
-                  >
-                    {card.text2}
-                  </p>
+                  {card.texts.map(text => (
+                    <p
+                      key={card.id}
+                      className="text-center"
+                      style={{
+                        fontSize: '1.6rem',
+                        lineHeight: '2.4rem',
+                        letterSpacing: '-0.01em',
+                        color: 'neutral-60',
+                      }}
+                    >
+                      {text}
+                    </p>
+                  ))}
                 </div>
               </div>
             ))}
