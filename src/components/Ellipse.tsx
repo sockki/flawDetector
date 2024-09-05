@@ -1,6 +1,6 @@
 export function Ellipse() {
   return (
-    <div className="absolute h-full w-screen overflow-hidden">
+    <div className="w-screen overflow-hidden">
       {Array.from({ length: 50 }).map((_, i) => {
         const key = `line-${i}`;
         return (
