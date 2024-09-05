@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState, useRef } from 'react';
 import { LandingSampleImg } from '@/public/index';
 
-export default function Page3() {
+export default function Overview() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 

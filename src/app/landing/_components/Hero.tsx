@@ -6,7 +6,7 @@ import Button from '@/components/Button/Button';
 import { Ellipse } from '@/components/Ellipse';
 import { LandingDownIcon } from '@/public/index';
 
-export default function Page1() {
+export default function Hero() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
