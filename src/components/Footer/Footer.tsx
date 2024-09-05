@@ -15,12 +15,14 @@ export default function Footer() {
               <span className="text-gray-default">(주)스팩스페이스</span>
               <div className="ml-[2.6rem] flex">
                 <span className="text-gray-default">대표자</span>
+
                 <span className="ml-[1.1rem]">염민호</span>
               </div>
             </div>
             <span>서울 강서구 마곡중앙2로 11, 3층 303호</span>
             <div>
               <span className="text-gray-default">Email</span>
+
               <a href="mailto:admin@sfacspace.com" className="ml-[2.3rem] text-[1.6rem]">
                 admin@sfacspace.com
               </a>
@@ -45,13 +47,13 @@ export default function Footer() {
           <nav className="cursor-pointer text-gray-default underline">
             <ul className="flex gap-[3.2rem]">
               <li>
-                <Link href="/">회사소개</Link>
+                <Link href="https://www.sfacspace.com/ko">회사소개</Link>
               </li>
               <li>
-                <Link href="/">서비스이용약관</Link>
+                <Link href="/agreements">서비스이용약관</Link>
               </li>
               <li>
-                <Link href="/">개인정보처리방침</Link>
+                <Link href="/ppa">개인정보처리방침</Link>
               </li>
             </ul>
           </nav>
