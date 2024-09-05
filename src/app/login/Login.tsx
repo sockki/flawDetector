@@ -10,7 +10,7 @@ export default function UiLogin() {
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center">
-      <Ellipse className="left-1/2 top-0 -translate-x-1/2 transform" />
+      <Ellipse />
 
       <div className="flex h-[20.3rem] w-[140.6rem] items-center justify-between">
         <div className="flex h-[20.3rem] w-[43.8rem] flex-col items-center gap-[2rem]">
