@@ -35,3 +35,9 @@ export { default as CrossIcon } from './icons/switchCross.svg';
 
 export { default as LandingSampleImg } from "./images/landingSample.png";
 export { default as LandingSquareImg } from "./images/landingSquare.png";
+export { default as CarouselEmoji1 } from "./images/carouselEmoji1.png";
+export { default as CarouselEmoji2 } from "./images/carouselEmoji2.png";
+export { default as CarouselEmoji3 } from "./images/carouselEmoji3.png";
+export { default as CarouselEmoji4 } from "./images/carouselEmoji4.png";
+export { default as CarouselEmoji5 } from "./images/carouselEmoji5.png";
+export { default as CarouselEmoji6 } from "./images/carouselEmoji6.png";
