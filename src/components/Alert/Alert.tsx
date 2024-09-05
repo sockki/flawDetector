@@ -5,8 +5,9 @@ import {
   AlertStatusCheckingIcon,
   AlertStatusCompleteIcon,
   AlertStatusErrorIcon,
-  AlertStatusWaitingIcon,
+  alertStatusWaitingGif,
 } from '@/public/index';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Button from '../Button/Button';
 
@@ -16,12 +17,12 @@ type AlertProps = {
 
 const alertConfig = {
   waiting: {
-    icon: <AlertStatusWaitingIcon />,
+    icon: <Image src={alertStatusWaitingGif} alt="모래시계" width={48} height={48} />,
     status: '검사 대기중...',
     subText: ['순차적으로 파일 검사가 진행됩니다.', '잠시만 대기해주시면 검사가 시작됩니다.'],
   },
   checking: {
-    icon: <AlertStatusCheckingIcon />,
+    icon: <AlertStatusCheckingIcon className="animate-spin360" />,
     status: '검사중...',
     subText: ['코드가 많을수록 처리시간이 길어집니다.'],
   },

@@ -42,3 +42,5 @@ export { default as SuccessIcon } from './icons/success.svg';
 export { default as CheckIcon } from './icons/switchCheck.svg';
 export { default as CrossIcon } from './icons/switchCross.svg';
 export { default as HeaderBackgroundImg } from './images/headerBackground.svg';
+
+export { default as alertStatusWaitingGif } from './images/alertStatusWaiting.gif';
