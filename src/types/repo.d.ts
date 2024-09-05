@@ -4,4 +4,5 @@ type RepositoryContentsProps = {
   path: string;
   sha: string;
   type: 'file' | 'dir';
+  content?: base64;
 };
