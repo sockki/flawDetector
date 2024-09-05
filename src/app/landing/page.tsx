@@ -1,7 +1,7 @@
 import Hero from './_components/Hero';
 import Introduction from './_components/Introduction';
 import Overview from './_components/Overview';
-import CareSel from './_components/CareSel';
+import CarouSel from './_components/CarouSel';
 
 export default function MainPage() {
   return (
@@ -9,7 +9,7 @@ export default function MainPage() {
       <Hero />
       <Introduction />
       <Overview />
-      <CareSel />
+      <CarouSel />
     </div>
   );
 }
