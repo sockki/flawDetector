@@ -61,7 +61,10 @@ export default function Page3() {
         </div>
       </div>
       <div className="flex flex-col items-end gap-[3.4rem]">
-        <h1 className="whitespace-nowrap text-right text-[6rem] font-bold leading-[7.3rem] tracking-[-0.01em] text-primary-500">
+        <h1
+          className="whitespace-nowrap text-right text-[6rem] leading-[7.3rem] tracking-[-0.01em] text-primary-500"
+          style={{ fontWeight: 700 }}
+        >
           최신 보안 동향을
           <br />
           실시간으로 확인하세요.
