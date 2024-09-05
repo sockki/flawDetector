@@ -1,6 +1,6 @@
 'use client';
 
-import { BugIcon, ChatIcon, SendIcon } from '@/public/index';
+import { BugIcon, ChatbotIcon, SendIcon } from '@/public/index';
 import { format } from 'date-fns/format';
 import { ko } from 'date-fns/locale';
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
@@ -102,7 +102,7 @@ export default function Chatbot() {
   return (
     <div className="flex h-[72.6rem] w-[55.8rem] flex-col justify-between overflow-hidden rounded-[2.4rem] bg-white shadow-chatbot">
       <div className="flex items-center gap-[1rem] bg-primary-500 px-[2.4rem] py-[1.25rem]">
-        <ChatIcon />
+        <ChatbotIcon />
         <h2 className="text-[2.4rem] font-bold text-white">플로디텍터 운영자</h2>
       </div>
       <div
