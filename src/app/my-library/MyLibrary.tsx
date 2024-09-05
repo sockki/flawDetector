@@ -34,11 +34,15 @@ export default function MyComponent() {
               <h1 className="text-[2rem] font-normal leading-[2.42rem] tracking-[-0.01em] text-primary-500">
                 깃허브와 연동하여 내 코드 파일을 불러오세요.
               </h1>
-              <div className="items-center">
-                <Button onClick={handleButtonClick}>Login</Button>
+
+              <div className="relative mt-[4rem] flex w-full flex-col items-center">
+                <Button onClick={handleButtonClick} className="relative z-10">
+                  Login
+                </Button>
               </div>
             </div>
           </div>
+          <div className="absolute inset-0 top-[60rem] w-full bg-white bg-opacity-70" />
         </div>
       </div>
     </div>
