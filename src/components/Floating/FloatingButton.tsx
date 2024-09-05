@@ -1,3 +1,5 @@
+'use client';
+
 import FloatVectorIcon from '@/public/icons/floatVector.svg';
 import FloatChatIcon from '@/public/icons/floatChat.svg';
 import { twMerge } from 'tailwind-merge';
