@@ -16,7 +16,7 @@ type StateConfig = {
 type ScanStatusProps = {
   type: ListStatusType;
   isMarked?: boolean;
-  onBookMarkClick: () => void;
+  onBookMarkClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 };
 
 export function ScanStatus({ type, isMarked, onBookMarkClick }: ScanStatusProps) {
