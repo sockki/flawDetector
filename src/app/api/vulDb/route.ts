@@ -1,21 +1,34 @@
-/* import { NextResponse } from 'next/server';
+/* eslint-disable */
+
+import { NextResponse } from 'next/server';
 import os from 'os';
 import * as cheerio from 'cheerio';
 import puppeteer from 'puppeteer-core';
 import getExecutablePath from '@/libs/getExcutablePath';
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '@/firebase/firebaseConfig';
+//import { addDoc, collection } from 'firebase/firestore';
+//import { db } from '@/firebase/firebaseConfig';
 
 export type CrawlingData = {
   title: string;
-  subTitle: string;
+  company:string;
+  uploadDate:Date;
   content: Content[];
+  views:number
 };
 
 type Content = string | Table;
 
 type Table = {
-  table?: { [key: string]: string }[];
+  table?: TableObject[];
+};
+
+export type TableObject = {
+  column1?: string;
+  column2?: string;
+  column3?: string;
+  column4?: string;
+  column5?: string;
+  column6?: string;
 };
 
 function parseDetailContent($: cheerio.CheerioAPI): Content[] {
@@ -29,15 +42,16 @@ function parseDetailContent($: cheerio.CheerioAPI): Content[] {
       } else if ($(element).is('table')) {
         const rows = $(element).find('tr');
 
-        const tableData: { [key: string]: string }[] = [];
+        const tableData: TableObject[] = [];
 
         rows.each((__, row) => {
-          const rowData: { [key: string]: string } = {};
+          const rowData: TableObject = {};
           $(row)
             .find('td, th')
             .each((index, cell) => {
               const cellContent = $(cell).text().trim();
-              rowData[`Column${index + 1}`] = cellContent;
+              const columnKey = `column${index + 1}` as keyof TableObject;
+              rowData[columnKey] = cellContent;
             });
           tableData.push(rowData);
         });
@@ -50,6 +64,7 @@ function parseDetailContent($: cheerio.CheerioAPI): Content[] {
 
 export async function GET() {
   let browser;
+  const dummyDate = new Date("2024-06-11 06:00:00")
   try {
     browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -63,37 +78,51 @@ export async function GET() {
 
     const data: CrawlingData[] = [];
 
-    for (let i = 0; i < 1; i += 1) {
-      for (let j = 0; j < 2; j += 1) {
-        await new Promise<void>(resolve => setTimeout(resolve, 2000));
+    for (let i = 0; i < 5; i += 1) {
+      for (let j = 0; j < 10; j += 1) {
+        await new Promise<void>(resolve => setTimeout(resolve, 1000));
         await page.waitForSelector(
           `#loudong > form > div.content > div > div.el-col.el-col-16 > div:nth-child(${j + 1})`,
         );
         await page.click(
           `#loudong > form > div.content > div > div.el-col.el-col-16 > div:nth-child(${j + 1})`,
         );
-        await new Promise<void>(resolve => setTimeout(resolve, 2000));
+        await new Promise<void>(resolve => setTimeout(resolve, 1000));
         const html = await page.content();
         const $ = cheerio.load(html);
 
         const title = $('.detail-title').text();
-        const subTitle = $('div.detail-subtitle > span').text();
+        const [company, date] = $('div.detail-subtitle > span').text().split("：");
         const content = parseDetailContent($);
-
-        await addDoc(collection(db,"vulDb"), {
-          title, subTitle, content
-        })
+        const uploadDate = new Date(date)
+        if(dummyDate.getTime() < uploadDate.getTime()) {
+          data.push({
+            title,
+            company,
+            uploadDate,
+            content,
+            views: 0
+          })
+        } else {
+          return NextResponse.json(data);
+        }
+        
+        /* await addDoc(collection(db, 'vulDb'), {
+          title,
+          subTitle,
+          content,
+          views: 0
+        }); */
         await page.waitForSelector('.el-page-header__left');
         await page.click(`.el-page-header__left`);
       }
 
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       await page.waitForSelector(`button.btn-next`);
       await page.click(`button.btn-next`);
- 
     }
- 
-    return NextResponse.json({message: "Done", status: true});
+
+    return NextResponse.json(data);
   } catch (error) {
     if (error instanceof Error) {
       return Response.json({ message: error.message, status: false });
@@ -104,4 +133,3 @@ export async function GET() {
     }
   }
 }
- */
