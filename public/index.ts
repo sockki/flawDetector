@@ -33,4 +33,5 @@ export { default as SuccessIcon } from './icons/success.svg';
 export { default as CheckIcon } from './icons/switchCheck.svg';
 export { default as CrossIcon } from './icons/switchCross.svg';
 
-export { default as landingSampleImg } from "./images/landingSample.png";
+export { default as LandingSampleImg } from "./images/landingSample.png";
+export { default as LandingSquareImg } from "./images/landingSquare.png";
