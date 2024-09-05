@@ -33,16 +33,11 @@ export function FolderItem({
 
   const [isMarked, setIsMarked] = useState(initialIsMarked);
 
-  function handleBookmark() {
+  function handleBookmark(e: React.MouseEvent<HTMLDivElement>) {
+    e.stopPropagation();
     setIsMarked(prevIsMarked => !prevIsMarked);
     // api 생성후 들어갈 예정입니다.
   }
-
-  const handleClick = () => {
-    if (type === 'enabled') {
-      handleBookmark();
-    }
-  };
 
   return (
     <div className={containerStyles} onClick={onFolderClick}>
@@ -52,7 +47,7 @@ export function FolderItem({
           <FolderIcon />
           {folderName}
         </div>
-        <ScanStatus type={type} onBookMarkClick={handleClick} isMarked={isMarked} />
+        <ScanStatus type={type} onBookMarkClick={() => handleBookmark} isMarked={isMarked} />
       </div>
       {type === 'enabled' ? '' : <ProgressBar type={type} />}
     </div>

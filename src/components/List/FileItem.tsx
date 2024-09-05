@@ -24,7 +24,7 @@ export function FileItem({
 }: FileItemProps) {
   const containerStyles = twMerge(
     'group flex h-[5.2rem] w-[24.7rem] flex-col justify-center gap-[0.4rem] border-b border-gray-300 p-[1rem] align-middle hover:bg-purple-light',
-    isSelected ? 'bg-purple-dark' : 'bg-white',
+    isSelected ? 'bg-purple-50' : 'bg-white',
   );
 
   const itemStyles = 'flex h-fit w-full justify-between items-center';
@@ -33,16 +33,11 @@ export function FileItem({
 
   const [isMarked, setIsMarked] = useState(initialIsMarked);
 
-  function handleBookmark() {
+  function handleBookmark(e: React.MouseEvent<HTMLDivElement>) {
+    e.stopPropagation();
     setIsMarked(prevIsMarked => !prevIsMarked);
     // api 생성후 들어갈 예정입니다.
   }
-
-  const handleClick = () => {
-    if (type === 'enabled') {
-      handleBookmark();
-    }
-  };
 
   return (
     <div className={containerStyles} onClick={onFileClick}>
@@ -52,9 +47,9 @@ export function FileItem({
           <ListDocumentIcon />
           {fileName}
         </div>
-        <ScanStatus type={type} onBookMarkClick={handleClick} isMarked={isMarked} />
+        <ScanStatus type={type} onBookMarkClick={() => handleBookmark} isMarked={isMarked} />
       </div>
-      {type === 'enabled' ? '' : <ProgressBar type={type} />}
+      {type !== 'enabled' && <ProgressBar type={type} />}
     </div>
   );
 }
