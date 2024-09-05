@@ -17,6 +17,7 @@ const config: Config = {
       boxShadow: {
         button: '0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.25)',
         drop: '0 0 2.48rem 0 rgba(0, 0, 0, 0.25);',
+        chatbot: '0 0.4rem 1.2rem 0 rgba(0, 0, 0, 0.12)',
       },
       colors: {
         neutral: {
