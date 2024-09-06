@@ -2,7 +2,7 @@ import { db } from '@/firebase/firebaseConfig';
 import { doc, runTransaction } from 'firebase/firestore';
 
 export async function POST(request: Request) {
-  const { value } = await request.json(); // 항상 value가 존재한다고 가정
+  const { value } = await request.json();
 
   const topicRef = doc(db, 'topic', value);
 
