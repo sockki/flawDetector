@@ -36,3 +36,28 @@ export async function getRepolist(userName: string = '') {
     return null;
   }
 }
+
+export async function getFileDetail({ owner, repo, path }: GetRepoContentsProps) {
+  try {
+    const response = await octokit.request(`GET /repos/${owner}/${repo}/commits`, {
+      owner,
+      repo,
+      path,
+      headers: {
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+    });
+
+    if (response.data.length > 0) {
+      const createdAt = response.data[0].commit.committer.date;
+      const subTitle = response.data[0].commit.message;
+      return { createdAt, subTitle };
+    } else {
+      console.warn('해당 파일에 대한 커밋 내역이 없습니다.');
+      return null;
+    }
+  } catch (error) {
+    console.error('파일 정보를 가져오는 중 에러가 발생했습니다:', error);
+    return null;
+  }
+}

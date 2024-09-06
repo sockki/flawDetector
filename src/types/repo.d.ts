@@ -6,3 +6,8 @@ type RepositoryContentsProps = {
   type: 'file' | 'dir';
   content?: base64;
 };
+
+type FileContentsResponse = {
+  createdAt: Date;
+  subTitle: string;
+};
