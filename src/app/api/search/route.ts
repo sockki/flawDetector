@@ -11,12 +11,10 @@ export async function POST(request: Request) {
       const docSnapshot = await transaction.get(topicRef);
 
       if (!docSnapshot.exists()) {
-        // 문서가 없으면 새로 생성하고 count는 1로 설정
         transaction.set(topicRef, { count: 1 });
         return;
       }
 
-      // 문서가 있으면 count를 직접 증가
       const currentCount = docSnapshot.data()?.count || 0;
       transaction.update(topicRef, { count: currentCount + 1 });
     });
