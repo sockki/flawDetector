@@ -1,7 +1,6 @@
 'use client';
 
 import { LandingBugIcon, LandingSquareImg } from '@/public/index';
-import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 
 export default function Introduction() {
@@ -35,9 +34,13 @@ export default function Introduction() {
         <LandingBugIcon height={196} width={190} className="relative z-10" />
       </div>
 
-      <div className="absolute right-[-10rem] h-full">
-        <Image src={LandingSquareImg} alt="Square Background" width="102.2rem" />
-      </div>
+      <div
+        className={twMerge('absolute right-0 h-full w-[102.2rem] bg-no-repeat')}
+        style={{
+          backgroundImage: `url(${LandingSquareImg.src})`,
+          backgroundPosition: 'right -10rem center',
+        }}
+      />
     </section>
   );
 }
