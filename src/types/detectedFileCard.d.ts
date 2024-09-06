@@ -1,4 +1,4 @@
-type DetectFileLabelType = 'before' | 'under' | 'done';
+export type DetectFileLabelType = 'before' | 'under' | 'done';
 
 export type ElementByLabel = {
   [key in DetectFileLabelType]: {
@@ -14,4 +14,8 @@ export type DetectFileCardProps = {
   label: DetectFileLabelType;
   date: Date;
   isBookmarked: boolean;
+  userId: string;
+  userName: string;
+  repoId: string;
+  setRepositories: Dispatch<SetStateAction<Repository[]>>;
 };
