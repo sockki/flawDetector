@@ -1,32 +1,39 @@
 'use client';
 
 import Button from '@/components/Button/Button';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function LoginPage() {
-  const { data: session, status } = useSession();
+  const router = useRouter();
+  const { status } = useSession();
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/repos');
+    }
+  }, [status, router]);
+
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
 
-  if (session) {
-    return (
-      <div>
-        <h1>Hello, {session.user?.name}</h1>
-        <p>Email: {session.user?.email}</p>
-        <Button type="button" onClick={() => signOut()}>
-          로그아웃
-        </Button>
-      </div>
-    );
-  }
-
   return (
-    <div>
-      <h1>로그인</h1>
+    <div className="flex min-h-screen items-center justify-center gap-[24.6rem] bg-[]">
+      <div className="flex flex-col items-center gap-[2rem]">
+        <h1 className="text-[6rem] font-regular text-primary-500">Find your Flaw,</h1>
+        <h2 className="w-fit rounded-full border-[0.4rem] border-primary-500 bg-white px-[4rem] text-[6rem] font-regular text-primary-500">
+          Login
+        </h2>
+      </div>
       <Button type="button" onClick={() => signIn('github')}>
-        GitHub로 로그인
+        GitHub로 연동 로그인하기
       </Button>
+      <Link href="https://github.com/">
+        <Button>Github</Button>
+      </Link>
     </div>
   );
 }
