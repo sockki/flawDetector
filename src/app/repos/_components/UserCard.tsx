@@ -2,21 +2,19 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 
 import Button from '@/components/Button/Button';
 import { Modal } from '@/components/Modals';
 import { useModal } from '@/hooks/useModal';
 import { RightArrowIcon, SignOutIcon } from '@/public/index';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 type UserCardProps = {
   hasLogoutButton?: boolean;
 };
 
 export default function UserCard({ hasLogoutButton }: UserCardProps) {
-  const router = useRouter();
   const [isModalOpen, handleClickTrigger] = useModal();
 
   const { data: session } = useSession();
@@ -24,9 +22,8 @@ export default function UserCard({ hasLogoutButton }: UserCardProps) {
   const avatar = session?.user?.image || '';
   const email = session?.user?.email || '';
 
-  const handleLogout = () => {
-    handleClickTrigger();
-    router.push('/');
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: '/' });
   };
 
   const baseStyles = 'flex w-full items-center justify-between ';
