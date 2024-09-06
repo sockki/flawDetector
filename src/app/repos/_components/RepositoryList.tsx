@@ -6,6 +6,8 @@ import DetectFileCard from '@/components/LibraryCard/DetectFileCard';
 import FilterChip from '@/components/Chips/FilterChip';
 import { useEffect, useState } from 'react';
 import { DetectFileLabelType } from '@/types/detectedFileCard';
+import { FolderSimpleStarIcon, ClockCounterIcon } from '@/public/index';
+import sortAndFilterRepositories from '@/utils/sortAndFilter';
 
 export type Repository = {
   id: string;
@@ -28,6 +30,8 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
   const [repositories, setRepositories] = useState<Repository[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState('');
+  const [sortOption, setSortOption] = useState<'최신순' | '오래된순' | '이름순'>('최신순');
+  const [typeFilter, setTypeFilter] = useState<'검사완료' | '검사중'>();
 
   const userName = session?.user?.name || '';
   const userId = session?.user?.id || '';
@@ -75,17 +79,47 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>{isError}</div>;
 
-  const pageData = repositories.slice((nowPage - 1) * pageItems, nowPage * pageItems);
+  const sortedAndFilteredRepos = sortAndFilterRepositories({
+    repositories,
+    typeFilter,
+    sortOption,
+  });
+
+  const pageData = sortedAndFilteredRepos.slice((nowPage - 1) * pageItems, nowPage * pageItems);
   const totalPage = Math.ceil(repositories.length / pageItems);
+
+  const handleRecentsButton = () => {};
+  const handleBookmarksButton = () => {
+    const bookmarkRepos = repositories.filter(repo => repo.isBookmarked === true);
+    setRepositories(bookmarkRepos);
+  };
 
   return (
     <div className="flex min-h-screen flex-col gap-[2.8rem]">
+      <section className="flex w-full gap-[2rem]">
+        <button
+          type="button"
+          onClick={handleRecentsButton}
+          className="flex w-full items-center justify-center gap-[1rem] rounded-[1.2rem] border border-neutral-10 bg-white p-[1.6rem] text-[2rem] font-medium text-gray-black"
+        >
+          <ClockCounterIcon />
+          Recents File
+        </button>
+        <button
+          type="button"
+          onClick={handleBookmarksButton}
+          className="flex w-full items-center justify-center gap-[1rem] rounded-[1.2rem] border border-neutral-10 bg-white p-[1.6rem] text-[2rem] font-medium text-gray-black"
+        >
+          <FolderSimpleStarIcon />
+          Bookmarks
+        </button>
+      </section>
       <section className="flex flex-col gap-[2.4rem]">
         <div className="flex items-center justify-between">
           <h3 className="text-[3.2rem] font-medium text-gray-black">Library</h3>
           <div className="flex gap-[1rem]">
-            <FilterChip label="Type" options={typeOptions} hasIcon onSelect={() => {}} />
-            <FilterChip label="Sort" options={sortOptions} hasIcon onSelect={() => {}} />
+            <FilterChip label="Type" options={typeOptions} hasIcon onSelect={setTypeFilter} />
+            <FilterChip label="Sort" options={sortOptions} hasIcon onSelect={setSortOption} />
           </div>
         </div>
         <div className="grid grid-cols-4 gap-[2.4rem]">
