@@ -23,12 +23,12 @@ export default function FilterChip({ label, options, hasIcon, onSelect }: Filter
   };
 
   return (
-    <div className={twMerge('w-fit text-[2rem] font-regular text-[#3f3f3f] hover:bg-purple-light')}>
+    <div className="h-fit w-fit text-[2rem] text-[#3f3f3f] hover:bg-purple-light">
       <div
-        className="relative flex cursor-pointer items-center justify-between rounded-[0.8rem] border border-[#c3c3c3] p-[1rem]"
+        className="relative flex w-fit cursor-pointer items-center justify-between rounded-[0.8rem] border border-[#c3c3c3] p-[1rem]"
         onClick={toggleDropdown}
       >
-        <span className="flex-1">{label}</span>
+        <span>{label}</span>
         {hasIcon && (
           <CaretIcon
             className={`ml-[0.4rem] transition-transform ${isOpen ? 'rotate-180 transform' : ''}`}
@@ -36,7 +36,7 @@ export default function FilterChip({ label, options, hasIcon, onSelect }: Filter
         )}
       </div>
       {isOpen && (
-        <ul className="absolute left-0 mt-2 overflow-hidden rounded-[0.8rem] border border-[#c3c3c3] bg-white px-[0] shadow-drop">
+        <ul className="left-0 mt-2 overflow-hidden rounded-[0.8rem] border border-[#c3c3c3] bg-white shadow-drop">
           {options.map(option => (
             <li
               key={option}
