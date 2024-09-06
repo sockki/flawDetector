@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useState, useRef } from 'react';
 import { LandingSampleImg } from '@/public/index';
+import { twMerge } from 'tailwind-merge';
 
 export default function Overview() {
   const [isVisible, setIsVisible] = useState(false);
@@ -45,9 +46,10 @@ export default function Overview() {
         <div className="relative h-[182.4rem] w-[98.5rem]">
           <Image src={LandingSampleImg} alt="랜딩 이미지" className="absolute top-[17.4rem]" />
           <span
-            className={`absolute left-[25rem] top-[33.6rem] z-20 flex items-center justify-center rounded-[1.287rem] bg-[#A66FFF] px-[2rem] py-[1rem] text-left text-[2.574rem] leading-[3.604rem] text-white shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-1000 ${
-              isVisible ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={twMerge(
+              `absolute left-[25rem] top-[33.6rem] z-20 flex items-center justify-center rounded-[1.287rem] bg-[#A66FFF] px-[2rem] py-[1rem] text-left text-[2.574rem] leading-[3.604rem] text-white shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-1000`,
+              isVisible ? 'opacity-100' : 'opacity-0',
+            )}
           >
             1. XSS (Cross-Site Scripting) Vulnerability
           </span>
@@ -60,9 +62,11 @@ export default function Overview() {
           </span>
         </div>
       </div>
-      <div className="flex flex-col items-end gap-[3.4rem]">
+      <div className={twMerge('flex flex-col items-end gap-[3.4rem]')}>
         <h1
-          className="whitespace-nowrap text-right text-[6rem] leading-[7.3rem] tracking-[-0.01em] text-primary-500"
+          className={twMerge(
+            'whitespace-nowrap text-right text-[6rem] leading-[7.3rem] tracking-[-0.01em] text-primary-500',
+          )}
           style={{ fontWeight: 700 }}
         >
           최신 보안 동향을
