@@ -1,5 +1,4 @@
-import FloatVectorIcon from '@/public/icons/floatVector.svg';
-import FloatChatIcon from '@/public/icons/floatChat.svg';
+import { ChatIcon, TopIcon } from '@/public/index';
 import { twMerge } from 'tailwind-merge';
 
 type FloatingButtonProps = {
@@ -9,30 +8,23 @@ type FloatingButtonProps = {
 };
 
 export function FloatingButton({ type, onClick, className }: FloatingButtonProps) {
-  const handleClick = () => {
-    if (type === 'top') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (type === 'ask' && onClick) {
-      onClick();
-    }
+  const handleClickTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const IconComponent = type === 'top' ? FloatVectorIcon : FloatChatIcon;
+  const IconComponent = type === 'top' ? TopIcon : ChatIcon;
 
   return (
     <button
       type="button"
-      onClick={handleClick}
+      onClick={type === 'top' ? handleClickTop : onClick}
       className={twMerge(
-        'group fixed bottom-4 flex h-[7.6rem] w-[7.6rem] items-center justify-center rounded-full shadow-lg focus:outline-none',
-        'border border-primary-500 bg-white text-primary-500 hover:border-primary-500 hover:bg-primary-500 hover:text-white',
+        'group fixed bottom-[7rem] right-[8rem] z-50 flex h-[7.6rem] w-[7.6rem] flex-col items-center justify-center gap-[0.8rem] rounded-full border-[0.14rem] border-primary-500 bg-white text-primary-500 hover:border-primary-500 hover:bg-primary-500 hover:text-white focus:outline-none',
         className,
       )}
     >
-      <div className="flex flex-col items-center justify-center">
-        <IconComponent className="group-hover:brightness-0 group-hover:invert group-hover:filter" />
-        {type === 'top' && <span className="text-[1.5rem] font-bold">TOP</span>}
-      </div>
+      <IconComponent className="fill-primary-500 group-hover:fill-white" />
+      {type === 'top' && <span className="text-[1.5rem] font-bold">TOP</span>}
     </button>
   );
 }

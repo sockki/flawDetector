@@ -37,9 +37,6 @@ importers:
       tailwind-merge:
         specifier: ^2.5.1
         version: 2.5.2
-      tw-merge:
-        specifier: 0.0.1-alpha.3
-        version: 0.0.1-alpha.3
       zustand:
         specifier: ^4.5.4
         version: 4.5.4(@types/react@18.3.4)(react@18.3.1)
@@ -9479,12 +9476,6 @@ packages:
         integrity: sha512-C3TaO7K81YvjCgQH9Q1S3R3P3BtN3RIM8n+OvX4il1K1zgE8ZhI0op7kClgkxtutIE8hQrcrHBXvIheqKUUCxw==,
       }
 
-  tw-merge@0.0.1-alpha.3:
-    resolution:
-      {
-        integrity: sha512-HvuKdaUWjJKFlUa/DKDGnicPXill0bUZnzoK/BoTWn0OkKLfIrMMn97VXW6fFdArA40FeBkitWjr7SJRuaDvCg==,
-      }
-
   tween-functions@1.2.0:
     resolution:
       {
@@ -16529,8 +16520,6 @@ snapshots:
       typescript: 5.5.4
 
   tty-browserify@0.0.1: {}
-
-  tw-merge@0.0.1-alpha.3: {}
 
   tween-functions@1.2.0: {}
 

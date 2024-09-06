@@ -61,6 +61,16 @@ const config: Config = {
         medium: '500',
         bold: '600',
       },
+      animation: {
+        spin360: 'spin360 2s linear infinite',
+      },
+      keyframes: {
+        spin360: {
+          '0%': { transform: 'rotate(0deg)' },
+          '50%': { transform: 'rotate(360deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+      },
     },
   },
   plugins: [],
