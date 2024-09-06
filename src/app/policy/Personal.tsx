@@ -1,5 +1,3 @@
-'use client';
-
 export default function MyComponent() {
   return (
     <div className="relative min-h-screen bg-white">
