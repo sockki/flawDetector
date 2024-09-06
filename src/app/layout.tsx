@@ -3,6 +3,7 @@ import Header from '@/components/Header/Header';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Providers from '@/utils/provider';
 import ClientSessionProvider from '@/utils/clientSessionProvider';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -20,12 +21,14 @@ export default function RootLayout({
     <html lang="ko">
       <body className={inter.className}>
         <ClientSessionProvider>
-          <div id="modal" />
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <div className="flex-1">{children}</div>
-            <Footer />
-          </div>
+          <Providers>
+            <div id="modal" />
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <div className="flex-1">{children}</div>
+              <Footer />
+            </div>
+          </Providers>
         </ClientSessionProvider>
       </body>
     </html>
