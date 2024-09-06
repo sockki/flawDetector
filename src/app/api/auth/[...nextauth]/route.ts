@@ -1,21 +1,22 @@
-import NextAuth, { NextAuthOptions } from 'next-auth';
+import NextAuth from 'next-auth';
 import GitHubProvider from 'next-auth/providers/github';
 
-const authOptions: NextAuthOptions = {
+const handler = NextAuth({
   providers: [
     GitHubProvider({
-      clientId: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+      clientId: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || '',
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || '',
     }),
   ],
   callbacks: {
-    async jwt({ token, account }) {
-      if (account) {
+    async jwt({ token, account, profile }) {
+      if (account && profile) {
         return {
           ...token,
           accessToken: account.access_token,
           accessTokenExpires: account.expires_at ? account.expires_at * 1000 : null,
           refreshToken: account.refresh_token,
+          id: profile?.id,
         };
       }
       return token;
@@ -25,6 +26,10 @@ const authOptions: NextAuthOptions = {
         ...session,
         accessToken: token.accessToken,
         error: token.error,
+        user: {
+          ...session.user,
+          id: token.id,
+        },
       };
     },
   },
@@ -32,8 +37,6 @@ const authOptions: NextAuthOptions = {
     signIn: '/login',
   },
   secret: process.env.NEXTAUTH_SECRET,
-};
-
-const handler = NextAuth(authOptions);
+});
 
 export { handler as GET, handler as POST };
