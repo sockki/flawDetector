@@ -1,6 +1,6 @@
 'use client';
 
-import { getRepoContents } from '@/apis/repos/repository';
+import { getFileDetail, getRepoContents } from '@/apis/repos/repository';
 import { useQuery } from '@tanstack/react-query';
 import { FolderItem } from '@/components/List/FolderItem';
 import { FileItem } from '@/components/List/FileItem';
@@ -8,16 +8,24 @@ import { ListHeader } from '@/components/List/ListHeader';
 import { useState, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useCodeFormatState } from '@/stores/Stroe';
-import { ScanButton } from './ScanButton';
+import { useModal } from '@/hooks/useModal';
+import { FileItemResponse } from '@/components/common/CheckedFileList';
+import Button from '@/components/Button/Button';
 import { ScanStatus } from './ScanStatus';
 import { ScanEntireFolder } from './ScanEntireFolder';
+import { MultipleSelectModal } from './MultipleSelectModal';
 
 export function RepoSide() {
   const [currentData, setCurrentData] = useState<RepositoryContentsProps[]>([]);
-  const [selectedFilePaths, setSelectedFilePaths] = useState<string[]>([]);
-  const [isMultipleSelected, setIsMultipleSelected] = useState(false);
+
   const [currentPath, setCurrentPath] = useState('');
   const [lastPath, setLastPath] = useState<string[]>([]);
+  const [selectedFilePaths, setSelectedFilePaths] = useState<string[]>([]);
+
+  const [isMultipleSelected, setIsMultipleSelected] = useState(false);
+  const [multipleSelectFiles, setMultipleSelectFiles] = useState<FileItemResponse[]>([]);
+
+  const [isModalOpen, handleClickTrigger] = useModal();
   const { setCurrentCode, setCodeType } = useCodeFormatState();
 
   const { data } = useQuery<RepositoryContentsProps[]>({
@@ -47,25 +55,69 @@ export function RepoSide() {
 
   const handleFileClick = async (filePath: string) => {
     try {
+      const fileName = filePath.split('/').pop();
+
+      const response = await getFileDetail({
+        owner: 'chaduhwan',
+        repo: 'Project2',
+        path: filePath,
+      });
+
+      if (!response) {
+        console.error('파일의 정보를 불러오는데 실패하였습니다.');
+        return null;
+      }
+
+      const { createdAt, subTitle }: FileContentsResponse = response;
+
       if (isMultipleSelected) {
         setSelectedFilePaths(prevSelected =>
           prevSelected.includes(filePath)
             ? prevSelected.filter(path => path !== filePath)
             : [...prevSelected, filePath],
         );
+
+        setMultipleSelectFiles(prevSelectedFiles => {
+          const isFileAlreadySelected = prevSelectedFiles.some(file => file.fileName === fileName);
+
+          if (isFileAlreadySelected) {
+            return prevSelectedFiles.filter(file => file.fileName !== fileName);
+          } else {
+            return [
+              ...prevSelectedFiles,
+              {
+                fileName: fileName || '',
+                subTitle,
+                createdAt: new Date(createdAt),
+              },
+            ];
+          }
+        });
       } else {
         setSelectedFilePaths([filePath]);
+
         const res: RepositoryContentsProps = await getRepoContents({
           owner: 'chaduhwan',
           repo: 'Project2',
           path: filePath,
         });
-        const incodingCode = await Buffer.from(res.content, 'base64').toString('utf-8');
+
+        const incodingCode = Buffer.from(res.content, 'base64').toString('utf-8');
         setCodeType(filePath.split('.').pop() || '');
         setCurrentCode(incodingCode);
+
+        setMultipleSelectFiles([
+          {
+            fileName: fileName || '',
+            subTitle,
+            createdAt: new Date(createdAt),
+          },
+        ]);
       }
+      return null;
     } catch (error) {
-      console.error('Error fetching file contents:', error);
+      console.error('파일 처리 중 오류가 발생했습니다:', error);
+      return null;
     }
   };
 
@@ -148,7 +200,14 @@ export function RepoSide() {
             )}
         </div>
       </div>
-      <ScanButton />
+      <Button shape="rectangle" size="large" className="w-[24.7rem]" onClick={handleClickTrigger}>
+        검사하기
+      </Button>
+      <MultipleSelectModal
+        onHandleModalOpen={handleClickTrigger}
+        isModalOpen={isModalOpen}
+        modalData={multipleSelectFiles}
+      />
     </div>
   );
 }
