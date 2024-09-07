@@ -1,12 +1,17 @@
 import type { Repository } from '@/app/repos/_components/RepositoryList';
 
 export const saveRecentRepoToLocalStorage = (recentRepos: Repository[]) => {
-  localStorage.setItem('recentRepos', JSON.stringify(recentRepos));
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('recentRepos', JSON.stringify(recentRepos));
+  }
 };
 
 export const loadRecentRepoFromLocalStorage = () => {
-  const storedRepos = localStorage.getItem('recentRepos');
-  return storedRepos ? JSON.parse(storedRepos) : [];
+  if (typeof window !== 'undefined') {
+    const storedRepos = localStorage.getItem('recentRepos');
+    return storedRepos ? JSON.parse(storedRepos) : [];
+  }
+  return [];
 };
 
 export const addRecentViewedToLocalStorage = (repo: Repository) => {
