@@ -17,5 +17,6 @@ export type DetectFileCardProps = {
   userId: string;
   userName: string;
   repoId: string;
-  setRepositories: Dispatch<SetStateAction<Repository[]>>;
+  setRepositories: (repositories: Repository[]) => void;
+  addRecentViewed: () => void;
 };

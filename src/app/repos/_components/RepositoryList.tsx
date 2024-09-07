@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { DetectFileLabelType } from '@/types/detectedFileCard';
 import { FolderSimpleStarIcon, ClockCounterIcon } from '@/public/index';
 import sortAndFilterRepositories from '@/utils/sortAndFilter';
+import type { SortOption, TypeFilterOption } from '@/types/sortAndFilter';
 
 export type Repository = {
   id: string;
@@ -28,10 +29,11 @@ const sortOptions = ['최신순', '오래된순', '이름순'];
 export default function RepositoryList({ searchParams }: RepositoryListProps) {
   const { data: session, status } = useSession();
   const [repositories, setRepositories] = useState<Repository[]>([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState('');
-  const [sortOption, setSortOption] = useState<'최신순' | '오래된순' | '이름순'>('최신순');
-  const [typeFilter, setTypeFilter] = useState<'검사완료' | '검사중'>();
+  const [sortOption, setSortOption] = useState<SortOption>('최신순');
+  const [typeFilter, setTypeFilter] = useState<TypeFilterOption>();
 
   const userName = session?.user?.name || '';
   const userId = session?.user?.id || '';
