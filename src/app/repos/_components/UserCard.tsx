@@ -3,12 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
-
 import Button from '@/components/Button/Button';
 import { Modal } from '@/components/Modals';
 import { useModal } from '@/hooks/useModal';
 import { RightArrowIcon, SignOutIcon } from '@/public/index';
 import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 type UserCardProps = {
   hasLogoutButton?: boolean;
@@ -16,14 +16,29 @@ type UserCardProps = {
 
 export default function UserCard({ hasLogoutButton }: UserCardProps) {
   const [isModalOpen, handleClickTrigger] = useModal();
-
   const { data: session } = useSession();
+  const router = useRouter();
 
   const avatar = session?.user?.image || '';
   const email = session?.user?.email || '';
+  const userId = session?.user.id.toString() || '';
 
   const handleLogout = async () => {
-    await signOut({ callbackUrl: '/' });
+    try {
+      const res = await fetch('/api/repositories', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to delete user repositories');
+      }
+      await signOut();
+      router.push('/');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const baseStyles = 'flex w-full items-center justify-between ';
