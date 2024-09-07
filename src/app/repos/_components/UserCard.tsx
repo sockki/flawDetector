@@ -32,9 +32,13 @@ export default function UserCard({ hasLogoutButton }: UserCardProps) {
       });
 
       if (!res.ok) {
-        throw new Error('Failed to delete user repositories');
+        throw new Error('사용자의 데이터를 삭제하는 중 오류가 발생했습니다.');
       }
       await signOut();
+
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('recentRepos');
+      }
       router.push('/');
     } catch (error) {
       console.error(error);
