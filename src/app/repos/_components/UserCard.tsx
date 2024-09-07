@@ -49,12 +49,16 @@ export default function UserCard({ hasLogoutButton }: UserCardProps) {
     <section className={twMerge(baseStyles, hasLogoutButton ? logoutStyles : defaultStyles)}>
       <div className="flex items-center gap-[4.4rem]">
         <div className="relative h-[10.7rem] w-[10.7rem] overflow-hidden rounded-full">
-          <Image
-            src={avatar}
-            alt="avatar"
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+          {avatar ? (
+            <Image
+              src={avatar}
+              alt="User Avatar"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          ) : (
+            <div>No Image</div>
+          )}
         </div>
         <div className="text-[4rem] font-medium text-gray-black">
           <p>Hello,</p>
