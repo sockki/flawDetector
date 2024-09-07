@@ -7,8 +7,9 @@ import Button from '@/components/Button/Button';
 import Input from '@/components/Input/Input';
 import { Modal } from '@/components/Modals';
 import { useModal } from '@/hooks/useModal';
+import { useSession } from 'next-auth/react';
 
-type ContactInputs = {
+type FormData = {
   name: string;
   email: string;
   message: string;
@@ -17,20 +18,29 @@ type ContactInputs = {
 export default function ContactForm() {
   const router = useRouter();
   const [isModalOpen, handleClickTrigger] = useModal();
+  const { data: session } = useSession();
+  const userEmail = session?.user.email || '';
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ContactInputs>();
+  } = useForm<FormData>();
 
-  const onSubmit: SubmitHandler<ContactInputs> = data => {
-    console.log(data);
-    handleClickTrigger();
+  const onSubmit: SubmitHandler<FormData> = async data => {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.ok) {
+      handleClickTrigger();
+    }
   };
 
-  const handleContact = () => {
-    handleClickTrigger();
+  const handleHomeButton = () => {
     router.push('/');
   };
 
@@ -58,19 +68,28 @@ export default function ContactForm() {
       </div>
       <div className="flex flex-col gap-[0.8rem]">
         <label className="text-[1.8rem] font-medium">Email</label>
-        <Input disabled defaultValue={userEmail} {...register('email')} />
+        <Input
+          readOnly
+          value={userEmail}
+          className="pointer-events-none"
+          {...register('email', { required: '이메일을 입력해주세요.' })}
+        />
+        {errors.email && <span className="text-system-warning">{errors.email.message}</span>}
       </div>
       <div className="flex flex-col gap-[0.8rem]">
         <label className="text-[1.8rem] font-medium">Message</label>
-        <Input placeholder="내용을 적어주세요." isMultiline rows={6} />
+        <Input
+          placeholder="내용을 적어주세요."
+          isMultiline
+          rows={6}
+          {...register('message', {
+            required: '내용을 입력해주세요.',
+            minLength: { value: 5, message: '내용은 5자 이상 입력해주세요.' },
+          })}
+        />
+        {errors.message && <span className="text-system-warning">{errors.message.message}</span>}
       </div>
-      <Button
-        type="submit"
-        shape="rectangle"
-        size="large"
-        className="w-full text-[1.8rem]"
-        onClick={handleSubmit}
-      >
+      <Button type="submit" shape="rectangle" size="large" className="w-full text-[1.8rem]">
         문의 보내기
       </Button>
       <Modal
@@ -82,7 +101,7 @@ export default function ContactForm() {
       >
         <Modal.Title size="lg">문의를 보냈어요!</Modal.Title>
         <Modal.Text subtitle={['문의를 성공적으로 전송했어요. 빠른 시일내에 답변해 드릴게요.']} />
-        <Modal.Button buttonText="홈으로 가기" variant="singleButton" onClick={handleContact} />
+        <Modal.Button buttonText="홈으로 가기" variant="singleButton" onClick={handleHomeButton} />
       </Modal>
     </form>
   );
