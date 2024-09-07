@@ -7,6 +7,10 @@ import FilterChip from '@/components/Chips/FilterChip';
 import { useEffect, useState } from 'react';
 import { DetectFileLabelType } from '@/types/detectedFileCard';
 import { FolderSimpleStarIcon, ClockCounterIcon } from '@/public/index';
+import {
+  loadRecentRepoFromLocalStorage,
+  addRecentViewedToLocalStorage,
+} from '@/utils/localStorage';
 import sortAndFilterRepositories from '@/utils/sortAndFilter';
 import type { SortOption, TypeFilterOption } from '@/types/sortAndFilter';
 
@@ -29,6 +33,7 @@ const sortOptions = ['최신순', '오래된순', '이름순'];
 export default function RepositoryList({ searchParams }: RepositoryListProps) {
   const { data: session, status } = useSession();
   const [repositories, setRepositories] = useState<Repository[]>([]);
+  const [recentViewed, setRecentViewed] = useState<Repository[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState('');
@@ -40,6 +45,11 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
 
   const pageItems = 16;
   const nowPage = searchParams.page ? Number(searchParams.page) : 1;
+
+  useEffect(() => {
+    const storedRecentRepos = loadRecentRepoFromLocalStorage();
+    setRecentViewed(storedRecentRepos);
+  }, []);
 
   useEffect(() => {
     async function loadRepositories() {
@@ -90,7 +100,10 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
   const pageData = sortedAndFilteredRepos.slice((nowPage - 1) * pageItems, nowPage * pageItems);
   const totalPage = Math.ceil(repositories.length / pageItems);
 
-  const handleRecentsButton = () => {};
+  const handleRecentsButton = () => {
+    setRepositories(recentViewed);
+  };
+
   const handleBookmarksButton = () => {
     const bookmarkRepos = repositories.filter(repo => repo.isBookmarked === true);
     setRepositories(bookmarkRepos);
@@ -136,6 +149,7 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
               userName={userName}
               repoId={repo.id}
               setRepositories={setRepositories}
+              addRecentViewed={() => addRecentViewedToLocalStorage(repo)}
             />
           ))}
         </div>

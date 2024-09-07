@@ -33,6 +33,7 @@ export default function DetectFileCard({
   date,
   isBookmarked,
   setRepositories,
+  addRecentViewed,
 }: DetectFileCardProps) {
   const [isBookmark, setIsBookmark] = useState<boolean>(isBookmarked);
   const router = useRouter();
@@ -74,6 +75,7 @@ export default function DetectFileCard({
   };
 
   const onClickCheckStatus = () => {
+    addRecentViewed();
     router.push(`/repos/${userName}/${repoId}`);
   };
 
