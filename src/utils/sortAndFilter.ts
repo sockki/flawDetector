@@ -1,9 +1,10 @@
-import type { Repository } from '@/app/repos/_components/RepositoryList';
+import { Repository } from '@/types/repository';
+import type { SortOption, TypeFilterOption } from '@/types/sortAndFilter';
 
 type SortAndFilterRepositoriesProps = {
   repositories: Repository[];
-  typeFilter?: '검사완료' | '검사중';
-  sortOption?: '최신순' | '오래된순' | '이름순';
+  typeFilter?: TypeFilterOption;
+  sortOption?: SortOption;
 };
 
 export default function sortAndFilterRepositories({
