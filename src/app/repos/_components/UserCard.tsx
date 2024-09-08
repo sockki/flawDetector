@@ -8,7 +8,6 @@ import { Modal } from '@/components/Modals';
 import { useModal } from '@/hooks/useModal';
 import { RightArrowIcon, SignOutIcon } from '@/public/index';
 import { signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 
 type UserCardProps = {
   hasLogoutButton?: boolean;
@@ -17,7 +16,6 @@ type UserCardProps = {
 export default function UserCard({ hasLogoutButton }: UserCardProps) {
   const [isModalOpen, handleClickTrigger] = useModal();
   const { data: session } = useSession();
-  const router = useRouter();
 
   const avatar = session?.user?.image || '';
   const email = session?.user?.email || '';
@@ -34,12 +32,11 @@ export default function UserCard({ hasLogoutButton }: UserCardProps) {
       if (!res.ok) {
         throw new Error('사용자의 데이터를 삭제하는 중 오류가 발생했습니다.');
       }
-      await signOut();
+      await signOut({ callbackUrl: '/' });
 
       if (typeof window !== 'undefined') {
         localStorage.removeItem('recentRepos');
       }
-      router.push('/');
     } catch (error) {
       console.error(error);
     }
