@@ -1,3 +1,5 @@
+import { db } from '@/firebase/firebaseConfig';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { octokit } from './octokit';
 
 type GetRepoContentsProps = {
@@ -59,5 +61,25 @@ export async function getFileDetail({ owner, repo, path }: GetRepoContentsProps)
   } catch (error) {
     console.error('파일 정보를 가져오는 중 에러가 발생했습니다:', error);
     return null;
+  }
+}
+
+export async function getCodeScanResult(path: string): Promise<FileScanResult[]> {
+  try {
+    const querySelect = query(collection(db, 'codeScanResult'), where('result.path', '==', path));
+    console.log(path);
+
+    const querySnapshot = await getDocs(querySelect);
+    const results: FileScanResult[] = [];
+
+    querySnapshot.forEach(doc => {
+      results.push({ ...doc.data() } as FileScanResult);
+    });
+
+    console.log('검사 완료 파일을 불러왔습니다.', results);
+    return results;
+  } catch (error) {
+    console.error('검사 완료 파일을 불러오는데 실패하였습니다.', error);
+    throw new Error('Firestore 데이터 가져오기 실패');
   }
 }
