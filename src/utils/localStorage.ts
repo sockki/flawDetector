@@ -1,4 +1,4 @@
-import type { Repository } from '@/app/repos/_components/RepositoryList';
+import type { Repository } from '@/types/repository';
 
 export const saveRecentRepoToLocalStorage = (recentRepos: Repository[]) => {
   if (typeof window !== 'undefined') {
