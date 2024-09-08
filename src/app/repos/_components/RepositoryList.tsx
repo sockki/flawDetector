@@ -1,27 +1,14 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import { useRepoStore } from '@/stores/useRepoStore';
+import type { SortOption, TypeFilterOption } from '@/types/sortAndFilter';
+import { FolderSimpleStarIcon, ClockCounterIcon } from '@/public/index';
+import sortAndFilterRepositories from '@/utils/sortAndFilter';
 import Pagination from '@/components/Pagination/Pagination';
 import DetectFileCard from '@/components/LibraryCard/DetectFileCard';
 import FilterChip from '@/components/Chips/FilterChip';
-import { useEffect, useState } from 'react';
-import { DetectFileLabelType } from '@/types/detectedFileCard';
-import { FolderSimpleStarIcon, ClockCounterIcon } from '@/public/index';
-import {
-  loadRecentRepoFromLocalStorage,
-  addRecentViewedToLocalStorage,
-} from '@/utils/localStorage';
-import sortAndFilterRepositories from '@/utils/sortAndFilter';
-import type { SortOption, TypeFilterOption } from '@/types/sortAndFilter';
-
-export type Repository = {
-  id: string;
-  name: string;
-  html_url: string;
-  pushed_at: string;
-  isBookmarked: boolean;
-  isChecked: DetectFileLabelType;
-};
 
 type RepositoryListProps = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -32,8 +19,7 @@ const sortOptions = ['최신순', '오래된순', '이름순'];
 
 export default function RepositoryList({ searchParams }: RepositoryListProps) {
   const { data: session, status } = useSession();
-  const [repositories, setRepositories] = useState<Repository[]>([]);
-  const [recentViewed, setRecentViewed] = useState<Repository[]>([]);
+  const { repositories, recentViewed, setRepositories } = useRepoStore();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState('');
@@ -45,11 +31,6 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
 
   const pageItems = 16;
   const nowPage = searchParams.page ? Number(searchParams.page) : 1;
-
-  useEffect(() => {
-    const storedRecentRepos = loadRecentRepoFromLocalStorage();
-    setRecentViewed(storedRecentRepos);
-  }, []);
 
   useEffect(() => {
     async function loadRepositories() {
@@ -71,8 +52,8 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
           }),
         });
 
-        const res = await fetch(`/api/repositories?userId=${userId}`);
-        const data = await res.json();
+        const response = await fetch(`/api/repositories?userId=${userId}`);
+        const data = await response.json();
 
         setRepositories(data.repositories);
       } catch (error) {
@@ -86,7 +67,7 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
     if (status === 'authenticated') {
       loadRepositories();
     }
-  }, [userId, userName, status]);
+  }, [userId, userName, status, setRepositories]);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>{isError}</div>;
@@ -148,8 +129,6 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
               userId={userId}
               userName={userName}
               repoId={repo.id}
-              setRepositories={setRepositories}
-              addRecentViewed={() => addRecentViewedToLocalStorage(repo)}
             />
           ))}
         </div>

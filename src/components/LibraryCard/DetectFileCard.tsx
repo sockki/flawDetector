@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { twMerge } from 'tailwind-merge';
 import { DetectFileCardArrowIcon, DetectFileCardBugIcon, DetectFileCardStar } from '@/public/index';
 import type { DetectFileCardProps, ElementByLabel } from '@/types/detectedFileCard';
+import { useRepoStore } from '@/stores/useRepoStore';
 
 async function updateBookmarkStatus(userId: string, repoId: string, isBookmarked: boolean) {
   const response = await fetch('/api/repositories', {
@@ -25,18 +26,21 @@ async function updateBookmarkStatus(userId: string, repoId: string, isBookmarked
 }
 
 export default function DetectFileCard({
-  userId,
-  userName,
-  repoId,
   title,
   label,
   date,
-  isBookmarked,
-  setRepositories,
-  addRecentViewed,
+  userId,
+  userName,
+  repoId,
 }: DetectFileCardProps) {
-  const [isBookmark, setIsBookmark] = useState<boolean>(isBookmarked);
   const router = useRouter();
+  const { repositories, setRepositories, addRecentViewed } = useRepoStore();
+
+  const repos = repositories.find(repo => repo.id === repoId);
+  const [isBookmark, setIsBookmark] = useState<boolean>(repos?.isBookmarked || false);
+
+  if (!repos) return null;
+
   const elementByLabel: ElementByLabel = {
     before: {
       labelStyle: '',
@@ -64,18 +68,19 @@ export default function DetectFileCard({
     try {
       setIsBookmark(prev => !prev);
 
+      setRepositories(
+        repositories.map(repo =>
+          repo.id === repoId ? { ...repo, isBookmarked: !isBookmark } : repo,
+        ),
+      );
       await updateBookmarkStatus(userId, repoId, !isBookmark);
-
-      const res = await fetch(`/api/repositories?userId=${userId}`);
-      const updatedData = await res.json();
-      setRepositories(updatedData.repositories);
     } catch (error) {
       console.error(error);
     }
   };
 
   const onClickCheckStatus = () => {
-    addRecentViewed();
+    addRecentViewed(repos);
     router.push(`/repos/${userName}/${repoId}`);
   };
 
