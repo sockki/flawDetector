@@ -8,18 +8,10 @@ import {
   query,
   where,
 } from 'firebase/firestore';
+import { GitHubRepoData } from '@/types/repository';
 import { db } from './firebaseConfig';
 
-type RepoData = {
-  id: string;
-  name: string;
-  description: string;
-  pushed_at: Date;
-  isChecked: 'before' | 'under' | 'done';
-  isBookmarked: boolean;
-};
-
-export const saveRepository = async (userId: string, repoData: RepoData[]) => {
+export const saveRepository = async (userId: string, repoData: GitHubRepoData[]) => {
   const userRepoRef = collection(db, 'users', userId.toString(), 'repositories');
 
   const promises = repoData.map(repo => {
@@ -33,8 +25,7 @@ export const saveRepository = async (userId: string, repoData: RepoData[]) => {
     });
   });
   try {
-    await Promise.all(promises); // 모든 비동기 작업 완료 대기
-    console.log('레포지토리가 성공적으로 저장되었습니다.');
+    await Promise.all(promises);
   } catch (error) {
     console.error('Firestore에 레포지토리 저장 실패:', error);
     throw new Error('레포지토리 저장 중 문제가 발생했습니다.');

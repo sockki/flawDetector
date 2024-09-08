@@ -23,9 +23,9 @@ export default function sortAndFilterRepositories({
 
   const sortFunctions = {
     최신순: (a: Repository, b: Repository) =>
-      new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime(),
+      new Date(b.pushedAt).getTime() - new Date(a.pushedAt).getTime(),
     오래된순: (a: Repository, b: Repository) =>
-      new Date(a.pushed_at).getTime() - new Date(b.pushed_at).getTime(),
+      new Date(a.pushedAt).getTime() - new Date(b.pushedAt).getTime(),
     이름순: (a: Repository, b: Repository) => a.name.localeCompare(b.name),
   };
 

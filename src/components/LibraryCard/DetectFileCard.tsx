@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { format } from 'date-fns';
 import { twMerge } from 'tailwind-merge';
 import { DetectFileCardArrowIcon, DetectFileCardBugIcon, DetectFileCardStar } from '@/public/index';
-import type { DetectFileCardProps, ElementByLabel } from '@/types/detectedFileCard';
 import { useRepoStore } from '@/stores/useRepoStore';
+import type { DetectFileCardProps, ElementByLabel } from '@/types/detectedFileCard';
 
 async function updateBookmarkStatus(userId: string, repoId: string, isBookmarked: boolean) {
   const response = await fetch('/api/repositories', {

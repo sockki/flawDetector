@@ -1,11 +1,18 @@
-import { DetectFileLabelType } from './detectedFileCard';
+import { DetectFileLabelType } from '@/types/detectedFileCard';
 
-export type Repository = {
+export type BaseRepoData = {
   id: string;
   name: string;
-  pushed_at: Date;
-  isBookmarked: boolean;
   isChecked: DetectFileLabelType;
+};
+
+export type GitHubRepoData = BaseRepoData & {
+  pushed_at: Date;
+};
+
+export type Repository = BaseRepoData & {
+  pushedAt: Date;
+  isBookmarked: boolean;
 };
 
 export type RepositoryState = {

@@ -37,7 +37,6 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
       if (!userId || !userName) {
         return;
       }
-
       setIsLoading(true);
 
       try {
@@ -124,7 +123,7 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
               key={repo.id}
               title={repo.name}
               label={repo.isChecked}
-              date={new Date(repo.pushed_at)}
+              date={repo.pushedAt}
               isBookmarked={repo.isBookmarked}
               userId={userId}
               userName={userName}
