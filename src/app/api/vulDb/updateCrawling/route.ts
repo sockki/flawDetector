@@ -76,7 +76,6 @@ async function parseDetailContent($: cheerio.CheerioAPI): Promise<Content[]> {
       }
     }
   }
-
   return content;
 }
 

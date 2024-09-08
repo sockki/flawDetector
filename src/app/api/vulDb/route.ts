@@ -8,11 +8,6 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get('page') || '1', 10);
     const data: ArticleData[] = [];
-    let lastVisibleDocId = '';
-    if (typeof window !== 'undefined') {
-      lastVisibleDocId = localStorage.getItem('lastVisibleDocId') || '';
-    }
-    console.log(lastVisibleDocId);
 
     const vulDbQuery = query(collection(db, 'vulDb'), orderBy('uploadDate', 'desc'));
 
