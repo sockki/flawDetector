@@ -13,10 +13,7 @@ import { db } from './firebaseConfig';
 type RepoData = {
   id: string;
   name: string;
-  html_url: string;
   description: string;
-  created_at: Date;
-  updated_at: Date;
   pushed_at: Date;
   isChecked: 'before' | 'under' | 'done';
   isBookmarked: boolean;
@@ -29,10 +26,7 @@ export const saveRepository = async (userId: string, repoData: RepoData[]) => {
     const repoRef = doc(userRepoRef, repo.id.toString());
     return setDoc(repoRef, {
       name: repo.name,
-      html_url: repo.html_url,
       description: repo.description || '',
-      created_at: repo.created_at,
-      updated_at: repo.updated_at,
       pushed_at: repo.pushed_at,
       isChecked: 'before',
       isBookmarked: false,
