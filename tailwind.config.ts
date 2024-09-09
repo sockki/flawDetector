@@ -17,6 +17,7 @@ const config: Config = {
       boxShadow: {
         button: '0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.25)',
         drop: '0 0 2.48rem 0 rgba(0, 0, 0, 0.25);',
+        chatbot: '0 0.4rem 1.2rem 0 rgba(0, 0, 0, 0.12)',
       },
       colors: {
         neutral: {
@@ -76,10 +77,21 @@ const config: Config = {
             height: '1134px',
           },
         },
+        move: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '50%': { transform: 'translateX(calc(100% + 280px))' }, // 로고 크기에 맞게 설정
+        },
+        spin360: {
+          '0%': { transform: 'rotate(0deg)' },
+          '50%': { transform: 'rotate(360deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         slide: 'slide 30s linear infinite',
         spread: 'spread 15s ease-in-out infinite',
+        'move-circle': 'move 4s ease-in-out infinite',
+        spin360: 'spin360 2s linear infinite',
       },
     },
   },

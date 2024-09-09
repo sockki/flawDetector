@@ -1,31 +1,15 @@
-'use client';
-
-import { useEffect, useState } from 'react';
+import Alert from '@/components/Alert/Alert';
 
 export default function TestPage() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('/api/firebase', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: 'yyyyy',
-          name: '영은',
-        }),
-      });
-      const data = await response.json();
-      setMessage(data.message);
-    };
-
-    fetchData();
-  }, []);
-
   return (
-    <div>
-      <h1>파이어베이스 상태</h1>
-      <p>{message}</p>
-    </div>
+    <>
+      <Alert type="error" />
+      <br />
+      <Alert type="complete" />
+      <br />
+      <Alert type="waiting" />
+      <br />
+      <Alert type="checking" />
+    </>
   );
 }

@@ -1,23 +1,25 @@
-import { forwardRef, ComponentPropsWithRef } from 'react';
+import { forwardRef, ComponentPropsWithoutRef, Ref } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-type InputProps = ComponentPropsWithRef<'input'> & {
-  variant?: 'default' | 'error';
-};
+type InputProps = ComponentPropsWithoutRef<'input'> &
+  ComponentPropsWithoutRef<'textarea'> & {
+    variant?: 'default' | 'error';
+    isMultiline?: boolean;
+  };
 
-const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { className, variant = 'default', disabled = false, ...rest },
+const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(function Input(
+  { className, variant = 'default', disabled = false, isMultiline = false, ...rest },
   ref,
 ) {
   const baseStyle =
-    'w-[86.6rem] h-[5.1rem] rounded-[0.8rem] p-[1.2rem] border font-medium text-[1.8rem] placeholder:text-gray-light outline-none';
+    'w-[86.6rem] rounded-[0.8rem] border p-[1.2rem] text-[1.8rem] font-medium outline-none placeholder:text-gray-light';
   const focusedStyle =
-    'hover:bg-purple-light hover:border-neutral-10 hover:text-[#3f3f3f] focus:border-primary-500 focus:text-[#3f3f3f]';
+    'hover:border-neutral-10 hover:bg-purple-light hover:text-[#3f3f3f] focus:border-primary-500 focus:text-[#3f3f3f]';
   const variantStyles = {
     default: 'border-neutral-10 text-gray-dark',
-    error: 'bg-red-light border-system-warning text-[#3f3f3f]',
+    error: 'border-system-warning bg-red-light text-[#3f3f3f]',
   };
-  const disabledStyles = 'bg-gray-light text-[#d6d6d6] cursor-not-allowed';
+  const disabledStyles = 'cursor-not-allowed bg-gray-light placeholder:text-[#d6d6d6]';
 
   const combinedClasses = twMerge(
     baseStyle,
@@ -25,7 +27,26 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     disabled ? disabledStyles : focusedStyle,
     className,
   );
-  return <input ref={ref} className={combinedClasses} disabled={disabled} {...rest} />;
+
+  if (isMultiline) {
+    return (
+      <textarea
+        ref={ref as Ref<HTMLTextAreaElement>}
+        className={twMerge(combinedClasses, 'resize-none')}
+        disabled={disabled}
+        {...rest}
+      />
+    );
+  }
+
+  return (
+    <input
+      ref={ref as Ref<HTMLInputElement>}
+      className={combinedClasses}
+      disabled={disabled}
+      {...rest}
+    />
+  );
 });
 
 Input.displayName = 'Input';
