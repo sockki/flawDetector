@@ -67,7 +67,6 @@ export async function getFileDetail({ owner, repo, path }: GetRepoContentsProps)
 export async function getCodeScanResult(path: string): Promise<FileScanResult[]> {
   try {
     const querySelect = query(collection(db, 'codeScanResult'), where('result.path', '==', path));
-    console.log(path);
 
     const querySnapshot = await getDocs(querySelect);
     const results: FileScanResult[] = [];
@@ -82,4 +81,29 @@ export async function getCodeScanResult(path: string): Promise<FileScanResult[]>
     console.error('검사 완료 파일을 불러오는데 실패하였습니다.', error);
     throw new Error('Firestore 데이터 가져오기 실패');
   }
+}
+
+export async function getFileStatus({ userName, repoName }: fetchCodeStatusProps) {
+  const results: CodeStatusResult[] = [];
+
+  const prefix = `${userName}/${repoName}`;
+
+  const q = query(
+    collection(db, 'codeScanResult'),
+    where('result.path', '>=', prefix),
+    where('result.path', '<', `${prefix}\uf8ff`),
+  );
+  const querySnapshot = await getDocs(q);
+
+  querySnapshot.forEach(doc => {
+    const data = doc.data();
+    const { path } = data.result;
+
+    results.push({
+      path,
+      type: data.result.issues && data.result.issues.length > 0 ? 'error' : 'success',
+    });
+  });
+  console.log(results);
+  return results;
 }
