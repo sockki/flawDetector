@@ -87,7 +87,7 @@ export default function InfoBox({
                 themeClasses.location[theme],
               )}
               onClick={() => {
-                onLineClick(number);
+                onLineClick(number[0]);
               }}
               type="button"
             >

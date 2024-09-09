@@ -41,10 +41,14 @@ export function ResultFormat() {
   };
 
   useEffect(() => {
-    if (selectedFilePaths.length > 0) {
-      mutation.mutate(`${userName}/${repoName}/${selectedFilePaths[0]}`);
-    }
-  }, [selectedFilePaths, userName, repoName, mutation]);
+    const performMutation = () => {
+      if (selectedFilePaths.length > 0) {
+        mutation.mutate(`${userName}/${repoName}/${selectedFilePaths[0]}`);
+      }
+    };
+
+    performMutation();
+  }, [selectedFilePaths, userName, repoName]);
 
   useEffect(() => {
     setHighLightedLines([]);
@@ -52,7 +56,7 @@ export function ResultFormat() {
       mutation.data.forEach((fileResult: FileScanResult) => {
         const { result } = fileResult;
         if (result && result.issues) {
-          result.issues.map(issue => setHighLightedLines(prev => [...prev, issue.number]));
+          result.issues.map(issue => setHighLightedLines(prev => [...prev, ...issue.number]));
         }
       });
     }
@@ -85,7 +89,7 @@ export function ResultFormat() {
                   number={issue.number}
                   vulnerability={issue.vulnerability}
                   fixDetails={issue.fixDetails}
-                  key={issue.number}
+                  key={issue.issue}
                   location
                   bullet
                   onLineClick={handleLineClick}

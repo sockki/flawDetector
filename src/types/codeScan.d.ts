@@ -1,6 +1,6 @@
 type Issue = {
   issue: string;
-  number: number;
+  number: number[];
   vulnerability: string;
   modifiedCode: string;
   fixDetails: string;
@@ -8,4 +8,14 @@ type Issue = {
 
 type FileScanResult = {
   result: { path: string; issues: Issue[] };
+};
+
+type FetchCodeStatusProps = {
+  userName: string;
+  repoName: string;
+};
+
+type CodeStatusResult = {
+  path: string;
+  type: 'error' | 'success';
 };
