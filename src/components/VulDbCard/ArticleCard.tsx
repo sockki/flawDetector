@@ -11,7 +11,7 @@ export default function ArticleCard({ label, title, company, content, date }: Ar
       <div className="flex w-full flex-col gap-[2.4rem]">
         <div className="flex flex-col">
           <div className="flex items-center gap-[0.8rem]">
-            <SuggestionChip variant={label} />
+            {label !== '' && <SuggestionChip variant={label} />}
             <div className="w-full">
               <h1 className="line-clamp-1 text-[2rem] font-regular leading-[2.42rem]">{title}</h1>
             </div>

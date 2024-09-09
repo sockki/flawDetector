@@ -23,7 +23,7 @@ export default function Header() {
       <nav className="w-full">
         <ul className="flex items-center justify-between">
           <li className="ml-[10rem]">
-            <Link href="/vulnerability-db?page=1" className="text-[1.8rem] font-[500]">
+            <Link href="/vulnerability-db?label=hot&page=1" className="text-[1.8rem] font-[500]">
               취약점 DB
             </Link>
           </li>

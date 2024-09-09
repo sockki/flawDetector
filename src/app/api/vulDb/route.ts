@@ -7,9 +7,16 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get('page') || '1', 10);
+    const label = searchParams.get('label');
     const data: ArticleData[] = [];
 
-    const vulDbQuery = query(collection(db, 'vulDb'), orderBy('uploadDate', 'desc'));
+    let vulDbQuery = query(collection(db, 'vulDb'), orderBy('view', 'desc'));
+    if (label === 'new') {
+      vulDbQuery = query(collection(db, 'vulDb'), orderBy('scrapDate', 'desc'));
+    }
+    if (label === 'hot') {
+      vulDbQuery = query(collection(db, 'vulDb'), orderBy('view', 'desc'));
+    }
 
     const results = await getDocs(vulDbQuery);
 
