@@ -3,6 +3,7 @@
 import Button from '@/components/Button/Button';
 import { Ellipse } from '@/components/Ellipse';
 import { LandingDownIcon } from '@/public/index';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -46,7 +47,9 @@ export default function Hero() {
           <Button onClick={handleButtonClick}>
             {isAuthenticated ? '파일 분석하러 가기' : 'Login'}
           </Button>
-          <LandingDownIcon />
+          <Link href="#intro" className="animate-bounce">
+            <LandingDownIcon />
+          </Link>
         </div>
       </section>
     </div>
