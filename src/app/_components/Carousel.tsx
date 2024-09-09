@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { twMerge } from 'tailwind-merge';
 
 import {
   carouselEmoji1,
@@ -11,6 +10,8 @@ import {
   carouselEmoji5,
   carouselEmoji6,
 } from '@/public/index';
+import Marquee from 'react-fast-marquee';
+import { twMerge } from 'tailwind-merge';
 
 const cards = [
   {
@@ -53,49 +54,38 @@ const cards = [
 
 export default function Carousel() {
   return (
-    <section className="flex min-h-screen items-center justify-center bg-primary-500">
-      <div className="flex flex-col items-center gap-[12.1rem]">
-        <h1 className="text-center text-[6rem] font-bold leading-[7.261rem] tracking-[-0.01em] text-white">
+    <section className="min-h-screen w-screen overflow-hidden bg-primary-500">
+      <div className="flex flex-col items-center gap-[12.1rem] py-[14.2rem]">
+        <h2 className="text-center text-[6rem] font-bold leading-[7.261rem] tracking-[-0.01em] text-white">
           안전과 보호를 우선으로 하는 <br />
           프로세스를 제공합니다.
-        </h1>
+        </h2>
 
-        <div className="relative flex animate-slide gap-[5rem] whitespace-nowrap">
-          {[...cards, ...cards].map(card => (
+        <Marquee autoFill>
+          {cards.map(card => (
             <div
               key={card.title}
-              className={twMerge(
-                'flex h-[46.126rem] w-[33.932rem] flex-col items-center justify-between rounded-[4rem] border bg-white',
-                'shadow-[0rem_8rem_6rem_-4rem_rgba(0,0,0,0.25)]',
-              )}
+              className="mx-[2.4rem] flex h-[46.126rem] w-[33.932rem] flex-col items-center justify-evenly rounded-[4rem] border bg-white shadow-[0rem_8rem_6rem_-4rem_rgba(0,0,0,0.25)]"
             >
-              <div className="mt-[5rem] flex items-center justify-center">
-                <div
-                  className={`inline-flex transform rounded-full border px-[2.4rem] py-[0.8rem] text-center ${card.style}`}
-                >
-                  <h2 className="text-[2rem] font-medium leading-[3rem] tracking-[-0.011em]">
-                    {card.title}
-                  </h2>
-                </div>
+              <div
+                className={twMerge(
+                  'flex rounded-full border px-[2.4rem] py-[0.8rem] text-center text-[2rem] font-medium',
+                  card.style,
+                )}
+              >
+                {card.title}
               </div>
 
-              <div className="flex h-[18rem] w-[12rem] items-center justify-center">
-                <Image src={card.emoji} alt={card.title} />
-              </div>
+              <Image width={120} height={180} src={card.emoji} alt={card.title} />
 
-              <div className="mb-[3rem] flex flex-col items-center gap-[0.4rem]">
+              <div className="flex flex-col items-center gap-[0.4rem] text-center text-[1.6rem] leading-[2.4rem] tracking-[-0.01em] text-neutral-60">
                 {card.texts.map(text => (
-                  <p
-                    key={card.title}
-                    className="text-center text-[1.6rem] leading-[2.4rem] tracking-[-0.01em] text-neutral-60"
-                  >
-                    {text}
-                  </p>
+                  <p key={card.title}>{text}</p>
                 ))}
               </div>
             </div>
           ))}
-        </div>
+        </Marquee>
       </div>
     </section>
   );
