@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
-import { useEffect, useState, useRef } from 'react';
 import { LandingSampleImg } from '@/public/index';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export default function Overview() {
@@ -42,38 +42,34 @@ export default function Overview() {
       ref={sectionRef}
       className="flex min-h-[102.3rem] w-full items-center justify-between gap-[8.8rem] overflow-hidden bg-white px-[14.5rem]"
     >
-      <div className="h-[102.3rem] flex-1">
+      <div className="h-[102.3rem] flex-1 text-[2.574rem] text-white">
         <div className="relative h-[182.4rem] w-[98.5rem]">
           <Image src={LandingSampleImg} alt="랜딩 이미지" className="absolute top-[17.4rem]" />
           <span
             className={twMerge(
-              `absolute left-[25rem] top-[33.6rem] z-20 flex items-center justify-center rounded-[1.287rem] bg-[#A66FFF] px-[2rem] py-[1rem] text-left text-[2.574rem] leading-[3.604rem] text-white shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-1000`,
+              `duration-3000 absolute left-[25rem] top-[33.6rem] rounded-[1.287rem] bg-[#A66FFF] px-[2rem] py-[1rem] leading-[3.604rem] shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity`,
               isVisible ? 'opacity-100' : 'opacity-0',
             )}
           >
             1. XSS (Cross-Site Scripting) Vulnerability
           </span>
           <span
-            className={`absolute left-[20.8rem] top-[42.5rem] z-20 flex items-center justify-center rounded-[1.287rem] bg-[#A66FFF] px-[2rem] py-[1rem] text-left text-[2.574rem] leading-[3.604rem] text-white shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-1000 ${
-              isVisible ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={twMerge(
+              'absolute left-[20.8rem] top-[42.5rem] rounded-[1.287rem] bg-[#A66FFF] px-[2rem] py-[1rem] leading-[3.604rem] shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-1000',
+              isVisible ? 'opacity-100' : 'opacity-0',
+            )}
           >
             Insecure Password Handling
           </span>
         </div>
       </div>
-      <div className={twMerge('flex flex-col items-end gap-[3.4rem]')}>
-        <h1
-          className={twMerge(
-            'whitespace-nowrap text-right text-[6rem] leading-[7.3rem] tracking-[-0.01em] text-primary-500',
-          )}
-          style={{ fontWeight: 700 }}
-        >
+      <div className="flex flex-col gap-[3.4rem]">
+        <h2 className="text-right text-[6rem] font-[700] leading-[7.3rem] tracking-[-0.01em] text-primary-500">
           최신 보안 동향을
           <br />
           실시간으로 확인하세요.
-        </h1>
-        <p className="text-right text-[2rem] font-medium leading-[2.42rem] tracking-[-0.01em] text-gray-default">
+        </h2>
+        <p className="text-right text-[2rem] text-gray-default">
           실시간으로 최신 보안 동향을 제공하여
           <br />
           개발자들이 보안 취약점에 대한 최신 정보를 받을 수 있어
