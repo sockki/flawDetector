@@ -1,11 +1,12 @@
+'use client';
+
 import { LeftIcon } from '@/public/index';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-type TilteProps = {
-  repoName: string;
-};
-
-export function Title({ repoName = 'sfacweb-1' }: TilteProps) {
+export function Title() {
+  const PathName = usePathname();
+  const repoName = PathName.split('/')[3];
   const repoIconStyles =
     'flex h-[7.9rem] w-[7.9rem] items-center justify-center rounded-full border-[0.4rem] border-primary-500';
   const titleStyles =
