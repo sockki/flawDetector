@@ -2,7 +2,10 @@ import { BugIcon } from '@/public/index';
 
 export default function Introduction() {
   return (
-    <section className="flex h-[102.2rem] w-full items-center justify-between overflow-hidden bg-primary-50 bg-[url('/images/landingSquare.png')] bg-[right_-10rem_center] bg-no-repeat p-[27.5rem_19.2rem]">
+    <section
+      id="intro"
+      className="flex h-[102.2rem] w-full items-center justify-between overflow-hidden bg-primary-50 bg-[url('/images/landingSquare.png')] bg-[right_-10rem_center] bg-no-repeat p-[27.5rem_19.2rem]"
+    >
       <div className="flex w-[60.1rem] flex-col gap-[3rem]">
         <div className="text-[8rem] font-[700] leading-[9.6rem] tracking-[-0.01em] text-primary-500">
           쉽고 편하게 <br /> 취약점을 발견하다
