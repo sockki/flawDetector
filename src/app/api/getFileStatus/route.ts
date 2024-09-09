@@ -3,14 +3,15 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
-    const { userName, repoName } = await req.json();
+    const { userName, repoName }: { userName: string; repoName: string } = await req.json();
 
-    if (!userName || typeof userName !== 'string') {
+    if (!userName) {
       return NextResponse.json({ error: '유효한 path 파라미터가 필요합니다.' }, { status: 400 });
     }
-    if (!repoName || typeof repoName !== 'string') {
+    if (!repoName) {
       return NextResponse.json({ error: '유효한 path 파라미터가 필요합니다.' }, { status: 400 });
     }
+    console.log(userName, repoName);
     const results = await getFileStatus({ userName, repoName });
     return NextResponse.json(results, { status: 200 });
   } catch (error) {

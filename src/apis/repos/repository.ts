@@ -83,7 +83,7 @@ export async function getCodeScanResult(path: string): Promise<FileScanResult[]>
   }
 }
 
-export async function getFileStatus({ userName, repoName }: fetchCodeStatusProps) {
+export async function getFileStatus({ userName, repoName }: FetchCodeStatusProps) {
   const results: CodeStatusResult[] = [];
 
   const prefix = `${userName}/${repoName}`;
