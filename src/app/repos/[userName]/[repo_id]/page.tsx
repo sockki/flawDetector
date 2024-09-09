@@ -1,7 +1,7 @@
 import { RepoSide } from './_components/RepoSide';
 import { ScanFormat } from './_components/ScanFormat';
 
-export default function RepoInspection({
+export default function RepositoryContents({
   params,
 }: {
   params: { userName: string; repo_id: string };
