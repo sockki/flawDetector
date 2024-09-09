@@ -62,9 +62,8 @@ export function ScanFormat({
             lineNumberStyle={{ paddingRight: '5rem' }}
             wrapLines
             lineProps={(lineNumber: number) => ({
-              // 각 줄에 대한 참조를 refs에 할당
               ref: (el: HTMLDivElement | null) => {
-                lineRefs.current[lineNumber - 1] = el; // 수정된 부분
+                lineRefs.current[lineNumber - 1] = el;
               },
               style: highLightedLines?.includes(lineNumber) ? { background: '#ff6d6d' } : {},
             })}
