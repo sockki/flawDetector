@@ -8,11 +8,11 @@ import {
   alertStatusWaitingGif,
 } from '@/public/index';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import Button from '../Button/Button';
 
 type AlertProps = {
   type: 'waiting' | 'checking' | 'error' | 'complete';
+  onAlertClick?: () => void;
 };
 
 const alertConfig = {
@@ -38,25 +38,13 @@ const alertConfig = {
   },
 };
 
-export default function Alert({ type }: AlertProps) {
-  const router = useRouter();
-  const handleClickRetry = () => {
-    console.log('다시시도 로직 짜주세욤');
-  };
-
-  const handleClickResult = () => {
-    // 결과 url로 이동하게 해주세욤
-    router.push('/');
-  };
-
+export default function Alert({ type, onAlertClick }: AlertProps) {
   const alertButton = {
     error: {
       buttonText: '다시 시도하기',
-      onClick: handleClickRetry,
     },
     complete: {
       buttonText: '결과 보러가기',
-      onClick: handleClickResult,
     },
   };
   return (
@@ -70,11 +58,7 @@ export default function Alert({ type }: AlertProps) {
           ))}
         </div>
         {(type === 'error' || type === 'complete') && (
-          <Button
-            shape="rectangle"
-            className="w-full font-regular"
-            onClick={alertButton[type].onClick}
-          >
+          <Button shape="rectangle" className="w-full font-regular" onClick={onAlertClick}>
             {alertButton[type].buttonText}
           </Button>
         )}

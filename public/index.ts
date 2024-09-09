@@ -55,3 +55,4 @@ export { default as CrossIcon } from './icons/switchCross.svg';
 export { default as HeaderBackgroundImg } from './images/headerBackground.svg';
 
 export { default as alertStatusWaitingGif } from './images/alertStatusWaiting.gif';
+export { default as CopyCodeIcon } from './icons/copycode.svg';

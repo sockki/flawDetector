@@ -1,11 +1,11 @@
 type Issue = {
   issue: string;
-  number: string;
+  number: number;
   vulnerability: string;
   modifiedCode: string;
+  fixDetails: string;
 };
 
 type FileScanResult = {
-  path: string;
-  issues: Issue[];
+  result: { path: string; issues: Issue[] };
 };
