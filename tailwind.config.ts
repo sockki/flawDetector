@@ -61,6 +61,15 @@ const config: Config = {
         medium: '500',
         bold: '600',
       },
+      keyframes: {
+        move: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '50%': { transform: 'translateX(calc(100% + 280px))' }, // 로고 크기에 맞게 설정
+        },
+      },
+      animation: {
+        'move-circle': 'move 4s ease-in-out infinite',
+      },
     },
   },
   plugins: [],
