@@ -25,12 +25,13 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
   const [sortOption, setSortOption] = useState<SortOption>('최신순');
   const [, setTypeFilter] = useState<TypeFilterOption>();
 
+  const userId = session?.user?.id || '';
   const userName = session?.user?.name || '';
   const nowPage = searchParams.page ? Number(searchParams.page) : 1;
 
   useEffect(() => {
     async function loadRepositories() {
-      if (!userName) {
+      if (!userId || !userName) {
         return;
       }
       setIsLoading(true);
@@ -39,12 +40,10 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
         await fetch('/api/repositories', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userName }),
+          body: JSON.stringify({ userId, userName }),
         });
 
-        const response = await fetch(
-          `/api/repositories?userName=${userName}&sortOption=${sortOption}`,
-        );
+        const response = await fetch(`/api/repositories?userId=${userId}&sortOption=${sortOption}`);
         const data = await response.json();
 
         setRepositories(data.repositories);
@@ -60,7 +59,7 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
     if (status === 'authenticated') {
       loadRepositories();
     }
-  }, [userName, status, sortOption, setRepositories, setFilteredRepositories]);
+  }, [userId, userName, status, sortOption, setRepositories, setFilteredRepositories]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -99,6 +98,7 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
               title={repo.name}
               label={repo.isChecked}
               date={repo.pushedAt}
+              userId={userId}
               userName={userName}
               repoId={repo.id}
             />

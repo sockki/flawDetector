@@ -8,14 +8,14 @@ import { DetectFileCardArrowIcon, DetectFileCardBugIcon, DetectFileCardStar } fr
 import { useRepoStore } from '@/stores/useRepoStore';
 import type { DetectFileCardProps, ElementByLabel } from '@/types/detectedFileCard';
 
-async function updateBookmarkStatus(userName: string, repoId: string, isBookmarked: boolean) {
+async function updateBookmarkStatus(userId: string, repoId: string, isBookmarked: boolean) {
   const response = await fetch('/api/repositories', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      userName,
+      userId,
       repoId,
       isBookmarked,
     }),
@@ -29,6 +29,7 @@ export default function DetectFileCard({
   title,
   label,
   date,
+  userId,
   userName,
   repoId,
 }: DetectFileCardProps) {
@@ -72,7 +73,7 @@ export default function DetectFileCard({
           repo.id === repoId ? { ...repo, isBookmarked: !isBookmark } : repo,
         ),
       );
-      await updateBookmarkStatus(userName, repoId, !isBookmark);
+      await updateBookmarkStatus(userId, repoId, !isBookmark);
     } catch (error) {
       console.error(error);
     }
