@@ -82,7 +82,7 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
   };
 
   return (
-    <div className="flex min-h-screen min-w-[131.4rem] flex-col gap-[2.8rem]">
+    <div className="mb-[15rem] flex min-h-screen min-w-[131.4rem] flex-col gap-[2.8rem]">
       <section className="flex flex-col gap-[2.4rem]">
         <div className="flex items-center justify-between">
           <h3 className="text-[3.2rem] font-medium text-gray-black">Library</h3>

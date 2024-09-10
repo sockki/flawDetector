@@ -81,7 +81,7 @@ export default function DetectFileCard({
 
   const onClickCheckStatus = () => {
     addRecentViewed(repos);
-    router.push(`/repos/${userName}/${repoId}`);
+    router.push(`/repos/${userName}/${title}`);
   };
 
   return (
