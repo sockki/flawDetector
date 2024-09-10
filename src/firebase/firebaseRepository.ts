@@ -15,8 +15,8 @@ import { SortOption } from '@/types/sortAndFilter';
 import { getSortParameters } from '@/utils/getSortParameters';
 import { db } from './firebaseConfig';
 
-export const saveRepositories = async (userName: string, repoData: GitHubRepoData[]) => {
-  const userRepoRef = collection(db, 'users', userName.toString(), 'repositories');
+export const saveRepositories = async (userId: string, repoData: GitHubRepoData[]) => {
+  const userRepoRef = collection(db, 'users', userId.toString(), 'repositories');
   const promises = repoData.map(async repo => {
     const repoRef = doc(userRepoRef, repo.id.toString());
     const existingRepoDoc = await getDoc(repoRef);
@@ -42,8 +42,8 @@ export const saveRepositories = async (userName: string, repoData: GitHubRepoDat
   }
 };
 
-export const getFirestoreRepositories = async (userName: string, sortOption: SortOption) => {
-  const userRepoRef = collection(db, 'users', userName, 'repositories');
+export const getFirestoreRepositories = async (userId: string, sortOption: SortOption) => {
+  const userRepoRef = collection(db, 'users', userId, 'repositories');
   const [orderField, direction] = getSortParameters(sortOption);
   const repoQuery = query(userRepoRef, orderBy(orderField, direction));
 
@@ -61,8 +61,8 @@ export const getFirestoreRepositories = async (userName: string, sortOption: Sor
   }
 };
 
-export const getBookmarkedRepositories = async (userName: string, sortOption: SortOption) => {
-  const repoRef = collection(db, 'users', userName, 'repositories');
+export const getBookmarkedRepositories = async (userId: string, sortOption: SortOption) => {
+  const repoRef = collection(db, 'users', userId, 'repositories');
   const q = query(repoRef, where('isBookmarked', '==', true), orderBy(sortOption));
   const querySnapshot = await getDocs(q);
 
@@ -70,25 +70,25 @@ export const getBookmarkedRepositories = async (userName: string, sortOption: So
 };
 
 export const updateBookmarkStatus = async (
-  userName: string,
+  userId: string,
   repoId: string,
   isBookmarked: boolean,
 ) => {
-  const repoRef = doc(db, 'users', userName, 'repositories', repoId.toString());
+  const repoRef = doc(db, 'users', userId, 'repositories', repoId.toString());
   await updateDoc(repoRef, { isBookmarked });
 };
 
 export const updateCheckedStatus = async (
-  userName: string,
+  userId: string,
   repoId: string,
   isChecked: 'before' | 'under' | 'done',
 ) => {
-  const repoRef = doc(db, 'users', userName, 'repositories', repoId.toString());
+  const repoRef = doc(db, 'users', userId, 'repositories', repoId.toString());
   await updateDoc(repoRef, { isChecked });
 };
 
-export const deleteUserRepositories = async (userName: string) => {
-  const userRepoRef = collection(db, 'users', userName, 'repositories');
+export const deleteUserRepositories = async (userId: string) => {
+  const userRepoRef = collection(db, 'users', userId, 'repositories');
   const querySnapshot = await getDocs(userRepoRef);
   const promises = querySnapshot.docs.map(repoDoc => deleteDoc(repoDoc.ref));
   await Promise.all(promises);
