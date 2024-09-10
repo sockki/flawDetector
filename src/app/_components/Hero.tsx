@@ -3,29 +3,16 @@
 import Button from '@/components/Button/Button';
 import { Ellipse } from '@/components/Ellipse';
 import { LandingDownIcon } from '@/public/index';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 export default function Hero() {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { status } = useSession();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      const auth = false; // 인증 상태를 여기서 처리
-      setIsAuthenticated(auth);
-    };
-    checkAuth();
-  }, []);
-
-  const handleButtonClick = () => {
-    if (isAuthenticated) {
-      router.push('/my-library');
-    } else {
-      router.push('/login');
-    }
-  };
+  const handleLoginButton = () => router.push('/login');
+  const handleAnalyzeButton = () => router.push('/repos');
 
   return (
     <div className="relative w-full overflow-hidden">
@@ -44,9 +31,10 @@ export default function Hero() {
               인공지능의 뛰어난 분석 능력을 활용하여 코드의 보안 취약점을 신속하게 해결하세요.
             </p>
           </div>
-          <Button onClick={handleButtonClick}>
-            {isAuthenticated ? '파일 분석하러 가기' : 'Login'}
-          </Button>
+          {status === 'authenticated' && (
+            <Button onClick={handleAnalyzeButton}>파일 분석하러 가기</Button>
+          )}
+          {status === 'unauthenticated' && <Button onClick={handleLoginButton}>Login</Button>}
           <Link href="#intro" className="animate-bounce">
             <LandingDownIcon />
           </Link>
