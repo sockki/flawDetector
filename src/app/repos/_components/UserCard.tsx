@@ -19,7 +19,9 @@ export default function UserCard({ hasLogoutButton }: UserCardProps) {
 
   const avatar = session?.user?.image || '';
   const email = session?.user?.email || '';
-  const userId = session?.user.id.toString() || '';
+  const userId = session?.user?.id || '';
+
+  console.log(session);
 
   const handleLogout = async () => {
     try {

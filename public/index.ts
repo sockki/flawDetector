@@ -65,4 +65,4 @@ export { default as LandingSampleImg } from "./images/landingSample.png";
 export { default as LandingSquareImg } from "./images/landingSquare.png";
 
 export { default as alertStatusWaitingGif } from './images/alertStatusWaiting.gif';
-export { default as CopyCodeIcon } from './icons/copycode.svg';
+export { default as CopyCodeIcon } from './icons/copyCode.svg';
