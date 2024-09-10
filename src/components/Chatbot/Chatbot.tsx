@@ -100,7 +100,7 @@ export default function Chatbot() {
   }, [message]);
 
   return (
-    <div className="flex h-[72.6rem] w-[55.8rem] flex-col justify-between overflow-hidden rounded-[2.4rem] bg-white shadow-chatbot">
+    <div className="flex h-[72.6rem] w-[55.8rem] flex-col justify-between overflow-hidden rounded-[2.4rem] bg-white shadow-button">
       <div className="flex items-center gap-[1rem] bg-primary-500 px-[2.4rem] py-[1.25rem]">
         <ChatbotIcon />
         <h2 className="text-[2.4rem] font-bold text-white">플로디텍터 운영자</h2>

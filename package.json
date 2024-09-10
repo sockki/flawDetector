@@ -42,7 +42,6 @@
     "@storybook/react": "^8.2.8",
     "@storybook/test": "^8.2.8",
     "@svgr/webpack": "^8.1.0",
-    "@types/dompurify": "^3.0.5",
     "@types/node": "^20",
     "@types/react": "^18.3.4",
     "@types/react-copy-to-clipboard": "^5.0.7",
