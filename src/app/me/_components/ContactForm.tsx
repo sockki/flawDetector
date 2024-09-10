@@ -18,7 +18,7 @@ export default function ContactForm() {
   const router = useRouter();
   const { data: session } = useSession();
   const [isModalOpen, handleClickTrigger] = useModal();
-  const userEmail = session?.user.email || '';
+  const userEmail = session?.user?.email || '';
 
   const {
     register,
