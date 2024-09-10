@@ -5,10 +5,9 @@ import { NextResponse } from 'next/server';
 
 async function saveResultToFirestore(generatedResult: FileScanResult) {
   try {
-    const docRef = await addDoc(collection(db, 'codeScanResult'), {
+    await addDoc(collection(db, 'codeScanResult'), {
       result: generatedResult,
     });
-    console.log('Document written with ID: ', docRef.id);
   } catch (error) {
     console.error('Error saving to Firestore:', error);
     throw new Error('Firestore 저장 실패');
