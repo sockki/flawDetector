@@ -36,6 +36,7 @@ export function RepoSide({ params }: RepoSideProps) {
   const { currentCode, setCurrentCode, setCodeType } = useCodeFormatState();
 
   const [resultFiles, setResultFiles] = useState<CodeStatusResult[]>([]);
+  const [waitingFiles, setWaitFiles] = useState<string[]>([]);
   const [pendingFiles, setPendingFiles] = useState<string[]>([]);
   const [checkingFiles, setCheckingFiles] = useState<string[]>([]);
 
@@ -96,8 +97,7 @@ export function RepoSide({ params }: RepoSideProps) {
     mutationFn: postFileStatus,
     scope: { id: 'FileStatus' },
     onSuccess: success => {
-      setCheckingFiles([]);
-      setResultFiles(success.results);
+      setResultFiles(prev => [...prev, ...success.results]);
       setFileCounts({
         detectedCount: success.detectedCount,
         completeCode: success.completeCode,
@@ -106,50 +106,66 @@ export function RepoSide({ params }: RepoSideProps) {
     },
   });
 
-  const handleCodeScan = (multipleFilesPath?: string) => {
+  const handleCodeScan = async (multipleFilesPath: string) => {
     const filepath = multipleFilesPath
-      ? `${params.userName}/${params.repo_id}/${multipleFilesPath}`
-      : `${params.userName}/${params.repo_id}/${selectedFilePaths[0]}`;
+      ? `${multipleFilesPath}`
+      : `${params.userName}/${params.repo_id}/${selectedFilePaths[selectedFilePaths.length - 1]}`;
 
-    setPendingFiles(prevFiles => prevFiles.filter(file => file !== filepath));
+    setWaitFiles(prevFiles => prevFiles.filter(file => file !== filepath));
+    setCheckingFiles(pre => [...pre, filepath]);
+    let decodedCode = '';
+
+    if (isMultipleSelected) {
+      const pathSegments = filepath.split('/').slice(2).join('/');
+      const res = await getRepoContents({
+        owner: params.userName,
+        repo: params.repo_id,
+        path: pathSegments,
+      });
+      decodedCode = Buffer.from(res.content, 'base64').toString('utf-8');
+    }
 
     setCheckingFiles([filepath]);
 
-    const codeLines = currentCode.split('\n').map((line, index) => ({
-      lineNumber: index + 1,
-      content: line,
-    }));
+    const codeLines = isMultipleSelected
+      ? decodedCode.split('\n').map((line, index) => ({
+          lineNumber: index + 1,
+          content: line,
+        }))
+      : currentCode.split('\n').map((line, index) => ({
+          lineNumber: index + 1,
+          content: line,
+        }));
+
     const formattedCodeForAI = JSON.stringify(codeLines, null, 2);
 
     const promptMessage = `
-      1. 현재 코드 내의 보안 취약점을 찾아내고 있어.
-      2. ${formattedCodeForAI} 의 코드를 분석해줘.
-      3. 취약점에 대한 결과를 아래 JSON 형식과 동일하게 맞춰서 한국어로 보내줘.
-      4. JSON 형식 예시:
+      1. 제공된 코드 내의 보안 취약점을 찾아내고 분석해줘.
+      2. 분석할 코드는 다음과 같습니다: ${formattedCodeForAI}
+      3. 코드에서 발견된 모든 보안 취약점을 찾아내고, 각각에 대해 상세한 정보를 제공해줘.
+      4. 각 취약점에 대한 정보를 아래와 같은 JSON 형식으로 정리해줘:
       {
-        "path": ${filepath},
+        "path": "${filepath}", // 제공된 경로, 수정하지 마세요.
         "issues": [
           {
-            "issue": "관련된 취약점 이슈",
-            "number": 찾아낸 취약코드에 해당하는 모든 줄 번호, number[] 형식,
-            "vulnerability": "취약한 이유를 관련된 취약점 이슈에 연결지어 풀어서 상세하게 설명",
-            "fixDetails": "취약한 코드를 올바른 코드로 리팩토링한 것에 대한 설명"
-            "modifiedCode": "취약한 코드를 올바른 코드로 리팩토링한 결과"
+            "issue": "발견된 취약점의 이름 또는 간단한 설명",
+            "number": [발견된 취약점에대한 코드의 줄 번호를 모두 나열한 배열], // 예: [1,2,3,4,5,6]
+            "vulnerability": "취약점이 발생한 이유와 관련된 보안 문제에 대한 상세한 설명. 이 취약점이 왜 위험한지, 어떤 공격이 가능한지 설명해줘.",
+            "fixDetails": "취약한 코드를 안전하게 리팩토링한 방법을 설명해줘. 가능한 경우, 코드 수정 전후를 비교하여 설명하면 좋습니다.",
+            "modifiedCode": "취약한 코드를 수정한 결과를 올바른 코드로 제시해줘."
           }
-          // 여러 개의 취약점이 있을 경우, 이 배열에 계속 추가합니다.
+          // 추가 취약점이 있을 경우, 이 배열에 계속 추가해줘.
         ]
       }
-      6. JSON형식에서 path는 내가 설정해서 보내였으니깐 수정하지말고 그대로 보내줘.
-      7. 설명은 생략하고, JSON 형식만 보내줘.`;
+      5. JSON 형식에서 'path'는 수정하지 말고 그대로 유지해줘.
+      6. 설명은 생략하고, 위의 JSON 형식에 맞춰서 분석 결과만 보내줘.`;
 
-    ScanCode.mutate(promptMessage, {
+    await ScanCode.mutateAsync(promptMessage, {
       onSuccess: () => {
-        setCheckingFiles(prevFiles => prevFiles.filter(file => file !== filepath));
         FileStatus.mutate();
       },
       onError: error => {
         console.error('Unexpected error:', error.message);
-        setCheckingFiles(prevFiles => prevFiles.filter(file => file !== filepath));
         setResultFiles(prevState => [
           ...prevState,
           {
@@ -159,20 +175,41 @@ export function RepoSide({ params }: RepoSideProps) {
         ]);
       },
     });
+    setCheckingFiles(prevFiles => prevFiles.filter(file => file !== filepath));
   };
-
   function handleMultipleSelect() {
-    setIsMultipleSelected(!isMultipleSelected);
-    setPendingFiles(selectedFilePaths);
+    if (isMultipleSelected) {
+      setIsMultipleSelected(!isMultipleSelected);
+      setPendingFiles([]);
+      setSelectedFilePaths([]);
+    } else {
+      setIsMultipleSelected(!isMultipleSelected);
+      setPendingFiles(selectedFilePaths);
+    }
   }
 
   const handleMultipleScan = async () => {
     handleClickTrigger();
     handleMultipleSelect();
+    setWaitFiles(pendingFiles);
 
-    await Promise.all(pendingFiles.map(filepath => handleCodeScan(filepath)));
-
-    setSelectedFilePaths([]);
+    await pendingFiles
+      .map(filepath => async () => {
+        try {
+          await handleCodeScan(filepath); // 파일 스캔 실행
+          setPendingFiles(prevFiles => prevFiles.filter(file => file !== filepath)); // 스캔 완료된 파일 제거
+        } catch (error) {
+          console.error('Failed to scan file:', filepath, error);
+          setResultFiles(prevState => [
+            ...prevState,
+            {
+              path: filepath,
+              type: 'error',
+            },
+          ]);
+        }
+      })
+      .reduce((prevPromise, scanFunction) => prevPromise.then(scanFunction), Promise.resolve());
   };
 
   useEffect(() => {
@@ -202,6 +239,7 @@ export function RepoSide({ params }: RepoSideProps) {
   const handleFileClick = async (filePath: string) => {
     try {
       const fileName = filePath.split('/').pop();
+      const fullPath = `${params.userName}/${params.repo_id}/${filePath}`;
 
       const response = await getFileDetail({
         owner: params.userName,
@@ -228,13 +266,13 @@ export function RepoSide({ params }: RepoSideProps) {
           const isFileAlreadySelected = prevSelectedFiles.some(file => file.fileName === fileName);
 
           if (isFileAlreadySelected) {
-            setPendingFiles(prev => prev.filter(path => path !== filePath));
+            setPendingFiles(prev => prev.filter(path => path !== fullPath));
 
             return prevSelectedFiles.filter(file => file.fileName !== fileName);
           } else {
             setPendingFiles(prev => {
-              if (!prev.includes(filePath)) {
-                return [...prev, filePath];
+              if (!prev.includes(fullPath)) {
+                return [...prev, fullPath];
               }
               return prev;
             });
@@ -286,7 +324,7 @@ export function RepoSide({ params }: RepoSideProps) {
       return fileResult.type;
     }
 
-    if (pendingFiles.includes(filePath)) {
+    if (waitingFiles.includes(filePath)) {
       return 'waiting';
     }
 
@@ -313,7 +351,7 @@ export function RepoSide({ params }: RepoSideProps) {
             onAlertClick={
               getFileItemType(`${params.userName}/${params.repo_id}/${selectedFilePaths[0]}`) ===
               'error'
-                ? () => handleCodeScan()
+                ? () => handleCodeScan
                 : () => {
                     router.push(`/repos/${params.userName}/${params.repo_id}/repo_inspection`);
                     handleAlertopen();
@@ -400,7 +438,7 @@ export function RepoSide({ params }: RepoSideProps) {
         shape="rectangle"
         size="large"
         className="w-[24.7rem]"
-        onClick={isMultipleSelected ? handleClickTrigger : () => handleCodeScan()}
+        onClick={isMultipleSelected ? handleClickTrigger : () => handleCodeScan}
       >
         검사하기
       </Button>
