@@ -50,10 +50,10 @@ export default function Footer() {
                 <Link href="https://www.sfacspace.com/ko">회사소개</Link>
               </li>
               <li>
-                <Link href="/agreements">서비스이용약관</Link>
+                <Link href="/agreements#agreements">서비스이용약관</Link>
               </li>
               <li>
-                <Link href="/ppa">개인정보처리방침</Link>
+                <Link href="/ppa#ppa">개인정보처리방침</Link>
               </li>
             </ul>
           </nav>

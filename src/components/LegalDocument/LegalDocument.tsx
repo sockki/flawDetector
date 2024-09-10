@@ -1,4 +1,5 @@
 type LegalDocumentProps = {
+  id: string;
   title: string;
   subText: string;
   desc: string;
@@ -7,7 +8,10 @@ type LegalDocumentProps = {
 export default function LegalDocument({ text }: { text: LegalDocumentProps }) {
   return (
     <>
-      <div className="flex h-[70.8rem] w-full flex-col justify-end gap-4 bg-[url('/icons/policyBackground.svg')] pb-[10rem] text-center text-white">
+      <div
+        id={text.id}
+        className="flex h-[70.8rem] w-full flex-col justify-end gap-4 bg-[url('/icons/policyBackground.svg')] pb-[10rem] text-center text-white"
+      >
         <h1 className="text-[3.2rem] font-semibold leading-[4.48rem] tracking-[0.015em]">
           {text.title}
         </h1>
