@@ -63,10 +63,6 @@ const config: Config = {
       },
 
       keyframes: {
-        slide: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(calc(-25% - 48px))' },
-        },
         spread: {
           '0%': {
             width: '0',
@@ -88,7 +84,6 @@ const config: Config = {
         },
       },
       animation: {
-        slide: 'slide 30s linear infinite',
         spread: 'spread 15s ease-in-out infinite',
         'move-circle': 'move 4s ease-in-out infinite',
         spin360: 'spin360 2s linear infinite',
