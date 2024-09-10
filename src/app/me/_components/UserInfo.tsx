@@ -1,11 +1,10 @@
 'use client';
 
-import Input from '@/components/Input/Input';
 import { useSession } from 'next-auth/react';
+import Input from '@/components/Input/Input';
 
 export default function UserInfo() {
   const { data: session } = useSession();
-
   const email = session?.user?.email || '';
 
   return (

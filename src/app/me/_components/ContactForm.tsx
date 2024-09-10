@@ -1,13 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-
+import { useModal } from '@/hooks/useModal';
+import { Modal } from '@/components/Modals';
 import Button from '@/components/Button/Button';
 import Input from '@/components/Input/Input';
-import { Modal } from '@/components/Modals';
-import { useModal } from '@/hooks/useModal';
-import { useSession } from 'next-auth/react';
 
 type FormData = {
   name: string;
@@ -17,8 +16,8 @@ type FormData = {
 
 export default function ContactForm() {
   const router = useRouter();
-  const [isModalOpen, handleClickTrigger] = useModal();
   const { data: session } = useSession();
+  const [isModalOpen, handleClickTrigger] = useModal();
   const userEmail = session?.user.email || '';
 
   const {
