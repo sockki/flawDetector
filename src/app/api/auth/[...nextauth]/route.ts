@@ -16,7 +16,6 @@ const handler = NextAuth({
           accessToken: account.access_token,
           accessTokenExpires: account.expires_at ? account.expires_at * 1000 : null,
           refreshToken: account.refresh_token,
-          id: profile?.id,
         };
       }
       return token;

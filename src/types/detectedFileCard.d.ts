@@ -13,8 +13,6 @@ export type DetectFileCardProps = {
   title: string;
   label: DetectFileLabelType;
   date: Date;
-  isBookmarked: boolean;
-  userId: string;
   userName: string;
   repoId: string;
 };

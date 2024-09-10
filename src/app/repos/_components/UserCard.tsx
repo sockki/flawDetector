@@ -19,14 +19,14 @@ export default function UserCard({ hasLogoutButton }: UserCardProps) {
 
   const avatar = session?.user?.image || '';
   const email = session?.user?.email || '';
-  const userId = session?.user.id.toString() || '';
+  const userName = session?.user.name || '';
 
   const handleLogout = async () => {
     try {
       const res = await fetch('/api/repositories', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ userName }),
       });
 
       if (!res.ok) {
