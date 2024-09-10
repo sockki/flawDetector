@@ -17,6 +17,7 @@ const handler = NextAuth({
           accessTokenExpires: account.expires_at ? account.expires_at * 1000 : null,
           refreshToken: account.refresh_token,
           id: profile.id,
+          login: profile.login,
         };
       }
       return token;
@@ -29,6 +30,7 @@ const handler = NextAuth({
         user: {
           ...session.user,
           id: token.id,
+          login: token.login,
         },
       };
     },

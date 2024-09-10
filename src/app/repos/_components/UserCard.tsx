@@ -21,8 +21,6 @@ export default function UserCard({ hasLogoutButton }: UserCardProps) {
   const email = session?.user?.email || '';
   const userId = session?.user?.id || '';
 
-  console.log(session);
-
   const handleLogout = async () => {
     try {
       const res = await fetch('/api/repositories', {

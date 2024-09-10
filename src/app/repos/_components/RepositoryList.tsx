@@ -26,7 +26,7 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
   const [, setTypeFilter] = useState<TypeFilterOption>();
 
   const userId = session?.user?.id || '';
-  const userName = session?.user?.name || '';
+  const userName = session?.user?.login || '';
   const nowPage = searchParams.page ? Number(searchParams.page) : 1;
 
   useEffect(() => {

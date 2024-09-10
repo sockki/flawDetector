@@ -8,6 +8,7 @@ declare module 'next-auth' {
       name?: string | null;
       email?: string | null;
       image?: string | null;
+      login?: string | null;
     };
     accessToken?: string;
     error?: string;
@@ -15,6 +16,7 @@ declare module 'next-auth' {
 
   interface User {
     id: string;
+    login: string;
   }
 
   interface Account {
