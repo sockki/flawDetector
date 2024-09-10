@@ -75,7 +75,7 @@ const config: Config = {
         },
         move: {
           '0%, 100%': { transform: 'translateX(0)' },
-          '50%': { transform: 'translateX(calc(100% + 280px))' }, // 로고 크기에 맞게 설정
+          '50%': { transform: 'translateX(calc(100% + 250px))' }, // 로고 크기에 맞게 설정
         },
         spin360: {
           '0%': { transform: 'rotate(0deg)' },
@@ -85,7 +85,7 @@ const config: Config = {
       },
       animation: {
         spread: 'spread 15s ease-in-out infinite',
-        'move-circle': 'move 4s ease-in-out infinite',
+        'move-circle': 'move 3.5s ease-in-out infinite',
         spin360: 'spin360 2s linear infinite',
       },
     },
