@@ -70,7 +70,7 @@ export default function InfoBox({
     <div
       className={twMerge(
         themeClasses.bg[theme],
-        'mb-[2rem] p-[1rem]',
+        'mb-[2rem] p-[3rem]',
         'rounded-lg',
         'flex flex-col gap-[3.2rem]',
         'h-fit w-[148.6rem]',
