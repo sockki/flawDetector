@@ -25,7 +25,7 @@ function ModalPortal({ children }: PropsWithChildren) {
     return null;
   }
 
-  return createPortal(children, portalElement);
+  return createPortal(<>{children}</>, portalElement);
 }
 
 export default function ModalRoot({
