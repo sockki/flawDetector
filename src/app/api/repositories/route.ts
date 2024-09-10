@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 
 import {
   deleteUserRepositories,
-  getFirestoreRepos,
-  saveRepository,
+  getFirestoreRepositories,
+  saveRepositories,
   updateBookmarkStatus,
   updateCheckedStatus,
 } from '@/firebase/firebaseRepository';

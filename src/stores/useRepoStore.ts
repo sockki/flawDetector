@@ -1,7 +1,6 @@
 import { create } from 'zustand';
-
 import type { RepositoryState } from '@/types/repository';
-import { loadRecentRepoFromLocalStorage } from '@/utils/localStorage';
+import { getRecentRepoFromLocalStorage } from '@/utils/localStorage';
 
 export const useRepoStore = create<RepositoryState>(set => ({
   repositories: [],

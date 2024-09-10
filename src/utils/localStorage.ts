@@ -6,7 +6,7 @@ export const saveRecentRepoToLocalStorage = (recentRepos: Repository[]) => {
   }
 };
 
-export const loadRecentRepoFromLocalStorage = () => {
+export const getRecentRepoFromLocalStorage = () => {
   if (typeof window !== 'undefined') {
     const storedRepos = localStorage.getItem('recentRepos');
     return storedRepos ? JSON.parse(storedRepos) : [];
@@ -15,7 +15,7 @@ export const loadRecentRepoFromLocalStorage = () => {
 };
 
 export const addRecentViewedToLocalStorage = (repo: Repository) => {
-  const recentRepos = loadRecentRepoFromLocalStorage();
+  const recentRepos = getRecentRepoFromLocalStorage();
 
   const updatedRecentRepos = [
     repo,
