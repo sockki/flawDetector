@@ -6,12 +6,14 @@ type MultipleSelectModalProps = {
   onHandleModalOpen: () => void;
   isModalOpen: boolean;
   modalData: FileItemResponse[];
+  onMultipleCodeScan: () => void;
 };
 
 export function MultipleSelectModal({
   onHandleModalOpen,
   isModalOpen,
   modalData,
+  onMultipleCodeScan,
 }: MultipleSelectModalProps) {
   return (
     <Modal
@@ -31,7 +33,9 @@ export function MultipleSelectModal({
           left: () => {
             onHandleModalOpen();
           },
-          right: () => {},
+          right: () => {
+            onMultipleCodeScan();
+          },
         }}
       />
     </Modal>
