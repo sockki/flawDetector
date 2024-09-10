@@ -20,10 +20,10 @@ export default function ModalButton({ variant, buttonText, onClick }: ModalButto
       {variant === 'doubleButton' ? (
         <>
           <Button variant="outlined" shape="rectangle" onClick={onClick.left}>
-            {buttonText.left}
+            <p className="font-medium">{buttonText.left}</p>
           </Button>
           <Button shape="rectangle" onClick={onClick.right}>
-            {buttonText.right}
+            <p className="font-medium">{buttonText.right}</p>
           </Button>
         </>
       ) : (

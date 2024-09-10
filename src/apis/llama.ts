@@ -51,8 +51,8 @@ export async function postGenerateMessage(prompt: string) {
     },
     body: JSON.stringify({
       user_message: prompt,
-      temperature: 0.1,
-      top_p: 0.1,
+      temperature: 0.3,
+      top_p: 0.9,
     }),
   });
 
