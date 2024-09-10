@@ -1,3 +1,6 @@
+import LegalDocument from '@/components/LegalDocument/LegalDocument';
+import { PPA_TEXT } from '@/constants/doce';
+
 export default function PpaPage() {
-  return <h1>PpaPa</h1>;
+  return <LegalDocument text={PPA_TEXT} />;
 }
