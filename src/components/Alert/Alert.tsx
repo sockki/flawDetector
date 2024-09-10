@@ -61,8 +61,9 @@ export default function Alert({ type, onAlertClick, isAlertOpen, onAlertHandle }
   return (
     <div
       className={twMerge(
-        isAlertOpen &&
-          'flex w-fit min-w-[49.4rem] items-start justify-between gap-[1.8rem] rounded-[1.6rem] p-[3.2rem] shadow-drop',
+        isAlertOpen
+          ? 'flex w-fit min-w-[49.4rem] items-start justify-between gap-[1.8rem] rounded-[1.6rem] p-[3.2rem] shadow-drop'
+          : 'hidden',
 
         type === 'enabled' ? 'hidden' : '',
       )}
