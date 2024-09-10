@@ -9,7 +9,7 @@ export default function ReposPage({
 }) {
   return (
     <div className="mx-auto bg-opacity-70 bg-[url('/images/headerBackground.svg')] bg-contain bg-top bg-no-repeat">
-      <div className="mx-auto flex w-[131.4rem] flex-col items-center gap-[12.4rem]">
+      <div className="mx-auto flex w-[131.4rem] min-w-[131.4rem] flex-col items-center gap-[12.4rem]">
         <ReposPageHeader />
         <div className="flex flex-col gap-[2.8rem]">
           <UserCard />
