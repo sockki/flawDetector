@@ -1,11 +1,9 @@
 import { octokit } from './octokit';
 
-export async function getRepoList(userName: string = '', page: number = 1, per_page: number = 16) {
+export async function getRepoList(userName: string) {
   try {
     const response = await octokit.request(`GET /users/${userName}/repos`, {
       userName,
-      page,
-      per_page,
       headers: {
         'X-GitHub-Api-Version': '2022-11-28',
       },
