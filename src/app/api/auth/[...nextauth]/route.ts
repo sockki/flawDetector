@@ -4,7 +4,7 @@ import GitHubProvider from 'next-auth/providers/github';
 const handler = NextAuth({
   providers: [
     GitHubProvider({
-      clientId: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || '',
+      clientId: process.env.GITHUB_CLIENT_ID || '',
       clientSecret: process.env.GITHUB_CLIENT_SECRET || '',
     }),
   ],
