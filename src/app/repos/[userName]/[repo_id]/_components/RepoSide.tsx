@@ -31,6 +31,9 @@ export function RepoSide({ params }: RepoSideProps) {
 
   const [isModalOpen, handleClickTrigger] = useModal();
   const [isAlertOpen, setAlertOpen] = useState(false);
+  const [isSortOpen, setSortOpen] = useState(false);
+
+  const [sortType, setSortType] = useState('folder');
 
   const { selectedFilePaths, setSelectedFilePaths } = useSelectedFile();
   const { currentCode, setCurrentCode, setCodeType } = useCodeFormatState();
@@ -213,6 +216,18 @@ export function RepoSide({ params }: RepoSideProps) {
   };
 
   useEffect(() => {
+    if (sortType === 'checked') {
+      const resultPaths = resultFiles.map(file => file.path);
+      const checkedData = currentData.slice().sort((a, b) => {
+        const aIncluded = resultPaths.includes(`${params.userName}/${params.repo_id}/${a.path}`);
+        const bIncluded = resultPaths.includes(`${params.userName}/${params.repo_id}/${b.path}`);
+        if (aIncluded === bIncluded) {
+          return 0;
+        }
+        return aIncluded ? -1 : 1;
+      });
+      setCurrentData(checkedData);
+    }
     if (ReposittoryData) {
       const sortedData = ReposittoryData.slice().sort((a, b) => {
         if (a.type === 'dir' && b.type === 'file') return -1;
@@ -222,6 +237,41 @@ export function RepoSide({ params }: RepoSideProps) {
       setCurrentData(sortedData);
     }
   }, [ReposittoryData]);
+
+  useEffect(() => {
+    if (sortType === 'folder') {
+      const sortedData = currentData.slice().sort((a, b) => {
+        if (a.type === 'dir' && b.type === 'file') return -1;
+        if (a.type === 'file' && b.type === 'dir') return 1;
+        return 0;
+      });
+      setCurrentData(sortedData);
+    }
+    if (sortType === 'checked') {
+      const resultPaths = resultFiles.map(file => file.path);
+      const checkedData = currentData.slice().sort((a, b) => {
+        const aIncluded = resultPaths.includes(`${params.userName}/${params.repo_id}/${a.path}`);
+        const bIncluded = resultPaths.includes(`${params.userName}/${params.repo_id}/${b.path}`);
+        if (aIncluded === bIncluded) {
+          return 0;
+        }
+        return aIncluded ? -1 : 1;
+      });
+      setCurrentData(checkedData);
+    }
+    if (sortType === 'unchecked') {
+      const resultPaths = resultFiles.map(file => file.path);
+      const uncheckedData = currentData.slice().sort((a, b) => {
+        const aIncluded = !resultPaths.includes(`${params.userName}/${params.repo_id}/${a.path}`);
+        const bIncluded = !resultPaths.includes(`${params.userName}/${params.repo_id}/${b.path}`);
+        if (aIncluded === bIncluded) {
+          return 0;
+        }
+        return aIncluded ? -1 : 1;
+      });
+      setCurrentData(uncheckedData);
+    }
+  }, [sortType]);
 
   useEffect(() => {
     FileStatus.mutate();
@@ -236,6 +286,13 @@ export function RepoSide({ params }: RepoSideProps) {
     setAlertOpen(!isAlertOpen);
   };
 
+  const handleSortOpen = () => {
+    setSortOpen(!isSortOpen);
+  };
+
+  const handleSortType = (type: string) => {
+    setSortType(type);
+  };
   const handleFileClick = async (filePath: string) => {
     try {
       const fileName = filePath.split('/').pop();
@@ -372,6 +429,9 @@ export function RepoSide({ params }: RepoSideProps) {
       />
       <div className="h-[103.6rem] w-[24.7rem] overflow-hidden overflow-y-scroll rounded-[1.2rem] border-[0.1rem] border-l border-r border-neutral-10">
         <ListHeader
+          isSortOpen={isSortOpen}
+          onListClick={handleSortOpen}
+          onChangeSortType={handleSortType}
           onFileSelect={() => handleMultipleSelect()}
           isMultipleSelected={isMultipleSelected}
         />
