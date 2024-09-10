@@ -19,7 +19,7 @@ export default function VulDbSearchInput() {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/search`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/topics`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
