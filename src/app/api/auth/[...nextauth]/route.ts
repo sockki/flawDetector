@@ -4,8 +4,8 @@ import GitHubProvider from 'next-auth/providers/github';
 const handler = NextAuth({
   providers: [
     GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID || '',
-      clientSecret: process.env.GITHUB_CLIENT_SECRET || '',
+      clientId: process.env.GIT_CLIENT_ID || '',
+      clientSecret: process.env.GIT_CLIENT_SECRET || '',
     }),
   ],
   callbacks: {
@@ -35,7 +35,7 @@ const handler = NextAuth({
   pages: {
     signIn: '/login',
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXT_AUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };
