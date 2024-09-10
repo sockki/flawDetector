@@ -75,7 +75,6 @@ export async function getCodeScanResult(path: string): Promise<FileScanResult[]>
       results.push({ ...doc.data() } as FileScanResult);
     });
 
-    console.log('검사 완료 파일을 불러왔습니다.', results);
     return results;
   } catch (error) {
     console.error('검사 완료 파일을 불러오는데 실패하였습니다.', error);
@@ -85,6 +84,9 @@ export async function getCodeScanResult(path: string): Promise<FileScanResult[]>
 
 export async function getFileStatus({ userName, repoName }: FetchCodeStatusProps) {
   const results: CodeStatusResult[] = [];
+  let detectedCount = 0;
+  let completeCode = 0;
+  let suggestionCount = 0;
 
   const prefix = `${userName}/${repoName}`;
 
@@ -99,11 +101,20 @@ export async function getFileStatus({ userName, repoName }: FetchCodeStatusProps
     const data = doc.data();
     const { path } = data.result;
 
+    const type = data.result.issues && data.result.issues.length > 0 && 'success';
+
     results.push({
       path,
-      type: data.result.issues && data.result.issues.length > 0 ? 'error' : 'success',
+      type,
     });
+
+    if (type === 'success') {
+      detectedCount += 1;
+      suggestionCount += data.result.issues.length;
+    } else {
+      completeCode += 1;
+    }
   });
-  console.log(results);
-  return results;
+
+  return { results, detectedCount, completeCode, suggestionCount };
 }
