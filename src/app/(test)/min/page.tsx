@@ -2,7 +2,6 @@
 
 import ArticleCard from '@/components/VulDbCard/ArticleCard';
 import ArticleSmallCard from '@/components/VulDbCard/ArticleSmallCard';
-import DetectFileCard from '@/components/LibraryCard/DetectFileCard';
 import ScrapCard from '@/components/LibraryCard/ScrapCard';
 import Pagination from '@/components/Pagination/Pagination';
 import dummyImg from '@/public/images/BannerCardDummyImg1.png';
@@ -39,11 +38,6 @@ export default function MinTextPage({ searchParams }: { searchParams: { page: st
           isHoverFirstCard={isHoverFirstCard}
           setIsHoverFirstCard={setIsHoverFirstCard}
         />
-      </div>
-      <div className="flex gap-[2.8rem]">
-        <DetectFileCard title="Project-1" date={dummyDate} label="before" isBookmarked={false} />
-        <DetectFileCard title="Project-1" date={dummyDate} label="under" isBookmarked={false} />
-        <DetectFileCard title="Project-1" date={dummyDate} label="done" isBookmarked />
       </div>
       <div className="flex gap-[2.8rem]">
         <ScrapCard
