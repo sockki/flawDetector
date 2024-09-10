@@ -1,6 +1,7 @@
 import ReposPageHeader from '@/app/repos/_components/ReposPageHeader';
 import UserCard from '@/app/repos/_components/UserCard';
 import RepositoryList from '@/app/repos/_components/RepositoryList';
+import RepositoryActions from '@/app/repos/_components/RepositoryActions';
 
 export default function ReposPage({
   searchParams,
@@ -13,6 +14,7 @@ export default function ReposPage({
         <ReposPageHeader />
         <div className="flex flex-col gap-[2.8rem]">
           <UserCard />
+          <RepositoryActions />
           <RepositoryList searchParams={searchParams} />
         </div>
       </div>

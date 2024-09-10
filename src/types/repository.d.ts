@@ -17,7 +17,12 @@ export type Repository = BaseRepoData & {
 
 export type RepositoryState = {
   repositories: Repository[];
+  filteredRepositories: Repository[];
   recentViewed: Repository[];
+  filterType: 'all' | 'recent' | 'bookmark';
+
   setRepositories: (repos: Repository[]) => void;
+  setFilteredRepositories: (repos: Repository[]) => void;
   addRecentViewed: (repo: Repository) => void;
+  setFilterType: (filter: 'all' | 'recent' | 'bookmark') => void;
 };
