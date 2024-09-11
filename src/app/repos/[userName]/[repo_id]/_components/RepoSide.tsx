@@ -109,7 +109,7 @@ export function RepoSide({ params }: RepoSideProps) {
     },
   });
 
-  const handleCodeScan = async (multipleFilesPath: string) => {
+  const handleCodeScan = async (multipleFilesPath?: string) => {
     const filepath = multipleFilesPath
       ? `${multipleFilesPath}`
       : `${params.userName}/${params.repo_id}/${selectedFilePaths[selectedFilePaths.length - 1]}`;
@@ -498,7 +498,7 @@ export function RepoSide({ params }: RepoSideProps) {
         shape="rectangle"
         size="large"
         className="w-[24.7rem]"
-        onClick={isMultipleSelected ? handleClickTrigger : () => handleCodeScan}
+        onClick={isMultipleSelected ? handleClickTrigger : () => handleCodeScan()}
       >
         검사하기
       </Button>
