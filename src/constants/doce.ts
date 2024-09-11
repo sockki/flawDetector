@@ -1,4 +1,5 @@
 export const AGREEMENT_TEXT = {
+  id: 'agreements',
   title: '플로디덱터 일반 사용 약관',
   subText: `
     모든 사업 관계에서 귀하는 일련의 약관에 동의합니다.
@@ -36,6 +37,7 @@ export const AGREEMENT_TEXT = {
 };
 
 export const PPA_TEXT = {
+  id: 'ppa',
   title: '우리는 당신의 개인정보 보호와 신뢰를 중요하게 생각합니다.',
   subText: `
   개인정보 보호 센터는 고객의 정보를 

@@ -42,6 +42,7 @@ export { default as LogoIcon } from './icons/headerLogo.svg';
 export { default as ListCheckIcon } from './icons/listCheck.svg';
 export { default as ListDocumentIcon } from './icons/listDocument.svg';
 export { default as ListIcon } from './icons/listLibrary.svg';
+export { default as LoadingIcon } from './icons/loadingIcon.svg';
 export { default as PaginationArrowIcon } from "./icons/paginationArrow.svg";
 export { default as PinIcon } from "./icons/pinIcon.svg";
 export { default as RemoveIcon } from './icons/remove.svg';
