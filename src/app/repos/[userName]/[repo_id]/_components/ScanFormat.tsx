@@ -10,7 +10,7 @@ import { useEffect, useRef } from 'react';
 type ScanFormatProps = {
   resultType?: boolean;
   highLightedLines?: number[];
-  scrollToLine?: number;
+  scrollToLine?: number | null;
 };
 
 const containerStyles = 'flex gap-[2.8rem]';
@@ -42,7 +42,7 @@ export function ScanFormat({
   };
 
   useEffect(() => {
-    if (scrollToLine) {
+    if (scrollToLine !== null && scrollToLine !== undefined) {
       handleScrollToLine(scrollToLine);
     }
   }, [scrollToLine]);
