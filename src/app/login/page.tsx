@@ -1,15 +1,20 @@
 'use client';
 
-import Link from 'next/link';
-import { signIn, useSession } from 'next-auth/react';
 import Button from '@/components/Button/Button';
 import { Ellipse } from '@/components/Ellipse';
+import LogoLoading from '@/components/common/Loading/LogoLoading';
+import { signIn, useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const { status } = useSession();
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <LogoLoading />
+      </div>
+    );
   }
 
   const handleGithubLoginButton = () => {

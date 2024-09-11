@@ -1,14 +1,15 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-import { useState, useEffect } from 'react';
-import { useRepoStore } from '@/stores/useRepoStore';
-import type { TypeFilterOption } from '@/types/sortAndFilter';
-import Pagination from '@/components/Pagination/Pagination';
-import DetectFileCard from '@/components/LibraryCard/DetectFileCard';
 import FilterChip from '@/components/Chips/FilterChip';
+import DetectFileCard from '@/components/LibraryCard/DetectFileCard';
+import Pagination from '@/components/Pagination/Pagination';
+import LogoLoading from '@/components/common/Loading/LogoLoading';
+import { useRepoStore } from '@/stores/useRepoStore';
 import { Repository } from '@/types/repository';
+import type { TypeFilterOption } from '@/types/sortAndFilter';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import RepositoryActions from './RepositoryActions';
 
 type RepositoryListProps = {
@@ -43,7 +44,11 @@ export default function RepositoryList({ user, repositories, searchParams }: Rep
   }, [repositories, setRepositories, setFilteredRepositories]);
 
   if (status === 'loading') {
-    return <div>Loading Repositories...</div>;
+    return (
+      <div className="min-h-[70rem] content-center">
+        <LogoLoading />
+      </div>
+    );
   }
 
   const totalPage = Math.ceil((filteredRepositories?.length || 0) / perPage);
@@ -71,7 +76,7 @@ export default function RepositoryList({ user, repositories, searchParams }: Rep
             <FilterChip label="Sort" options={sortOptions} hasIcon onSelect={handleSortSelect} />
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-[2.4rem]">
+        <div className="grid min-h-[97.6rem] grid-cols-4 gap-[2.4rem]">
           {pageData.map(repo => (
             <DetectFileCard
               key={repo.id}
