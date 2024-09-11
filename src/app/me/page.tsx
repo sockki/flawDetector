@@ -5,7 +5,7 @@ import MePageLinks from '@/app/me/_components/MePageLinks';
 
 export default function MePage() {
   return (
-    <div className="mx-auto flex min-h-screen w-[131.4rem] flex-col items-center gap-[8.3rem]">
+    <div className="mx-auto mb-[10rem] flex min-h-screen w-[131.4rem] flex-col items-center gap-[8.3rem]">
       <MePageTitle title="Profile Information" />
       <UserCard hasLogoutButton />
       <UserInfo />
