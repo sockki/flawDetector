@@ -1,18 +1,11 @@
-'use client';
-
-import Button from '@/components/Button/Button';
 import { Ellipse } from '@/components/Ellipse';
 import { LandingDownIcon } from '@/public/index';
-import { useSession } from 'next-auth/react';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 export default function Hero() {
-  const router = useRouter();
-  const { status } = useSession();
-
-  const handleLoginButton = () => router.push('/login');
-  const handleAnalyzeButton = () => router.push('/repos');
+  const cookieStore = cookies();
+  const sessionCookie = cookieStore.get('next-auth.session-token'); // 쿠키에서 세션 토큰 가져오기
 
   return (
     <div className="relative w-full overflow-hidden">
@@ -31,10 +24,14 @@ export default function Hero() {
               인공지능의 뛰어난 분석 능력을 활용하여 코드의 보안 취약점을 신속하게 해결하세요.
             </p>
           </div>
-          {status === 'authenticated' && (
-            <Button onClick={handleAnalyzeButton}>파일 분석하러 가기</Button>
-          )}
-          {status === 'unauthenticated' && <Button onClick={handleLoginButton}>Login</Button>}
+
+          <Link
+            href={sessionCookie ? '/repos' : '/login'}
+            className="rounded-full bg-primary-500 px-[2.4rem] py-[1.1rem] text-[2.8rem] font-[300] text-white hover:shadow-button"
+          >
+            {sessionCookie ? '파일 분석하러 가기' : 'Login'}
+          </Link>
+
           <Link href="#intro" className="animate-bounce">
             <LandingDownIcon />
           </Link>
