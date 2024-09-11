@@ -32,11 +32,11 @@ export default function UserCard({ hasLogoutButton }: UserCardProps) {
       if (!res.ok) {
         throw new Error('사용자의 데이터를 삭제하는 중 오류가 발생했습니다.');
       }
-      await signOut({ callbackUrl: '/' });
 
       if (typeof window !== 'undefined') {
         localStorage.removeItem('recentRepos');
       }
+      await signOut({ callbackUrl: '/' });
     } catch (error) {
       console.error(error);
     }
