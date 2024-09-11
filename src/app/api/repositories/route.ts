@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-
 import {
   deleteUserRepositories,
   getFirestoreRepositories,
@@ -13,7 +12,8 @@ import { SortOption } from '@/types/sortAndFilter';
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get('userId');
-  const sortOption = (searchParams.get('sortOption') as SortOption) || '최신순';
+  const rawSortOption = searchParams.get('sortOption');
+  const sortOption = (decodeURIComponent(rawSortOption || '') as SortOption) || '최신순';
 
   if (!userId) {
     return NextResponse.json({ error: 'userId가 필요합니다.' }, { status: 400 });

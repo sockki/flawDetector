@@ -9,7 +9,9 @@ export default function MainPage() {
       <Introduction />
       <Overview />
       <Carousel />
-      <ContactSection />
+      <div className="flex min-h-screen items-center justify-center overflow-hidden p-[15rem]">
+        <ContactSection />
+      </div>
       <FloatingButton type="top" className="fixed bottom-[8.77rem] right-[10.8rem]" />
     </>
   );

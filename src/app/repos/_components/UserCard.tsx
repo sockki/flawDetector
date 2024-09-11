@@ -7,19 +7,23 @@ import Button from '@/components/Button/Button';
 import { Modal } from '@/components/Modals';
 import { useModal } from '@/hooks/useModal';
 import { RightArrowIcon, SignOutIcon } from '@/public/index';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 
 type UserCardProps = {
+  user: {
+    image?: string | null;
+    email?: string | null;
+    id?: string;
+  };
   hasLogoutButton?: boolean;
 };
 
-export default function UserCard({ hasLogoutButton }: UserCardProps) {
+export default function UserCard({ user, hasLogoutButton }: UserCardProps) {
   const [isModalOpen, handleClickTrigger] = useModal();
-  const { data: session } = useSession();
 
-  const avatar = session?.user?.image || '';
-  const email = session?.user?.email || '';
-  const userId = session?.user?.id || '';
+  const avatar = user?.image || '';
+  const email = user?.email || '';
+  const userId = user?.id || '';
 
   const handleLogout = async () => {
     try {
@@ -32,11 +36,11 @@ export default function UserCard({ hasLogoutButton }: UserCardProps) {
       if (!res.ok) {
         throw new Error('사용자의 데이터를 삭제하는 중 오류가 발생했습니다.');
       }
-      await signOut({ callbackUrl: '/' });
 
       if (typeof window !== 'undefined') {
         localStorage.removeItem('recentRepos');
       }
+      await signOut({ callbackUrl: '/' });
     } catch (error) {
       console.error(error);
     }
@@ -58,7 +62,7 @@ export default function UserCard({ hasLogoutButton }: UserCardProps) {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
-            <div>No Image</div>
+            ''
           )}
         </div>
         <div className="text-[4rem] font-medium text-gray-black">

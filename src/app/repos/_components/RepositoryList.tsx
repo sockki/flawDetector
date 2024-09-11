@@ -1,15 +1,25 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRepoStore } from '@/stores/useRepoStore';
-import type { SortOption, TypeFilterOption } from '@/types/sortAndFilter';
+import type { TypeFilterOption } from '@/types/sortAndFilter';
 import Pagination from '@/components/Pagination/Pagination';
 import DetectFileCard from '@/components/LibraryCard/DetectFileCard';
 import FilterChip from '@/components/Chips/FilterChip';
+import { Repository } from '@/types/repository';
+import { useRouter } from 'next/navigation';
+import RepositoryActions from './RepositoryActions';
 
 type RepositoryListProps = {
-  searchParams: { [key: string]: string | string[] | undefined };
+  user: {
+    image?: string | null;
+    email?: string | null;
+    id?: string;
+    login?: string | null;
+  };
+  repositories: Repository[];
+  searchParams: Record<string, string>;
 };
 
 const typeOptions = ['검사완료', '검사중'];
@@ -17,64 +27,32 @@ const sortOptions = ['최신순', '오래된순', '이름순'];
 
 const perPage = 16;
 
-export default function RepositoryList({ searchParams }: RepositoryListProps) {
-  const { data: session, status } = useSession();
+export default function RepositoryList({ user, repositories, searchParams }: RepositoryListProps) {
+  const router = useRouter();
+  const { status } = useSession();
   const { setRepositories, filteredRepositories, setFilteredRepositories } = useRepoStore();
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState('');
-  const [sortOption, setSortOption] = useState<SortOption>('최신순');
   const [, setTypeFilter] = useState<TypeFilterOption>();
 
-  const userId = session?.user?.id || '';
-  const userName = session?.user?.login || '';
+  const userId = user?.id || '';
+  const userName = user?.login || '';
   const nowPage = searchParams.page ? Number(searchParams.page) : 1;
 
   useEffect(() => {
-    async function loadRepositories() {
-      if (!userId || !userName) {
-        return;
-      }
-      setIsLoading(true);
+    setRepositories(repositories);
+    setFilteredRepositories(repositories);
+  }, [repositories, setRepositories, setFilteredRepositories]);
 
-      try {
-        await fetch('/api/repositories', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId, userName }),
-        });
-
-        const response = await fetch(`/api/repositories?userId=${userId}&sortOption=${sortOption}`);
-        const data = await response.json();
-
-        setRepositories(data.repositories);
-        setFilteredRepositories(data.repositories);
-      } catch (error) {
-        console.error('레포지토리 가져오기 실패:', error);
-        setIsError('레포지토리 목록을 가져오는 데 실패했습니다.');
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    if (status === 'authenticated') {
-      loadRepositories();
-    }
-  }, [userId, userName, status, sortOption, setRepositories, setFilteredRepositories]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (isError) {
-    return <div>{isError}</div>;
+  if (status === 'loading') {
+    return <div>Loading Repositories...</div>;
   }
 
   const totalPage = Math.ceil((filteredRepositories?.length || 0) / perPage);
-  const pageData = filteredRepositories
-    ? filteredRepositories.slice((nowPage - 1) * perPage, nowPage * perPage)
-    : [];
+  const pageData = filteredRepositories.slice((nowPage - 1) * perPage, nowPage * perPage);
 
-  const handleSortSelect = (v: string) => {
-    setSortOption(v as SortOption);
+  const handleSortSelect = (selectedSort: string) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('sortOption', selectedSort);
+    router.push(`/repos?${newSearchParams.toString()}`);
   };
 
   const handleTypeSelect = (v: string) => {
@@ -82,7 +60,9 @@ export default function RepositoryList({ searchParams }: RepositoryListProps) {
   };
 
   return (
-    <div className="mb-[15rem] flex min-h-screen min-w-[131.4rem] flex-col gap-[2.8rem]">
+    <div className="mb-[5rem] flex min-h-screen min-w-[131.4rem] flex-col gap-[2.8rem]">
+      <RepositoryActions />
+
       <section className="flex flex-col gap-[2.4rem]">
         <div className="flex items-center justify-between">
           <h3 className="text-[3.2rem] font-medium text-gray-black">Library</h3>
