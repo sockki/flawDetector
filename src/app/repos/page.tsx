@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/authOptions';
 import ReposPageHeader from '@/app/repos/_components/ReposPageHeader';
 import UserCard from '@/app/repos/_components/UserCard';
 import RepositoryList from '@/app/repos/_components/RepositoryList';
