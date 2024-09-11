@@ -43,7 +43,7 @@ export default function Overview() {
       className="flex min-h-[102.3rem] w-full items-center justify-between gap-[8.8rem] overflow-hidden bg-white px-[14.5rem]"
     >
       <div className="h-[102.3rem] flex-1 text-[2.574rem] text-white">
-        <div className="relative h-[182.4rem] w-[98.5rem]">
+        <div className="relative h-[182.4rem] w-[91.2rem]">
           <Image src={LandingSampleImg} alt="랜딩 이미지" className="absolute top-[17.4rem]" />
           <span
             className={twMerge(

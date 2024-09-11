@@ -1,6 +1,6 @@
 export default function ContactInfo() {
   return (
-    <div className="flex-start flex w-[42.9rem] flex-col justify-between gap-[7.9rem]">
+    <div className="flex-start flex flex-col justify-between gap-[7.9rem]">
       <div className="flex flex-col gap-[3rem]">
         <h1 className="text-[6rem] font-[700] leading-[9rem] text-primary-500">
           서비스 이용에

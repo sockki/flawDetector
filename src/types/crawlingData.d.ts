@@ -19,7 +19,7 @@ export type ArticleData = {
 
 type DateObject = { seconds: number; nanoseconds: number };
 
-type Content = string | Table;
+export type Content = string | Table;
 
 type Table = {
   table?: TableObject[];

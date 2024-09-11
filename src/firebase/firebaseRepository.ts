@@ -88,7 +88,7 @@ export const updateCheckedStatus = async (
 };
 
 export const deleteUserRepositories = async (userId: string) => {
-  const userRepoRef = collection(db, 'users', userId, 'repositories');
+  const userRepoRef = collection(db, 'users', userId.toString(), 'repositories');
   const querySnapshot = await getDocs(userRepoRef);
   const promises = querySnapshot.docs.map(repoDoc => deleteDoc(repoDoc.ref));
   await Promise.all(promises);

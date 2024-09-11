@@ -4,14 +4,23 @@ import { ChatIcon, TopIcon } from '@/public/index';
 
 import { twMerge } from 'tailwind-merge';
 import { useState } from 'react';
+import { Content } from '@/types/crawlingData';
 import Chatbot from '../Chatbot/Chatbot';
 
 type FloatingButtonProps = {
   type: 'top' | 'ask';
   className?: string;
+  report?: Report;
 };
 
-export function FloatingButton({ type, className }: FloatingButtonProps) {
+type Report = { title: string; desc: Content[] };
+
+const initReport: Report = {
+  title: '',
+  desc: [],
+};
+
+export function FloatingButton({ type, className, report }: FloatingButtonProps) {
   const [toggleAsk, setToggleAsk] = useState<boolean>(false);
   const handleClickTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -24,7 +33,7 @@ export function FloatingButton({ type, className }: FloatingButtonProps) {
 
   return (
     <div className="fixed bottom-[7rem] right-[8rem] z-50 flex flex-col items-end gap-[2.4rem]">
-      {toggleAsk && <Chatbot />}
+      {toggleAsk && <Chatbot report={report || initReport} />}
       <button
         type="button"
         onClick={type === 'top' ? handleClickTop : handleClickAsk}
