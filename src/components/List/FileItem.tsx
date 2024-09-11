@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { ListDocumentIcon, ListCheckIcon } from '@/public/index';
 import { twMerge } from 'tailwind-merge';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
@@ -33,11 +33,14 @@ export function FileItem({
 
   const [isMarked, setIsMarked] = useState(initialIsMarked);
 
-  function handleBookmark(e: React.MouseEvent<HTMLDivElement>) {
-    e.stopPropagation();
-    setIsMarked(prevIsMarked => !prevIsMarked);
-    // api 생성후 들어갈 예정입니다.
-  }
+  const handleBookmark = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      setIsMarked(prevIsMarked => !prevIsMarked);
+      // API 호출 코드 추가 예정
+    },
+    [], // 의존성 배열
+  );
 
   return (
     <div className={containerStyles} onClick={onFileClick}>
@@ -47,7 +50,7 @@ export function FileItem({
           <ListDocumentIcon />
           {fileName}
         </div>
-        <ScanStatus type={type} onBookMarkClick={() => handleBookmark} isMarked={isMarked} />
+        <ScanStatus type={type} onBookMarkClick={handleBookmark} isMarked={isMarked} />
       </div>
       {type !== 'enabled' && <ProgressBar type={type} />}
     </div>
