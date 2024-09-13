@@ -7,7 +7,9 @@ export type ArticleCardProps = {
   label: LabelType;
   imageSrc?: StaticImageData;
   title: string;
+  keyword: string;
   company: string;
   content: string;
   date: Date;
+  isScrapped: boolean;
 };
