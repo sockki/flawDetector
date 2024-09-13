@@ -1,12 +1,13 @@
 'use client';
 
+import { ComponentPropsWithoutRef, ReactElement, cloneElement, isValidElement } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { ComponentPropsWithoutRef } from 'react';
 
 type ButtonProps = ComponentPropsWithoutRef<'button'> & {
   variant?: 'filled' | 'outlined' | 'tonal';
   shape?: 'rectangle' | 'rounded';
   size?: 'small' | 'default' | 'large';
+  asChild?: boolean;
 };
 
 export default function Button({
@@ -17,6 +18,7 @@ export default function Button({
   shape = 'rounded',
   size = 'default',
   disabled,
+  asChild = false,
   ...rest
 }: ButtonProps) {
   const baseStyle = 'flex items-center justify-center outline-none';
@@ -60,6 +62,14 @@ export default function Button({
     !disabled && interactionStyles[variant],
     className,
   );
+
+  if (asChild && isValidElement(children)) {
+    return cloneElement(children as ReactElement, {
+      className: twMerge(children.props.className || '', combinedClasses),
+      disabled,
+      ...rest,
+    });
+  }
 
   return (
     <button
