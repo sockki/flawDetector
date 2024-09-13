@@ -4,7 +4,14 @@ import { ko } from 'date-fns/locale/ko';
 import type { ArticleCardProps } from '@/types/articleCard';
 import SuggestionChip from '../Chips/SuggestionChip';
 
-export default function ArticleCard({ label, title, company, content, date }: ArticleCardProps) {
+export default function ArticleCard({
+  label,
+  title,
+  company,
+  content,
+  date,
+  keyword,
+}: ArticleCardProps) {
   const timeDifference = formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
   return (
     <article className="flex h-fit w-[86.5rem] gap-[2.4rem] rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] p-[2.8rem] hover:shadow-button active:bg-purple-dark">
@@ -13,7 +20,7 @@ export default function ArticleCard({ label, title, company, content, date }: Ar
           <div className="flex items-center gap-[0.8rem]">
             {label !== '' && <SuggestionChip variant={label} />}
             <div className="w-full">
-              <h1 className="line-clamp-1 text-[2rem] font-regular leading-[2.42rem]">{title}</h1>
+              <h1 className="line-clamp-1 text-[2rem] font-regular leading-[2.42rem]">{`[${keyword.trim()}] ${title}`}</h1>
             </div>
           </div>
           <address className="mt-[0.8rem] text-[1.6rem] font-regular not-italic leading-[1.946rem] text-[#adadad]">
