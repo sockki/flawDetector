@@ -1,19 +1,21 @@
 
-# Security-Vigilante
 
-## ❓  Security-Vigilante 가 뭐예요?
-- **Security-Vigilante**는 **개발 중 발생할 수 있는 보안 취약점을 실시간으로 분석하고, 해결책을 제안**하는 AI 기반 보안 솔루션입니다. 
+## ❓  Flaw Detector 가 뭐예요?
+- **Flaw Detector**는 **개발 중 발생할 수 있는 보안 취약점을 실시간으로 분석하고, 해결책을 제안**하는 AI 기반 보안 솔루션입니다. 
 - GitHub OAuth를 통해 사용자의 레포지토리와 연동하여 소스코드의 보안 문제를 탐지하고, 최신 취약점 정보를 바탕으로 해결책을 제공합니다.
 - 이 프로젝트는 사용자가 좀 더 안전한 소프트웨어를 개발할 수 있도록 지원합니다.
 
+
 ## 🌐 웹사이트
 [Security-Vigilante](https://geekhub-gamma.vercel.app/)
+
 
 ## 🙋‍♂️ 어떻게 사용하나요?
 1. GitHub OAuth로 로그인하세요.
 2. 분석할 레포지토리를 선택하세요.
 3. FlawDetector가 자동으로 소스코드를 분석하여 보안 취약점을 찾아냅니다.
 4. 실시간으로 취약점 정보와 해결책을 제공받으세요.
+
 
 ## 🛠 주요 기능
 1. **소스코드 보안 취약점 분석**: GitHub 레포지토리의 소스코드에서 실시간 보안 취약점 분석.
@@ -41,12 +43,14 @@
 
 4. 브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 FlawDetector를 실행합니다.
 
+
 ## 🛠 기술 스택
 - **프론트엔드**: Next.js, TailwindCSS
 - **백엔드**: Firebase Functions
 - **배포**: Vercel
 - **데이터베이스**: Firebase Firestore
 - **AI 모델**: Llama 3
+
 
 ## 📝 개발자 소개
 **Security-Vigilante 개발 팀**
@@ -84,13 +88,16 @@
   
 - **디버깅**: ESLint와 Prettier 설정을 통해 코드 스타일 유지 및 자동 오류 수정.
 
+
 ## 📄 저작권 및 사용권 정보
 이 프로젝트는 []에 따라 배포됩니다. 자유롭게 사용 및 수정할 수 있지만, 저작권 고지를 유지해야 합니다.
+
 
 ## 📚 참고 및 출처
 - [Next.js Documentation](https://nextjs.org/docs)
 - [TailwindCSS Documentation](https://tailwindcss.com/docs)
 - [GitHub REST API Documentation](https://docs.github.com/en/rest)
+
 
 ## 🔄 버전 및 업데이트 정보
 - **현재 버전**: 1.0.0
