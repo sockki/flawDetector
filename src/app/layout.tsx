@@ -1,15 +1,19 @@
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
 import '@/styles/globals.css';
+import ClientSessionProvider from '@/utils/clientSessionProvider';
 import Providers from '@/utils/provider';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import ClientSessionProvider from '@/utils/clientSessionProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'GeekHub',
+  title: '플로디텍터 | FlawDetector',
+  description: '쉽고 편하게 취약점을 발견하다',
+  icons: {
+    icon: '/icon',
+  },
 };
 
 export default function RootLayout({
