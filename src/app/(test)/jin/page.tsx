@@ -1,13 +1,13 @@
 'use client';
 
-import { FloatingButton } from '../../../components/Floating/FloatingButton';
+import { Ellipse } from '../../../components/Ellipse';
 
 export default function HomeApp() {
   return (
     <div>
-      <div className="h-[1000rem]">아무글자</div>
-      <FloatingButton type="ask" onClick={() => alert('Ask Button Clicked!')} />
-      <FloatingButton type="top" />
+      <div className="h-[100rem]">아무글자</div>
+
+      <Ellipse />
     </div>
   );
 }

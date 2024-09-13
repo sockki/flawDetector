@@ -1,6 +1,7 @@
 'use client';
 
 import { BugIcon, ChatbotIcon, SendIcon } from '@/public/index';
+import { Content } from '@/types/crawlingData';
 import { format } from 'date-fns/format';
 import { ko } from 'date-fns/locale';
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
@@ -12,16 +13,9 @@ type Message = {
   sentAt: string;
 };
 
-const report = {
-  title: '[취약성 보고서] Microsoft의 다양한 보안 취약점에 대한 CNNVD의 보고서',
-  desc: `
-  Microsoft는 2024년 8월 13일에 총 89개의 보안 취약점에 대한 패치를 포함한 2024년 8월 보안 업데이트를 출시했습니다. 이 업데이트는 Microsoft Windows, Microsoft Azure Connected Machine Agent, Microsoft Visual Studio 및 Microsoft .NET 등을 포함한 다양한 제품과 시스템을 대상으로 합니다. CNNVD는 이들 중 7개를 매우 중요한 취약점으로, 66개를 고위험, 16개를 중간 위험 수준으로 평가했습니다.
-  이번 보안 업데이트에는 새로운 취약점에 대한 패치 81개, 기존 취약점에 대한 패치 3개, Microsoft 제품에 영향을 미치는 타사 제품의 취약점에 대한 패치 5개가 포함되었습니다. 주요 취약점으로는 Microsoft Windows TCP/IP 구성 요소 숫자 오류, Microsoft Azure Stack 교차 사이트 스크립팅 취약점, Microsoft Azure 코드 문제 등이 있으며, 이러한 취약점들은 매우 심각한 위험 수준으로 평가되었습니다.
-  또한 Microsoft는 타사 제품에서 발생하는 취약점에 대한 패치도 발표했습니다. GNU 커뮤니티의 grub2 보안 취약점, 개인 개발자의 심 버퍼 오류 취약점 등이 포함되어 있습니다.
-  Microsoft는 이 취약점들을 해결하기 위한 패치를 공식적으로 발표했으며, 사용자들은 가능한 빨리 패치를 적용하는 것이 권장됩니다. 자세한 정보와 패치 다운로드는 Microsoft의 [보안 업데이트 가이드](https://msrc.microsoft.com/update-guide/en-us)에서 확인할 수 있습니다.`,
-};
+export type Report = { title: string; desc: Content[] };
 
-export default function Chatbot() {
+export default function Chatbot({ report }: { report: Report }) {
   const [message, setMessage] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);

@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type ProgressBarProps = ComponentProps<typeof ProgressPrimitive.Root> & {
-  type: 'enabled' | 'analye' | 'waiting' | 'success' | 'error';
+  type: 'enabled' | 'analye' | 'waiting' | 'success' | 'error' | 'issue';
   progress?: 0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100;
   isError?: boolean;
 };
@@ -23,7 +23,7 @@ export function ProgressBar({ progress = 0, type, ...rest }: ProgressBarProps) {
       <ProgressPrimitive.Indicator
         className={indicatorStyles}
         style={{
-          transform: `translateX(${type === 'error' || type === 'success' ? 0 : progress - 100}%)`,
+          transform: `translateX(${0}%)`,
         }}
       />
     </ProgressPrimitive.Root>

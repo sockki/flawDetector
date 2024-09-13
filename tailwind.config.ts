@@ -61,10 +61,21 @@ const config: Config = {
         medium: '500',
         bold: '600',
       },
+
       keyframes: {
+        spread: {
+          '0%': {
+            width: '0',
+            height: '0',
+          },
+          '100%': {
+            width: '3856px',
+            height: '1134px',
+          },
+        },
         move: {
           '0%, 100%': { transform: 'translateX(0)' },
-          '50%': { transform: 'translateX(calc(100% + 280px))' }, // 로고 크기에 맞게 설정
+          '50%': { transform: 'translateX(calc(100% + 250px))' }, // 로고 크기에 맞게 설정
         },
         spin360: {
           '0%': { transform: 'rotate(0deg)' },
@@ -73,11 +84,13 @@ const config: Config = {
         },
       },
       animation: {
-        'move-circle': 'move 4s ease-in-out infinite',
+        spread: 'spread 15s ease-in-out infinite',
+        'move-circle': 'move 2s ease-in-out infinite',
         spin360: 'spin360 2s linear infinite',
       },
     },
   },
   plugins: [],
 };
+
 export default config;

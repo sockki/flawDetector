@@ -8,9 +8,10 @@ import { twMerge } from 'tailwind-merge';
 type PaginationProps = {
   nowPage: number;
   totalPage: number;
+  label?: string;
 };
 
-export default function Pagination({ nowPage, totalPage }: PaginationProps) {
+export default function Pagination({ nowPage, totalPage, label }: PaginationProps) {
   const pathname = usePathname();
   const router = useRouter();
   const firstNumber = nowPage - (((nowPage - 1) % 10) + 1) + 1;
@@ -20,7 +21,7 @@ export default function Pagination({ nowPage, totalPage }: PaginationProps) {
         type="button"
         className="flex h-[3.6rem] w-[3.6rem] items-center justify-center bg-none text-[1.6rem] font-regular text-gray-black hover:bg-purple-light"
         onClick={() => {
-          router.push(`${pathname}?page=${nowPage - 1}`);
+          router.push(`${pathname}?${label ? `label=${label}&` : ''}page=${nowPage - 1}`);
         }}
         disabled={nowPage === 1}
       >
@@ -37,7 +38,9 @@ export default function Pagination({ nowPage, totalPage }: PaginationProps) {
                 firstNumber + pageNumber === nowPage ? 'text-primary-300' : '',
               )}
               onClick={() => {
-                router.push(`${pathname}?page=${firstNumber + pageNumber}`);
+                router.push(
+                  `${pathname}?${label ? `label=${label}&` : ''}page=${firstNumber + pageNumber}`,
+                );
               }}
             >
               {firstNumber + pageNumber}
@@ -48,7 +51,7 @@ export default function Pagination({ nowPage, totalPage }: PaginationProps) {
         className="flex h-[3.6rem] w-[3.6rem] items-center justify-center bg-none text-[1.6rem] font-regular text-gray-black hover:bg-purple-light"
         type="button"
         onClick={() => {
-          router.push(`${pathname}?page=${nowPage + 1}`);
+          router.push(`${pathname}?${label ? `label=${label}&` : ''}page=${nowPage + 1}`);
         }}
         disabled={nowPage === totalPage}
       >

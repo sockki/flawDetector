@@ -19,7 +19,7 @@ export default function VulDbSearchInput() {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/search`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/topics`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export default function VulDbSearchInput() {
   };
 
   return (
-    <div className="flex h-[8.2rem] w-[131.3rem] items-center justify-center rounded-[1.4rem] bg-[linear-gradient(91.33deg,#6100FF,#4F6BFF)] p-[0.2rem]">
+    <div className="flex h-[8.2rem] w-[134.7rem] items-center justify-center rounded-[1.4rem] bg-[linear-gradient(91.33deg,#6100FF,#4F6BFF)] p-[0.2rem]">
       <form
         onSubmit={handleSearch}
         className="flex h-full w-full items-center gap-[1rem] rounded-[1.16rem] bg-white p-[2.4rem]"

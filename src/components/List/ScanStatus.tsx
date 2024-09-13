@@ -1,3 +1,5 @@
+'use client';
+
 import {
   AnalyzeIcon,
   SuccessIcon,
@@ -16,7 +18,7 @@ type StateConfig = {
 type ScanStatusProps = {
   type: ListStatusType;
   isMarked?: boolean;
-  onBookMarkClick: () => void;
+  onBookMarkClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 };
 
 export function ScanStatus({ type, isMarked, onBookMarkClick }: ScanStatusProps) {
@@ -29,15 +31,36 @@ export function ScanStatus({ type, isMarked, onBookMarkClick }: ScanStatusProps)
     success: { icon: <SuccessIcon /> },
     error: { icon: <ErrorIcon /> },
     enabled: {
-      icon: isMarked ? <FullBookMarkIcon /> : <EmptyBookMarkIcon />,
+      icon: '',
     },
   };
 
   const { icon } = stateConfig[type];
 
   return (
-    <div className={baseStyles} onClick={onBookMarkClick}>
-      {icon}
+    <div className={baseStyles}>
+      {!isMarked && type === 'enabled' && (
+        <div onClick={onBookMarkClick}>
+          <EmptyBookMarkIcon />
+        </div>
+      )}
+
+      {!isMarked && type !== 'enabled' && <>{icon}</>}
+
+      {isMarked && type === 'enabled' && (
+        <div onClick={onBookMarkClick}>
+          <FullBookMarkIcon />
+        </div>
+      )}
+
+      {isMarked && type !== 'enabled' && (
+        <>
+          <div onClick={onBookMarkClick}>
+            <FullBookMarkIcon />
+          </div>
+          {icon}
+        </>
+      )}
     </div>
   );
 }

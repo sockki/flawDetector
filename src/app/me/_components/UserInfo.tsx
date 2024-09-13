@@ -1,10 +1,12 @@
+'use client';
+
+import { useSession } from 'next-auth/react';
 import Input from '@/components/Input/Input';
 
-type UserInfoProps = {
-  email: string;
-};
+export default function UserInfo() {
+  const { data: session } = useSession();
+  const email = session?.user?.email || '';
 
-export default function UserInfo({ email }: UserInfoProps) {
   return (
     <section className="flex w-full flex-col gap-[4.8rem] border-b border-b-[#e6e6e6] pb-[8rem]">
       <h3 className="text-[3.2rem] font-bold text-gray-black">내 정보</h3>

@@ -2,30 +2,51 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
-
 import Button from '@/components/Button/Button';
 import { Modal } from '@/components/Modals';
 import { useModal } from '@/hooks/useModal';
 import { RightArrowIcon, SignOutIcon } from '@/public/index';
+import { signOut } from 'next-auth/react';
 
 type UserCardProps = {
-  avatar: string;
-  email: string;
+  user: {
+    image?: string | null;
+    email?: string | null;
+    id?: string;
+  };
   hasLogoutButton?: boolean;
 };
 
-export default function UserCard({ avatar, email, hasLogoutButton }: UserCardProps) {
-  const router = useRouter();
+export default function UserCard({ user, hasLogoutButton }: UserCardProps) {
   const [isModalOpen, handleClickTrigger] = useModal();
 
-  const handleLogout = () => {
-    handleClickTrigger();
-    router.push('/');
+  const avatar = user?.image || '';
+  const email = user?.email || '';
+  const userId = user?.id || '';
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch('/api/repositories', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId }),
+      });
+
+      if (!res.ok) {
+        throw new Error('사용자의 데이터를 삭제하는 중 오류가 발생했습니다.');
+      }
+
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('recentRepos');
+      }
+      await signOut({ callbackUrl: '/' });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const baseStyles = 'flex w-full items-center justify-between ';
+  const baseStyles = 'flex w-full min-w-[131.4rem] items-center justify-between ';
   const logoutStyles = 'border-b border-b-[#e6e6e6]] pb-[8rem]';
   const defaultStyles = 'bg-neutral-5 rounded-[4.2rem] p-[3.2rem]';
 
@@ -33,12 +54,16 @@ export default function UserCard({ avatar, email, hasLogoutButton }: UserCardPro
     <section className={twMerge(baseStyles, hasLogoutButton ? logoutStyles : defaultStyles)}>
       <div className="flex items-center gap-[4.4rem]">
         <div className="relative h-[10.7rem] w-[10.7rem] overflow-hidden rounded-full">
-          <Image
-            src={avatar}
-            alt="avatar"
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+          {avatar ? (
+            <Image
+              src={avatar}
+              alt="User Avatar"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          ) : (
+            ''
+          )}
         </div>
         <div className="text-[4rem] font-medium text-gray-black">
           <p>Hello,</p>

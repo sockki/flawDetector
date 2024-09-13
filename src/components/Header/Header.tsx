@@ -8,6 +8,8 @@ import { twMerge } from 'tailwind-merge';
 export default function Header() {
   const pathname = usePathname();
   const headerStyle = (pathname === '/ppa' || pathname === '/agreements') && 'text-white';
+  const iconStyle =
+    (pathname === '/ppa' || pathname === '/agreements') && 'filter invert brightness-0';
   return (
     <header
       className={twMerge(
@@ -17,13 +19,13 @@ export default function Header() {
     >
       <h1 className="text- ml-[8rem] flex items-center">
         <Link href="/">
-          <LogoIcon />
+          <LogoIcon className={iconStyle} />
         </Link>
       </h1>
       <nav className="w-full">
         <ul className="flex items-center justify-between">
           <li className="ml-[10rem]">
-            <Link href="/vulnerability-db?page=1" className="text-[1.8rem] font-[500]">
+            <Link href="/vulnerability-db?label=hot&page=1" className="text-[1.8rem] font-[500]">
               취약점 DB
             </Link>
           </li>

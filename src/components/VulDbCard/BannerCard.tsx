@@ -7,7 +7,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type BannerCardProps = {
-  id: number;
+  id: string;
   title: string;
   date: Date;
   backgroundId: number;
