@@ -76,7 +76,7 @@ export default function RepositoryList({ user, repositories, searchParams }: Rep
             <FilterChip label="Sort" options={sortOptions} hasIcon onSelect={handleSortSelect} />
           </div>
         </div>
-        <div className="grid min-h-[97.6rem] grid-cols-4 gap-[2.4rem]">
+        <div className="grid grid-cols-4 gap-[2.4rem]">
           {pageData.map(repo => (
             <DetectFileCard
               key={repo.id}
