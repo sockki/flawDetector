@@ -4,7 +4,7 @@ export type CrawlingData = {
   uploadDate: DateObject;
   scrapDate: Date;
   content: Content[];
-  views: number;
+  view: number;
   isScrapped: boolean;
 };
 
@@ -14,7 +14,7 @@ export type ArticleData = {
   uploadDate: DateObject;
   scrapDate: Date;
   content: Content[];
-  views: number;
+  view: number;
   id: string;
   isScrapped: boolean;
 };
