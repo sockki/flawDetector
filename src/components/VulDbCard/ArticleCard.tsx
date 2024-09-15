@@ -1,7 +1,7 @@
 import { ExternalLinkIcon, PinIcon } from '@/public/index';
+import type { ArticleCardProps } from '@/types/articleCard';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
-import type { ArticleCardProps } from '@/types/articleCard';
 import SuggestionChip from '../Chips/SuggestionChip';
 
 export default function ArticleCard({ label, title, company, content, date }: ArticleCardProps) {
