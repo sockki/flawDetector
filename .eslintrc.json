@@ -30,6 +30,12 @@
         "extensions": [".ts", ".tsx"]
       }
     ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "no-useless-catch": "off",
     "react/jsx-props-no-spreading": "off",
     "jsx-a11y/control-has-associated-label": "off",
