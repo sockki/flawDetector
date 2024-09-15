@@ -10,31 +10,33 @@ export { default as BackIcon } from './icons/caretLeft.svg';
 export { default as RightArrowIcon } from './icons/caretRight.svg';
 export { default as ChatbotIcon } from './icons/chat.svg';
 
+export { default as AnalyzeIcon } from './icons/analyze.svg';
+export { default as BannerCardArrowIcon } from "./icons/bannerCardArrow.svg";
+export { default as BigPinIcon } from "./icons/bigPinIcon.svg";
+export { default as LeftIcon } from './icons/careLeft.svg';
 export { default as SelectedIcon } from './icons/check.svg';
 export { default as ClockCounterIcon } from './icons/clockCounterClockwise.svg';
 export { default as CloseIcon } from './icons/close.svg';
-export { default as DocumentIcon } from './icons/document.svg';;
+export { default as DetectFileCardArrowIcon } from "./icons/detectFileCardArrow.svg";
+export { default as DetectFileCardBugIcon } from "./icons/detectFileCardBug.svg";
+export { default as DetectFileCardStar } from "./icons/detectFileCardStar.svg";
+export { default as DocumentIcon } from './icons/document.svg';
+export { default as DoubleCheckIcon } from "./icons/doubleCheck.svg";
+export { default as EmptyBookMarkIcon } from "./icons/emptyBookMark.svg";
+export { default as EmptyFileIcon } from './icons/emptyFile.svg';
 export { default as ErrorIcon } from './icons/error.svg';
-export { default as AnalyzeIcon } from './icons/analyze.svg';
-export { default as LeftIcon} from'./icons/careLeft.svg'
-export { default as ScanCrossIcon} from'./icons/scanCross.svg'
-export { default as ScanErrorIcon} from'./icons/scanError.svg'
-export { default as ScanSuccessIcon} from'./icons/scanSuccess.svg'
-export { default as ReadingGlassesIcon} from'./icons/readingGlasses.svg'
-export { default as EmptyFileIcon} from'./icons/emptyFile.svg'
-export { default as EmptyBookMarkIcon } from "./icons/emptyBookMark.svg"
-export { default as DoubleCheckIcon } from "./icons/doubleCheck.svg"
-export { default as BigPinIcon } from "./icons/bigPinIcon.svg"
-export { default as BannerCardArrowIcon} from "./icons/bannerCardArrow.svg"
-export { default as DetectFileCardArrowIcon} from "./icons/detectFileCardArrow.svg"
-export { default as DetectFileCardBugIcon} from "./icons/detectFileCardBug.svg"
-export { default as DetectFileCardStar} from "./icons/detectFileCardStar.svg"
 export { default as ExternalLinkIcon } from "./icons/externalLinkIcon.svg";
 export { default as ChatIcon } from './icons/floatChat.svg';
 export { default as TopIcon } from './icons/floatTop.svg';
 export { default as LandingBugIcon } from "./icons/landingpageBug.svg";
 export { default as LandingDownIcon } from "./icons/landingpageDown.svg";
+export { default as ReadingGlassesIcon } from './icons/readingGlasses.svg';
+export { default as ScanCrossIcon } from './icons/scanCross.svg';
+export { default as ScanErrorIcon } from './icons/scanError.svg';
+export { default as ScanSuccessIcon } from './icons/scanSuccess.svg';
+;
 
+export { default as FillPinIcon } from './icons/fillPin.svg';
 export { default as FolderIcon } from './icons/folder.svg';
 export { default as FolderSimpleStarIcon } from './icons/folderSimpleStar.svg';
 export { default as FullBookMarkIcon } from "./icons/fullBookMark.svg";
@@ -65,5 +67,5 @@ export { default as HeaderBackgroundImg } from './images/headerBackground.svg';
 export { default as LandingSampleImg } from "./images/landingSample.png";
 export { default as LandingSquareImg } from "./images/landingSquare.png";
 
-export { default as alertStatusWaitingGif } from './images/alertStatusWaiting.gif';
 export { default as CopyCodeIcon } from './icons/copyCode.svg';
+export { default as alertStatusWaitingGif } from './images/alertStatusWaiting.gif';
