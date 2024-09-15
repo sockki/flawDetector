@@ -19,6 +19,7 @@ export default function ArticleCard({
         <div className="flex flex-col">
           <div className="flex items-center gap-[0.8rem]">
             {label !== '' && <SuggestionChip variant={label} />}
+
             <div className="w-full">
               <h1 className="line-clamp-1 text-[2rem] font-regular leading-[2.42rem]">{`[${keyword.trim()}] ${title}`}</h1>
             </div>

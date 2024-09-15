@@ -4,7 +4,7 @@ export type CrawlingData = {
   uploadDate: DateObject;
   scrapDate: Date;
   content: Content[];
-  views: number;
+  view: number;
 };
 
 export type ArticleData = {
@@ -13,7 +13,7 @@ export type ArticleData = {
   uploadDate: DateObject;
   scrapDate: Date;
   content: Content[];
-  views: number;
+  view: number;
   id: string;
 };
 
