@@ -13,6 +13,7 @@ import { FileItemResponse } from '@/components/common/CheckedFileList';
 import Button from '@/components/Button/Button';
 import Alert from '@/components/Alert/Alert';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { ScanStatus } from './ScanStatus';
 import { MultipleSelectModal } from './MultipleSelectModal';
 
@@ -50,6 +51,7 @@ export function RepoSide({ params }: RepoSideProps) {
   });
 
   const router = useRouter();
+  const { data } = useSession();
 
   const { data: ReposittoryData } = useQuery<RepositoryContentsProps[]>({
     queryKey: ['RepoDetail', currentPath],
@@ -64,6 +66,8 @@ export function RepoSide({ params }: RepoSideProps) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        userId: data?.user.id,
+        repoName: params.repo_id,
         prompt: promptMessage,
       }),
     });

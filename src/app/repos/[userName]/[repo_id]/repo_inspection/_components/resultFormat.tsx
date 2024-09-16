@@ -4,6 +4,7 @@ import InfoBox from '@/components/InfoBox/InfoBox';
 import { useMutation } from '@tanstack/react-query';
 import { useSelectedFile } from '@/stores/Stroe';
 import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { ScanFormat } from '../../_components/ScanFormat';
 
 type ResultFormatProps = {
@@ -15,13 +16,16 @@ export function ResultFormat({ params }: ResultFormatProps) {
   const { selectedFilePaths } = useSelectedFile();
   const [scrollToLine, setScrollToLine] = useState<number | null>(0);
 
-  const postCodeScanResult = async (path: string) => {
+  const { data } = useSession();
+  const sessionUserId = data?.user?.id;
+
+  const postCodeScanResult = async (repoName: string, userId: string, path: string) => {
     const response = await fetch('/api/getCodeScanResult', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ path }),
+      body: JSON.stringify({ path, repoName, userId }),
     });
 
     if (!response.ok) {
@@ -32,7 +36,8 @@ export function ResultFormat({ params }: ResultFormatProps) {
   };
 
   const mutation = useMutation({
-    mutationFn: (path: string) => postCodeScanResult(path),
+    mutationFn: ({ repoName, userId, path }: { repoName: string; userId: string; path: string }) =>
+      postCodeScanResult(repoName, userId, path),
   });
 
   const handleLineClick = (lineNumber: number) => {
@@ -43,7 +48,11 @@ export function ResultFormat({ params }: ResultFormatProps) {
   useEffect(() => {
     const performMutation = () => {
       if (selectedFilePaths.length > 0) {
-        mutation.mutate(`${params.userName}/${params.repo_id}/${selectedFilePaths[0]}`);
+        mutation.mutate({
+          repoName: params.repo_id,
+          userId: sessionUserId || '',
+          path: `${params.userName}/${params.repo_id}/${selectedFilePaths[0]}`,
+        });
       }
     };
 

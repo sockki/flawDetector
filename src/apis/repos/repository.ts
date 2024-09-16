@@ -64,9 +64,16 @@ export async function getFileDetail({ owner, repo, path }: GetRepoContentsProps)
   }
 }
 
-export async function getCodeScanResult(path: string): Promise<FileScanResult[]> {
+export async function getCodeScanResult(
+  userId: string,
+  repoName: string,
+  path: string,
+): Promise<FileScanResult[]> {
   try {
-    const querySelect = query(collection(db, 'codeScanResult'), where('result.path', '==', path));
+    const querySelect = query(
+      collection(db, 'users', userId.toString(), 'repositories', repoName, 'codeScanResult'),
+      where('result.path', '==', path),
+    );
 
     const querySnapshot = await getDocs(querySelect);
     const results: FileScanResult[] = [];
