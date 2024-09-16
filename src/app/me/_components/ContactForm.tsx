@@ -61,9 +61,13 @@ export default function ContactForm() {
           {...register('name', {
             required: '이름을 입력해 주세요.',
             minLength: { value: 2, message: '이름은 최소 2자 이상이어야 합니다.' },
+            maxLength: { value: 16, message: '이름은 16자 이하로 입력해 주세요.' },
+            validate: value => value.trim().length > 0 || '공백만 입력할 수 없습니다.',
           })}
         />
-        {errors.name && <span className="text-system-warning">{errors.name.message}</span>}
+        {errors.name && (
+          <span className="text-[1.4rem] text-system-warning">{errors.name.message}</span>
+        )}
       </div>
       <div className="flex flex-col gap-[0.8rem]">
         <label className="text-[1.8rem] font-medium">Email</label>
@@ -82,11 +86,15 @@ export default function ContactForm() {
           isMultiline
           rows={6}
           {...register('message', {
-            required: '내용을 입력해주세요.',
-            minLength: { value: 5, message: '내용은 5자 이상 입력해주세요.' },
+            required: '내용을 입력해 주세요.',
+            minLength: { value: 5, message: '내용은 5자 이상 입력해 주세요.' },
+            maxLength: { value: 1000, message: '내용은 1000자 이하로 입력해 주세요.' },
+            validate: value => value.trim().length > 0 || '공백만 입력할 수 없습니다.',
           })}
         />
-        {errors.message && <span className="text-system-warning">{errors.message.message}</span>}
+        {errors.message && (
+          <span className="text-[1.4rem] text-system-warning">{errors.message.message}</span>
+        )}
       </div>
       <Button type="submit" shape="rectangle" size="large" className="w-full text-[1.8rem]">
         문의 보내기
