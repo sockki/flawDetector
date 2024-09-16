@@ -65,7 +65,9 @@ export function ScanFormat({
               ref: (el: HTMLDivElement | null) => {
                 lineRefs.current[lineNumber - 1] = el;
               },
-              style: highLightedLines?.includes(lineNumber) ? { background: '#ff6d6d' } : {},
+              style: highLightedLines?.includes(lineNumber)
+                ? { background: '#ffefef', display: 'block', width: '100%' } // 변경된 부분
+                : { display: 'block', width: '100%' }, // 기본 줄 스타일에도 추가
             })}
           >
             {currentCode}
