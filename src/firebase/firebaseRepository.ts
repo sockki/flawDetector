@@ -7,7 +7,6 @@ import {
   getDocs,
   deleteDoc,
   query,
-  where,
   orderBy,
 } from 'firebase/firestore';
 import { GitHubRepoData } from '@/types/repository';
@@ -59,14 +58,6 @@ export const getFirestoreRepositories = async (userId: string, sortOption: SortO
     console.error('Firestore에서 레포지토리 조회 중 오류 발생:', error);
     throw new Error('Firestore에서 레포지토리를 가져오는 중 오류가 발생했습니다.');
   }
-};
-
-export const getBookmarkedRepositories = async (userId: string, sortOption: SortOption) => {
-  const repoRef = collection(db, 'users', userId, 'repositories');
-  const q = query(repoRef, where('isBookmarked', '==', true), orderBy(sortOption));
-  const querySnapshot = await getDocs(q);
-
-  return querySnapshot.docs.map(repoDoc => repoDoc.data());
 };
 
 export const updateBookmarkStatus = async (
