@@ -1,3 +1,5 @@
+import { LabelType } from './articleCard';
+
 export type CrawlingData = {
   title: string;
   keyword: string;
@@ -16,6 +18,7 @@ export type ArticleData = {
   content: Content[];
   view: number;
   id: string;
+  labelList: LabelType[];
   isScrapped: boolean;
 };
 
@@ -35,4 +38,9 @@ export type TableObject = {
   column5?: string;
   column6?: string;
   column7?: string;
+};
+
+export type GetLabelData = {
+  hotIdSet: Set<string>;
+  newIdSet: Set<string>;
 };

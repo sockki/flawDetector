@@ -1,5 +1,7 @@
+import { getLabelData } from '@/apis/vulDb/getLabelData';
 import { db } from '@/firebase/firebaseConfig';
-import { ArticleData, CrawlingData } from '@/types/crawlingData';
+import { LabelType } from '@/types/articleCard';
+import { ArticleData, CrawlingData, GetLabelData } from '@/types/crawlingData';
 import { collection, doc, getDocs, orderBy, query, runTransaction } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 
@@ -19,7 +21,7 @@ export async function GET(request: Request) {
       vulDbQuery = query(collection(db, 'vulDb'), orderBy('view', 'desc'));
     }
 
-    const results = await getDocs(vulDbQuery);
+    const crawlingSnapshots = await getDocs(vulDbQuery);
 
     const scrappedArticleIds: string[] = [];
     if (userId) {
@@ -28,16 +30,21 @@ export async function GET(request: Request) {
       scrappedArticleIds.push(...scrapDocs.docs.map(doc => doc.id));
     }
 
-    results.docs.slice((page - 1) * 5, page * 5).forEach(doc => {
-      const docData = doc.data() as CrawlingData;
-      data.push({
-        ...docData,
-        id: doc.id,
-        isScrapped: scrappedArticleIds.includes(doc.id), // 스크랩 여부 추가
-      });
+    const { hotIdSet, newIdSet }: GetLabelData = await getLabelData();
+
+    crawlingSnapshots.docs.slice((page - 1) * 5, page * 5).forEach(crawlingDocItem => {
+      const crawlingDocData = crawlingDocItem.data() as CrawlingData;
+      const crawlingLabel: LabelType[] = [];
+      if (hotIdSet.has(crawlingDocItem.id)) {
+        crawlingLabel.push('hot');
+      }
+      if (newIdSet.has(crawlingDocItem.id)) {
+        crawlingLabel.push('new');
+      }
+      data.push({ ...crawlingDocData, id: crawlingDocItem.id, labelList: crawlingLabel, isScrapped: scrappedArticleIds.includes(crawlingDocItem.id), });
     });
 
-    return NextResponse.json({ data, totalLength: results.size });
+    return NextResponse.json({ data, totalLength: crawlingSnapshots.size });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message, status: false });
