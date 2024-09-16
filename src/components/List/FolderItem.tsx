@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { FolderIcon, ListCheckIcon } from '@/public/index';
 import { twMerge } from 'tailwind-merge';
-import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 import { ListStatusType } from '@/types/list';
 import { ScanStatus } from './ScanStatus';
 
@@ -45,11 +44,10 @@ export function FolderItem({
         <div className={infoStyles}>
           {isSelected && <ListCheckIcon />}
           <FolderIcon />
-          {folderName}
+          <div className="w-[17rem] truncate">{folderName}</div>
         </div>
         <ScanStatus type={type} onBookMarkClick={() => handleBookmark} isMarked={isMarked} />
       </div>
-      {type === 'enabled' ? '' : <ProgressBar type={type} />}
     </div>
   );
 }
