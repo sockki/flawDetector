@@ -12,8 +12,8 @@ type ResultFormatProps = {
 };
 
 export function ResultFormat({ params }: ResultFormatProps) {
-  const [highLightedLines, setHighLightedLines] = useState<number[]>([]);
   const { selectedFilePaths } = useSelectedFile();
+  const [highLightedLines, setHighLightedLines] = useState<number[]>([]);
   const [scrollToLine, setScrollToLine] = useState<number | null>(0);
 
   const { data } = useSession();
@@ -78,9 +78,9 @@ export function ResultFormat({ params }: ResultFormatProps) {
         {mutation.data && mutation.data.length === 0 && (
           <div className="flex h-[52.1rem] w-[148.5rem] flex-col items-center justify-center gap-[2.4rem]">
             <div className="text-[3.2rem] font-bold">검출된 취약점이 없어요</div>
-            <div className="flex flex-col items-center text-[2.4rem] font-normal text-gray-default">
+            <div className="flex flex-col items-center text-[2.4rem] font-regular text-gray-default">
               취약점이 발견되지 않았지만 새로 업데이트할 경우 파일을 한번 더 검사해주세요.
-              <div className="">파일을 한번 더 검사해주세요.</div>
+              <div>파일을 한번 더 검사해주세요.</div>
             </div>
           </div>
         )}
