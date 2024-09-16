@@ -72,11 +72,3 @@ export async function POST(request: Request) {
     });
   }
 }
-
-/* async function getLabel() {
-  const hotQuery = query(collection(db, 'vulDb'), orderBy('view', 'desc'), limit(10));
-  const newQuery = query(collection(db, 'vulDb'), orderBy('scrapDate', 'desc'), limit(10));
-
-  const hotResult = await getDocs(hotQuery);
-  const newResult = await getDocs(newQuery);
-} */
