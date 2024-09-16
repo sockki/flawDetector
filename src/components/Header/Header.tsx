@@ -9,7 +9,8 @@ export default function Header() {
   const pathname = usePathname();
   const headerStyle = (pathname === '/ppa' || pathname === '/agreements') && 'text-white';
   const iconStyle =
-    (pathname === '/ppa' || pathname === '/agreements') && 'filter invert brightness-0';
+    pathname === '/ppa' || pathname === '/agreements' ? 'filter invert brightness-0' : '';
+
   return (
     <header
       className={twMerge(
