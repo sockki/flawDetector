@@ -419,15 +419,20 @@ export function RepoSide({ params }: RepoSideProps) {
           />
         </div>
       )}
-      <Button shape="rectangle" size="large" className="h-[10.7rem] w-[24.7rem]">
-        폴더 전체 검사
+      <Button
+        shape="rectangle"
+        size="large"
+        className="h-[10.7rem] w-[24.7rem]"
+        onClick={isMultipleSelected ? handleClickTrigger : () => handleCodeScan()}
+      >
+        폴더 검사 하기
       </Button>
       <ScanStatus
         detectedCount={fileCounts.detectedCount}
         errorCount={fileCounts.suggestionCount}
         successCount={fileCounts.completeCode}
       />
-      <div className="max-h-[103.6rem] w-[24.7rem] overflow-hidden overflow-y-scroll rounded-[1.2rem] border-[0.1rem] border-l border-r border-neutral-10">
+      <div className="max-h-[103.2rem] w-[24.7rem] overflow-hidden overflow-y-scroll rounded-[1.2rem] border-[0.1rem] border-l border-r border-neutral-10">
         <div className="sticky top-0 border-b bg-white">
           <ListHeader
             isSortOpen={isSortOpen}
@@ -496,14 +501,6 @@ export function RepoSide({ params }: RepoSideProps) {
             )}
         </div>
       </div>
-      <Button
-        shape="rectangle"
-        size="large"
-        className="w-[24.7rem]"
-        onClick={isMultipleSelected ? handleClickTrigger : () => handleCodeScan()}
-      >
-        검사하기
-      </Button>
       <MultipleSelectModal
         onHandleModalOpen={handleClickTrigger}
         isModalOpen={isModalOpen}
