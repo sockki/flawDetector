@@ -12,7 +12,6 @@ export { default as ChatbotIcon } from './icons/chat.svg';
 
 export { default as AnalyzeIcon } from './icons/analyze.svg';
 export { default as BannerCardArrowIcon } from "./icons/bannerCardArrow.svg";
-export { default as BigPinIcon } from "./icons/bigPinIcon.svg";
 export { default as LeftIcon } from './icons/careLeft.svg';
 export { default as SelectedIcon } from './icons/check.svg';
 export { default as ClockCounterIcon } from './icons/clockCounterClockwise.svg';
@@ -45,8 +44,8 @@ export { default as ListCheckIcon } from './icons/listCheck.svg';
 export { default as ListDocumentIcon } from './icons/listDocument.svg';
 export { default as ListIcon } from './icons/listLibrary.svg';
 export { default as LoadingIcon } from './icons/loadingIcon.svg';
+export { default as OutlinePinIcon } from "./icons/outlinePin.svg";
 export { default as PaginationArrowIcon } from "./icons/paginationArrow.svg";
-export { default as PinIcon } from "./icons/pinIcon.svg";
 export { default as RemoveIcon } from './icons/remove.svg';
 export { default as SearchIcon } from "./icons/searchIcon.svg";
 export { default as ShareIcon } from "./icons/sharingIcon.svg";
