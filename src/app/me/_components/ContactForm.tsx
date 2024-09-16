@@ -71,13 +71,23 @@ export default function ContactForm() {
       </div>
       <div className="flex flex-col gap-[0.8rem]">
         <label className="text-[1.8rem] font-medium">Email</label>
-        <Input
-          readOnly
-          value={userEmail}
-          className="pointer-events-none"
-          {...register('email', { required: '이메일을 입력해주세요.' })}
-        />
-        {errors.email && <span className="text-system-warning">{errors.email.message}</span>}
+        {userEmail ? (
+          <Input readOnly value={userEmail} />
+        ) : (
+          <Input
+            placeholder="justin@floatfactory.kr"
+            {...register('email', {
+              required: '이메일을 입력해 주세요.',
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+                message: '유효한 이메일 주소를 입력해 주세요.',
+              },
+            })}
+          />
+        )}
+        {errors.email && (
+          <span className="text-[1.4rem] text-system-warning">{errors.email.message}</span>
+        )}
       </div>
       <div className="flex flex-col gap-[0.8rem]">
         <label className="text-[1.8rem] font-medium">Message</label>
