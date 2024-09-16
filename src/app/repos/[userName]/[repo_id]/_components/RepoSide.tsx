@@ -427,52 +427,54 @@ export function RepoSide({ params }: RepoSideProps) {
         errorCount={fileCounts.suggestionCount}
         successCount={fileCounts.completeCode}
       />
-      <div className="min-h-fit-[103.6rem] w-[24.7rem] overflow-hidden overflow-y-scroll rounded-[1.2rem] border-[0.1rem] border-l border-r border-neutral-10">
-        <ListHeader
-          isSortOpen={isSortOpen}
-          onListClick={handleSortOpen}
-          onChangeSortType={handleSortType}
-          onFileSelect={() => handleMultipleSelect()}
-          isMultipleSelected={isMultipleSelected}
-        />
-        {currentPath === '' ? (
-          <div
-            className="flex h-[4.4rem] w-[24.7rem] cursor-pointer gap-[1rem] border-t p-[1rem] px-[1.5rem] text-[1.6rem]"
-            onClick={() => handleFolderClick('')}
-          >
-            All Files
-          </div>
-        ) : (
-          <div className="flex h-[4.4rem] w-[24.7rem] items-center border-t p-[1rem] px-[1.5rem] text-[1.6rem]">
+      <div className="max-h-[103.6rem] w-[24.7rem] overflow-hidden overflow-y-scroll rounded-[1.2rem] border-[0.1rem] border-l border-r border-neutral-10">
+        <div className="sticky top-0 border-b bg-white">
+          <ListHeader
+            isSortOpen={isSortOpen}
+            onListClick={handleSortOpen}
+            onChangeSortType={handleSortType}
+            onFileSelect={() => handleMultipleSelect()}
+            isMultipleSelected={isMultipleSelected}
+          />
+          {currentPath === '' ? (
             <div
-              className="mr-[0.2rem] cursor-pointer text-[#c3c3c3] hover:underline"
+              className="flex h-[4.4rem] w-[24.7rem] cursor-pointer gap-[1rem] border-t p-[1rem] px-[1.5rem] text-[1.6rem]"
               onClick={() => handleFolderClick('')}
             >
               All Files
             </div>
-            {pathSegments.map((segment, index) => {
-              const partialPath = pathSegments.slice(0, index + 1).join('/');
-              return (
-                <span key={segment} className="flex items-center">
-                  <span className="mx-[0.3rem]">/</span>
-                  <span
-                    className={twMerge(
-                      index === pathSegments.length - 1 ? 'text-primary-500' : 'text-[#c3c3c3]',
-                      'cursor-pointer hover:underline',
-                    )}
-                    onClick={() => handleFolderClick(partialPath)}
-                  >
-                    {segment}
+          ) : (
+            <div className="flex h-[4.4rem] w-[24.7rem] items-center border-t p-[1rem] px-[1.5rem] text-[1.6rem]">
+              <div
+                className="mr-[0.2rem] cursor-pointer text-[#c3c3c3] hover:underline"
+                onClick={() => handleFolderClick('')}
+              >
+                All Files
+              </div>
+              {pathSegments.map((segment, index) => {
+                const partialPath = pathSegments.slice(0, index + 1).join('/');
+                return (
+                  <span key={segment} className="flex items-center">
+                    <span className="mx-[0.3rem]">/</span>
+                    <span
+                      className={twMerge(
+                        index === pathSegments.length - 1 ? 'text-primary-500' : 'text-[#c3c3c3]',
+                        'cursor-pointer hover:underline',
+                      )}
+                      onClick={() => handleFolderClick(partialPath)}
+                    >
+                      {segment}
+                    </span>
                   </span>
-                </span>
-              );
-            })}
-          </div>
-        )}
-        <div className="overflow-y-scroll text-[1rem] last:pb-0">
+                );
+              })}
+            </div>
+          )}
           {currentPath && (
             <FolderItem folderName="..." type="enabled" onFolderClick={handleParentDirectory} />
           )}
+        </div>
+        <div className="overflow-y-scroll text-[1rem] first:border-t-0">
           {currentData &&
             currentData.map(contents =>
               contents.type === 'dir' ? (
