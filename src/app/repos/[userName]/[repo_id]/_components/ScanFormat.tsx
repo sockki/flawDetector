@@ -15,7 +15,7 @@ type ScanFormatProps = {
 
 const containerStyles = 'flex gap-[2.8rem]';
 const formatStyles =
-  'flex h-[131rem] w-[148.4rem] items-center justify-center rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] bg-white overflow-y-auto'; // Changed 'over-scroll-y' to 'overflow-y-auto'
+  'flex h-[131rem] w-[148.4rem] items-center justify-center rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] bg-white overflow-y-auto';
 const contentStyles = 'flex flex-col items-center gap-[2rem] text-[3.2rem] text-primary-500';
 const customCodeStyle = {
   width: '148.4rem',
@@ -66,8 +66,8 @@ export function ScanFormat({
                 lineRefs.current[lineNumber - 1] = el;
               },
               style: highLightedLines?.includes(lineNumber)
-                ? { background: '#ffefef', display: 'block', width: '100%' } // 변경된 부분
-                : { display: 'block', width: '100%' }, // 기본 줄 스타일에도 추가
+                ? { background: '#ffefef', display: 'block', width: '100%' }
+                : { display: 'block', width: '100%' },
             })}
           >
             {currentCode}

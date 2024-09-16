@@ -18,7 +18,7 @@ export function ListHeader({
   onChangeSortType,
 }: ListHeaderProps) {
   const containerStyles =
-    'flex h-[7rem] w-[24.7rem] items-center justify-between rounded-t-[0.8rem] border-[0.1rem] border-gray-300 bg-purple-light p-[2rem] relative';
+    'flex h-[7rem] w-[24.7rem] items-center justify-between rounded-t-[0.8rem] border-gray-300 bg-purple-light p-[2rem] relative';
 
   const iconContainerStyles = 'flex h-[3rem] w-fit items-center justify-around gap-[1rem] ';
 

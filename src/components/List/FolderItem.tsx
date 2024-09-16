@@ -22,7 +22,7 @@ export function FolderItem({
   onFolderClick,
 }: FolderItemProps) {
   const containerStyles = twMerge(
-    'group flex h-[5.2rem] w-[24.7rem] flex-col justify-center gap-[0.4rem] border-b border-gray-300 p-[1rem] align-middle hover:bg-purple-light',
+    'group flex h-[5.2rem] w-[24.7rem] flex-col justify-center gap-[0.4rem] border-t border-gray-300 p-[1rem] align-middle hover:bg-purple-light',
     isSelected ? 'bg-purple-dark' : 'bg-white',
   );
 

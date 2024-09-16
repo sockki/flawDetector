@@ -427,7 +427,7 @@ export function RepoSide({ params }: RepoSideProps) {
         errorCount={fileCounts.suggestionCount}
         successCount={fileCounts.completeCode}
       />
-      <div className="h-[103.6rem] w-[24.7rem] overflow-hidden overflow-y-scroll rounded-[1.2rem] border-[0.1rem] border-l border-r border-neutral-10">
+      <div className="min-h-fit-[103.6rem] w-[24.7rem] overflow-hidden overflow-y-scroll rounded-[1.2rem] border-[0.1rem] border-l border-r border-neutral-10">
         <ListHeader
           isSortOpen={isSortOpen}
           onListClick={handleSortOpen}
@@ -437,13 +437,13 @@ export function RepoSide({ params }: RepoSideProps) {
         />
         {currentPath === '' ? (
           <div
-            className="flex h-[4.4rem] w-[24.7rem] cursor-pointer gap-[1rem] border-b border-t p-[1rem] px-[1.5rem] text-[1.6rem]"
+            className="flex h-[4.4rem] w-[24.7rem] cursor-pointer gap-[1rem] border-t p-[1rem] px-[1.5rem] text-[1.6rem]"
             onClick={() => handleFolderClick('')}
           >
             All Files
           </div>
         ) : (
-          <div className="flex h-[4.4rem] w-[24.7rem] items-center border-b border-t p-[1rem] px-[1.5rem] text-[1.6rem]">
+          <div className="flex h-[4.4rem] w-[24.7rem] items-center border-t p-[1rem] px-[1.5rem] text-[1.6rem]">
             <div
               className="mr-[0.2rem] cursor-pointer text-[#c3c3c3] hover:underline"
               onClick={() => handleFolderClick('')}
@@ -469,7 +469,7 @@ export function RepoSide({ params }: RepoSideProps) {
             })}
           </div>
         )}
-        <div className="overflow-y-scroll text-[1rem]">
+        <div className="overflow-y-scroll text-[1rem] last:pb-0">
           {currentPath && (
             <FolderItem folderName="..." type="enabled" onFolderClick={handleParentDirectory} />
           )}
