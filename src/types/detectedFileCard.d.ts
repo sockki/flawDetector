@@ -15,5 +15,4 @@ export type DetectFileCardProps = {
   date: Date;
   userId: string;
   userName: string;
-  repoId: string;
 };

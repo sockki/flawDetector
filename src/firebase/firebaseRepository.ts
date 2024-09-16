@@ -18,7 +18,7 @@ import { db } from './firebaseConfig';
 export const saveRepositories = async (userId: string, repoData: GitHubRepoData[]) => {
   const userRepoRef = collection(db, 'users', userId.toString(), 'repositories');
   const promises = repoData.map(async repo => {
-    const repoRef = doc(userRepoRef, repo.id.toString());
+    const repoRef = doc(userRepoRef, repo.name);
     const existingRepoDoc = await getDoc(repoRef);
     const isBookmarked = existingRepoDoc.exists() ? existingRepoDoc.data().isBookmarked : false;
 
@@ -71,19 +71,19 @@ export const getBookmarkedRepositories = async (userId: string, sortOption: Sort
 
 export const updateBookmarkStatus = async (
   userId: string,
-  repoId: string,
+  repoName: string,
   isBookmarked: boolean,
 ) => {
-  const repoRef = doc(db, 'users', userId, 'repositories', repoId.toString());
+  const repoRef = doc(db, 'users', userId.toString(), 'repositories', repoName);
   await updateDoc(repoRef, { isBookmarked });
 };
 
 export const updateCheckedStatus = async (
   userId: string,
-  repoId: string,
+  repoName: string,
   isChecked: 'before' | 'under' | 'done',
 ) => {
-  const repoRef = doc(db, 'users', userId, 'repositories', repoId.toString());
+  const repoRef = doc(db, 'users', userId.toString(), 'repositories', repoName);
   await updateDoc(repoRef, { isChecked });
 };
 

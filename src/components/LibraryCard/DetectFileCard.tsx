@@ -8,7 +8,7 @@ import { DetectFileCardArrowIcon, DetectFileCardBugIcon, DetectFileCardStar } fr
 import { useRepoStore } from '@/stores/useRepoStore';
 import type { DetectFileCardProps, ElementByLabel } from '@/types/detectedFileCard';
 
-async function updateBookmarkStatus(userId: string, repoId: string, isBookmarked: boolean) {
+async function updateBookmarkStatus(userId: string, repoName: string, isBookmarked: boolean) {
   const response = await fetch('/api/repositories', {
     method: 'PATCH',
     headers: {
@@ -16,7 +16,7 @@ async function updateBookmarkStatus(userId: string, repoId: string, isBookmarked
     },
     body: JSON.stringify({
       userId,
-      repoId,
+      repoName,
       isBookmarked,
     }),
   });
@@ -31,12 +31,11 @@ export default function DetectFileCard({
   date,
   userId,
   userName,
-  repoId,
 }: DetectFileCardProps) {
   const router = useRouter();
   const { repositories, setRepositories, addRecentViewed } = useRepoStore();
 
-  const repos = repositories.find(repo => repo.id === repoId);
+  const repos = repositories.find(repo => repo.name === title);
   const [isBookmark, setIsBookmark] = useState<boolean>(repos?.isBookmarked || false);
 
   if (!repos) return null;
@@ -70,10 +69,10 @@ export default function DetectFileCard({
 
       setRepositories(
         repositories.map(repo =>
-          repo.id === repoId ? { ...repo, isBookmarked: !isBookmark } : repo,
+          repo.name === title ? { ...repo, isBookmarked: !isBookmark } : repo,
         ),
       );
-      await updateBookmarkStatus(userId, repoId, !isBookmark);
+      await updateBookmarkStatus(userId, title, !isBookmark);
     } catch (error) {
       console.error(error);
     }

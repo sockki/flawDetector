@@ -85,7 +85,6 @@ export default function RepositoryList({ user, repositories, searchParams }: Rep
               date={repo.pushedAt}
               userId={userId}
               userName={userName}
-              repoId={repo.id}
             />
           ))}
         </div>
