@@ -1,15 +1,16 @@
+import { LabelType } from '@/types/articleCard';
 import { twMerge } from 'tailwind-merge';
 
 type SuggestionChipProps = {
-  variant: 'new' | 'hot' | 'warn' | 'notification' | 'report';
-
+  variant: LabelType;
   isActive?: boolean;
 };
+
 export default function SuggestionChip({ variant, isActive = true }: SuggestionChipProps) {
   const baseClasses =
     'py-[0.8rem] px-[1.2rem] rounded-full bg-[#e8e8e8] text-gray-dark font-bold text-[1.6rem] w-fit ';
 
-  const variantClasses = {
+  const variantClasses: Record<LabelType, string> = {
     new: 'text-white bg-system-assist',
     hot: 'text-white bg-system-warning',
     warn: 'text-system-warning bg-red-light',

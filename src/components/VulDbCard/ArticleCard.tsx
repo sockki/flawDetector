@@ -5,7 +5,7 @@ import type { ArticleCardProps } from '@/types/articleCard';
 import SuggestionChip from '../Chips/SuggestionChip';
 
 export default function ArticleCard({
-  label,
+  labelList,
   title,
   company,
   content,
@@ -18,7 +18,9 @@ export default function ArticleCard({
       <div className="flex w-full flex-col gap-[2.4rem]">
         <div className="flex flex-col">
           <div className="flex items-center gap-[0.8rem]">
-            {label !== '' && <SuggestionChip variant={label} />}
+            {labelList.map(label => (
+              <SuggestionChip key={label} variant={label} />
+            ))}
 
             <div className="w-full">
               <h1 className="line-clamp-1 text-[2rem] font-regular leading-[2.42rem]">{`[${keyword.trim()}] ${title}`}</h1>

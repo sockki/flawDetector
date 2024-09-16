@@ -7,7 +7,7 @@ import type { ArticleCardProps } from '@/types/articleCard';
 import SuggestionChip from '../Chips/SuggestionChip';
 
 export default function ArticleSmallCard({
-  label,
+  labelList,
   imageSrc,
   title,
   content,
@@ -33,7 +33,11 @@ export default function ArticleSmallCard({
       )}
       <div className="flex flex-col">
         <div className="flex flex-col">
-          <div className="w-fit">{label !== '' && <SuggestionChip variant={label} />}</div>
+          <div className="w-fit">
+            {labelList.map(label => (
+              <SuggestionChip key={label} variant={label} />
+            ))}
+          </div>
           <div className="mt-[1.6rem] flex h-fit w-full items-center">
             <h1 className="line-clamp-2 text-[2.4rem] font-medium leading-[3.6rem]">{title}</h1>
           </div>
