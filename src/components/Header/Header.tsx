@@ -10,6 +10,7 @@ export default function Header() {
   const headerStyle = (pathname === '/ppa' || pathname === '/agreements') && 'text-white';
   const iconStyle =
     (pathname === '/ppa' || pathname === '/agreements') && 'filter invert brightness-0';
+
   return (
     <header
       className={twMerge(
@@ -17,20 +18,26 @@ export default function Header() {
         headerStyle,
       )}
     >
-      <h1 className="text- ml-[8rem] flex items-center">
+      <h1 className="ml-[8rem] flex items-center">
         <Link href="/">
           <LogoIcon className={iconStyle} />
         </Link>
       </h1>
-      <nav className="w-full">
-        <ul className="flex items-center justify-between">
-          <li className="ml-[10rem]">
-            <Link href="/vulnerability-db?label=hot&page=1" className="text-[1.8rem] font-[500]">
+      <nav className="w-full px-[5rem]">
+        <ul className="flex items-center justify-end space-x-[5rem]">
+          <li>
+            <Link
+              href="/vulnerability-db?label=hot&page=1"
+              className="text-[1.8rem] font-[500] hover:text-primary-500"
+            >
               취약점 DB
             </Link>
           </li>
-          <li className="mr-[8rem]">
-            <Link href="/repos" className="text-[1.8rem] font-[500]">
+          <li>
+            <Link
+              href="/repos"
+              className="pr-[2rem] text-[1.8rem] font-[500] hover:text-primary-500"
+            >
               MY 저장소
             </Link>
           </li>
