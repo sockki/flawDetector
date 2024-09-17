@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import { twMerge } from 'tailwind-merge';
-import { BigPinIcon, ShareIcon } from '@/public/index';
+import { OutlinePinIcon, ShareIcon } from '@/public/index';
+import type { ArticleCardProps } from '@/types/articleCard';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
-import type { ArticleCardProps } from '@/types/articleCard';
+import Image from 'next/image';
+import { twMerge } from 'tailwind-merge';
 import SuggestionChip from '../Chips/SuggestionChip';
 
 export default function ArticleSmallCard({
@@ -45,7 +45,7 @@ export default function ArticleSmallCard({
       <div className="flex items-center justify-between">
         <div className="flex gap-[1.2rem]">
           <button type="button">
-            <BigPinIcon className="h-[3.2rem] w-[3.2rem]" />
+            <OutlinePinIcon className="h-[3.2rem] w-[3.2rem]" />
           </button>
           <button type="button">
             <ShareIcon />
