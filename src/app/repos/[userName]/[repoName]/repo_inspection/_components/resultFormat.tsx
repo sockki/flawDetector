@@ -8,7 +8,7 @@ import { useSession } from 'next-auth/react';
 import { ScanFormat } from '../../_components/ScanFormat';
 
 type ResultFormatProps = {
-  params: { userName: string; repo_id: string };
+  params: { userName: string; repoName: string };
 };
 
 export function ResultFormat({ params }: ResultFormatProps) {
@@ -49,15 +49,15 @@ export function ResultFormat({ params }: ResultFormatProps) {
     const performMutation = () => {
       if (selectedFilePaths.length > 0) {
         mutation.mutate({
-          repoName: params.repo_id,
+          repoName: params.repoName,
           userId: sessionUserId || '',
-          path: `${params.userName}/${params.repo_id}/${selectedFilePaths[0]}`,
+          path: `${params.userName}/${params.repoName}/${selectedFilePaths[0]}`,
         });
       }
     };
 
     performMutation();
-  }, [selectedFilePaths, params.userName, params.repo_id]);
+  }, [selectedFilePaths, params.userName, params.repoName]);
 
   useEffect(() => {
     setHighLightedLines([]);

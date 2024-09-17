@@ -4,7 +4,7 @@ import { RepoSide } from './_components/RepoSide';
 
 interface LayoutProps {
   children: ReactNode;
-  params: { userName: string; repo_id: string };
+  params: { userName: string; repoName: string };
 }
 
 export default function Layout({ children, params }: LayoutProps) {
