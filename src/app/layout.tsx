@@ -3,6 +3,7 @@ import Header from '@/components/Header/Header';
 import '@/styles/globals.css';
 import ClientSessionProvider from '@/utils/clientSessionProvider';
 import Providers from '@/utils/provider';
+import { cookies } from 'next/headers';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -18,6 +19,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = cookies();
+  const sessionCookie = cookieStore.get('next-auth.session-token');
+  const isLoggedIn = !!sessionCookie;
+
   return (
     <html lang="ko">
       <head>
@@ -27,12 +32,11 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans">
-        {' '}
         <ClientSessionProvider>
           <Providers>
             <div id="modal" />
             <div className="flex min-h-screen flex-col">
-              <Header />
+              <Header isLoggedIn={isLoggedIn} />
               <div className="flex-1">{children}</div>
               <Footer />
             </div>
