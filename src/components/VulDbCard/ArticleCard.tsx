@@ -1,7 +1,7 @@
 'use client';
 
 import ScrapButton from '@/app/vulnerability-db/_components/ScrapButton';
-import { ShareIcon } from '@/public/index';
+import ShareButton from '@/app/vulnerability-db/_components/ShareButton';
 import type { LabelType } from '@/types/articleCard';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
@@ -26,21 +26,7 @@ export default function ArticleCard({
   id,
   isScrapped,
 }: ArticleCardProps) {
-  // const [isScrapped, setIsScrapped] = useState(false)
   const timeDifference = formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
-  // const session = useSession();
-
-  // const checkScrapped = async () => {
-  //   const response = await (
-  //     await fetch(
-  //       `${process.env.NEXT_PUBLIC_API_URL}/api/scrap?userId=${session?.data?.user.id}&articleId=${id}`,
-  //       {
-  //         cache: 'no-cache',
-  //       },
-  //     )
-  //   ).json();
-  // };
-  // useEffect(() => {}, []);
 
   return (
     <article className="flex h-fit w-[86.5rem] gap-[2.4rem] rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] p-[2.8rem] hover:shadow-button active:bg-purple-dark">
@@ -64,9 +50,7 @@ export default function ArticleCard({
         <div className="flex justify-between">
           <div className="flex gap-[1.2rem]">
             <ScrapButton articleId={id} isScrapped={isScrapped} />
-            <button type="button">
-              <ShareIcon />
-            </button>
+            <ShareButton title={title} />
           </div>
           <span className="text-[1.6rem] font-regular leading-[1.936rem] text-[#a2a2a2]">
             {timeDifference}
