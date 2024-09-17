@@ -1,18 +1,21 @@
 'use client';
 
 import { SearchIcon } from '@/public/index';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 export default function VulDbSearchInput() {
   const [searchValue, setSearchValue] = useState('');
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const params = new URLSearchParams(searchParams);
 
     if (!searchValue.trim()) {
       return;
@@ -28,8 +31,12 @@ export default function VulDbSearchInput() {
       });
 
       if (response.ok) {
-        // 검색로직 추가 해주세욤
-        router.refresh();
+        if (searchValue) {
+          params.set('search', searchValue);
+        } else {
+          params.delete('search');
+        }
+        router.replace(`${pathname}?${params.toString()}`);
       }
       setSearchValue('');
     } catch (error) {

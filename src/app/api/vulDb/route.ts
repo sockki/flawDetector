@@ -13,13 +13,10 @@ export async function GET(request: Request) {
     const userId = searchParams.get('userId');
     const data: ArticleData[] = [];
 
-    let vulDbQuery = query(collection(db, 'vulDb'), orderBy('view', 'desc'));
-    if (label === 'new') {
-      vulDbQuery = query(collection(db, 'vulDb'), orderBy('scrapDate', 'desc'));
-    }
-    if (label === 'hot') {
-      vulDbQuery = query(collection(db, 'vulDb'), orderBy('view', 'desc'));
-    }
+    const vulDbQuery = query(
+      collection(db, 'vulDb'),
+      orderBy(label === 'new' ? 'scrapDate' : 'view', 'desc'),
+    );
 
     const crawlingSnapshots = await getDocs(vulDbQuery);
 
