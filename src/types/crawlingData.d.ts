@@ -8,6 +8,7 @@ export type CrawlingData = {
   content: Content[];
   view: number;
   isScrapped: boolean;
+  company: string;
 };
 
 export type ArticleData = {
@@ -17,6 +18,7 @@ export type ArticleData = {
   scrapDate: Date;
   content: Content[];
   view: number;
+  company: string;
   id: string;
   labelList: LabelType[];
   isScrapped: boolean;
@@ -44,3 +46,5 @@ export type GetLabelData = {
   hotIdSet: Set<string>;
   newIdSet: Set<string>;
 };
+
+export type DetailResponse = { articleDetailData: ArticleData; relativeData: ArticleData[] };
