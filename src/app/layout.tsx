@@ -35,7 +35,7 @@ export default function RootLayout({
               <div className="flex-1">{children}</div>
               <Footer />
             </div>
-            <ToastContainer />
+            <ToastContainer autoClose={2000} />
           </Providers>
         </ClientSessionProvider>
       </body>
