@@ -13,12 +13,14 @@ type ScanFormatProps = {
   scrollToLine?: number | null;
 };
 
-const containerStyles = 'flex gap-[2.8rem]';
+const containerStyles = 'flex gap-[2.8rem] w-[148.4rem]';
 const formatStyles =
-  'flex h-[131rem] max-w-[148.4rem] items-center justify-center rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] bg-white overflow-y-auto';
-const contentStyles = 'flex flex-col items-center gap-[2rem] text-[3.2rem] text-primary-500';
+  'flex h-[131rem]  max-w-[148.4rem] items-center justify-center rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] bg-white overflow-y-auto';
+const contentStyles =
+  'flex flex-col items-center justify-center  gap-[2rem] text-[3.2rem] text-primary-500 w-[148.4rem]';
 const customCodeStyle = {
-  width: '148.4rem',
+  maxWidth: '148.4rem',
+  minWidth: '100rem',
   height: '100%',
   backgroundColor: '#ffffff',
   fontSize: '1.8rem',
@@ -49,8 +51,8 @@ export function ScanFormat({
 
   return (
     <div className={containerStyles}>
-      <div className={twMerge(formatStyles, resultType ? 'h-[55.5rem]' : '')}>
-        {currentCode ? (
+      {currentCode ? (
+        <div className={twMerge(formatStyles, resultType ? 'h-[55.5rem]' : '')}>
           <SyntaxHighlighter
             language={codeType}
             style={oneLight}
@@ -72,13 +74,13 @@ export function ScanFormat({
           >
             {currentCode}
           </SyntaxHighlighter>
-        ) : (
-          <div className={contentStyles}>
-            <ReadingGlassesIcon />
-            파일을 선택하세요
-          </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className={contentStyles}>
+          <ReadingGlassesIcon />
+          파일을 선택하세요
+        </div>
+      )}
     </div>
   );
 }

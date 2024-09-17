@@ -1,4 +1,4 @@
-import SortList from '@/app/repos/[userName]/[repo_id]/_components/SortList';
+import SortList from '@/app/repos/[userName]/[repoName]/_components/SortList';
 import { DoubleCheckIcon, ListIcon } from '@/public/index';
 import { twMerge } from 'tailwind-merge';
 

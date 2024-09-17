@@ -17,7 +17,7 @@ import { ScanStatus } from './ScanStatus';
 import { MultipleSelectModal } from './MultipleSelectModal';
 
 type RepoSideProps = {
-  params: { userName: string; repo_id: string };
+  params: { userName: string; repoName: string };
 };
 
 export function RepoSide({ params }: RepoSideProps) {
@@ -54,7 +54,7 @@ export function RepoSide({ params }: RepoSideProps) {
   const { data: ReposittoryData } = useQuery<RepositoryContentsProps[]>({
     queryKey: ['RepoDetail', currentPath],
     queryFn: () =>
-      getRepoContents({ owner: params.userName, repo: params.repo_id, path: currentPath }),
+      getRepoContents({ owner: params.userName, repo: params.repoName, path: currentPath }),
   });
 
   const generateMessage = async (promptMessage: string) => {
@@ -86,7 +86,7 @@ export function RepoSide({ params }: RepoSideProps) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ userName: params.userName, repoName: params.repo_id }),
+      body: JSON.stringify({ userName: params.userName, repoName: params.repoName }),
     });
 
     if (!response.ok) {
@@ -112,7 +112,7 @@ export function RepoSide({ params }: RepoSideProps) {
   const handleCodeScan = async (multipleFilesPath?: string) => {
     const filepath = multipleFilesPath
       ? `${multipleFilesPath}`
-      : `${params.userName}/${params.repo_id}/${selectedFilePaths[selectedFilePaths.length - 1]}`;
+      : `${params.userName}/${params.repoName}/${selectedFilePaths[selectedFilePaths.length - 1]}`;
 
     setWaitFiles(prevFiles => prevFiles.filter(file => file !== filepath));
     setCheckingFiles(pre => [...pre, filepath]);
@@ -122,7 +122,7 @@ export function RepoSide({ params }: RepoSideProps) {
       const pathSegments = filepath.split('/').slice(2).join('/');
       const res = await getRepoContents({
         owner: params.userName,
-        repo: params.repo_id,
+        repo: params.repoName,
         path: pathSegments,
       });
       decodedCode = Buffer.from(res.content, 'base64').toString('utf-8');
@@ -219,8 +219,8 @@ export function RepoSide({ params }: RepoSideProps) {
     if (sortType === 'checked') {
       const resultPaths = resultFiles.map(file => file.path);
       const checkedData = currentData.slice().sort((a, b) => {
-        const aIncluded = resultPaths.includes(`${params.userName}/${params.repo_id}/${a.path}`);
-        const bIncluded = resultPaths.includes(`${params.userName}/${params.repo_id}/${b.path}`);
+        const aIncluded = resultPaths.includes(`${params.userName}/${params.repoName}/${a.path}`);
+        const bIncluded = resultPaths.includes(`${params.userName}/${params.repoName}/${b.path}`);
         if (aIncluded === bIncluded) {
           return 0;
         }
@@ -250,8 +250,8 @@ export function RepoSide({ params }: RepoSideProps) {
     if (sortType === 'checked') {
       const resultPaths = resultFiles.map(file => file.path);
       const checkedData = currentData.slice().sort((a, b) => {
-        const aIncluded = resultPaths.includes(`${params.userName}/${params.repo_id}/${a.path}`);
-        const bIncluded = resultPaths.includes(`${params.userName}/${params.repo_id}/${b.path}`);
+        const aIncluded = resultPaths.includes(`${params.userName}/${params.repoName}/${a.path}`);
+        const bIncluded = resultPaths.includes(`${params.userName}/${params.repoName}/${b.path}`);
         if (aIncluded === bIncluded) {
           return 0;
         }
@@ -262,8 +262,8 @@ export function RepoSide({ params }: RepoSideProps) {
     if (sortType === 'unchecked') {
       const resultPaths = resultFiles.map(file => file.path);
       const uncheckedData = currentData.slice().sort((a, b) => {
-        const aIncluded = !resultPaths.includes(`${params.userName}/${params.repo_id}/${a.path}`);
-        const bIncluded = !resultPaths.includes(`${params.userName}/${params.repo_id}/${b.path}`);
+        const aIncluded = !resultPaths.includes(`${params.userName}/${params.repoName}/${a.path}`);
+        const bIncluded = !resultPaths.includes(`${params.userName}/${params.repoName}/${b.path}`);
         if (aIncluded === bIncluded) {
           return 0;
         }
@@ -296,11 +296,11 @@ export function RepoSide({ params }: RepoSideProps) {
   const handleFileClick = async (filePath: string) => {
     try {
       const fileName = filePath.split('/').pop();
-      const fullPath = `${params.userName}/${params.repo_id}/${filePath}`;
+      const fullPath = `${params.userName}/${params.repoName}/${filePath}`;
 
       const response = await getFileDetail({
         owner: params.userName,
-        repo: params.repo_id,
+        repo: params.repoName,
         path: filePath,
       });
 
@@ -347,7 +347,7 @@ export function RepoSide({ params }: RepoSideProps) {
         setSelectedFilePaths([filePath]);
         const res: RepositoryContentsProps = await getRepoContents({
           owner: params.userName,
-          repo: params.repo_id,
+          repo: params.repoName,
           path: filePath,
         });
 
@@ -404,13 +404,13 @@ export function RepoSide({ params }: RepoSideProps) {
       {ScanCode && (
         <div className="absolute left-[125rem] top-[1.5rem] bg-white">
           <Alert
-            type={getFileItemType(`${params.userName}/${params.repo_id}/${selectedFilePaths[0]}`)}
+            type={getFileItemType(`${params.userName}/${params.repoName}/${selectedFilePaths[0]}`)}
             onAlertClick={
-              getFileItemType(`${params.userName}/${params.repo_id}/${selectedFilePaths[0]}`) ===
+              getFileItemType(`${params.userName}/${params.repoName}/${selectedFilePaths[0]}`) ===
               'error'
                 ? () => handleCodeScan
                 : () => {
-                    router.push(`/repos/${params.userName}/${params.repo_id}/repo_inspection`);
+                    router.push(`/repos/${params.userName}/${params.repoName}/repo_inspection`);
                     handleAlertopen();
                   }
             }
@@ -493,7 +493,7 @@ export function RepoSide({ params }: RepoSideProps) {
                 <FileItem
                   key={contents.sha}
                   fileName={contents.name}
-                  type={getFileItemType(`${params.userName}/${params.repo_id}/${contents.path}`)}
+                  type={getFileItemType(`${params.userName}/${params.repoName}/${contents.path}`)}
                   isSelected={selectedFilePaths.includes(contents.path)}
                   onFileClick={() => handleFileClick(contents.path)}
                 />
