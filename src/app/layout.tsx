@@ -5,6 +5,7 @@ import ClientSessionProvider from '@/utils/clientSessionProvider';
 import Providers from '@/utils/provider';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import { ReactNode } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -39,6 +40,7 @@ export default function RootLayout({
           </Providers>
         </ClientSessionProvider>
       </body>
+      <Script src="https://developers.kakao.com/sdk/js/kakao.js" strategy="afterInteractive" />
     </html>
   );
 }
