@@ -24,7 +24,6 @@ export { default as DoubleCheckIcon } from "./icons/doubleCheck.svg";
 export { default as EmptyBookMarkIcon } from "./icons/emptyBookMark.svg";
 export { default as EmptyFileIcon } from './icons/emptyFile.svg';
 export { default as ErrorIcon } from './icons/error.svg';
-export { default as ExternalLinkIcon } from "./icons/externalLinkIcon.svg";
 export { default as ChatIcon } from './icons/floatChat.svg';
 export { default as TopIcon } from './icons/floatTop.svg';
 export { default as LandingBugIcon } from "./icons/landingpageBug.svg";
@@ -33,7 +32,6 @@ export { default as ReadingGlassesIcon } from './icons/readingGlasses.svg';
 export { default as ScanCrossIcon } from './icons/scanCross.svg';
 export { default as ScanErrorIcon } from './icons/scanError.svg';
 export { default as ScanSuccessIcon } from './icons/scanSuccess.svg';
-;
 
 export { default as FillPinIcon } from './icons/fillPin.svg';
 export { default as FolderIcon } from './icons/folder.svg';
@@ -48,7 +46,7 @@ export { default as OutlinePinIcon } from "./icons/outlinePin.svg";
 export { default as PaginationArrowIcon } from "./icons/paginationArrow.svg";
 export { default as RemoveIcon } from './icons/remove.svg';
 export { default as SearchIcon } from "./icons/searchIcon.svg";
-export { default as ShareIcon } from "./icons/sharingIcon.svg";
+export { default as ShareIcon } from "./icons/sharing.svg";
 export { default as SpacSpaceLogoIcon } from "./icons/spacSpaceLogo.svg";
 export { default as SuccessIcon } from './icons/success.svg';
 
