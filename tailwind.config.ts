@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Pretendard', 'sans-serif'],
+      },
       backgroundOpacity: {
         8: '0.08',
         12: '0.12',
@@ -75,7 +78,7 @@ const config: Config = {
         },
         move: {
           '0%, 100%': { transform: 'translateX(0)' },
-          '50%': { transform: 'translateX(calc(100% + 250px))' }, // 로고 크기에 맞게 설정
+          '50%': { transform: 'translateX(calc(100% + 250px))' },
         },
         spin360: {
           '0%': { transform: 'rotate(0deg)' },

@@ -4,9 +4,6 @@ import '@/styles/globals.css';
 import ClientSessionProvider from '@/utils/clientSessionProvider';
 import Providers from '@/utils/provider';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: '플로디텍터 | FlawDetector',
@@ -23,7 +20,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={inter.className}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+        />
+      </head>
+      <body className="font-sans">
+        {' '}
         <ClientSessionProvider>
           <Providers>
             <div id="modal" />
