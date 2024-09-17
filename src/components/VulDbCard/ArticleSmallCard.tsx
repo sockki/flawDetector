@@ -1,36 +1,13 @@
-import Image from 'next/image';
-import { twMerge } from 'tailwind-merge';
 import { BigPinIcon, ShareIcon } from '@/public/index';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
 import type { ArticleCardProps } from '@/types/articleCard';
 import SuggestionChip from '../Chips/SuggestionChip';
 
-export default function ArticleSmallCard({
-  labelList,
-  imageSrc,
-  title,
-  content,
-  date,
-}: ArticleCardProps) {
+export default function ArticleSmallCard({ labelList, title, content, date }: ArticleCardProps) {
   const timeDifference = formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
   return (
-    <article
-      className={twMerge(
-        'relative flex h-fit w-[41.4rem] flex-col gap-[2.4rem] overflow-hidden rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] p-[2.8rem] hover:shadow-button',
-        imageSrc ? 'active:border-[#9747ff] active:bg-none' : 'active:bg-purple-dark',
-      )}
-    >
-      {imageSrc && (
-        <div className="absolute inset-0">
-          <Image
-            src={imageSrc}
-            alt="backgroundImage"
-            className="object-cover opacity-[0.16]"
-            fill
-          />
-        </div>
-      )}
+    <article className="relative flex h-fit w-[41.4rem] flex-col gap-[2.4rem] overflow-hidden rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] p-[2.8rem] hover:shadow-button">
       <div className="flex flex-col">
         <div className="flex flex-col">
           <div className="w-fit">

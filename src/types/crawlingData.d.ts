@@ -7,6 +7,7 @@ export type CrawlingData = {
   scrapDate: Date;
   content: Content[];
   view: number;
+  company: string;
 };
 
 export type ArticleData = {
@@ -16,6 +17,7 @@ export type ArticleData = {
   scrapDate: Date;
   content: Content[];
   view: number;
+  company: string;
   id: string;
   labelList: LabelType[];
 };
@@ -42,3 +44,5 @@ export type GetLabelData = {
   hotIdSet: Set<string>;
   newIdSet: Set<string>;
 };
+
+export type DetailResponse = { articleDetailData: ArticleData; relativeData: ArticleData[] };

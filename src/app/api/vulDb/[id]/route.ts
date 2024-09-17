@@ -2,7 +2,7 @@ import { getLabelData } from '@/apis/vulDb/getLabelData';
 import { db } from '@/firebase/firebaseConfig';
 import { LabelType } from '@/types/articleCard';
 import { ArticleData, CrawlingData, GetLabelData } from '@/types/crawlingData';
-import { doc, getDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, limit, query, where } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 
 export async function GET(_: Request, { params }: { params: { id: string } }) {
@@ -19,13 +19,17 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
       content: [],
       view: 0,
       labelList: [],
+      company: '',
     };
+
+    const relativeData: ArticleData[] = [];
+
     const articleRef = doc(db, 'vulDb', params.id);
-    const articleSnap = await getDoc(articleRef);
+    const articleSnapshot = await getDoc(articleRef);
 
     const { hotIdSet, newIdSet }: GetLabelData = await getLabelData();
 
-    if (articleSnap.exists()) {
+    if (articleSnapshot.exists()) {
       const articleLabel: LabelType[] = [];
       if (hotIdSet.has(params.id)) {
         articleLabel.push('hot');
@@ -34,11 +38,33 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
         articleLabel.push('new');
       }
       articleDetailData = {
-        ...(articleSnap.data() as CrawlingData),
+        ...(articleSnapshot.data() as CrawlingData),
         id: params.id,
         labelList: articleLabel,
       };
-      return NextResponse.json(articleDetailData);
+
+      const relativeQuery = query(
+        collection(db, 'vulDb'),
+        where('company', '==', articleDetailData.company),
+        limit(6),
+      );
+
+      const relativeSnapshots = await getDocs(relativeQuery);
+
+      relativeSnapshots.docs.forEach(relativeDocItem => {
+        const relativeDocData = relativeDocItem.data() as CrawlingData;
+        if (params.id === relativeDocItem.id) return;
+        const relativeLabel: LabelType[] = [];
+        if (hotIdSet.has(params.id)) {
+          relativeLabel.push('hot');
+        }
+        if (newIdSet.has(params.id)) {
+          relativeLabel.push('new');
+        }
+        relativeData.push({ ...relativeDocData, id: relativeDocItem.id, labelList: relativeLabel });
+      });
+
+      return NextResponse.json({ articleDetailData, relativeData });
     } else {
       return NextResponse.json({ message: '데이터가 존재하지 않습니다' }, { status: 500 });
     }
