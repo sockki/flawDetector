@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Pretendard', 'sans-serif'],
+      },
       backgroundOpacity: {
         8: '0.08',
         12: '0.12',
@@ -75,18 +78,23 @@ const config: Config = {
         },
         move: {
           '0%, 100%': { transform: 'translateX(0)' },
-          '50%': { transform: 'translateX(calc(100% + 250px))' }, // 로고 크기에 맞게 설정
+          '50%': { transform: 'translateX(calc(100% + 250px))' },
         },
         spin360: {
           '0%': { transform: 'rotate(0deg)' },
           '50%': { transform: 'rotate(360deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
+        rotateAround: {
+          '0%': { transform: 'rotate(0deg) translate(40vh)' },
+          '100%': { transform: 'rotate(360deg) translate(40vh)' },
+        },
       },
       animation: {
         spread: 'spread 15s ease-in-out infinite',
         'move-circle': 'move 2s ease-in-out infinite',
         spin360: 'spin360 2s linear infinite',
+        'rotate-around': 'rotateAround 30s linear infinite',
       },
     },
   },
