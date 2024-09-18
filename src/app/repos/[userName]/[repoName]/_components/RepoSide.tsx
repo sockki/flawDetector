@@ -52,9 +52,10 @@ export function RepoSide({ params }: RepoSideProps) {
   const router = useRouter();
 
   const { data: ReposittoryData } = useQuery<RepositoryContentsProps[]>({
-    queryKey: ['RepoDetail', currentPath],
+    queryKey: ['RepoDetail', currentPath, params],
     queryFn: () =>
       getRepoContents({ owner: params.userName, repo: params.repoName, path: currentPath }),
+    refetchOnMount: true,
   });
 
   const generateMessage = async (promptMessage: string) => {
@@ -216,27 +217,18 @@ export function RepoSide({ params }: RepoSideProps) {
   };
 
   useEffect(() => {
-    if (sortType === 'checked') {
-      const resultPaths = resultFiles.map(file => file.path);
-      const checkedData = currentData.slice().sort((a, b) => {
-        const aIncluded = resultPaths.includes(`${params.userName}/${params.repoName}/${a.path}`);
-        const bIncluded = resultPaths.includes(`${params.userName}/${params.repoName}/${b.path}`);
-        if (aIncluded === bIncluded) {
-          return 0;
-        }
-        return aIncluded ? -1 : 1;
-      });
-      setCurrentData(checkedData);
-    }
     if (ReposittoryData) {
       const sortedData = ReposittoryData.slice().sort((a, b) => {
         if (a.type === 'dir' && b.type === 'file') return -1;
         if (a.type === 'file' && b.type === 'dir') return 1;
         return 0;
       });
-      setCurrentData(sortedData);
+
+      if (JSON.stringify(currentData) !== JSON.stringify(sortedData)) {
+        setCurrentData(sortedData);
+      }
     }
-  }, [ReposittoryData]);
+  }, [ReposittoryData, currentData]);
 
   useEffect(() => {
     if (sortType === 'folder') {
@@ -400,7 +392,7 @@ export function RepoSide({ params }: RepoSideProps) {
   const pathSegments = currentPath.split('/').filter(segment => segment !== '');
 
   return (
-    <div className="relative mb-[2rem] flex flex-col gap-[2.8rem]">
+    <div className="relative mb-[2rem] flex h-[103.2rem] flex-col gap-[2.8rem]">
       {ScanCode && (
         <div className="absolute left-[125rem] top-[1.5rem] bg-white">
           <Alert
