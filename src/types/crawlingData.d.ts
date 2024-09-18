@@ -46,3 +46,11 @@ export type GetLabelData = {
 };
 
 export type DetailResponse = { articleDetailData: ArticleData; relativeData: ArticleData[] };
+
+export type ApiResponse<T> = {
+  success: boolean;
+  data?: T;
+  totalLength?: number;
+  message?: string;
+  subMessage?: string;
+};
