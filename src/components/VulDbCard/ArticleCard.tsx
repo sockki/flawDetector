@@ -2,11 +2,10 @@
 
 import ScrapButton from '@/app/vulnerability-db/_components/ScrapButton';
 import ShareButton from '@/app/vulnerability-db/_components/ShareButton';
-import type { ArticleCardProps, LabelType } from '@/types/articleCard';
+import type { ArticleCardProps } from '@/types/articleCard';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
 import SuggestionChip from '../Chips/SuggestionChip';
-
 
 export default function ArticleCard({
   labelList,
