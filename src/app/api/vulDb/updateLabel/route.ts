@@ -1,5 +1,5 @@
 import { db } from '@/firebase/firebaseConfig';
-import { CrawlingData } from '@/types/crawlingData';
+import { ApiResponse, CrawlingData } from '@/types/crawlingData';
 import { collection, doc, getDocs, limit, orderBy, query, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 
@@ -27,17 +27,17 @@ export async function GET() {
     const labelRef = doc(db, 'label', 'vulDbId');
     updateDoc(labelRef, { hot: hotId, new: newId });
 
-    return NextResponse.json({
-      message: '라벨 목록 업데이트가 완료 되었습니다',
-      status: true,
+    return NextResponse.json<ApiResponse<null>>({
+      success: true,
+      message: '라벨 목록 업데이트가 완료 되었습니다.',
     });
   } catch (error) {
     if (error instanceof Error) {
       return Response.json({ message: error.message, status: false });
     }
-    return Response.json({
-      message: '알 수 없는 오류가 발생했습니다.',
-      status: false,
+    return NextResponse.json<ApiResponse<null>>({
+      success: false,
+      message: error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.',
     });
   }
 }
