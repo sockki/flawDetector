@@ -73,7 +73,7 @@ export default function InfoBox({
         'mb-[2rem] p-[3rem]',
         'rounded-lg',
         'flex flex-col gap-[3.2rem]',
-        'h-fit w-[148.6rem]',
+        'h-fit w-[100rem]',
         'rounded-[1.2rem]',
       )}
     >

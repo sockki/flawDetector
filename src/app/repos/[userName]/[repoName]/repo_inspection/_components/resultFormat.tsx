@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { ScanFormat } from '../../_components/ScanFormat';
 
 type ResultFormatProps = {
-  params: { userName: string; repo_id: string };
+  params: { userName: string; repoName: string };
 };
 
 export function ResultFormat({ params }: ResultFormatProps) {
@@ -43,12 +43,12 @@ export function ResultFormat({ params }: ResultFormatProps) {
   useEffect(() => {
     const performMutation = () => {
       if (selectedFilePaths.length > 0) {
-        mutation.mutate(`${params.userName}/${params.repo_id}/${selectedFilePaths[0]}`);
+        mutation.mutate(`${params.userName}/${params.repoName}/${selectedFilePaths[0]}`);
       }
     };
 
     performMutation();
-  }, [selectedFilePaths, params.userName, params.repo_id]);
+  }, [selectedFilePaths, params.userName, params.repoName]);
 
   useEffect(() => {
     setHighLightedLines([]);
@@ -65,9 +65,9 @@ export function ResultFormat({ params }: ResultFormatProps) {
   return (
     <div>
       <ScanFormat resultType highLightedLines={highLightedLines} scrollToLine={scrollToLine} />
-      <div className="mt-[3rem] h-[83.5rem] overflow-scroll pb-[1rem]">
+      <div className="mt-[3rem] h-[83.5rem] min-w-[100rem] overflow-scroll pb-[1rem]">
         {mutation.data && mutation.data.length === 0 && (
-          <div className="flex h-[52.1rem] w-[148.5rem] flex-col items-center justify-center gap-[2.4rem]">
+          <div className="flex h-[52.1rem] w-[100rem] flex-col items-center justify-center gap-[2.4rem]">
             <div className="text-[3.2rem] font-bold">검출된 취약점이 없어요</div>
             <div className="flex flex-col items-center text-[2.4rem] font-normal text-gray-default">
               취약점이 발견되지 않았지만 새로 업데이트할 경우 파일을 한번 더 검사해주세요.
