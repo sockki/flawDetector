@@ -1,13 +1,13 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { format } from 'date-fns';
-import { twMerge } from 'tailwind-merge';
+import { getFirestoreRepositories } from '@/firebase/firebaseRepository';
 import { DetectFileCardArrowIcon, DetectFileCardBugIcon, DetectFileCardStar } from '@/public/index';
 import { useRepoStore } from '@/stores/useRepoStore';
 import type { DetectFileCardProps, ElementByLabel } from '@/types/detectedFileCard';
-import { getFirestoreRepositories } from '@/firebase/firebaseRepository';
+import { format } from 'date-fns';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 async function updateBookmarkStatus(userId: string, repoName: string, isBookmarked: boolean) {
   const response = await fetch('/api/repositories', {
@@ -93,26 +93,26 @@ export default function DetectFileCard({ title, date, userId, userName }: Detect
 
   return (
     <div className="group relative flex h-[22.5rem] w-[31rem] flex-col justify-between rounded-[1.2rem] border-[0.1rem] border-primary-100 bg-white p-[2rem] hover:bg-purple-light">
-      <div className="absolute right-[2rem] flex h-[4.8rem] w-[4.8rem] items-center justify-center rounded-[1.2rem]">
+      <div className="absolute right-[2rem] flex items-start justify-center rounded-[1.2rem]">
         <DetectFileCardStar
           className={twMerge(
-            'ml-[0.15rem] mt-[0.15rem] h-[2.8rem] w-[2.8rem] cursor-pointer stroke-primary-200 stroke-1',
+            'h-[2.8rem] w-[2.8rem] cursor-pointer stroke-primary-200 stroke-1 hover:fill-primary-100',
             isBookmark ? 'fill-primary-200 stroke-primary-200 stroke-1' : undefined,
           )}
           onClick={onClickBookmark}
         />
       </div>
       <div className="flex flex-col gap-[0.4rem]">
-        <label
+        <div
           className={twMerge(
             'w-fit rounded-full px-[1.2rem] py-[0.8rem] text-[1.6rem] font-medium leading-[2.24rem]',
             labelStyle,
           )}
         >
           {labelText}
-        </label>
-        <div className="flex h-[3.9rem] items-center gap-[0.8rem]" title={title}>
-          <span className="max-w-[calc(100%-4.8rem)] overflow-hidden text-ellipsis whitespace-nowrap text-[2.8rem] font-medium leading-[3.9rem] text-gray-black">
+        </div>
+        <div className="flex gap-[0.8rem]" title={title}>
+          <span className="max-w-[calc(100%-4.8rem)] overflow-hidden text-ellipsis text-[2.8rem] font-medium leading-[3.9rem] text-gray-black">
             {title}
           </span>
         </div>
