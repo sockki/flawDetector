@@ -6,7 +6,7 @@ import {
   updateBookmarkStatus,
   updateCheckedStatus,
 } from '@/firebase/firebaseRepository';
-import { getRepoList } from '@/apis/repository';
+import { getRepoList } from '@/apis/repos/repository';
 import { SortOption } from '@/types/sortAndFilter';
 
 export async function GET(request: Request) {

@@ -24,7 +24,7 @@ export async function getRepoContents({ owner, repo, path = '' }: GetRepoContent
   }
 }
 
-export async function getRepolist(userName: string = '') {
+export async function getRepoList(userName: string = '') {
   try {
     const response = await octokit.request(`GET /users/${userName}/repos`, {
       userName,
