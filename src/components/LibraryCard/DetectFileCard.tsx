@@ -52,19 +52,19 @@ export default function DetectFileCard({ title, date, userId, userName }: Detect
     before: {
       labelStyle: '',
       labelText: '',
-      buttonStyle: 'bg-primary-500',
+      buttonStyle: 'bg-primary-500 cursor-pointer',
       buttonText: '검사하기',
     },
     under: {
       labelStyle: 'bg-gray-light text-gray-default',
       labelText: '검사중',
-      buttonStyle: 'bg-primary-500',
+      buttonStyle: 'bg-primary-500 cursor-pointer',
       buttonText: '검사하기',
     },
     done: {
       labelStyle: 'bg-primary-50 text-primary-500',
       labelText: '검사완료',
-      buttonStyle: 'bg-neutral-100',
+      buttonStyle: 'bg-neutral-100 cursor-pointer',
       buttonText: '결과보기',
     },
   };
@@ -92,11 +92,11 @@ export default function DetectFileCard({ title, date, userId, userName }: Detect
   };
 
   return (
-    <div className="group relative flex h-[22.5rem] w-[31rem] cursor-pointer flex-col justify-between rounded-[1.2rem] border-[0.1rem] border-primary-100 bg-white p-[2rem] hover:bg-purple-light">
+    <div className="group relative flex h-[22.5rem] w-[31rem] flex-col justify-between rounded-[1.2rem] border-[0.1rem] border-primary-100 bg-white p-[2rem] hover:bg-purple-light">
       <div className="absolute right-[2rem] flex h-[4.8rem] w-[4.8rem] items-center justify-center rounded-[1.2rem]">
         <DetectFileCardStar
           className={twMerge(
-            'ml-[0.15rem] mt-[0.15rem] h-[2.8rem] w-[2.8rem] stroke-primary-200 stroke-1',
+            'ml-[0.15rem] mt-[0.15rem] h-[2.8rem] w-[2.8rem] cursor-pointer stroke-primary-200 stroke-1',
             isBookmark ? 'fill-primary-200 stroke-primary-200 stroke-1' : undefined,
           )}
           onClick={onClickBookmark}
@@ -111,8 +111,8 @@ export default function DetectFileCard({ title, date, userId, userName }: Detect
         >
           {labelText}
         </label>
-        <div className="flex h-[3.9rem] items-center gap-[0.8rem]">
-          <span className="text-[2.8rem] font-medium leading-[3.9rem] text-gray-black">
+        <div className="flex h-[3.9rem] items-center gap-[0.8rem]" title={title}>
+          <span className="max-w-[calc(100%-4.8rem)] overflow-hidden text-ellipsis whitespace-nowrap text-[2.8rem] font-medium leading-[3.9rem] text-gray-black">
             {title}
           </span>
         </div>
