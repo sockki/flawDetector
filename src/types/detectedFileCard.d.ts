@@ -11,9 +11,7 @@ export type ElementByLabel = {
 
 export type DetectFileCardProps = {
   title: string;
-  label: DetectFileLabelType;
   date: Date;
   userId: string;
   userName: string;
-  repoId: string;
 };

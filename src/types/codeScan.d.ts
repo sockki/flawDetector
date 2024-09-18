@@ -7,7 +7,7 @@ type Issue = {
 };
 
 type FileScanResult = {
-  result: { path: string; issues: Issue[] };
+  result: { userId: string; repoName: string; path: string; issues: Issue[] };
 };
 
 type FetchCodeStatusProps = {

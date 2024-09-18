@@ -51,6 +51,7 @@ export { default as SearchIcon } from "./icons/searchIcon.svg";
 export { default as ShareIcon } from "./icons/sharing.svg";
 export { default as SpacSpaceLogoIcon } from "./icons/spacSpaceLogo.svg";
 export { default as SuccessIcon } from './icons/success.svg';
+export { default as ReturnArrowIcon } from './icons/returnArrow.svg'
 
 export { default as SendIcon } from './icons/send.svg';
 export { default as SignOutIcon } from './icons/signOut.svg';

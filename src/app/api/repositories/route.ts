@@ -6,7 +6,7 @@ import {
   updateBookmarkStatus,
   updateCheckedStatus,
 } from '@/firebase/firebaseRepository';
-import { getRepoList } from '@/apis/repository';
+import { getRepoList } from '@/apis/repos/repository';
 import { SortOption } from '@/types/sortAndFilter';
 
 export async function GET(request: Request) {
@@ -46,14 +46,14 @@ export async function POST(request: Request) {
 }
 
 export async function PATCH(request: Request) {
-  const { userId, repoId, isBookmarked, isChecked } = await request.json();
+  const { userId, repoName, isBookmarked, isChecked } = await request.json();
 
   try {
     if (typeof isBookmarked !== 'undefined') {
-      await updateBookmarkStatus(userId, repoId, isBookmarked);
+      await updateBookmarkStatus(userId, repoName, isBookmarked);
     }
     if (typeof isChecked !== 'undefined') {
-      await updateCheckedStatus(userId, repoId, isChecked);
+      await updateCheckedStatus(userId, repoName, isChecked);
     }
     return NextResponse.json({ message: '성공적으로 수정되었습니다.' });
   } catch (error) {

@@ -24,7 +24,7 @@ export async function getRepoContents({ owner, repo, path = '' }: GetRepoContent
   }
 }
 
-export async function getRepolist(userName: string = '') {
+export async function getRepoList(userName: string = '') {
   try {
     const response = await octokit.request(`GET /users/${userName}/repos`, {
       userName,
@@ -64,9 +64,16 @@ export async function getFileDetail({ owner, repo, path }: GetRepoContentsProps)
   }
 }
 
-export async function getCodeScanResult(path: string): Promise<FileScanResult[]> {
+export async function getCodeScanResult(
+  userId: string,
+  repoName: string,
+  path: string,
+): Promise<FileScanResult[]> {
   try {
-    const querySelect = query(collection(db, 'codeScanResult'), where('result.path', '==', path));
+    const querySelect = query(
+      collection(db, 'users', userId.toString(), 'repositories', repoName, 'codeScanResult'),
+      where('result.path', '==', path),
+    );
 
     const querySnapshot = await getDocs(querySelect);
     const results: FileScanResult[] = [];

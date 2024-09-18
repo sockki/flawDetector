@@ -47,11 +47,14 @@ export default function UserCard({ user, hasLogoutButton }: UserCardProps) {
   };
 
   const baseStyles = 'flex w-full min-w-[131.4rem] items-center justify-between ';
-  const logoutStyles = 'border-b border-b-[#e6e6e6]] pb-[8rem]';
+  const logoutStyles = 'border-b border-b-[#e6e6e6] pb-[8rem]';
   const defaultStyles = 'bg-neutral-5 rounded-[4.2rem] p-[3.2rem]';
 
   return (
-    <section className={twMerge(baseStyles, hasLogoutButton ? logoutStyles : defaultStyles)}>
+    <Link
+      href="/me"
+      className={twMerge(baseStyles, hasLogoutButton ? logoutStyles : defaultStyles)}
+    >
       <div className="flex items-center gap-[4.4rem]">
         <div className="relative h-[10.7rem] w-[10.7rem] overflow-hidden rounded-full">
           {avatar ? (
@@ -75,9 +78,7 @@ export default function UserCard({ user, hasLogoutButton }: UserCardProps) {
           로그아웃
         </Button>
       ) : (
-        <Link href="/me">
-          <RightArrowIcon />
-        </Link>
+        <RightArrowIcon />
       )}
       <Modal
         gap={24}
@@ -103,6 +104,6 @@ export default function UserCard({ user, hasLogoutButton }: UserCardProps) {
           }}
         />
       </Modal>
-    </section>
+    </Link>
   );
 }
