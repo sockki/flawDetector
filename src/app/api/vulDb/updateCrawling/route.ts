@@ -8,10 +8,6 @@ import { addDoc, collection } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 import os from 'os';
 import puppeteer from 'puppeteer-core';
-import getExecutablePath from '@/libs/getExcutablePath';
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '@/firebase/firebaseConfig';
-import { Content, TableObject } from '@/types/crawlingData';
 
 const companyList: string[] = ['마이크로소프트', '오라클', 'GitLab', '아파치', '리눅스'];
 
@@ -43,6 +39,9 @@ const checkCompany = (title: string): string => {
   });
   return companyName;
 };
+
+
+
 
 
 async function getTranslation(crawlingData: TableObject | string) {
@@ -161,8 +160,6 @@ export async function GET() {
             scrapDate: nowDate,
             content,
             view: 0,
-            company
-            isScrapped: false,
           });
         }
 
@@ -204,3 +201,5 @@ export async function GET() {
     }
   }
 }
+
+
