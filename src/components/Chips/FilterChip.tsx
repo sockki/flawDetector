@@ -33,7 +33,7 @@ export default function FilterChip({
   return (
     <div className="h-fit w-fit text-[2rem] text-[#3f3f3f] hover:bg-purple-light">
       <div
-        className="relative flex w-fit cursor-pointer items-center justify-between rounded-[0.8rem] border border-[#c3c3c3] p-[1rem]"
+        className="relative flex min-w-[9.5rem] cursor-pointer items-center justify-between rounded-[0.8rem] border border-[#c3c3c3] p-[1rem]"
         onClick={toggleDropdown}
       >
         <span>{label}</span>
