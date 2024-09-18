@@ -55,7 +55,7 @@ export default function Header({ isLoggedIn }: HeaderProps) {
               <button
                 type="button"
                 onClick={handleLogout}
-                className="text-[1.8rem] font-medium text-red-500 hover:text-red-700"
+                className="text-[1.8rem] font-medium hover:text-red-500"
               >
                 로그아웃
               </button>
