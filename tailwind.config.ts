@@ -85,11 +85,16 @@ const config: Config = {
           '50%': { transform: 'rotate(360deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
+        rotateAround: {
+          '0%': { transform: 'rotate(0deg) translate(40vh)' },
+          '100%': { transform: 'rotate(360deg) translate(40vh)' },
+        },
       },
       animation: {
         spread: 'spread 15s ease-in-out infinite',
         'move-circle': 'move 2s ease-in-out infinite',
         spin360: 'spin360 2s linear infinite',
+        'rotate-around': 'rotateAround 30s linear infinite',
       },
     },
   },
