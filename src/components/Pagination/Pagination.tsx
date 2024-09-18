@@ -22,6 +22,7 @@ export default function Pagination({ nowPage, totalPage, label }: PaginationProp
         className="flex h-[3.6rem] w-[3.6rem] items-center justify-center bg-none text-[1.6rem] font-regular text-gray-black hover:bg-purple-light"
         onClick={() => {
           router.push(`${pathname}?${label ? `label=${label}&` : ''}page=${nowPage - 1}`);
+          router.refresh();
         }}
         disabled={nowPage === 1}
       >
@@ -41,6 +42,7 @@ export default function Pagination({ nowPage, totalPage, label }: PaginationProp
                 router.push(
                   `${pathname}?${label ? `label=${label}&` : ''}page=${firstNumber + pageNumber}`,
                 );
+                router.refresh();
               }}
             >
               {firstNumber + pageNumber}
@@ -52,6 +54,7 @@ export default function Pagination({ nowPage, totalPage, label }: PaginationProp
         type="button"
         onClick={() => {
           router.push(`${pathname}?${label ? `label=${label}&` : ''}page=${nowPage + 1}`);
+          router.refresh();
         }}
         disabled={nowPage === totalPage}
       >
