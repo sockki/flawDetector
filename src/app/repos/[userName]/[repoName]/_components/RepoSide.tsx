@@ -7,7 +7,7 @@ import { FileItem } from '@/components/List/FileItem';
 import { ListHeader } from '@/components/List/ListHeader';
 import { useState, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { useCodeFormatState, useSelectedFile } from '@/stores/Stroe';
+import { useCodeFormatState, useSelectedPath } from '@/stores/useRepoDetailStore';
 import { useModal } from '@/hooks/useModal';
 import { FileItemResponse } from '@/components/common/CheckedFileList';
 import Button from '@/components/Button/Button';
@@ -26,7 +26,8 @@ export function RepoSide({ params }: RepoSideProps) {
   const [currentPath, setCurrentPath] = useState('');
   const [lastPath, setLastPath] = useState<string[]>([]);
 
-  const [isMultipleSelected, setIsMultipleSelected] = useState(false);
+  const [currentFilePath, setCurrentFilePath] = useState('');
+
   const [multipleSelectFiles, setMultipleSelectFiles] = useState<FileItemResponse[]>([]);
 
   const [isModalOpen, handleClickTrigger] = useModal();
@@ -35,8 +36,9 @@ export function RepoSide({ params }: RepoSideProps) {
 
   const [sortType, setSortType] = useState('folder');
 
-  const { selectedFilePaths, setSelectedFilePaths } = useSelectedFile();
-  const { currentCode, setCurrentCode, setCodeType } = useCodeFormatState();
+  const [selectedFilePaths, setSelectedFilePaths] = useState<string[]>([]);
+  const { setCurrentCode, setCodeType } = useCodeFormatState();
+  const { setIsSelectedFilePath, isSelectedFilePath } = useSelectedPath();
 
   const [resultFiles, setResultFiles] = useState<CodeStatusResult[]>([]);
   const [waitingFiles, setWaitFiles] = useState<string[]>([]);
@@ -111,35 +113,26 @@ export function RepoSide({ params }: RepoSideProps) {
   });
 
   const handleCodeScan = async (multipleFilesPath?: string) => {
-    const filepath = multipleFilesPath
-      ? `${multipleFilesPath}`
-      : `${params.userName}/${params.repoName}/${selectedFilePaths[selectedFilePaths.length - 1]}`;
+    const filepath = `${multipleFilesPath}`;
 
     setWaitFiles(prevFiles => prevFiles.filter(file => file !== filepath));
     setCheckingFiles(pre => [...pre, filepath]);
     let decodedCode = '';
 
-    if (isMultipleSelected) {
-      const pathSegments = filepath.split('/').slice(2).join('/');
-      const res = await getRepoContents({
-        owner: params.userName,
-        repo: params.repoName,
-        path: pathSegments,
-      });
-      decodedCode = Buffer.from(res.content, 'base64').toString('utf-8');
-    }
+    const pathSegments = filepath.split('/').slice(2).join('/');
+    const res = await getRepoContents({
+      owner: params.userName,
+      repo: params.repoName,
+      path: pathSegments,
+    });
+    decodedCode = Buffer.from(res.content, 'base64').toString('utf-8');
 
     setCheckingFiles([filepath]);
 
-    const codeLines = isMultipleSelected
-      ? decodedCode.split('\n').map((line, index) => ({
-          lineNumber: index + 1,
-          content: line,
-        }))
-      : currentCode.split('\n').map((line, index) => ({
-          lineNumber: index + 1,
-          content: line,
-        }));
+    const codeLines = decodedCode.split('\n').map((line, index) => ({
+      lineNumber: index + 1,
+      content: line,
+    }));
 
     const formattedCodeForAI = JSON.stringify(codeLines, null, 2);
 
@@ -181,21 +174,18 @@ export function RepoSide({ params }: RepoSideProps) {
     });
     setCheckingFiles(prevFiles => prevFiles.filter(file => file !== filepath));
   };
-  function handleMultipleSelect() {
-    if (isMultipleSelected) {
-      setIsMultipleSelected(!isMultipleSelected);
-      setPendingFiles([]);
-      setSelectedFilePaths([]);
-    } else {
-      setIsMultipleSelected(!isMultipleSelected);
-      setPendingFiles(selectedFilePaths);
-    }
-  }
 
   const handleMultipleScan = async () => {
     handleClickTrigger();
-    handleMultipleSelect();
+
     setWaitFiles(pendingFiles);
+    const res: RepositoryContentsProps = await getRepoContents({
+      owner: params.userName,
+      repo: params.repoName,
+      path: pendingFiles[0].split('/').slice(2).join('/'),
+    });
+    const decodedCode = Buffer.from(res.content, 'base64').toString('utf-8');
+    setCurrentCode(decodedCode);
 
     await pendingFiles
       .map(filepath => async () => {
@@ -285,11 +275,13 @@ export function RepoSide({ params }: RepoSideProps) {
   const handleSortType = (type: string) => {
     setSortType(type);
   };
-  const handleFileClick = async (filePath: string) => {
+
+  const handleCheckClick = async (filePath: string) => {
     try {
       const fileName = filePath.split('/').pop();
       const fullPath = `${params.userName}/${params.repoName}/${filePath}`;
 
+      // 파일 세부 정보를 가져옴
       const response = await getFileDetail({
         owner: params.userName,
         repo: params.repoName,
@@ -298,79 +290,89 @@ export function RepoSide({ params }: RepoSideProps) {
 
       if (!response) {
         console.error('파일의 정보를 불러오는데 실패하였습니다.');
-        return null;
+        return null; // 파일 정보를 가져오지 못했을 때 null 반환
       }
+      setIsSelectedFilePath(filePath);
       setAlertOpen(true);
 
       const { createdAt, subTitle }: FileContentsResponse = response;
 
-      if (isMultipleSelected) {
-        setSelectedFilePaths(
-          selectedFilePaths.includes(filePath)
-            ? selectedFilePaths.filter(path => path !== filePath)
-            : [...selectedFilePaths, filePath],
+      // 파일이 선택되었는지 여부에 따라 상태 업데이트
+      if (selectedFilePaths.includes(filePath)) {
+        // 파일이 이미 선택된 경우, 선택 해제
+        setSelectedFilePaths(selectedFilePaths.filter(path => path !== filePath));
+        setMultipleSelectFiles(prevSelectedFiles =>
+          prevSelectedFiles.filter(file => file.fileName !== fileName),
         );
-
-        setMultipleSelectFiles(prevSelectedFiles => {
-          const isFileAlreadySelected = prevSelectedFiles.some(file => file.fileName === fileName);
-
-          if (isFileAlreadySelected) {
-            setPendingFiles(prev => prev.filter(path => path !== fullPath));
-
-            return prevSelectedFiles.filter(file => file.fileName !== fileName);
-          } else {
-            setPendingFiles(prev => {
-              if (!prev.includes(fullPath)) {
-                return [...prev, fullPath];
-              }
-              return prev;
-            });
-            return [
-              ...prevSelectedFiles,
-              {
-                fileName: fileName || '',
-                subTitle,
-                createdAt: new Date(createdAt),
-              },
-            ];
-          }
-        });
+        setPendingFiles(prev => prev.filter(path => path !== fullPath));
       } else {
-        setSelectedFilePaths([filePath]);
-        const res: RepositoryContentsProps = await getRepoContents({
-          owner: params.userName,
-          repo: params.repoName,
-          path: filePath,
-        });
-
-        const decodedCode = Buffer.from(res.content, 'base64').toString('utf-8');
-        setCodeType(filePath.split('.').pop() || '');
-        setCurrentCode(decodedCode);
-
-        setMultipleSelectFiles([
+        // 파일을 선택함
+        setSelectedFilePaths([...selectedFilePaths, filePath]);
+        setMultipleSelectFiles(prevSelectedFiles => [
+          ...prevSelectedFiles,
           {
             fileName: fileName || '',
             subTitle,
             createdAt: new Date(createdAt),
           },
         ]);
+        setPendingFiles(prev => (!prev.includes(fullPath) ? [...prev, fullPath] : prev));
       }
-      return null;
+
+      // 선택된 파일의 내용을 가져옴
+      const res: RepositoryContentsProps = await getRepoContents({
+        owner: params.userName,
+        repo: params.repoName,
+        path: filePath,
+      });
+
+      if (!res.content) {
+        console.error('파일 내용을 가져오는데 실패했습니다.');
+        return null; // 파일 내용을 가져오지 못했을 때 null 반환
+      }
+
+      const decodedCode = Buffer.from(res.content, 'base64').toString('utf-8');
+      setCodeType(filePath.split('.').pop() || '');
+      setCurrentCode(decodedCode);
+      return null; // 모든 로직이 완료되었을 때 null 반환
     } catch (error) {
       console.error('파일 처리 중 오류가 발생했습니다:', error);
+      return null; // 오류 발생 시 null 반환
+    }
+  };
+
+  const handleFileClick = async (filePath: string) => {
+    setCurrentFilePath(filePath);
+    setIsSelectedFilePath(filePath);
+    setAlertOpen(true);
+
+    // 선택된 파일의 내용을 가져옴
+    const res: RepositoryContentsProps = await getRepoContents({
+      owner: params.userName,
+      repo: params.repoName,
+      path: filePath,
+    });
+
+    if (!res.content) {
+      console.error('파일 내용을 가져오는데 실패했습니다.');
       return null;
     }
+
+    const decodedCode = Buffer.from(res.content, 'base64').toString('utf-8');
+    setCodeType(filePath.split('.').pop() || '');
+    setCurrentCode(decodedCode);
+    return null;
   };
 
   const getFileItemType = (filePath: string) => {
     const fileResult = resultFiles.find(file => file.path === filePath);
 
-    if (checkingFiles.includes(filePath)) {
-      return 'analye';
-    }
-
     if (fileResult) {
       return fileResult.type;
+    }
+
+    if (checkingFiles.includes(filePath)) {
+      return 'analye';
     }
 
     if (waitingFiles.includes(filePath)) {
@@ -394,13 +396,13 @@ export function RepoSide({ params }: RepoSideProps) {
   return (
     <div className="relative mb-[2rem] flex h-[103.2rem] flex-col gap-[2.8rem]">
       {ScanCode && (
-        <div className="absolute left-[125rem] top-[1.5rem] bg-white">
+        <div className="absolute left-[100rem] top-[1.5rem] bg-white">
           <Alert
-            type={getFileItemType(`${params.userName}/${params.repoName}/${selectedFilePaths[0]}`)}
+            type={getFileItemType(`${params.userName}/${params.repoName}/${currentFilePath}`)}
             onAlertClick={
-              getFileItemType(`${params.userName}/${params.repoName}/${selectedFilePaths[0]}`) ===
+              getFileItemType(`${params.userName}/${params.repoName}/${currentFilePath}`) ===
               'error'
-                ? () => handleCodeScan
+                ? () => handleCodeScan(`${params.userName}/${params.repoName}/${currentFilePath}`)
                 : () => {
                     router.push(`/repos/${params.userName}/${params.repoName}/repo_inspection`);
                     handleAlertopen();
@@ -415,9 +417,9 @@ export function RepoSide({ params }: RepoSideProps) {
         shape="rectangle"
         size="large"
         className="h-[10.7rem] w-[24.7rem]"
-        onClick={isMultipleSelected ? handleClickTrigger : () => handleCodeScan()}
+        onClick={handleClickTrigger}
       >
-        폴더 검사 하기
+        파일 검사 하기
       </Button>
       <ScanStatus
         detectedCount={fileCounts.detectedCount}
@@ -430,8 +432,6 @@ export function RepoSide({ params }: RepoSideProps) {
             isSortOpen={isSortOpen}
             onListClick={handleSortOpen}
             onChangeSortType={handleSortType}
-            onFileSelect={() => handleMultipleSelect()}
-            isMultipleSelected={isMultipleSelected}
           />
           {currentPath === '' ? (
             <div
@@ -441,9 +441,9 @@ export function RepoSide({ params }: RepoSideProps) {
               All Files
             </div>
           ) : (
-            <div className="flex h-[4.4rem] w-[24.7rem] items-center border-t p-[1rem] px-[1.5rem] text-[1.6rem]">
+            <div className="flex h-[4.4rem] w-[24.7rem] items-center overscroll-x-auto border-t p-[1rem] px-[1.5rem] text-[1.6rem]">
               <div
-                className="mr-[0.2rem] cursor-pointer text-[#c3c3c3] hover:underline"
+                className="mr-[0.2rem] w-[5.9rem] cursor-pointer text-[#c3c3c3] hover:underline"
                 onClick={() => handleFolderClick('')}
               >
                 All Files
@@ -455,6 +455,7 @@ export function RepoSide({ params }: RepoSideProps) {
                     <span className="mx-[0.3rem]">/</span>
                     <span
                       className={twMerge(
+                        'max-w-[7.2rem] truncate',
                         index === pathSegments.length - 1 ? 'text-primary-500' : 'text-[#c3c3c3]',
                         'cursor-pointer hover:underline',
                       )}
@@ -486,8 +487,9 @@ export function RepoSide({ params }: RepoSideProps) {
                   key={contents.sha}
                   fileName={contents.name}
                   type={getFileItemType(`${params.userName}/${params.repoName}/${contents.path}`)}
-                  isSelected={selectedFilePaths.includes(contents.path)}
+                  isSelected={isSelectedFilePath.includes(contents.path)}
                   onFileClick={() => handleFileClick(contents.path)}
+                  onCheckClick={() => handleCheckClick(contents.path)}
                 />
               ),
             )}
