@@ -7,6 +7,17 @@ import { ko } from 'date-fns/locale';
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
+// 미트볼 아이콘
+function MeatballIcon() {
+  return (
+    <div className="flex h-[2rem] animate-pulse items-center justify-center gap-[0.4rem]">
+      <div className="h-2 w-2 rounded-full bg-gray-400" />
+      <div className="h-2 w-2 rounded-full bg-gray-400" />
+      <div className="h-2 w-2 rounded-full bg-gray-400" />
+    </div>
+  );
+}
+
 type Message = {
   sender: 'user' | 'bot';
   content: string;
@@ -18,6 +29,7 @@ export type Report = { title: string; desc: Content[] };
 export default function Chatbot({ report }: { report: Report }) {
   const [message, setMessage] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
+  const [loading, setLoading] = useState(false); // 로딩 상태 추가
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
@@ -30,13 +42,14 @@ export default function Chatbot({ report }: { report: Report }) {
   };
 
   const handleSendMessage = async () => {
-    if (inputText.trim()) {
+    if (inputText.trim() && !loading) {
       const content = inputText;
       setInputText('');
-
+      setLoading(true); // 로딩 상태를 true로 설정
       setMessage(prevMessages => [
         ...prevMessages,
         { sender: 'user', content, sentAt: new Date().toISOString() },
+        { sender: 'bot', content: 'thinking', sentAt: new Date().toISOString() }, // 로딩 중일 때 미트볼 아이콘 표시
       ]);
 
       if (textareaRef.current) {
@@ -68,12 +81,18 @@ export default function Chatbot({ report }: { report: Report }) {
         }
         const data = await response.json();
 
-        setMessage(prevMessage => [
-          ...prevMessage,
-          { sender: 'bot', content: data.message, sentAt: new Date().toISOString() },
-        ]);
+        setMessage(prevMessage =>
+          prevMessage.map((msg, index) => {
+            if (index === prevMessage.length - 1 && msg.sender === 'bot') {
+              return { ...msg, content: data.message }; // 로딩 중인 메시지를 실제 응답으로 교체
+            }
+            return msg;
+          }),
+        );
       } catch (error) {
-        throw new Error('응답 생성 실패');
+        console.error('응답 생성 실패:', error);
+      } finally {
+        setLoading(false); // 응답을 받은 후 로딩 상태를 false로 설정
       }
     }
   };
@@ -151,7 +170,7 @@ export default function Chatbot({ report }: { report: Report }) {
                         'rounded-tl-[2rem] rounded-tr-none bg-primary-500 text-white',
                     )}
                   >
-                    {content}
+                    {content === 'thinking' ? <MeatballIcon /> : content}
                   </div>
                   <span className="text-[1.4rem] font-regular text-[#8B8F93]">
                     {format(new Date(sentAt), 'aaa h:mm', { locale: ko })}
@@ -174,6 +193,7 @@ export default function Chatbot({ report }: { report: Report }) {
               placeholder="챗봇에게 궁금한 점을 물어보세요!"
               rows={1}
               style={{ overflowY: 'hidden' }}
+              disabled={loading} // 로딩 중일 때 비활성화
             />
           </div>
           <button
@@ -181,8 +201,13 @@ export default function Chatbot({ report }: { report: Report }) {
             aria-label="Send prompt"
             className="flex h-[3.64rem] w-[4.6rem] items-center justify-center rounded-full bg-primary-500 text-white transition-colors hover:bg-primary-300 focus-visible:outline-none focus-visible:outline-black disabled:bg-[#D7D7D7] disabled:text-[#f4f4f4] disabled:hover:opacity-100"
             onClick={handleSendMessage}
+            disabled={loading} // 로딩 중일 때 버튼 비활성화
           >
-            <SendIcon />
+            {loading ? (
+              <div className="h-5 w-5 animate-spin rounded-full border-t-2 border-white" /> // 로딩 중일 때 아이콘 대신 스피너 표시
+            ) : (
+              <SendIcon />
+            )}
           </button>
         </div>
       </div>
