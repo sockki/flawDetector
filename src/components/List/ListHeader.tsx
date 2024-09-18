@@ -3,16 +3,14 @@ import { DoubleCheckIcon, ListIcon } from '@/public/index';
 import { twMerge } from 'tailwind-merge';
 
 type ListHeaderProps = {
-  onFileSelect: () => void;
+  onFileSelect?: () => void;
   onListClick: () => void;
   onChangeSortType: (type: string) => void;
   isSortOpen: boolean;
-  isMultipleSelected: boolean;
 };
 
 export function ListHeader({
   onFileSelect,
-  isMultipleSelected,
   isSortOpen,
   onListClick,
   onChangeSortType,
@@ -22,13 +20,14 @@ export function ListHeader({
 
   const iconContainerStyles = 'flex h-[3rem] w-fit items-center justify-around gap-[1rem] ';
 
-  const checkIconStyles = twMerge(isMultipleSelected && '[&_*]:fill-primary-500', 'cursor-pointer');
-
   return (
     <div className={containerStyles}>
       <div className="text-[2rem]">Files</div>
       <div className={iconContainerStyles}>
-        <DoubleCheckIcon onClick={onFileSelect} className={checkIconStyles} />
+        <DoubleCheckIcon
+          onClick={onFileSelect}
+          className="[&_*]:fill-primary-500, cursor-pointer"
+        />
         <ListIcon onClick={onListClick} className="cursor-pointer" />
         <div
           className={twMerge(
