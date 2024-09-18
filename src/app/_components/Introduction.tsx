@@ -25,7 +25,10 @@ export default function Introduction() {
         </div>
       </div>
 
-      <div className="mr-[6rem] flex w-fit items-center justify-center rounded-[0.8rem] bg-white p-[9.3rem_9.5rem] shadow-[0_6.0rem_6rem_-2.4rem_rgba(97,0,255,0.25)]">
+      <div
+        data-aos="flip-right"
+        className="mr-[6rem] flex w-fit items-center justify-center rounded-[0.8rem] bg-white p-[9.3rem_9.5rem] shadow-[0_6.0rem_6rem_-2.4rem_rgba(97,0,255,0.25)]"
+      >
         <BugIcon height={196} width={190} stroke="#6100ff" />
       </div>
     </section>

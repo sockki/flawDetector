@@ -7,9 +7,9 @@ import { PropsWithChildren, useEffect } from 'react';
 export default function AOSWrapper({ children }: PropsWithChildren) {
   useEffect(() => {
     AOS.init({
-      duration: 1500,
+      duration: 1000,
       easing: 'ease-in-out',
-      once: false,
+      once: true,
     });
   }, []);
 
