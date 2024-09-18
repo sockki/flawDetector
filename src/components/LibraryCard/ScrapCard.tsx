@@ -1,4 +1,4 @@
-import type { ScrapCardProps, ElementByLabel } from '@/types/scrapCard';
+import type { ElementByLabel, ScrapCardProps } from '@/types/scrapCard';
 import { format } from 'date-fns';
 import { twMerge } from 'tailwind-merge';
 

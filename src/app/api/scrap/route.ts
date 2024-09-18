@@ -1,32 +1,31 @@
 import { db } from '@/firebase/firebaseConfig';
-import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
+import { fromUnixTime } from 'date-fns';
+import { collection, deleteDoc, doc, getDocs, setDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId');
-    const articleId = searchParams.get('articleId');
 
-    if (!userId || !articleId) {
-      return NextResponse.json(
-        { error: 'userId 또는 articleId가 누락되었습니다.' },
-        { status: 400 },
-      );
+    if (!userId) {
+      return NextResponse.json({ error: 'userId가 누락되었습니다.' }, { status: 400 });
     }
 
-    const scrapDocRef = doc(db, `users/${userId}/scrap`, articleId);
-    const scrapDoc = await getDoc(scrapDocRef);
+    const scrapCollectionRef = collection(db, `users/${userId}/scrap`);
+    const scrapSnapshot = await getDocs(scrapCollectionRef);
 
-    if (scrapDoc.exists()) {
-      const data = scrapDoc.data();
-      return NextResponse.json({ isScrapped: data?.isScrapped || false });
-    } else {
-      return NextResponse.json({ isScrapped: false });
-    }
+    const scrapData = scrapSnapshot.docs.map(doc3 => ({
+      id: doc3.id,
+      label: 'report',
+      date: fromUnixTime(doc3.data().scrappedAt.seconds),
+      title: doc3.data().title,
+    }));
+
+    return NextResponse.json({ scrapData });
   } catch (error) {
     return NextResponse.json(
-      { error: '스크랩 상태를 확인하는 중 오류가 발생했습니다.' },
+      { error: '스크랩 데이터를 가져오는 중 오류가 발생했습니다.' },
       { status: 500 },
     );
   }
@@ -34,12 +33,14 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const { userId, articleId } = await request.json();
+    const { userId, articleId, title } = await request.json();
 
     const scrapDoc = doc(db, `users/${userId}/scrap`, articleId);
     await setDoc(scrapDoc, {
-      scrappedAt: new Date(),
       isScrapped: true,
+      scrappedAt: new Date(),
+      articleId,
+      title,
     });
 
     return NextResponse.json({ message: '기사가 스크랩 되었습니다.' });

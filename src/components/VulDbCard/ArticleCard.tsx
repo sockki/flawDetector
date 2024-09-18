@@ -49,7 +49,7 @@ export default function ArticleCard({
         </div>
         <div className="flex justify-between">
           <div className="flex gap-[1.2rem]">
-            <ScrapButton articleId={id} isScrapped={isScrapped} />
+            <ScrapButton articleId={id} isScrapped={isScrapped} title={title} />
             <ShareButton title={title} />
           </div>
           <span className="text-[1.6rem] font-regular leading-[1.936rem] text-[#a2a2a2]">
