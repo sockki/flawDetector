@@ -1,20 +1,85 @@
-import { LoadingIcon } from '@/public/index';
-import { twMerge } from 'tailwind-merge';
-
-type LogoLoadingProp = {
-  className?: string;
-};
-
-export default function LogoLoading({ className }: LogoLoadingProp) {
+export default function LogoLoading() {
   return (
-    <div className={twMerge('flex w-full items-center justify-center', className)}>
-      <div className="relative h-[10rem] w-[45rem] bg-white">
-        <LoadingIcon className="absolute left-[2.2rem] top-1/2 -translate-y-1/2" />
-        {/* <div className="absolute left-0 top-0 text-[4rem]">Loading ...</div> */}
-        <div className="absolute left-0 flex h-full w-full items-center">
-          <div className="h-[10rem] w-[10rem] animate-move-circle rounded-full bg-white mix-blend-difference" />
-        </div>
-      </div>
+    <div
+      aria-label="Loading..."
+      role="status"
+      className="fixed flex h-screen w-screen flex-1 items-center justify-center space-x-2"
+    >
+      <svg className="h-20 w-20 animate-spin stroke-purple-500" viewBox="0 0 256 256">
+        <line
+          x1="128"
+          y1="32"
+          x2="128"
+          y2="64"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="24"
+        />
+        <line
+          x1="195.9"
+          y1="60.1"
+          x2="173.3"
+          y2="82.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="24"
+        />
+        <line
+          x1="224"
+          y1="128"
+          x2="192"
+          y2="128"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="24"
+        />
+        <line
+          x1="195.9"
+          y1="195.9"
+          x2="173.3"
+          y2="173.3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="24"
+        />
+        <line
+          x1="128"
+          y1="224"
+          x2="128"
+          y2="192"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="24"
+        />
+        <line
+          x1="60.1"
+          y1="195.9"
+          x2="82.7"
+          y2="173.3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="24"
+        />
+        <line
+          x1="32"
+          y1="128"
+          x2="64"
+          y2="128"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="24"
+        />
+        <line
+          x1="60.1"
+          y1="60.1"
+          x2="82.7"
+          y2="82.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="24"
+        />
+      </svg>
+      <span className="text-4xl font-medium text-gray-500">Loading...</span>
     </div>
   );
 }
