@@ -20,4 +20,10 @@ export const useRepoStore = create<RepositoryState>(set => ({
       localStorage.setItem('recentRepos', JSON.stringify(updatedRecentRepos));
       return { recentViewed: updatedRecentRepos };
     }),
+  updateRepoStatus: (repoName, isChecked) =>
+    set(state => ({
+      repositories: state.repositories.map(repo =>
+        repo.name === repoName ? { ...repo, isChecked } : repo,
+      ),
+    })),
 }));

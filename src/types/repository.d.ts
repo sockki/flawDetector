@@ -25,4 +25,6 @@ export type RepositoryState = {
   setFilteredRepositories: (repos: Repository[]) => void;
   addRecentViewed: (repo: Repository) => void;
   setFilterType: (filter: 'all' | 'recent' | 'bookmark') => void;
+
+  updateRepoStatus: (repoName: string, isChecked: DetectFileLabelType) => void;
 };

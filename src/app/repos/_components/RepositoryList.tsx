@@ -62,7 +62,16 @@ export default function RepositoryList({ user, repositories, searchParams }: Rep
   };
 
   const handleTypeSelect = (v: string) => {
-    setTypeFilter(v as TypeFilterOption);
+    const selectedType = v as TypeFilterOption;
+    setTypeFilter(selectedType);
+
+    let filteredRepos = [...repositories];
+    if (selectedType === '검사완료') {
+      filteredRepos = filteredRepos.filter(repo => repo.isChecked === 'done');
+    } else if (selectedType === '검사중') {
+      filteredRepos = filteredRepos.filter(repo => repo.isChecked === 'under');
+    }
+    setFilteredRepositories(filteredRepos);
   };
 
   return (
@@ -93,7 +102,6 @@ export default function RepositoryList({ user, repositories, searchParams }: Rep
                 <DetectFileCard
                   key={repo.id}
                   title={repo.name}
-                  label={repo.isChecked}
                   date={repo.pushedAt}
                   userId={userId}
                   userName={userName}

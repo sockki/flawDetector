@@ -12,21 +12,29 @@ import {
 import { GitHubRepoData } from '@/types/repository';
 import { SortOption } from '@/types/sortAndFilter';
 import { getSortParameters } from '@/utils/getSortParameters';
+import { countRepoFiles } from '@/utils/countRepoFiles';
 import { db } from './firebaseConfig';
 
 export const saveRepositories = async (userId: string, repoData: GitHubRepoData[]) => {
   const userRepoRef = collection(db, 'users', userId.toString(), 'repositories');
+
   const promises = repoData.map(async repo => {
     const repoRef = doc(userRepoRef, repo.name);
+
     const existingRepoDoc = await getDoc(repoRef);
+
     const isBookmarked = existingRepoDoc.exists() ? existingRepoDoc.data().isBookmarked : false;
 
+    let isChecked = 'before';
+    if (existingRepoDoc.exists() && existingRepoDoc.data().isChecked) {
+      isChecked = existingRepoDoc.data().isChecked;
+    }
     return setDoc(
       repoRef,
       {
         name: repo.name,
         pushedAt: repo.pushed_at,
-        isChecked: repo.isChecked || 'before',
+        isChecked,
         isBookmarked,
       },
       { merge: true },
@@ -42,7 +50,7 @@ export const saveRepositories = async (userId: string, repoData: GitHubRepoData[
 };
 
 export const getFirestoreRepositories = async (userId: string, sortOption: SortOption) => {
-  const userRepoRef = collection(db, 'users', userId, 'repositories');
+  const userRepoRef = collection(db, 'users', userId.toString(), 'repositories');
   const [orderField, direction] = getSortParameters(sortOption);
   const repoQuery = query(userRepoRef, orderBy(orderField, direction));
 
@@ -50,6 +58,8 @@ export const getFirestoreRepositories = async (userId: string, sortOption: SortO
     const querySnapshot = await getDocs(repoQuery);
     const repos = querySnapshot.docs.map(repoDoc => ({
       id: repoDoc.id,
+      name: repoDoc.data().name,
+      isChecked: repoDoc.data().isChecked,
       ...repoDoc.data(),
     }));
 
@@ -87,4 +97,43 @@ export const deleteUserRepositories = async (userId: string) => {
 
   const userDocRef = doc(db, 'users', userId.toString());
   await deleteDoc(userDocRef);
+};
+
+export const getFirestoreCodeScanResults = async (userId: string, repoName: string) => {
+  try {
+    const scanResultsRef = collection(
+      db,
+      'users',
+      userId.toString(),
+      'repositories',
+      repoName,
+      'codeScanResult',
+    );
+    const querySnapshot = await getDocs(scanResultsRef);
+    const scanResults = querySnapshot.docs.map(repoDoc => repoDoc.data());
+
+    return scanResults;
+  } catch (error) {
+    console.error('Firestore에서 코드 스캔 결과를 가져오는 중 오류 발생:', error);
+    return [];
+  }
+};
+
+export const checkAndUpdateScanStatus = async (userName: string, owner: string, repo: string) => {
+  try {
+    const totalFileCount = await countRepoFiles(owner, repo, '');
+
+    const scanResults = await getFirestoreCodeScanResults(userName, repo);
+    const scanResultsCount = scanResults.length;
+
+    if (scanResultsCount === totalFileCount) {
+      await updateCheckedStatus(userName, repo, 'done');
+    } else if (scanResultsCount > 0) {
+      await updateCheckedStatus(userName, repo, 'under');
+    } else {
+      await updateCheckedStatus(userName, repo, 'before');
+    }
+  } catch (error) {
+    console.error('검사 상태 업데이트 중 오류 발생:', error);
+  }
 };

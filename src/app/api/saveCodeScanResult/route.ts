@@ -1,6 +1,7 @@
 import { postGenerateMessage } from '@/apis/llama';
 import { db } from '@/firebase/firebaseConfig';
-import { addDoc, collection } from 'firebase/firestore';
+import { checkAndUpdateScanStatus } from '@/firebase/firebaseRepository';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 
 async function saveResultToFirestore(
@@ -15,6 +16,11 @@ async function saveResultToFirestore(
         result: generatedResult,
       },
     );
+
+    const repoRef = doc(db, 'users', userId.toString(), 'repositories', repoName);
+    await updateDoc(repoRef, { isChecked: 'under' });
+
+    await checkAndUpdateScanStatus(userId, repoName, repoName);
   } catch (error) {
     console.error('Error saving to Firestore:', error);
     throw new Error('Firestore 저장 실패');

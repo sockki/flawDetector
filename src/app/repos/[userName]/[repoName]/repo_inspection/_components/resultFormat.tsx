@@ -25,7 +25,7 @@ export function ResultFormat({ params }: ResultFormatProps) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ path, repoName, userId }),
+      body: JSON.stringify({ repoName, userId, path }),
     });
 
     if (!response.ok) {

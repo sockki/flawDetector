@@ -1,12 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { twMerge } from 'tailwind-merge';
 import { DetectFileCardArrowIcon, DetectFileCardBugIcon, DetectFileCardStar } from '@/public/index';
 import { useRepoStore } from '@/stores/useRepoStore';
 import type { DetectFileCardProps, ElementByLabel } from '@/types/detectedFileCard';
+import { getFirestoreRepositories } from '@/firebase/firebaseRepository';
 
 async function updateBookmarkStatus(userId: string, repoName: string, isBookmarked: boolean) {
   const response = await fetch('/api/repositories', {
@@ -25,18 +26,25 @@ async function updateBookmarkStatus(userId: string, repoName: string, isBookmark
   }
 }
 
-export default function DetectFileCard({
-  title,
-  label,
-  date,
-  userId,
-  userName,
-}: DetectFileCardProps) {
+export default function DetectFileCard({ title, date, userId, userName }: DetectFileCardProps) {
   const router = useRouter();
-  const { repositories, setRepositories, addRecentViewed } = useRepoStore();
+  const { repositories, setRepositories, addRecentViewed, updateRepoStatus } = useRepoStore();
 
   const repos = repositories.find(repo => repo.name === title);
   const [isBookmark, setIsBookmark] = useState<boolean>(repos?.isBookmarked || false);
+  const [isChecked] = useState(repos?.isChecked || 'before');
+
+  useEffect(() => {
+    const fetchRepoStatus = async () => {
+      const updatedRepos = await getFirestoreRepositories(userId.toString(), '최신순');
+      if (updatedRepos) {
+        updatedRepos.repos.forEach(repo => {
+          updateRepoStatus(repo.name, repo.isChecked);
+        });
+      }
+    };
+    fetchRepoStatus();
+  }, [userId, updateRepoStatus]);
 
   if (!repos) return null;
 
@@ -61,7 +69,7 @@ export default function DetectFileCard({
     },
   };
 
-  const { labelStyle, labelText, buttonStyle, buttonText } = elementByLabel[label];
+  const { labelStyle, labelText, buttonStyle, buttonText } = elementByLabel[isChecked];
 
   const onClickBookmark = async () => {
     try {
