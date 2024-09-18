@@ -13,6 +13,7 @@ type FileScanResult = {
 type FetchCodeStatusProps = {
   userName: string;
   repoName: string;
+  userId: string;
 };
 
 type CodeStatusResult = {

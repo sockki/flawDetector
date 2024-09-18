@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { FolderIcon, ListCheckIcon } from '@/public/index';
+import { useCallback, useState } from 'react';
+import { FolderIcon } from '@/public/index';
 import { twMerge } from 'tailwind-merge';
-import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 import { ListStatusType } from '@/types/list';
 import { ScanStatus } from './ScanStatus';
 
@@ -23,7 +22,7 @@ export function FolderItem({
   onFolderClick,
 }: FolderItemProps) {
   const containerStyles = twMerge(
-    'group flex h-[5.2rem] w-[24.7rem] flex-col justify-center gap-[0.4rem] border-b border-gray-300 p-[1rem] align-middle hover:bg-purple-light',
+    'group flex h-[5.2rem] w-[24.7rem] flex-col justify-center gap-[0.4rem] border-t border-gray-300 p-[1rem] align-middle hover:bg-purple-light cursor-pointer',
     isSelected ? 'bg-purple-dark' : 'bg-white',
   );
 
@@ -33,23 +32,24 @@ export function FolderItem({
 
   const [isMarked, setIsMarked] = useState(initialIsMarked);
 
-  function handleBookmark(e: React.MouseEvent<HTMLDivElement>) {
-    e.stopPropagation();
-    setIsMarked(prevIsMarked => !prevIsMarked);
-    // api 생성후 들어갈 예정입니다.
-  }
+  const handleBookmark = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      setIsMarked(prevIsMarked => !prevIsMarked);
+      // API 호출 코드 추가 예정
+    },
+    [], // 의존성 배열
+  );
 
   return (
     <div className={containerStyles} onClick={onFolderClick}>
       <div className={itemStyles}>
         <div className={infoStyles}>
-          {isSelected && <ListCheckIcon />}
           <FolderIcon />
-          {folderName}
+          <div className="max-w-[12rem] truncate">{folderName}</div>
         </div>
-        <ScanStatus type={type} onBookMarkClick={() => handleBookmark} isMarked={isMarked} />
+        <ScanStatus type={type} onBookMarkClick={handleBookmark} isMarked={isMarked} />
       </div>
-      {type === 'enabled' ? '' : <ProgressBar type={type} />}
     </div>
   );
 }

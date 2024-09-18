@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { useCodeFormatState } from '@/stores/Stroe';
+import { useCodeFormatState } from '@/stores/useRepoDetailStore';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { CopyCodeIcon } from '@/public/index';
 
@@ -20,7 +20,7 @@ const customCodeStyle = {
   borderTopRightRadius: '0',
   borderBottomLeftRadius: '2rem',
   borderBottomRightRadius: '2rem',
-  padding: '1rem',
+  padding: '1.6rem',
   margin: 0,
   border: 0,
 };
@@ -73,7 +73,7 @@ export default function InfoBox({
         'mb-[2rem] p-[3rem]',
         'rounded-lg',
         'flex flex-col gap-[3.2rem]',
-        'h-fit w-[148.6rem]',
+        'h-fit w-[100rem]',
         'rounded-[1.2rem]',
       )}
     >
@@ -104,10 +104,10 @@ export default function InfoBox({
       <div className="text-[1.8rem]">{fixDetails}</div>
 
       <div>
-        <div className="text-[3.2rem] font-bold">
+        <div className="text-[2.4rem] font-bold">
           수정된 코드
           <div className="h-fit w-fit min-w-[70rem]">
-            <div className="text-gray-ligh flex justify-between rounded-tl-[2rem] rounded-tr-[2rem] bg-neutral-80 px-[1.6rem] py-[2rem] text-[1.8rem] text-gray-light">
+            <div className="text-gray-ligh flex justify-between rounded-tl-[2rem] rounded-tr-[2rem] bg-black px-[1.6rem] py-[2rem] text-[1.8rem] text-gray-light">
               <div>{codeType}</div>
               <CopyToClipboard text={formatCodeString(modifiedCode)}>
                 <button type="button" className="flex gap-[1rem]">

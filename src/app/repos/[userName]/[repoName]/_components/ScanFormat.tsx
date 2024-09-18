@@ -3,7 +3,7 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { ReadingGlassesIcon } from '@/public/index';
-import { useCodeFormatState } from '@/stores/Stroe';
+import { useCodeFormatState } from '@/stores/useRepoDetailStore';
 import { twMerge } from 'tailwind-merge';
 import { useEffect, useRef } from 'react';
 
@@ -13,15 +13,16 @@ type ScanFormatProps = {
   scrollToLine?: number | null;
 };
 
-const containerStyles = 'flex gap-[2.8rem]';
+const containerStyles = 'flex gap-[2.8rem] w-[148.4rem]';
 const formatStyles =
-  'flex h-[131rem] w-[148.4rem] items-center justify-center rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] bg-white overflow-y-auto'; // Changed 'over-scroll-y' to 'overflow-y-auto'
-const contentStyles = 'flex flex-col items-center gap-[2rem] text-[3.2rem] text-primary-500';
+  'flex h-[102rem]  max-w-[148.4rem] items-center justify-center rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] bg-white overflow-y-auto';
+const contentStyles =
+  'flex flex-col items-center justify-center  gap-[2rem] text-[3.2rem] text-primary-500 max-w-[148.4rem] min-w-[100rem]';
 const customCodeStyle = {
-  width: '148.4rem',
+  width: '100rem',
   height: '100%',
   backgroundColor: '#ffffff',
-  fontSize: '2.5rem',
+  fontSize: '1.8rem',
   borderRadius: '0.8rem',
   padding: '1rem',
 };
@@ -49,8 +50,8 @@ export function ScanFormat({
 
   return (
     <div className={containerStyles}>
-      <div className={twMerge(formatStyles, resultType ? 'h-[55.5rem]' : '')}>
-        {currentCode ? (
+      {currentCode ? (
+        <div className={twMerge(formatStyles, resultType ? 'h-[55.5rem]' : '')}>
           <SyntaxHighlighter
             language={codeType}
             style={oneLight}
@@ -65,18 +66,20 @@ export function ScanFormat({
               ref: (el: HTMLDivElement | null) => {
                 lineRefs.current[lineNumber - 1] = el;
               },
-              style: highLightedLines?.includes(lineNumber) ? { background: '#ff6d6d' } : {},
+              style: highLightedLines?.includes(lineNumber)
+                ? { background: '#ffefef', display: 'block', width: '100%' }
+                : { display: 'block', width: '100%' },
             })}
           >
             {currentCode}
           </SyntaxHighlighter>
-        ) : (
-          <div className={contentStyles}>
-            <ReadingGlassesIcon />
-            파일을 선택하세요
-          </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className={twMerge(contentStyles, resultType ? 'h-[55.5rem]' : '')}>
+          <ReadingGlassesIcon />
+          파일을 선택하세요
+        </div>
+      )}
     </div>
   );
 }

@@ -9,7 +9,7 @@ interface LayoutProps {
 
 export default function Layout({ children, params }: LayoutProps) {
   return (
-    <div className="relative left-[8rem] flex w-[176.05rem] flex-col gap-[2.0rem]">
+    <div className="relative left-[8rem] flex flex-col gap-[2.0rem]">
       <Title />
       <div className="flex gap-[2.8rem]">
         <RepoSide params={params} />
