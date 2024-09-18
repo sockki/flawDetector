@@ -34,6 +34,7 @@ export default function RepositoryList({ user, repositories, searchParams }: Rep
   const { status } = useSession();
   const { setRepositories, filteredRepositories, setFilteredRepositories } = useRepoStore();
   const [, setTypeFilter] = useState<TypeFilterOption>();
+  const [selectedSortOption, setSelectedSortOption] = useState<string>('최신순');
 
   const userId = user?.id || '';
   const userName = user?.login || '';
@@ -55,12 +56,6 @@ export default function RepositoryList({ user, repositories, searchParams }: Rep
   const totalPage = Math.ceil((filteredRepositories?.length || 0) / perPage);
   const pageData = filteredRepositories.slice((nowPage - 1) * perPage, nowPage * perPage);
 
-  const handleSortSelect = (selectedSort: string) => {
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set('sortOption', selectedSort);
-    router.push(`/repos?${newSearchParams.toString()}`);
-  };
-
   const handleTypeSelect = (v: string) => {
     const selectedType = v as TypeFilterOption;
     setTypeFilter(selectedType);
@@ -72,6 +67,13 @@ export default function RepositoryList({ user, repositories, searchParams }: Rep
       filteredRepos = filteredRepos.filter(repo => repo.isChecked === 'under');
     }
     setFilteredRepositories(filteredRepos);
+  };
+
+  const handleSortSelect = (selectedSort: string) => {
+    setSelectedSortOption(selectedSort);
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('sortOption', selectedSort);
+    router.push(`/repos?${newSearchParams.toString()}`);
   };
 
   return (
@@ -94,6 +96,7 @@ export default function RepositoryList({ user, repositories, searchParams }: Rep
                   options={sortOptions}
                   hasIcon
                   onSelect={handleSortSelect}
+                  selectedOption={selectedSortOption}
                 />
               </div>
             </div>
