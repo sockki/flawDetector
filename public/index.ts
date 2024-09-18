@@ -47,16 +47,17 @@ export { default as LoadingIcon } from './icons/loadingIcon.svg';
 export { default as OutlinePinIcon } from "./icons/outlinePin.svg";
 export { default as PaginationArrowIcon } from "./icons/paginationArrow.svg";
 export { default as RemoveIcon } from './icons/remove.svg';
+export { default as ReturnArrowIcon } from './icons/returnArrow.svg';
 export { default as SearchIcon } from "./icons/searchIcon.svg";
 export { default as ShareIcon } from "./icons/sharing.svg";
 export { default as SpacSpaceLogoIcon } from "./icons/spacSpaceLogo.svg";
 export { default as SuccessIcon } from './icons/success.svg';
-export { default as ReturnArrowIcon } from './icons/returnArrow.svg'
 
 export { default as SendIcon } from './icons/send.svg';
 export { default as SignOutIcon } from './icons/signOut.svg';
 export { default as CheckIcon } from './icons/switchCheck.svg';
 export { default as CrossIcon } from './icons/switchCross.svg';
+export { default as blurImg } from "./images/blurDb.png";
 export { default as carouselEmoji1 } from "./images/carouselEmoji1.png";
 export { default as carouselEmoji2 } from "./images/carouselEmoji2.png";
 export { default as carouselEmoji3 } from "./images/carouselEmoji3.png";
