@@ -3,16 +3,14 @@ export default function ContactInfo() {
     <div className="flex-start flex flex-col justify-between gap-[7.9rem]">
       <div className="flex flex-col gap-[3rem]">
         <h1 data-aos="fade-up" className="text-[6rem] font-[700] leading-[9rem] text-primary-500">
-          서비스 이용에
-          <br />
+          서비스 이용에 <br />
           문제가 생겼나요?
         </h1>
         <p
           data-aos="fade-up"
-          className="text-[2rem] font-medium leading-[2.4rem] tracking-[-0.01rem] text-gray-default"
+          className="text-[2rem] font-medium tracking-[-0.01rem] text-gray-default"
         >
-          이용하면서 문제가 생겼다면 언제든지 문의주세요.
-          <br />
+          이용하면서 문제가 생겼다면 언제든지 문의주세요. <br />
           서비스 개발과 성장에 큰 도움이 됩니다.
         </p>
       </div>
