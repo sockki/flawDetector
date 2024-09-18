@@ -3,10 +3,10 @@ import Header from '@/components/Header/Header';
 import '@/styles/globals.css';
 import ClientSessionProvider from '@/utils/clientSessionProvider';
 import Providers from '@/utils/provider';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/authOptions';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: '플로디텍터 | FlawDetector',
@@ -16,19 +16,35 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
+  const session = await getServerSession(authOptions);
+  const isLoggedIn = !!session;
+
   return (
     <html lang="ko">
-      <body className={inter.className}>
+      <head>
+        <link
+          rel="preload"
+          href="/PretendardVariableSubset.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+        />
+      </head>
+      <body className="font-sans">
         <ClientSessionProvider>
           <Providers>
             <div id="modal" />
             <div className="flex min-h-screen flex-col">
-              <Header />
+              <Header isLoggedIn={isLoggedIn} />
               <div className="flex-1">{children}</div>
               <Footer />
             </div>
