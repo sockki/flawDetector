@@ -1,24 +1,32 @@
 'use client';
 
-import { LogoIcon } from '@/public/index';
-import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
+import { useLogout } from '@/hooks/useLogout';
+import { LogoIcon } from '@/public/index';
+import { useModal } from '@/hooks/useModal';
+import LogoutModal from '@/app/repos/_components/LogoutModal';
 
 type HeaderProps = {
   isLoggedIn: boolean;
+  userId: string | undefined;
 };
 
-export default function Header({ isLoggedIn }: HeaderProps) {
+export default function Header({ isLoggedIn, userId }: HeaderProps) {
   const pathname = usePathname();
   const headerStyle = (pathname === '/ppa' || pathname === '/agreements') && 'text-white';
   const iconStyle =
     pathname === '/ppa' || pathname === '/agreements' ? 'filter invert brightness-0' : '';
 
-  const handleLogout = async () => {
-    await signOut({ callbackUrl: '/' });
+  const [isModalOpen, handleClickTrigger] = useModal();
+  const { handleLogout } = useLogout();
+
+  const confirmLogout = async () => {
+    await handleLogout(userId);
+    handleClickTrigger();
   };
+
   return (
     <header
       className={twMerge(
@@ -53,13 +61,18 @@ export default function Header({ isLoggedIn }: HeaderProps) {
             <li>
               <button
                 type="button"
-                onClick={handleLogout}
-                className="text-[1.8rem] font-medium hover:text-red-500"
+                onClick={handleClickTrigger}
+                className="text-[1.8rem] font-medium hover:text-system-warning"
               >
                 로그아웃
               </button>
             </li>
           )}
+          <LogoutModal
+            isModalOpen={isModalOpen}
+            handleClickTrigger={handleClickTrigger}
+            confirmLogout={confirmLogout}
+          />
         </ul>
       </nav>
     </header>
