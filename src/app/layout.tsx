@@ -28,6 +28,13 @@ export default async function RootLayout({
     <html lang="ko">
       <head>
         <link
+          rel="preload"
+          href="/PretendardVariableSubset.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
         />
