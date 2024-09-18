@@ -1,17 +1,29 @@
 import { db } from '@/firebase/firebaseConfig';
 import { fromUnixTime } from 'date-fns';
-import { collection, deleteDoc, doc, getDocs, setDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId');
+    const articleId = searchParams.get('articleId');
 
     if (!userId) {
       return NextResponse.json({ error: 'userId가 누락되었습니다.' }, { status: 400 });
     }
 
+    if (articleId) {
+      const scrapDocRef = doc(db, `users/${userId}/scrap`, articleId);
+      const scrapDoc = await getDoc(scrapDocRef);
+
+      if (scrapDoc.exists()) {
+        const data = scrapDoc.data();
+        return NextResponse.json({ data });
+      } else {
+        return NextResponse.json({ data: { isScrapped: false } });
+      }
+    }
     const scrapCollectionRef = collection(db, `users/${userId}/scrap`);
     const scrapSnapshot = await getDocs(scrapCollectionRef);
 
