@@ -7,14 +7,17 @@ export default function Introduction() {
       className="flex h-[102.2rem] w-full items-center justify-between overflow-hidden bg-primary-50 bg-[url('/images/landingSquare.png')] bg-[right_-10rem_center] bg-no-repeat p-[27.5rem_19.2rem]"
     >
       <div className="flex flex-col gap-[3rem]">
-        <div className="text-[8rem] font-[700] leading-[9.6rem] tracking-[-0.01em] text-primary-500">
+        <div
+          data-aos="fade-up"
+          className="text-[8rem] font-[700] leading-[9.6rem] tracking-[-0.01em] text-primary-500"
+        >
           쉽고 편하게 <br /> 취약점을 발견하다
         </div>
-        <div className="flex flex-col gap-[2.8rem]">
+        <div data-aos="fade-up" className="flex flex-col gap-[2.8rem]">
           <div className="text-[3.2rem] font-bold text-neutral-100">
             코드 보안 <br /> 어떻게 관리하시나요?
           </div>
-          <p className="text-[2rem] text-[#9C6FA8]">
+          <p data-aos="fade-up" className="text-[2rem] text-[#9C6FA8]">
             플로디텍터는 안전한 소프트웨어 개발을 위한 필수 도구로, <br />
             코드의 보안 취약점을 사전에 수정함으로써 <br />
             개발자들에게 편의와 안전한 개발 환경을 제공합니다.

@@ -9,6 +9,7 @@ import Script from 'next/script';
 import { ReactNode } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AOSWrapper from './_components/AOSwarpper';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,7 +34,9 @@ export default function RootLayout({
             <div id="modal" />
             <div className="flex min-h-screen flex-col">
               <Header />
-              <div className="flex-1">{children}</div>
+              <AOSWrapper>
+                <div className="flex-1">{children}</div>
+              </AOSWrapper>
               <Footer />
             </div>
             <ToastContainer autoClose={2000} />
