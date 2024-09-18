@@ -19,7 +19,7 @@ export default function Header({ isLoggedIn }: HeaderProps) {
   const handleLogout = async () => {
     await signOut({ callbackUrl: '/' });
   };
-  
+
   return (
     <header
       className={twMerge(
