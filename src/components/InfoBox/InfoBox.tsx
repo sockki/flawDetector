@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { useCodeFormatState } from '@/stores/Stroe';
+import { useCodeFormatState } from '@/stores/useRepoDetailStore';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { CopyCodeIcon } from '@/public/index';
 

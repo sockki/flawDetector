@@ -3,7 +3,7 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { ReadingGlassesIcon } from '@/public/index';
-import { useCodeFormatState } from '@/stores/Stroe';
+import { useCodeFormatState } from '@/stores/useRepoDetailStore';
 import { twMerge } from 'tailwind-merge';
 import { useEffect, useRef } from 'react';
 
@@ -15,7 +15,7 @@ type ScanFormatProps = {
 
 const containerStyles = 'flex gap-[2.8rem] w-[148.4rem]';
 const formatStyles =
-  'flex h-[131rem]  max-w-[148.4rem] items-center justify-center rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] bg-white overflow-y-auto';
+  'flex h-[102rem]  max-w-[148.4rem] items-center justify-center rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] bg-white overflow-y-auto';
 const contentStyles =
   'flex flex-col items-center justify-center  gap-[2rem] text-[3.2rem] text-primary-500 max-w-[148.4rem] min-w-[100rem]';
 const customCodeStyle = {

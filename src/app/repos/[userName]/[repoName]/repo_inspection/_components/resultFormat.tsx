@@ -2,7 +2,7 @@
 
 import InfoBox from '@/components/InfoBox/InfoBox';
 import { useMutation } from '@tanstack/react-query';
-import { useSelectedFile } from '@/stores/Stroe';
+import { useSelectedPath } from '@/stores/useRepoDetailStore';
 import { useEffect, useState } from 'react';
 import { ScanFormat } from '../../_components/ScanFormat';
 
@@ -12,7 +12,7 @@ type ResultFormatProps = {
 
 export function ResultFormat({ params }: ResultFormatProps) {
   const [highLightedLines, setHighLightedLines] = useState<number[]>([]);
-  const { selectedFilePaths } = useSelectedFile();
+  const { isSelectedFilePath } = useSelectedPath();
   const [scrollToLine, setScrollToLine] = useState<number | null>(0);
 
   const postCodeScanResult = async (path: string) => {
@@ -42,13 +42,13 @@ export function ResultFormat({ params }: ResultFormatProps) {
 
   useEffect(() => {
     const performMutation = () => {
-      if (selectedFilePaths.length > 0) {
-        mutation.mutate(`${params.userName}/${params.repoName}/${selectedFilePaths[0]}`);
+      if (isSelectedFilePath) {
+        mutation.mutate(`${params.userName}/${params.repoName}/${isSelectedFilePath}`);
       }
     };
 
     performMutation();
-  }, [selectedFilePaths, params.userName, params.repoName]);
+  }, [isSelectedFilePath, params.userName, params.repoName]);
 
   useEffect(() => {
     setHighLightedLines([]);

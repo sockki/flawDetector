@@ -14,12 +14,12 @@ export const useCodeFormatState = create<CodeFormatState>(set => ({
   setCodeType: (res: string) => set({ codeType: res }),
 }));
 
-interface SelectedFilePathsState {
-  selectedFilePaths: string[];
-  setSelectedFilePaths: (res: string[]) => void;
+interface IsSelectedFilePathState {
+  isSelectedFilePath: string;
+  setIsSelectedFilePath: (res: string) => void;
 }
 
-export const useSelectedFile = create<SelectedFilePathsState>(set => ({
-  selectedFilePaths: [],
-  setSelectedFilePaths: (res: string[]) => set({ selectedFilePaths: res }),
+export const useSelectedPath = create<IsSelectedFilePathState>(set => ({
+  isSelectedFilePath: '',
+  setIsSelectedFilePath: (res: string) => set({ isSelectedFilePath: res }),
 }));
