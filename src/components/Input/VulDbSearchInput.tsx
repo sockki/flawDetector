@@ -40,7 +40,6 @@ export default function VulDbSearchInput() {
         params.set('page', '1');
         router.replace(`${pathname}?${params.toString()}`);
       }
-      setSearchValue('');
     } catch (error) {
       throw new Error('검색어 저장 실패');
     }

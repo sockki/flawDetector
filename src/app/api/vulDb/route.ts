@@ -38,6 +38,13 @@ export async function GET(request: Request) {
         return docData.title.toLowerCase().includes(search.toLowerCase());
       });
     }
+    if (filteredDocs.length === 0) {
+      return NextResponse.json<ApiResponse<null>>({
+        success: false,
+        message: '취약점DB에 검색한 결과가 없어요.',
+        subMessage: '다른 주제로 다시 검색해 보세요',
+      });
+    }
 
     filteredDocs.slice((page - 1) * 5, page * 5).forEach(filteredDocItem => {
       const crawlingDocData = filteredDocItem.data() as CrawlingData;
