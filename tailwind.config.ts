@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['PretendardVariable', 'sans-serif'],
+        sans: ['Pretendard', 'sans-serif'],
       },
       backgroundOpacity: {
         8: '0.08',
