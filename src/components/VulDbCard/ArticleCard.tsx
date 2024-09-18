@@ -1,11 +1,33 @@
-import { ExternalLinkIcon, PinIcon } from '@/public/index';
+'use client';
+
+import ScrapButton from '@/app/vulnerability-db/_components/ScrapButton';
+import ShareButton from '@/app/vulnerability-db/_components/ShareButton';
+import type { LabelType } from '@/types/articleCard';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
-import type { ArticleCardProps } from '@/types/articleCard';
 import SuggestionChip from '../Chips/SuggestionChip';
 
-export default function ArticleCard({ label, title, company, content, date }: ArticleCardProps) {
+type ArticleCardProps = {
+  id: string;
+  label: LabelType;
+  title: string;
+  company: string;
+  content: string;
+  date: Date;
+  isScrapped: boolean;
+};
+
+export default function ArticleCard({
+  label,
+  title,
+  company,
+  content,
+  date,
+  id,
+  isScrapped,
+}: ArticleCardProps) {
   const timeDifference = formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
+
   return (
     <article className="flex h-fit w-[86.5rem] gap-[2.4rem] rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] p-[2.8rem] hover:shadow-button active:bg-purple-dark">
       <div className="flex w-full flex-col gap-[2.4rem]">
@@ -27,12 +49,8 @@ export default function ArticleCard({ label, title, company, content, date }: Ar
         </div>
         <div className="flex justify-between">
           <div className="flex gap-[1.2rem]">
-            <button type="button">
-              <PinIcon />
-            </button>
-            <button type="button">
-              <ExternalLinkIcon />
-            </button>
+            <ScrapButton articleId={id} isScrapped={isScrapped} title={title} />
+            <ShareButton title={title} />
           </div>
           <span className="text-[1.6rem] font-regular leading-[1.936rem] text-[#a2a2a2]">
             {timeDifference}

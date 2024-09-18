@@ -93,7 +93,7 @@ const config: Config = {
       animation: {
         spread: 'spread 15s ease-in-out infinite',
         'move-circle': 'move 2s ease-in-out infinite',
-        spin360: 'spin360 2s linear infinite',
+        spin360: 'spin360 linear infinite',
         'rotate-around': 'rotateAround 30s linear infinite',
       },
     },

@@ -5,6 +5,7 @@ export type CrawlingData = {
   scrapDate: Date;
   content: Content[];
   views: number;
+  isScrapped: boolean;
 };
 
 export type ArticleData = {
@@ -15,6 +16,7 @@ export type ArticleData = {
   content: Content[];
   views: number;
   id: string;
+  isScrapped: boolean;
 };
 
 type DateObject = { seconds: number; nanoseconds: number };

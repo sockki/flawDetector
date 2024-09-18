@@ -16,7 +16,7 @@ export default function Hero() {
           <div className="flex flex-col items-center justify-center gap-[4rem]">
             <div className="flex flex-col items-center justify-center gap-[2rem] text-[6rem] leading-[7.261rem] tracking-[0.015em]">
               <h2>Find your Flaw,</h2>
-              <div className="content-center rounded-full border-[0.4rem] border-primary-500 px-[4rem] py-[1.85rem]">
+              <div className="content-center rounded-full border-[0.4rem] border-primary-500 bg-white px-[4rem] py-[1.85rem]">
                 <span>FlawDetector</span>
               </div>
             </div>

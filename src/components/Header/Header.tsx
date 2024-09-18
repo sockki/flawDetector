@@ -1,10 +1,10 @@
 'use client';
 
 import { LogoIcon } from '@/public/index';
+import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
-import { signOut } from 'next-auth/react';
 
 type HeaderProps = {
   isLoggedIn: boolean;
@@ -14,12 +14,11 @@ export default function Header({ isLoggedIn }: HeaderProps) {
   const pathname = usePathname();
   const headerStyle = (pathname === '/ppa' || pathname === '/agreements') && 'text-white';
   const iconStyle =
-    (pathname === '/ppa' || pathname === '/agreements') && 'filter invert brightness-0';
+    pathname === '/ppa' || pathname === '/agreements' ? 'filter invert brightness-0' : '';
 
   const handleLogout = async () => {
     await signOut({ callbackUrl: '/' });
   };
-
   return (
     <header
       className={twMerge(
