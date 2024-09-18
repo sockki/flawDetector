@@ -92,12 +92,12 @@ export default function DetectFileCard({ title, date, userId, userName }: Detect
   };
 
   return (
-    <div className="group relative flex h-[22.5rem] w-[31rem] cursor-pointer flex-col justify-between rounded-[1.2rem] border-[0.1rem] border-primary-100 bg-white p-[2rem]">
-      <div className="absolute right-[2rem] flex h-[4.8rem] w-[4.8rem] items-center justify-center rounded-[1.2rem] group-hover:border-[0.2rem] group-hover:border-primary-200">
+    <div className="group relative flex h-[22.5rem] w-[31rem] cursor-pointer flex-col justify-between rounded-[1.2rem] border-[0.1rem] border-primary-100 bg-white p-[2rem] hover:bg-purple-light">
+      <div className="absolute right-[2rem] flex h-[4.8rem] w-[4.8rem] items-center justify-center rounded-[1.2rem]">
         <DetectFileCardStar
           className={twMerge(
-            'ml-[0.15rem] mt-[0.15rem] h-[2.8rem] w-[2.8rem] group-hover:stroke-primary-200 group-hover:stroke-1',
-            isBookmark ? 'fill-primary-200 stroke-primary-200 stroke-1' : '',
+            'ml-[0.15rem] mt-[0.15rem] h-[2.8rem] w-[2.8rem] stroke-primary-200 stroke-1',
+            isBookmark ? 'fill-primary-200 stroke-primary-200 stroke-1' : undefined,
           )}
           onClick={onClickBookmark}
         />
