@@ -453,7 +453,7 @@ export function RepoSide({ params }: RepoSideProps) {
           ) : (
             <div className="flex h-[4.4rem] w-[24.7rem] items-center overscroll-x-auto border-t p-[1rem] px-[1.5rem] text-[1.6rem]">
               <div
-                className="mr-[0.2rem] w-[5.9rem] cursor-pointer text-[#c3c3c3] hover:underline"
+                className="mr-[0.2rem] w-[5.9rem] cursor-pointer text-gray-middle hover:underline"
                 onClick={() => handleFolderClick('')}
               >
                 All Files
@@ -466,7 +466,7 @@ export function RepoSide({ params }: RepoSideProps) {
                     <span
                       className={twMerge(
                         'max-w-[7.2rem] truncate',
-                        index === pathSegments.length - 1 ? 'text-primary-500' : 'text-[#c3c3c3]',
+                        index === pathSegments.length - 1 ? 'text-primary-500' : 'text-gray-middle',
                         'cursor-pointer hover:underline',
                       )}
                       onClick={() => handleFolderClick(partialPath)}

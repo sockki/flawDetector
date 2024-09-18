@@ -47,7 +47,7 @@ export default function Overview() {
           <Image src={LandingSampleImg} alt="랜딩 이미지" className="absolute top-[17.4rem]" />
           <span
             className={twMerge(
-              `absolute left-[25rem] top-[33.6rem] rounded-[1.287rem] bg-[#A66FFF] px-[2rem] py-[1rem] leading-[3.604rem] shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-[1000ms]`,
+              `absolute left-[25rem] top-[33.6rem] rounded-[1.287rem] bg-primary-300 px-[2rem] py-[1rem] leading-[3.604rem] shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-[1000ms]`,
               isVisible ? 'opacity-100' : 'opacity-0',
             )}
           >
@@ -55,7 +55,7 @@ export default function Overview() {
           </span>
           <span
             className={twMerge(
-              'absolute left-[20.8rem] top-[42.5rem] rounded-[1.287rem] bg-[#A66FFF] px-[2rem] py-[1rem] leading-[3.604rem] shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-[3000ms]',
+              'absolute left-[20.8rem] top-[42.5rem] rounded-[1.287rem] bg-primary-300 px-[2rem] py-[1rem] leading-[3.604rem] shadow-[0_3.862rem_5.793rem_0_rgba(0,0,0,0.25)] transition-opacity duration-[3000ms]',
               isVisible ? 'opacity-100' : 'opacity-0',
             )}
           >

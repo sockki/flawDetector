@@ -17,7 +17,7 @@ export default function ArticleSmallCard({
   return (
     <article
       className={twMerge(
-        'relative flex h-fit w-[41.4rem] flex-col gap-[2.4rem] overflow-hidden rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] p-[2.8rem] hover:shadow-button',
+        'relative flex h-fit w-[41.4rem] flex-col gap-[2.4rem] overflow-hidden rounded-[0.8rem] border-[0.1rem] border-gray-middle p-[2.8rem] hover:shadow-button',
         imageSrc ? 'active:border-[#9747ff] active:bg-none' : 'active:bg-purple-dark',
       )}
     >

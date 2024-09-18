@@ -11,7 +11,7 @@ export default function AssistChip({ variant = 'outline', label, disabled }: Ass
     'inline-block cursor-default rounded-full bg-black px-[1.2rem] py-[0.7rem] text-[1.6rem] hover:bg-opacity-8 focus:bg-opacity-12 focus:outline-none selection:shadow-button';
 
   const variantClasses = {
-    outline: 'border border-[#3F3F3F] bg-black bg-opacity-0',
+    outline: 'border border-gray-black bg-black bg-opacity-0',
     elevated: 'bg-purple-light hover:bg-[#7E5AFF] focus:bg-[#7E5AFF]',
     'outline-primary':
       'border border-primary-300 bg-purple-light text-primary-500 hover:bg-[#7E5AFF] focus:bg-[#7E5AFF] focus:border-primary-500 ',
