@@ -8,7 +8,14 @@ type InputProps = ComponentPropsWithoutRef<'input'> &
   };
 
 const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(function Input(
-  { className, variant = 'default', disabled = false, isMultiline = false, ...rest },
+  {
+    className,
+    variant = 'default',
+    disabled = false,
+    isMultiline = false,
+    readOnly = false,
+    ...rest
+  },
   ref,
 ) {
   const baseStyle =
@@ -19,12 +26,12 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(fun
     default: 'border-neutral-10 text-gray-dark',
     error: 'border-system-warning bg-red-light text-[#3f3f3f]',
   };
-  const disabledStyles = 'cursor-not-allowed bg-gray-light placeholder:text-[#d6d6d6]';
+  const inactiveStyles = 'cursor-not-allowed bg-gray-light placeholder:text-[#d6d6d6]';
 
   const combinedClasses = twMerge(
     baseStyle,
     variantStyles[variant],
-    disabled ? disabledStyles : focusedStyle,
+    disabled || readOnly ? inactiveStyles : focusedStyle,
     className,
   );
 
@@ -34,6 +41,8 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(fun
         ref={ref as Ref<HTMLTextAreaElement>}
         className={twMerge(combinedClasses, 'resize-none')}
         disabled={disabled}
+        readOnly={readOnly}
+        tabIndex={disabled || readOnly ? -1 : undefined}
         {...rest}
       />
     );
@@ -44,6 +53,8 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(fun
       ref={ref as Ref<HTMLInputElement>}
       className={combinedClasses}
       disabled={disabled}
+      readOnly={readOnly}
+      tabIndex={disabled || readOnly ? -1 : undefined}
       {...rest}
     />
   );

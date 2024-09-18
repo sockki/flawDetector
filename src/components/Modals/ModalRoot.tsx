@@ -71,7 +71,7 @@ export default function ModalRoot({
       <div
         ref={ref}
         className={twMerge(
-          'absolute left-1/2 top-1/2 z-[100] flex -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center rounded-[2rem] bg-white p-[4.8rem]',
+          'fixed left-1/2 top-1/2 z-[100] flex -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center rounded-[2rem] bg-white p-[4.8rem]',
           gap && modalRootStyles.gapSize[gap],
           modalRootStyles.paddingSize[padding],
           hasShadow && 'shadow-drop',

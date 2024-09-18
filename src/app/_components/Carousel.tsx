@@ -56,7 +56,10 @@ export default function Carousel() {
   return (
     <section className="min-h-screen w-screen overflow-hidden bg-primary-500">
       <div className="flex flex-col items-center gap-[12.1rem] py-[14.2rem]">
-        <h2 className="text-center text-[6rem] font-bold leading-[7.261rem] tracking-[-0.01em] text-white">
+        <h2
+          data-aos="fade-up"
+          className="text-center text-[6rem] font-bold leading-[7.261rem] tracking-[-0.01em] text-white"
+        >
           안전과 보호를 우선으로 하는 <br />
           프로세스를 제공합니다.
         </h2>

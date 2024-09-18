@@ -9,15 +9,23 @@ type FilterChipProps = {
   options: string[];
   hasIcon?: boolean;
   onSelect: (option: string) => void;
+  selectedOption?: string;
 };
 
-export default function FilterChip({ label, options, hasIcon, onSelect }: FilterChipProps) {
+export default function FilterChip({
+  label,
+  options,
+  hasIcon,
+  onSelect,
+  selectedOption,
+}: FilterChipProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>('');
-
+  const [internalSelectedOption, setInternalSelectedOption] = useState<string | undefined>(
+    selectedOption,
+  );
   const toggleDropdown = () => setIsOpen(() => !isOpen);
   const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
+    setInternalSelectedOption(option);
     setIsOpen(false);
     onSelect(option);
   };
@@ -42,11 +50,11 @@ export default function FilterChip({ label, options, hasIcon, onSelect }: Filter
                 key={option}
                 className={twMerge(
                   'flex cursor-pointer justify-center gap-[0.8rem] overflow-hidden text-nowrap px-[0.95rem] py-[1rem] text-gray-dark hover:bg-purple-light',
-                  selectedOption === option && 'bg-purple-50 text-gray-black',
+                  internalSelectedOption === option && 'bg-purple-50 text-gray-black',
                 )}
                 onClick={() => handleOptionClick(option)}
               >
-                {selectedOption === option && <SelectedIcon />}
+                {internalSelectedOption === option && <SelectedIcon />}
                 {option}
               </li>
             ))}

@@ -13,6 +13,7 @@ import { FileItemResponse } from '@/components/common/CheckedFileList';
 import Button from '@/components/Button/Button';
 import Alert from '@/components/Alert/Alert';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { ScanStatus } from './ScanStatus';
 import { MultipleSelectModal } from './MultipleSelectModal';
 
@@ -52,6 +53,8 @@ export function RepoSide({ params }: RepoSideProps) {
   });
 
   const router = useRouter();
+  const { data } = useSession();
+  const userId = data?.user.id;
 
   const { data: ReposittoryData } = useQuery<RepositoryContentsProps[]>({
     queryKey: ['RepoDetail', currentPath, params],
@@ -67,6 +70,8 @@ export function RepoSide({ params }: RepoSideProps) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        userId: data?.user.id,
+        repoName: params.repoName,
         prompt: promptMessage,
       }),
     });
@@ -89,7 +94,11 @@ export function RepoSide({ params }: RepoSideProps) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ userName: params.userName, repoName: params.repoName }),
+      body: JSON.stringify({
+        userName: params.userName,
+        repoName: params.repoName,
+        userId,
+      }),
     });
 
     if (!response.ok) {
@@ -179,6 +188,7 @@ export function RepoSide({ params }: RepoSideProps) {
     handleClickTrigger();
 
     setWaitFiles(pendingFiles);
+    setIsSelectedFilePath(pendingFiles[0].split('/').slice(2).join('/'));
     const res: RepositoryContentsProps = await getRepoContents({
       owner: params.userName,
       repo: params.repoName,

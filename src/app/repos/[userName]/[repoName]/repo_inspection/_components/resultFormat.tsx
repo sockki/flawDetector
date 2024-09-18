@@ -4,6 +4,7 @@ import InfoBox from '@/components/InfoBox/InfoBox';
 import { useMutation } from '@tanstack/react-query';
 import { useSelectedPath } from '@/stores/useRepoDetailStore';
 import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { ScanFormat } from '../../_components/ScanFormat';
 
 type ResultFormatProps = {
@@ -15,13 +16,20 @@ export function ResultFormat({ params }: ResultFormatProps) {
   const { isSelectedFilePath } = useSelectedPath();
   const [scrollToLine, setScrollToLine] = useState<number | null>(0);
 
-  const postCodeScanResult = async (path: string) => {
+  const { data } = useSession();
+
+  const postCodeScanResult = async (
+    repoName: string,
+    userId: string | undefined,
+    path: string,
+    userName: string,
+  ) => {
     const response = await fetch('/api/getCodeScanResult', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ path }),
+      body: JSON.stringify({ repoName, userId, path, userName }),
     });
 
     if (!response.ok) {
@@ -32,7 +40,17 @@ export function ResultFormat({ params }: ResultFormatProps) {
   };
 
   const mutation = useMutation({
-    mutationFn: (path: string) => postCodeScanResult(path),
+    mutationFn: ({
+      repoName,
+      userId,
+      path,
+      userName,
+    }: {
+      repoName: string;
+      userId: string | undefined;
+      path: string;
+      userName: string;
+    }) => postCodeScanResult(repoName, userId, path, userName),
   });
 
   const handleLineClick = (lineNumber: number) => {
@@ -43,10 +61,14 @@ export function ResultFormat({ params }: ResultFormatProps) {
   useEffect(() => {
     const performMutation = () => {
       if (isSelectedFilePath) {
-        mutation.mutate(`${params.userName}/${params.repoName}/${isSelectedFilePath}`);
+        mutation.mutate({
+          repoName: params.repoName,
+          userId: data?.user.id,
+          path: isSelectedFilePath,
+          userName: params.userName,
+        });
       }
     };
-
     performMutation();
   }, [isSelectedFilePath, params.userName, params.repoName]);
 
@@ -69,9 +91,9 @@ export function ResultFormat({ params }: ResultFormatProps) {
         {mutation.data && mutation.data.length === 0 && (
           <div className="flex h-[52.1rem] w-[100rem] flex-col items-center justify-center gap-[2.4rem]">
             <div className="text-[3.2rem] font-bold">검출된 취약점이 없어요</div>
-            <div className="flex flex-col items-center text-[2.4rem] font-normal text-gray-default">
+            <div className="flex flex-col items-center text-[2.4rem] font-regular text-gray-default">
               취약점이 발견되지 않았지만 새로 업데이트할 경우 파일을 한번 더 검사해주세요.
-              <div className="">파일을 한번 더 검사해주세요.</div>
+              <div>파일을 한번 더 검사해주세요.</div>
             </div>
           </div>
         )}

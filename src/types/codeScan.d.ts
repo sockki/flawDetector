@@ -7,12 +7,13 @@ type Issue = {
 };
 
 type FileScanResult = {
-  result: { path: string; issues: Issue[] };
+  result: { userId: string; repoName: string; path: string; issues: Issue[] };
 };
 
 type FetchCodeStatusProps = {
   userName: string;
   repoName: string;
+  userId: string;
 };
 
 type CodeStatusResult = {

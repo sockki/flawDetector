@@ -1,14 +1,13 @@
 /* eslint-disable */
 
+import { db } from '@/firebase/firebaseConfig';
+import getExecutablePath from '@/libs/getExcutablePath';
+import { Content, TableObject } from '@/types/crawlingData';
+import * as cheerio from 'cheerio';
+import { addDoc, collection } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 import os from 'os';
-import * as cheerio from 'cheerio';
 import puppeteer from 'puppeteer-core';
-import getExecutablePath from '@/libs/getExcutablePath';
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '@/firebase/firebaseConfig';
-import { Content, TableObject } from '@/types/crawlingData';
-
 
 async function getTranslation(crawlingData: TableObject | string) {
   const promptMessage = `${typeof crawlingData === 'string' ? crawlingData : JSON.stringify(crawlingData)} \n 위의 글을 그대로 한글로 번역 해줘. 번역해 드리겠습니다 같은 다른 말 붙이지 말고 글만 번역해줘`;
@@ -125,6 +124,7 @@ export async function GET() {
             scrapDate: nowDate,
             content,
             view: 0,
+            isScrapped: false,
           });
         }
 

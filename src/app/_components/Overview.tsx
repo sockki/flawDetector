@@ -64,12 +64,15 @@ export default function Overview() {
         </div>
       </div>
       <div className="flex flex-col gap-[3.4rem]">
-        <h2 className="text-right text-[6rem] font-[700] leading-[7.3rem] tracking-[-0.01em] text-primary-500">
+        <h2
+          data-aos="fade-up"
+          className="text-right text-[6rem] font-[700] leading-[7.3rem] tracking-[-0.01em] text-primary-500"
+        >
           최신 보안 동향을
           <br />
           실시간으로 확인하세요.
         </h2>
-        <p className="text-right text-[2rem] text-gray-default">
+        <p data-aos="fade-up" className="text-right text-[2rem] text-gray-default">
           실시간으로 최신 보안 동향을 제공하여
           <br />
           개발자들이 보안 취약점에 대한 최신 정보를 받을 수 있어
