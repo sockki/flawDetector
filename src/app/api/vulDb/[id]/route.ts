@@ -5,18 +5,6 @@ import { ArticleData, CrawlingData, GetLabelData } from '@/types/crawlingData';
 import { collection, doc, getDoc, getDocs, limit, query, where } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 
-// Firestore 문서를 가져오는 공통 함수
-async function getArticleData(id: string) {
-  const articleRef = doc(db, 'vulDb', id);
-  const articleSnap = await getDoc(articleRef);
-
-  if (!articleSnap.exists()) {
-    return null;
-  }
-
-  return articleSnap.data();
-}
-
 export async function GET(_: Request, { params }: { params: { id: string } }) {
   try {
     let articleDetailData: ArticleData = {
@@ -32,7 +20,7 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
       view: 0,
       labelList: [],
       company: '',
-      isScrapped: false
+      isScrapped: false,
     };
 
     const relativeData: ArticleData[] = [];

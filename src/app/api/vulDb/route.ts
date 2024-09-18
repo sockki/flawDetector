@@ -25,7 +25,7 @@ export async function GET(request: Request) {
     if (userId) {
       const scrapCollection = collection(db, 'users', userId.toString(), 'scrap');
       const scrapDocs = await getDocs(scrapCollection);
-      scrappedArticleIds.push(...scrapDocs.docs.map(doc => doc.id));
+      scrappedArticleIds.push(...scrapDocs.docs.map(docItem => docItem.id));
     }
 
     const { hotIdSet, newIdSet }: GetLabelData = await getLabelData();
@@ -55,7 +55,12 @@ export async function GET(request: Request) {
       if (newIdSet.has(filteredDocItem.id)) {
         crawlingLabel.push('new');
       }
-      data.push({ ...crawlingDocData, id: filteredDocItem.id, labelList: crawlingLabel, isScrapped: scrappedArticleIds.includes(filteredDocItem.id), });
+      data.push({
+        ...crawlingDocData,
+        id: filteredDocItem.id,
+        labelList: crawlingLabel,
+        isScrapped: scrappedArticleIds.includes(filteredDocItem.id),
+      });
     });
 
     return NextResponse.json<ApiResponse<ArticleData[]>>({
