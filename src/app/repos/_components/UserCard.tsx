@@ -32,7 +32,7 @@ export default function UserCard({ user, hasLogoutButton }: UserCardProps) {
   };
 
   const baseStyles = 'flex w-full min-w-[131.4rem] items-center justify-between ';
-  const logoutStyles = 'border-b border-b-[#e6e6e6] pb-[8rem]';
+  const logoutStyles = 'border-b border-b-neutral-10 pb-[8rem]';
   const defaultStyles = 'bg-neutral-5 rounded-[4.2rem] p-[3.2rem]';
 
   return (
