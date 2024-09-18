@@ -12,7 +12,8 @@ type HeaderProps = {
 
 export default function Header({ isLoggedIn }: HeaderProps) {
   const pathname = usePathname();
-  const headerStyle = (pathname === '/ppa' || pathname === '/agreements') && 'text-white';
+  const headerStyle =
+    (pathname === '/ppa' || pathname === '/agreements') && 'text-white bg-[#24005f]';
   const iconStyle =
     pathname === '/ppa' || pathname === '/agreements' ? 'filter invert brightness-0' : '';
 
@@ -22,7 +23,7 @@ export default function Header({ isLoggedIn }: HeaderProps) {
   return (
     <header
       className={twMerge(
-        'sticky top-0 z-50 flex h-[13.7rem] w-full items-center text-gray-black backdrop-blur-sm',
+        'sticky top-0 z-50 flex h-[13.7rem] w-full items-center bg-white bg-opacity-50 text-gray-black backdrop-blur-sm',
         headerStyle,
       )}
     >
