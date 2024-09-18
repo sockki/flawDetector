@@ -80,26 +80,21 @@ export default function RepositoryList({ user, repositories, searchParams }: Rep
     <div className="mb-[5rem] flex min-h-screen min-w-[131.4rem] flex-col gap-[2.8rem]">
       <RepositoryActions />
       <section className="flex flex-col gap-[2.4rem]">
+        <div className="flex items-center justify-between">
+          <h3 className="text-[3.2rem] font-medium text-gray-black">Library</h3>
+          <div className="flex gap-[1rem]">
+            <FilterChip label="Type" options={typeOptions} hasIcon onSelect={handleTypeSelect} />
+            <FilterChip
+              label="Sort"
+              options={sortOptions}
+              hasIcon
+              onSelect={handleSortSelect}
+              selectedOption={selectedSortOption}
+            />
+          </div>
+        </div>
         {pageData.length > 0 ? (
           <>
-            <div className="flex items-center justify-between">
-              <h3 className="text-[3.2rem] font-medium text-gray-black">Library</h3>
-              <div className="flex gap-[1rem]">
-                <FilterChip
-                  label="Type"
-                  options={typeOptions}
-                  hasIcon
-                  onSelect={handleTypeSelect}
-                />
-                <FilterChip
-                  label="Sort"
-                  options={sortOptions}
-                  hasIcon
-                  onSelect={handleSortSelect}
-                  selectedOption={selectedSortOption}
-                />
-              </div>
-            </div>
             <div className="grid grid-cols-4 gap-[2.4rem]">
               {pageData.map(repo => (
                 <DetectFileCard
