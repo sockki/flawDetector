@@ -34,7 +34,7 @@ export default function RepositoryActions() {
       <button
         type="button"
         onClick={handleRecentsButton}
-        className={`group flex w-full items-center justify-center gap-[1rem] rounded-[1.2rem] border p-[1.6rem] text-[2rem] font-medium hover:bg-purple-light ${activeButton === 'recent' ? 'border-primary-100 bg-purple-light text-primary-400' : 'bg-white text-gray-black'}`}
+        className={`group flex w-full items-center justify-center gap-[1rem] rounded-[1.2rem] border p-[1.6rem] text-[2rem] font-medium hover:bg-purple-light hover:text-primary-400 ${activeButton === 'recent' ? 'border-primary-100 bg-purple-light text-primary-400' : 'bg-white text-gray-black'}`}
       >
         {activeButton === 'recent' ? (
           <ReturnArrowIcon className="h-12 w-12 fill-primary-400" />
