@@ -6,9 +6,9 @@ import { usePathname } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 import { signOut } from 'next-auth/react';
 
-interface HeaderProps {
+type HeaderProps = {
   isLoggedIn: boolean;
-}
+};
 
 export default function Header({ isLoggedIn }: HeaderProps) {
   const pathname = usePathname();
@@ -37,7 +37,7 @@ export default function Header({ isLoggedIn }: HeaderProps) {
           <li>
             <Link
               href="/vulnerability-db?label=hot&page=1"
-              className="text-[1.8rem] font-[500] hover:text-primary-500"
+              className="text-[1.8rem] font-medium hover:text-primary-500"
             >
               취약점 DB
             </Link>
@@ -45,7 +45,7 @@ export default function Header({ isLoggedIn }: HeaderProps) {
           <li>
             <Link
               href="/repos"
-              className="pr-[2rem] text-[1.8rem] font-[500] hover:text-primary-500"
+              className="pr-[2rem] text-[1.8rem] font-medium hover:text-primary-500"
             >
               MY 저장소
             </Link>
@@ -55,7 +55,7 @@ export default function Header({ isLoggedIn }: HeaderProps) {
               <button
                 type="button"
                 onClick={handleLogout}
-                className="text-[1.8rem] font-[500] text-red-500 hover:text-red-700"
+                className="text-[1.8rem] font-medium text-red-500 hover:text-red-700"
               >
                 로그아웃
               </button>
