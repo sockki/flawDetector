@@ -10,6 +10,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get('page') || '1', 10);
     const label = searchParams.get('label');
+    const search = searchParams.get('search');
     const userId = searchParams.get('userId');
     const data: ArticleData[] = [];
 
@@ -29,22 +30,31 @@ export async function GET(request: Request) {
 
     const { hotIdSet, newIdSet }: GetLabelData = await getLabelData();
 
-    crawlingSnapshots.docs.slice((page - 1) * 5, page * 5).forEach(crawlingDocItem => {
-      const crawlingDocData = crawlingDocItem.data() as CrawlingData;
+    let filteredDocs = crawlingSnapshots.docs;
+
+    if (search) {
+      filteredDocs = crawlingSnapshots.docs.filter(crawlingDocItem => {
+        const docData = crawlingDocItem.data() as CrawlingData;
+        return docData.title.toLowerCase().includes(search.toLowerCase());
+      });
+    }
+
+    filteredDocs.slice((page - 1) * 5, page * 5).forEach(filteredDocItem => {
+      const crawlingDocData = filteredDocItem.data() as CrawlingData;
       const crawlingLabel: LabelType[] = [];
-      if (hotIdSet.has(crawlingDocItem.id)) {
+      if (hotIdSet.has(filteredDocItem.id)) {
         crawlingLabel.push('hot');
       }
-      if (newIdSet.has(crawlingDocItem.id)) {
+      if (newIdSet.has(filteredDocItem.id)) {
         crawlingLabel.push('new');
       }
-      data.push({ ...crawlingDocData, id: crawlingDocItem.id, labelList: crawlingLabel, isScrapped: scrappedArticleIds.includes(crawlingDocItem.id), });
+      data.push({ ...crawlingDocData, id: filteredDocItem.id, labelList: crawlingLabel, isScrapped: scrappedArticleIds.includes(filteredDocItem.id), });
     });
 
     return NextResponse.json<ApiResponse<ArticleData[]>>({
       success: true,
       data,
-      totalLength: crawlingSnapshots.size,
+      totalLength: filteredDocs.length,
     });
   } catch (error) {
     return NextResponse.json<ApiResponse<null>>({

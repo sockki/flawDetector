@@ -5,10 +5,11 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 export default function VulDbSearchInput() {
-  const [searchValue, setSearchValue] = useState('');
   const router = useRouter();
-  const searchParams = useSearchParams();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const search = searchParams.get('search');
+  const [searchValue, setSearchValue] = useState(search || '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -36,6 +37,7 @@ export default function VulDbSearchInput() {
         } else {
           params.delete('search');
         }
+        params.set('page', '1');
         router.replace(`${pathname}?${params.toString()}`);
       }
       setSearchValue('');
