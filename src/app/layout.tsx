@@ -8,6 +8,7 @@ import Providers from '@/utils/provider';
 import type { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 import Script from 'next/script';
+import NextTopLoader from 'nextjs-toploader';
 import { ReactNode, Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -49,6 +50,7 @@ export default async function RootLayout({
           <Providers>
             <div id="modal" />
             <div className="flex min-h-screen flex-col">
+              <NextTopLoader color="#6100ff" showSpinner={false} shadow={false} />
               <Suspense fallback={<LogoLoading />}>
                 <Header isLoggedIn={isLoggedIn} />
                 <AOSWrapper>
