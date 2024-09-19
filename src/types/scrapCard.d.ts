@@ -11,4 +11,5 @@ export type ScrapCardProps = {
   title: string;
   date: Date;
   label: ScrapLabelType;
+  id: string;
 };

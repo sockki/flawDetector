@@ -23,7 +23,7 @@ export default function VulDbSearchInput() {
     const params = new URLSearchParams(searchParams);
     const trimValue = searchValue.trim();
 
-    const specialCharRegex = /[^a-zA-Z0-9]/;
+    const specialCharRegex = /[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]/;
 
     if (!trimValue) {
       setSearchError('공백이 아닌 문자를 입력해주세요');

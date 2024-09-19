@@ -6,8 +6,6 @@ export async function POST(req: Request) {
     const { userName, repoName, userId }: { userName: string; repoName: string; userId: string } =
       await req.json();
 
-    console.log(userId);
-
     if (!userName) {
       return NextResponse.json(
         { error: '유효한 userName 파라미터가 필요합니다.' },

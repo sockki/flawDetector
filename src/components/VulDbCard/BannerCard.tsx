@@ -54,7 +54,7 @@ export default function BannerCard({
       className={twMerge(
         `group flex h-[39rem] rounded-[2rem] bg-cover p-[3.6rem] duration-500 hover:w-[62.5rem]`,
         backgroundById(backgroundId),
-        conditionOfFirstBannerCard ? 'w-[62.5rem]' : 'w-[31.6rem]',
+        conditionOfFirstBannerCard ? 'w-[62.5rem]' : 'w-[32rem]',
       )}
     >
       <div className="flex w-full items-end justify-between">

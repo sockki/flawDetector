@@ -1,9 +1,9 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/authOptions';
-import ReposPageHeader from '@/app/repos/_components/ReposPageHeader';
-import UserCard from '@/app/repos/_components/UserCard';
-import RepositoryList from '@/app/repos/_components/RepositoryList';
 import NonLoginReposPage from '@/app/repos/_components/NonLoginReposPage';
+import ReposPageHeader from '@/app/repos/_components/ReposPageHeader';
+import RepositoryList from '@/app/repos/_components/RepositoryList';
+import UserCard from '@/app/repos/_components/UserCard';
+import { authOptions } from '@/authOptions';
+import { getServerSession } from 'next-auth';
 
 export default async function ReposPage({
   searchParams,
@@ -16,10 +16,6 @@ export default async function ReposPage({
 
   if (!session) {
     return <NonLoginReposPage />;
-  }
-
-  if (!session?.user) {
-    return <div>Loading...</div>;
   }
 
   await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/repositories`, {
