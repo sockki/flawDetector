@@ -58,18 +58,13 @@ export default function BannerCard({
       )}
     >
       <div className="flex w-full items-end justify-between">
-        <div
-          className={twMerge(
-            'flex flex-col gap-[0.8rem] group-hover:w-[42rem]',
-            conditionOfFirstBannerCard ? 'w-[42rem]' : 'w-[13.6rem]',
-          )}
-        >
+        <div className="flex flex-col gap-[0.8rem]">
           <span
             className={twMerge(
-              'line-clamp-4 font-bold text-white group-hover:text-[2.8rem] group-hover:leading-[3.389rem]',
+              'line-clamp-4 font-bold text-white group-hover:w-[42rem] group-hover:text-[2.8rem] group-hover:leading-[3.389rem]',
               conditionOfFirstBannerCard
-                ? 'text-[2.8rem] leading-[3.389rem]'
-                : 'text-[1.8rem] leading-[2.178rem]',
+                ? 'w-[42rem] text-[2.8rem] leading-[3.389rem]'
+                : 'w-[13.6rem] text-[1.8rem] leading-[2.178rem]',
             )}
           >
             {title}
