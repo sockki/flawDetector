@@ -15,7 +15,7 @@ export default function ScrapCard({ title, date, label, id }: ScrapCardProps) {
   return (
     <Link
       href={`/vulnerability-db/${id}`}
-      className="relative block flex h-[21.7rem] w-[42.2rem] flex-col rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] bg-white p-[2.8rem]"
+      className="relative flex h-[21.7rem] w-[42.2rem] flex-col rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] bg-white p-[2.8rem]"
     >
       <span
         className={twMerge(
