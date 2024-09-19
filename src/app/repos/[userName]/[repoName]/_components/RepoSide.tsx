@@ -123,6 +123,8 @@ export function RepoSide({ params }: RepoSideProps) {
   const handleCodeScan = async (multipleFilesPath?: string) => {
     const filepath = `${multipleFilesPath}`;
 
+    setResultFiles(prev => prev.filter(file => file.path !== filepath));
+
     setWaitFiles(prevFiles => prevFiles.filter(file => file !== filepath));
     setCheckingFiles(pre => [...pre, filepath]);
     let decodedCode = '';
@@ -177,6 +179,7 @@ export function RepoSide({ params }: RepoSideProps) {
     await ScanCode.mutateAsync(promptMessage, {
       onSuccess: () => {
         FileStatus.mutate();
+        setCheckingFiles([]);
       },
       onError: error => {
         console.error('Unexpected error:', error.message);
@@ -187,9 +190,9 @@ export function RepoSide({ params }: RepoSideProps) {
             type: 'error',
           },
         ]);
+        setCheckingFiles([]);
       },
     });
-    setCheckingFiles(prevFiles => prevFiles.filter(file => file !== filepath));
   };
 
   const handleMultipleScan = async () => {
@@ -197,6 +200,7 @@ export function RepoSide({ params }: RepoSideProps) {
 
     setWaitFiles(pendingFiles);
     setIsSelectedFilePath(pendingFiles[0].split('/').slice(2).join('/'));
+
     const res: RepositoryContentsProps = await getRepoContents({
       owner: params.userName,
       repo: params.repoName,
