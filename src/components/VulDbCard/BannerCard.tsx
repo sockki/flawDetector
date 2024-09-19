@@ -52,7 +52,7 @@ export default function BannerCard({
       href={`/vulnerability-db/${id}`}
       {...hoverHandlers}
       className={twMerge(
-        `group flex h-[39rem] rounded-[2rem] bg-cover p-[3.6rem] transition-all duration-500 ease-in-out hover:w-[62.5rem]`,
+        `group flex h-[39rem] rounded-[2rem] bg-cover p-[3.6rem] duration-500 hover:w-[62.5rem]`,
         backgroundById(backgroundId),
         conditionOfFirstBannerCard ? 'w-[62.5rem]' : 'w-[31.6rem]',
       )}

@@ -1,11 +1,14 @@
+import { LabelType } from './articleCard';
+
 export type CrawlingData = {
   title: string;
   keyword: string;
   uploadDate: DateObject;
   scrapDate: Date;
   content: Content[];
-  views: number;
+  view: number;
   isScrapped: boolean;
+  company: string;
 };
 
 export type ArticleData = {
@@ -14,8 +17,10 @@ export type ArticleData = {
   uploadDate: DateObject;
   scrapDate: Date;
   content: Content[];
-  views: number;
+  view: number;
+  company: string;
   id: string;
+  labelList: LabelType[];
   isScrapped: boolean;
 };
 
@@ -35,4 +40,19 @@ export type TableObject = {
   column5?: string;
   column6?: string;
   column7?: string;
+};
+
+export type GetLabelData = {
+  hotIdSet: Set<string>;
+  newIdSet: Set<string>;
+};
+
+export type DetailResponse = { articleDetailData: ArticleData; relativeData: ArticleData[] };
+
+export type ApiResponse<T> = {
+  success: boolean;
+  data?: T;
+  totalLength?: number;
+  message?: string;
+  subMessage?: string;
 };
