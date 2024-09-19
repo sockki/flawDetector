@@ -1,39 +1,28 @@
-import { OutlinePinIcon, ShareIcon } from '@/public/index';
 import type { ArticleCardProps } from '@/types/articleCard';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
-import Image from 'next/image';
-import { twMerge } from 'tailwind-merge';
+import ScrapButton from '@/app/vulnerability-db/_components/ScrapButton';
+import ShareButton from '@/app/vulnerability-db/_components/ShareButton';
 import SuggestionChip from '../Chips/SuggestionChip';
 
 export default function ArticleSmallCard({
-  label,
-  imageSrc,
+  labelList,
   title,
   content,
   date,
+  id,
+  isScrapped,
 }: ArticleCardProps) {
   const timeDifference = formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
   return (
-    <article
-      className={twMerge(
-        'relative flex h-fit w-[41.4rem] flex-col gap-[2.4rem] overflow-hidden rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] p-[2.8rem] hover:shadow-button',
-        imageSrc ? 'active:border-[#9747ff] active:bg-none' : 'active:bg-purple-dark',
-      )}
-    >
-      {imageSrc && (
-        <div className="absolute inset-0">
-          <Image
-            src={imageSrc}
-            alt="backgroundImage"
-            className="object-cover opacity-[0.16]"
-            fill
-          />
-        </div>
-      )}
+    <article className="relative flex h-fit w-[41.4rem] flex-col gap-[2.4rem] overflow-hidden rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] p-[2.8rem] hover:shadow-button">
       <div className="flex flex-col">
         <div className="flex flex-col">
-          <div className="w-fit">{label !== '' && <SuggestionChip variant={label} />}</div>
+          <div className="w-fit">
+            {labelList.map(label => (
+              <SuggestionChip key={label} variant={label} />
+            ))}
+          </div>
           <div className="mt-[1.6rem] flex h-fit w-full items-center">
             <h1 className="line-clamp-2 text-[2.4rem] font-medium leading-[3.6rem]">{title}</h1>
           </div>
@@ -44,12 +33,8 @@ export default function ArticleSmallCard({
       </span>
       <div className="flex items-center justify-between">
         <div className="flex gap-[1.2rem]">
-          <button type="button">
-            <OutlinePinIcon className="h-[3.2rem] w-[3.2rem]" />
-          </button>
-          <button type="button">
-            <ShareIcon />
-          </button>
+          <ScrapButton articleId={id} isScrapped={isScrapped} title={title} />
+          <ShareButton title={title} />
         </div>
         <span className="text-[1.6rem] font-regular leading-[1.936rem] text-[#a2a2a2]">
           {timeDifference}
