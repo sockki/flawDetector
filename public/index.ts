@@ -34,6 +34,7 @@ export { default as ScanCrossIcon } from './icons/scanCross.svg';
 export { default as ScanErrorIcon } from './icons/scanError.svg';
 export { default as ScanSuccessIcon } from './icons/scanSuccess.svg';
 
+export { default as CopyCheckIcon } from './icons/copyCheck.svg';
 export { default as FillPinIcon } from './icons/fillPin.svg';
 export { default as FolderIcon } from './icons/folder.svg';
 export { default as FolderSimpleStarIcon } from './icons/folderSimpleStar.svg';

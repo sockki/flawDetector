@@ -1,9 +1,12 @@
-import { twMerge } from 'tailwind-merge';
+'use client';
+
+import { CopyCheckIcon, CopyCodeIcon } from '@/public/index';
+import { useCodeFormatState } from '@/stores/useRepoDetailStore';
+import { useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { useCodeFormatState } from '@/stores/useRepoDetailStore';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { CopyCodeIcon } from '@/public/index';
+import { twMerge } from 'tailwind-merge';
 
 type InfoBoxProps = Issue & {
   theme: 'red' | 'primary' | 'gray';
@@ -36,6 +39,8 @@ export default function InfoBox({
   fixDetails,
   onLineClick,
 }: InfoBoxProps) {
+  const [isCopied, setIsCopied] = useState(false);
+
   const { codeType } = useCodeFormatState();
   const themeClasses = {
     bg: {
@@ -65,6 +70,13 @@ export default function InfoBox({
       .replace(/}/g, '\n}')
       .replace(/(\r\n|\r|\n){2,}/g, '\n');
   }
+
+  const handleCopy = () => {
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2_000);
+  };
 
   return (
     <div
@@ -107,12 +119,12 @@ export default function InfoBox({
         <div className="text-[2.4rem] font-bold">
           수정된 코드
           <div className="h-fit w-fit min-w-[70rem]">
-            <div className="text-gray-ligh flex justify-between rounded-tl-[2rem] rounded-tr-[2rem] bg-black px-[1.6rem] py-[2rem] text-[1.8rem] text-gray-light">
+            <div className="text-gray-ligh flex justify-between rounded-tl-[2rem] rounded-tr-[2rem] bg-black px-[1.6rem] py-[1.6rem] text-[1.8rem] text-gray-light">
               <div>{codeType}</div>
-              <CopyToClipboard text={formatCodeString(modifiedCode)}>
-                <button type="button" className="flex gap-[1rem]">
-                  <CopyCodeIcon />
-                  코드복사
+              <CopyToClipboard text={formatCodeString(modifiedCode)} onCopy={handleCopy}>
+                <button type="button" className="flex items-center gap-[1rem]">
+                  {isCopied ? <CopyCheckIcon /> : <CopyCodeIcon />}
+                  {isCopied ? '복사완료' : '코드복사'}
                 </button>
               </CopyToClipboard>
             </div>
