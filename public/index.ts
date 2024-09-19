@@ -34,10 +34,12 @@ export { default as ScanCrossIcon } from './icons/scanCross.svg';
 export { default as ScanErrorIcon } from './icons/scanError.svg';
 export { default as ScanSuccessIcon } from './icons/scanSuccess.svg';
 
+export { default as CopyCheckIcon } from './icons/copyCheck.svg';
 export { default as FillPinIcon } from './icons/fillPin.svg';
 export { default as FolderIcon } from './icons/folder.svg';
 export { default as FolderSimpleStarIcon } from './icons/folderSimpleStar.svg';
 export { default as FullBookMarkIcon } from "./icons/fullBookMark.svg";
+export { default as GithubCatIcon } from './icons/githubCat.svg';
 export { default as LogoIcon } from './icons/headerLogo.svg';
 export { default as LinkIcon } from "./icons/link.svg";
 export { default as ListCheckIcon } from './icons/listCheck.svg';
@@ -47,12 +49,11 @@ export { default as LoadingIcon } from './icons/loadingIcon.svg';
 export { default as OutlinePinIcon } from "./icons/outlinePin.svg";
 export { default as PaginationArrowIcon } from "./icons/paginationArrow.svg";
 export { default as RemoveIcon } from './icons/remove.svg';
+export { default as ReturnArrowIcon } from './icons/returnArrow.svg';
 export { default as SearchIcon } from "./icons/searchIcon.svg";
 export { default as ShareIcon } from "./icons/sharing.svg";
 export { default as SpacSpaceLogoIcon } from "./icons/spacSpaceLogo.svg";
 export { default as SuccessIcon } from './icons/success.svg';
-export { default as ReturnArrowIcon } from './icons/returnArrow.svg'
-export { default as GithubCatIcon }from './icons/githubCat.svg'
 
 export { default as SendIcon } from './icons/send.svg';
 export { default as SignOutIcon } from './icons/signOut.svg';

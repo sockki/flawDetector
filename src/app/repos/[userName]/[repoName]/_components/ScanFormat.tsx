@@ -1,11 +1,11 @@
 'use client';
 
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { ReadingGlassesIcon } from '@/public/index';
 import { useCodeFormatState } from '@/stores/useRepoDetailStore';
-import { twMerge } from 'tailwind-merge';
 import { useEffect, useRef } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { twMerge } from 'tailwind-merge';
 
 type ScanFormatProps = {
   resultType?: boolean;
@@ -13,7 +13,7 @@ type ScanFormatProps = {
   scrollToLine?: number | null;
 };
 
-const containerStyles = 'flex gap-[2.8rem] w-[148.4rem]';
+const containerStyles = 'flex gap-[2.8rem]';
 const formatStyles =
   'flex h-[102rem]  max-w-[148.4rem] items-center justify-center rounded-[0.8rem] border-[0.1rem] border-gray-middle bg-white overflow-y-auto';
 const contentStyles =

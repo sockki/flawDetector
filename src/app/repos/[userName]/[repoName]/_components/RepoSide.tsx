@@ -1,21 +1,21 @@
 'use client';
 
 import { getFileDetail, getRepoContents } from '@/apis/repos/repository';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { FolderItem } from '@/components/List/FolderItem';
-import { FileItem } from '@/components/List/FileItem';
-import { ListHeader } from '@/components/List/ListHeader';
-import { useState, useEffect } from 'react';
-import { twMerge } from 'tailwind-merge';
-import { useCodeFormatState, useSelectedPath } from '@/stores/useRepoDetailStore';
-import { useModal } from '@/hooks/useModal';
-import { FileItemResponse } from '@/components/common/CheckedFileList';
-import Button from '@/components/Button/Button';
 import Alert from '@/components/Alert/Alert';
-import { useRouter } from 'next/navigation';
+import Button from '@/components/Button/Button';
+import { FileItem } from '@/components/List/FileItem';
+import { FolderItem } from '@/components/List/FolderItem';
+import { ListHeader } from '@/components/List/ListHeader';
+import { FileItemResponse } from '@/components/common/CheckedFileList';
+import { useModal } from '@/hooks/useModal';
+import { useCodeFormatState, useSelectedPath } from '@/stores/useRepoDetailStore';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
-import { ScanStatus } from './ScanStatus';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 import { MultipleSelectModal } from './MultipleSelectModal';
+import { ScanStatus } from './ScanStatus';
 
 type RepoSideProps = {
   params: { userName: string; repoName: string };
@@ -164,7 +164,8 @@ export function RepoSide({ params }: RepoSideProps) {
         ]
       }
       5. JSON 형식에서 'path'는 수정하지 말고 그대로 유지해줘.
-      6. 설명은 생략하고, 위의 JSON 형식에 맞춰서 분석 결과만 보내줘.`;
+      6. 설명은 생략하고, 위의 JSON 형식에 맞춰서 분석 결과만 보내줘.
+      7. 코드를 제외한 결과는 무조건 한국어로 번역해줘`;
 
     await ScanCode.mutateAsync(promptMessage, {
       onSuccess: () => {
@@ -404,9 +405,9 @@ export function RepoSide({ params }: RepoSideProps) {
   const pathSegments = currentPath.split('/').filter(segment => segment !== '');
 
   return (
-    <div className="relative mb-[2rem] flex h-[103.2rem] flex-col gap-[2.8rem]">
+    <div className="mb-[2rem] flex h-[103.2rem] flex-col gap-[2.8rem]">
       {ScanCode && (
-        <div className="absolute left-[100rem] top-[1.5rem] bg-white">
+        <div className="absolute right-0 bg-white">
           <Alert
             type={getFileItemType(`${params.userName}/${params.repoName}/${currentFilePath}`)}
             onAlertClick={

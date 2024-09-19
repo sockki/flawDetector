@@ -1,13 +1,15 @@
 import { authOptions } from '@/authOptions';
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
+import LogoLoading from '@/components/common/Loading/LogoLoading';
 import '@/styles/globals.css';
 import ClientSessionProvider from '@/utils/clientSessionProvider';
 import Providers from '@/utils/provider';
 import type { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 import Script from 'next/script';
-import { ReactNode } from 'react';
+import NextTopLoader from 'nextjs-toploader';
+import { ReactNode, Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AOSWrapper from './_components/AOSwrapper';
@@ -49,11 +51,14 @@ export default async function RootLayout({
           <Providers>
             <div id="modal" />
             <div className="flex min-h-screen flex-col">
-              <Header isLoggedIn={isLoggedIn} userId={userId} />
-              <AOSWrapper>
-                <div className="flex-1">{children}</div>
-              </AOSWrapper>
-              <Footer />
+              <NextTopLoader color="#6100ff" showSpinner={false} shadow={false} />
+              <Suspense fallback={<LogoLoading />}>
+                <Header isLoggedIn={isLoggedIn} userId={userId} />
+                <AOSWrapper>
+                  <div className="flex-1">{children}</div>
+                </AOSWrapper>
+                <Footer />
+              </Suspense>
             </div>
             <ToastContainer autoClose={2000} />
           </Providers>
