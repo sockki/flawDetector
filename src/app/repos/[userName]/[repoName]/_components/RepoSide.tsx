@@ -164,7 +164,8 @@ export function RepoSide({ params }: RepoSideProps) {
         ]
       }
       5. JSON 형식에서 'path'는 수정하지 말고 그대로 유지해줘.
-      6. 설명은 생략하고, 위의 JSON 형식에 맞춰서 분석 결과만 보내줘.`;
+      6. 설명은 생략하고, 위의 JSON 형식에 맞춰서 분석 결과만 보내줘.
+      7. 코드를 제외한 결과는 무조건 한국어로 번역해줘`;
 
     await ScanCode.mutateAsync(promptMessage, {
       onSuccess: () => {
