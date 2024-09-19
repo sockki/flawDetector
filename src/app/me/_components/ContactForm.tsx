@@ -41,6 +41,7 @@ export default function ContactForm() {
 
   const handleHomeButton = () => {
     router.push('/');
+    handleClickTrigger();
   };
 
   return (

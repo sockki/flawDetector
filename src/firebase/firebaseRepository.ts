@@ -89,14 +89,37 @@ export const updateCheckedStatus = async (
 };
 
 export const deleteUserRepositories = async (userId: string) => {
-  const userRepoRef = collection(db, 'users', userId.toString(), 'repositories');
-  const querySnapshot = await getDocs(userRepoRef);
+  try {
+    const userRepoRef = collection(db, 'users', userId.toString(), 'repositories');
+    const repoSnapshot = await getDocs(userRepoRef);
 
-  const promises = querySnapshot.docs.map(repoDoc => deleteDoc(repoDoc.ref));
-  await Promise.all(promises);
+    const deleteRepoPromises = repoSnapshot.docs.map(async repoDoc => {
+      const repoId = repoDoc.id;
+      const codeScanRef = collection(
+        db,
+        'users',
+        userId.toString(),
+        'repositories',
+        repoId,
+        'codeScanResult',
+      );
+      const codeScanSnapshot = await getDocs(codeScanRef);
 
-  const userDocRef = doc(db, 'users', userId.toString());
-  await deleteDoc(userDocRef);
+      const deleteCodeScanPromises = codeScanSnapshot.docs.map(codeScanDoc =>
+        deleteDoc(codeScanDoc.ref),
+      );
+      await Promise.all(deleteCodeScanPromises);
+
+      return deleteDoc(repoDoc.ref);
+    });
+
+    await Promise.all(deleteRepoPromises);
+
+    const userDocRef = doc(db, 'users', userId.toString());
+    await deleteDoc(userDocRef);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const getFirestoreCodeScanResults = async (userId: string, repoName: string) => {

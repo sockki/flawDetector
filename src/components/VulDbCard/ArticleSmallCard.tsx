@@ -15,7 +15,7 @@ export default function ArticleSmallCard({
 }: ArticleCardProps) {
   const timeDifference = formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
   return (
-    <article className="relative flex h-fit w-[41.4rem] flex-col gap-[2.4rem] overflow-hidden rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] p-[2.8rem] hover:shadow-button">
+    <article className="relative flex h-fit w-[41.4rem] flex-col gap-[2.4rem] overflow-hidden rounded-[0.8rem] border-[0.1rem] border-gray-middle p-[2.8rem] hover:shadow-button">
       <div className="flex flex-col">
         <div className="flex flex-col">
           <div className="w-fit">

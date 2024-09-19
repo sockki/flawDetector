@@ -27,7 +27,7 @@ export default function ModalButton({ variant, buttonText, onClick }: ModalButto
           </Button>
         </>
       ) : (
-        <Button variant="filled" onClick={onClick}>
+        <Button variant="filled" shape="rectangle" onClick={onClick}>
           {buttonText}
         </Button>
       )}

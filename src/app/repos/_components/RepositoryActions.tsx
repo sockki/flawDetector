@@ -46,7 +46,7 @@ export default function RepositoryActions() {
       <button
         type="button"
         onClick={handleBookmarksButton}
-        className={`group flex w-full items-center justify-center gap-[1rem] rounded-[1.2rem] border p-[1.6rem] text-[2rem] font-medium hover:bg-purple-light hover:text-primary-400 ${activeButton === 'bookmark' && 'border-primary-100 bg-purple-light text-primary-400'}`}
+        className={`group flex w-full items-center justify-center gap-[1rem] rounded-[1.2rem] border p-[1.6rem] text-[2rem] font-medium hover:bg-purple-light hover:text-primary-400 ${activeButton === 'bookmark' ? 'border-primary-100 bg-purple-light text-primary-400' : 'bg-white text-gray-black'}`}
       >
         {activeButton === 'bookmark' ? (
           <ReturnArrowIcon className="h-12 w-12 fill-primary-400" />

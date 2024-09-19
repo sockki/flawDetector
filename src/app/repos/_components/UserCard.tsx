@@ -4,10 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 import Button from '@/components/Button/Button';
-import { Modal } from '@/components/Modals';
 import { useModal } from '@/hooks/useModal';
-import { RightArrowIcon, SignOutIcon } from '@/public/index';
-import { signOut } from 'next-auth/react';
+import { useLogout } from '@/hooks/useLogout';
+import { RightArrowIcon } from '@/public/index';
+import LogoutModal from './LogoutModal';
 
 type UserCardProps = {
   user: {
@@ -20,34 +20,19 @@ type UserCardProps = {
 
 export default function UserCard({ user, hasLogoutButton }: UserCardProps) {
   const [isModalOpen, handleClickTrigger] = useModal();
+  const { handleLogout } = useLogout();
 
   const avatar = user?.image || '';
   const email = user?.email || '';
   const userId = user?.id || '';
 
-  const handleLogout = async () => {
-    try {
-      const res = await fetch('/api/repositories', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId }),
-      });
-
-      if (!res.ok) {
-        throw new Error('사용자의 데이터를 삭제하는 중 오류가 발생했습니다.');
-      }
-
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('recentRepos');
-      }
-      await signOut({ callbackUrl: '/' });
-    } catch (error) {
-      console.error(error);
-    }
+  const confirmLogout = async () => {
+    await handleLogout(userId);
+    handleClickTrigger();
   };
 
   const baseStyles = 'flex w-full min-w-[131.4rem] items-center justify-between ';
-  const logoutStyles = 'border-b border-b-[#e6e6e6] pb-[8rem]';
+  const logoutStyles = 'border-b border-b-neutral-10 pb-[8rem]';
   const defaultStyles = 'bg-neutral-5 rounded-[4.2rem] p-[3.2rem]';
 
   return (
@@ -80,30 +65,11 @@ export default function UserCard({ user, hasLogoutButton }: UserCardProps) {
       ) : (
         <RightArrowIcon />
       )}
-      <Modal
-        gap={24}
-        padding={32}
-        hasShadow
-        setIsModalOpen={handleClickTrigger}
-        isOpen={isModalOpen}
-      >
-        <SignOutIcon />
-        <Modal.Title size="sm">정말 로그아웃 할까요?</Modal.Title>
-        <Modal.Text
-          subtitle={[
-            '소스코드 보안을 위하여 모든 히스토리와 코드 저장 내역이 삭제됩니다.',
-            '아래 버튼을 누르면 모든 데이터를 삭제하게 되고 로그아웃 처리가 됩니다.',
-          ]}
-        />
-        <Modal.Button
-          buttonText={{ left: '닫기', right: '확인' }}
-          variant="doubleButton"
-          onClick={{
-            left: handleClickTrigger,
-            right: handleLogout,
-          }}
-        />
-      </Modal>
+      <LogoutModal
+        isModalOpen={isModalOpen}
+        handleClickTrigger={handleClickTrigger}
+        confirmLogout={confirmLogout}
+      />
     </Link>
   );
 }

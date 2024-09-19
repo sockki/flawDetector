@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="relative bottom-0 flex h-[32.4rem] w-full flex-col bg-[#FAF8FF] bg-[url('/icons/footerBackground.svg')] pl-[8rem] font-medium text-gray-black">
+    <footer className="relative bottom-0 flex h-[32.4rem] w-full flex-col bg-purple-light bg-[url('/icons/footerBackground.svg')] pl-[8rem] font-medium text-gray-black">
       <h1 className="pt-[6rem]">
         <SpacSpaceLogoIcon />
       </h1>

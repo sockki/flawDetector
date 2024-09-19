@@ -31,9 +31,9 @@ export default function FilterChip({
   };
 
   return (
-    <div className="h-fit w-fit text-[2rem] text-[#3f3f3f] hover:bg-purple-light">
+    <div className="h-fit w-fit text-[2rem] text-gray-black hover:bg-purple-light">
       <div
-        className="relative flex w-fit cursor-pointer items-center justify-between rounded-[0.8rem] border border-[#c3c3c3] p-[1rem]"
+        className="relative flex min-w-[9.5rem] cursor-pointer items-center justify-between rounded-[0.8rem] border border-gray-middle p-[1rem]"
         onClick={toggleDropdown}
       >
         <span>{label}</span>
@@ -44,7 +44,7 @@ export default function FilterChip({
         )}
 
         {isOpen && (
-          <ul className="absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 transform overflow-hidden rounded-[0.8rem] border border-[#c3c3c3] bg-white shadow-drop">
+          <ul className="absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 transform overflow-hidden rounded-[0.8rem] border border-gray-middle bg-white shadow-drop">
             {options.map(option => (
               <li
                 key={option}

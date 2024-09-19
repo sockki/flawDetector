@@ -20,7 +20,7 @@ export default function ArticleCard({
   const timeDifference = formatDistanceToNowStrict(date, { addSuffix: true, locale: ko });
 
   return (
-    <article className="flex h-fit w-[86.5rem] gap-[2.4rem] rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] p-[2.8rem] hover:shadow-button active:bg-purple-dark">
+    <article className="flex h-fit w-[86.5rem] gap-[2.4rem] rounded-[0.8rem] border-[0.1rem] border-gray-middle p-[2.8rem] hover:shadow-button active:bg-purple-dark">
       <div className="flex w-full flex-col gap-[2.4rem]">
         <div className="flex flex-col">
           <div className="flex items-center gap-[0.8rem]">
