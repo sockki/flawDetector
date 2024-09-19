@@ -1,18 +1,19 @@
 'use client';
 
 import { PaginationArrowIcon } from '@/public/index';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { twMerge } from 'tailwind-merge';
 
 type PaginationProps = {
   nowPage: number;
   totalPage: number;
-  label?: string;
 };
 
-export default function Pagination({ nowPage, totalPage, label }: PaginationProps) {
+export default function Pagination({ nowPage, totalPage }: PaginationProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
   const router = useRouter();
   const firstNumber = nowPage - (((nowPage - 1) % 10) + 1) + 1;
   return (
@@ -21,7 +22,8 @@ export default function Pagination({ nowPage, totalPage, label }: PaginationProp
         type="button"
         className="flex h-[3.6rem] w-[3.6rem] items-center justify-center bg-none text-[1.6rem] font-regular text-gray-black hover:bg-purple-light"
         onClick={() => {
-          router.push(`${pathname}?${label ? `label=${label}&` : ''}page=${nowPage - 1}`);
+          params.set('page', String(nowPage - 1));
+          router.replace(`${pathname}?${params.toString()}`);
         }}
         disabled={nowPage === 1}
       >
@@ -38,9 +40,8 @@ export default function Pagination({ nowPage, totalPage, label }: PaginationProp
                 firstNumber + pageNumber === nowPage ? 'text-primary-300' : '',
               )}
               onClick={() => {
-                router.push(
-                  `${pathname}?${label ? `label=${label}&` : ''}page=${firstNumber + pageNumber}`,
-                );
+                params.set('page', String(firstNumber + pageNumber));
+                router.replace(`${pathname}?${params.toString()}`);
               }}
             >
               {firstNumber + pageNumber}
@@ -51,7 +52,8 @@ export default function Pagination({ nowPage, totalPage, label }: PaginationProp
         className="flex h-[3.6rem] w-[3.6rem] items-center justify-center bg-none text-[1.6rem] font-regular text-gray-black hover:bg-purple-light"
         type="button"
         onClick={() => {
-          router.push(`${pathname}?${label ? `label=${label}&` : ''}page=${nowPage + 1}`);
+          params.set('page', String(nowPage + 1));
+          router.replace(`${pathname}?${params.toString()}`);
         }}
         disabled={nowPage === totalPage}
       >

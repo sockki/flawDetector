@@ -9,6 +9,37 @@ import { NextResponse } from 'next/server';
 import os from 'os';
 import puppeteer from 'puppeteer-core';
 
+const companyList: string[] = ['마이크로소프트', '오라클', 'GitLab', '아파치', '리눅스'];
+
+type CompanyConfig = {
+  마이크로소프트: string;
+  오라클: string;
+  GitLab: string;
+  아파치: string;
+  리눅스: string;
+};
+
+const companyConfig: CompanyConfig = {
+  마이크로소프트: 'microsoft',
+  오라클: 'Oracle',
+  GitLab: 'GitLab',
+  아파치: 'Apache',
+  리눅스: 'Linux',
+};
+
+const checkCompany = (title: string): string => {
+  let companyName = 'other';
+  companyList.forEach(company => {
+    if (title.indexOf(company) === -1) {
+      return false;
+    } else {
+      companyName = companyConfig[company as keyof CompanyConfig];
+      return true;
+    }
+  });
+  return companyName;
+};
+
 async function getTranslation(crawlingData: TableObject | string) {
   const promptMessage = `${typeof crawlingData === 'string' ? crawlingData : JSON.stringify(crawlingData)} \n 위의 글을 그대로 한글로 번역 해줘. 번역해 드리겠습니다 같은 다른 말 붙이지 말고 글만 번역해줘`;
 
@@ -115,6 +146,7 @@ export async function GET() {
           const keyword = $('.detail-title').text().slice(1, 5);
           const translateTitle = await (await getTranslation(title)).json();
           const translateKeyword = await (await getTranslation(keyword)).json();
+          const company = checkCompany(translateTitle);
           const content = await parseDetailContent($);
 
           await addDoc(collection(db, 'vulDb'), {
@@ -124,7 +156,7 @@ export async function GET() {
             scrapDate: nowDate,
             content,
             view: 0,
-            isScrapped: false,
+            company,
           });
         }
 
