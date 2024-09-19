@@ -5,6 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useSelectedPath } from '@/stores/useRepoDetailStore';
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import LogoLoading from '@/components/common/Loading/LogoLoading';
 import { ScanFormat } from '../../_components/ScanFormat';
 
 type ResultFormatProps = {
@@ -88,11 +89,26 @@ export function ResultFormat({ params }: ResultFormatProps) {
     <div>
       <ScanFormat resultType highLightedLines={highLightedLines} scrollToLine={scrollToLine} />
       <div className="mt-[3rem] h-[83.5rem] min-w-[100rem] overflow-scroll pb-[1rem]">
+        {mutation.isPending && (
+          <div className="flex h-[52.1rem] w-[100rem] flex-col items-center justify-center gap-[2.4rem]">
+            <LogoLoading />
+          </div>
+        )}
         {mutation.data && mutation.data.length === 0 && (
+          <div className="flex h-[52.1rem] w-[100rem] flex-col items-center justify-center gap-[2.4rem]">
+            <div className="text-[3.2rem] font-bold">아직 검사하지 않은 파일이에요.</div>
+            <div className="flex flex-col items-center text-[2.4rem] font-regular text-gray-default">
+              어떠한 취약점이 있을지 알 수 없으니 보안을 위해
+              <div>빠른 시일 내 검사해 주세요.</div>
+            </div>
+          </div>
+        )}
+
+        {mutation.data && mutation.data[0]?.result?.issues[0]?.issue === 'complete' && (
           <div className="flex h-[52.1rem] w-[100rem] flex-col items-center justify-center gap-[2.4rem]">
             <div className="text-[3.2rem] font-bold">검출된 취약점이 없어요</div>
             <div className="flex flex-col items-center text-[2.4rem] font-regular text-gray-default">
-              취약점이 발견되지 않았지만 새로 업데이트할 경우 파일을 한번 더 검사해주세요.
+              취약점이 발견되지 않았지만 새로 업데이트할 경우
               <div>파일을 한번 더 검사해주세요.</div>
             </div>
           </div>

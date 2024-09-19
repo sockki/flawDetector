@@ -9,6 +9,7 @@ import {
 } from '@/public/index';
 import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
+import { usePathname } from 'next/navigation';
 import Button from '../Button/Button';
 
 type AlertProps = {
@@ -47,6 +48,8 @@ const alertConfig = {
 };
 
 export default function Alert({ type, onAlertClick, isAlertOpen, onAlertHandle }: AlertProps) {
+  const path = usePathname();
+
   const alertButton = {
     error: {
       buttonText: '다시 시도하기',
@@ -64,7 +67,9 @@ export default function Alert({ type, onAlertClick, isAlertOpen, onAlertHandle }
         isAlertOpen
           ? 'flex w-fit min-w-[49.4rem] items-start justify-between gap-[1.8rem] rounded-[1.6rem] p-[3.2rem] shadow-drop'
           : 'hidden',
-
+        path.split('/')[path.split('/').length - 1] === 'repo_inspection' && type == 'success'
+          ? 'hidden'
+          : '',
         type === 'enabled' ? 'hidden' : '',
       )}
     >

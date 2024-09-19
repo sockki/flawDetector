@@ -2,6 +2,7 @@
 
 import { ReadingGlassesIcon } from '@/public/index';
 import { useCodeFormatState } from '@/stores/useRepoDetailStore';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -32,7 +33,8 @@ export function ScanFormat({
   highLightedLines,
   scrollToLine,
 }: ScanFormatProps) {
-  const { currentCode, codeType } = useCodeFormatState();
+  const { currentCode, codeType, setCurrentCode } = useCodeFormatState();
+  const pathname = usePathname();
 
   const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -47,6 +49,20 @@ export function ScanFormat({
       handleScrollToLine(scrollToLine);
     }
   }, [scrollToLine]);
+
+  useEffect(() => {
+    if (lineRefs.current[0]) {
+      lineRefs.current[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [currentCode]);
+
+  useEffect(() => {
+    const pattern = /^\/repos\/[^/]+\/[^/]+\/repo_inspection$/;
+
+    if (!pattern.test(pathname)) {
+      setCurrentCode('');
+    }
+  }, [pathname]);
 
   return (
     <div className={containerStyles}>

@@ -37,7 +37,6 @@ export function RepoSide({ params }: RepoSideProps) {
 
   const [sortType, setSortType] = useState('folder');
 
-  const [selectedFilePaths, setSelectedFilePaths] = useState<string[]>([]);
   const { setCurrentCode, setCodeType } = useCodeFormatState();
   const { setIsSelectedFilePath, isSelectedFilePath } = useSelectedPath();
 
@@ -124,6 +123,8 @@ export function RepoSide({ params }: RepoSideProps) {
   const handleCodeScan = async (multipleFilesPath?: string) => {
     const filepath = `${multipleFilesPath}`;
 
+    setResultFiles(prev => prev.filter(file => file.path !== filepath));
+
     setWaitFiles(prevFiles => prevFiles.filter(file => file !== filepath));
     setCheckingFiles(pre => [...pre, filepath]);
     let decodedCode = '';
@@ -149,7 +150,7 @@ export function RepoSide({ params }: RepoSideProps) {
       1. 제공된 코드 내의 보안 취약점을 찾아내고 분석해줘.
       2. 분석할 코드는 다음과 같습니다: ${formattedCodeForAI}
       3. 코드에서 발견된 모든 보안 취약점을 찾아내고, 각각에 대해 상세한 정보를 제공해줘.
-      4. 각 취약점에 대한 정보를 아래와 같은 JSON 형식으로 정리해줘:
+      4. 각 취약점에 대한 정보를 아래와 같은 JSON 형식으로 지켜줘:
       {
         "path": "${filepath}", // 제공된 경로, 수정하지 마세요.
         "issues": [
@@ -163,13 +164,22 @@ export function RepoSide({ params }: RepoSideProps) {
           // 추가 취약점이 있을 경우, 이 배열에 계속 추가해줘.
         ]
       }
-      5. JSON 형식에서 'path'는 수정하지 말고 그대로 유지해줘.
-      6. 설명은 생략하고, 위의 JSON 형식에 맞춰서 분석 결과만 보내줘.
-      7. 코드를 제외한 결과는 무조건 한국어로 번역해줘`;
-
+      5. 만약 취약점을 발견하지 못한다면 아래와 같은 JSON 형식으로 보내줘
+      {
+        "path": "${filepath}", // 제공된 경로, 수정하지 마세요.
+        "issues": [
+          {
+            "issue": "complete" // 제공된 상태, 수정하지 마세요
+          }
+        ]
+      }
+      6. JSON 형식에서 'path'는 수정하지 말고 그대로 유지해줘.
+      7. 설명은 생략하고, 위의 JSON 형식에 맞춰서 분석 결과만 보내줘.
+      8. 코드를 제외한 결과는 무조건 한국어로 번역해줘`;
     await ScanCode.mutateAsync(promptMessage, {
       onSuccess: () => {
         FileStatus.mutate();
+        setCheckingFiles([]);
       },
       onError: error => {
         console.error('Unexpected error:', error.message);
@@ -180,9 +190,9 @@ export function RepoSide({ params }: RepoSideProps) {
             type: 'error',
           },
         ]);
+        setCheckingFiles([]);
       },
     });
-    setCheckingFiles(prevFiles => prevFiles.filter(file => file !== filepath));
   };
 
   const handleMultipleScan = async () => {
@@ -190,6 +200,7 @@ export function RepoSide({ params }: RepoSideProps) {
 
     setWaitFiles(pendingFiles);
     setIsSelectedFilePath(pendingFiles[0].split('/').slice(2).join('/'));
+
     const res: RepositoryContentsProps = await getRepoContents({
       owner: params.userName,
       repo: params.repoName,
@@ -301,34 +312,44 @@ export function RepoSide({ params }: RepoSideProps) {
 
       if (!response) {
         console.error('파일의 정보를 불러오는데 실패하였습니다.');
-        return null; // 파일 정보를 가져오지 못했을 때 null 반환
+        return null;
       }
       setIsSelectedFilePath(filePath);
       setAlertOpen(true);
 
       const { createdAt, subTitle }: FileContentsResponse = response;
 
-      // 파일이 선택되었는지 여부에 따라 상태 업데이트
-      if (selectedFilePaths.includes(filePath)) {
-        // 파일이 이미 선택된 경우, 선택 해제
-        setSelectedFilePaths(selectedFilePaths.filter(path => path !== filePath));
-        setMultipleSelectFiles(prevSelectedFiles =>
-          prevSelectedFiles.filter(file => file.fileName !== fileName),
-        );
-        setPendingFiles(prev => prev.filter(path => path !== fullPath));
-      } else {
-        // 파일을 선택함
-        setSelectedFilePaths([...selectedFilePaths, filePath]);
-        setMultipleSelectFiles(prevSelectedFiles => [
-          ...prevSelectedFiles,
-          {
-            fileName: fileName || '',
-            subTitle,
-            createdAt: new Date(createdAt),
-          },
-        ]);
-        setPendingFiles(prev => (!prev.includes(fullPath) ? [...prev, fullPath] : prev));
-      }
+      // 상태 업데이트 분리
+      const updatePendingFiles = (prevPendingFiles: string[]) => {
+        if (prevPendingFiles.includes(fullPath)) {
+          return prevPendingFiles.filter(path => path !== fullPath);
+        } else {
+          return [...prevPendingFiles, fullPath];
+        }
+      };
+
+      const updateMultipleSelectFiles = (prevSelectedFiles: FileItemResponse[]) => {
+        if (prevSelectedFiles.some(file => file.fileName === fileName)) {
+          // 파일이 이미 선택된 경우
+          const updatedFiles = prevSelectedFiles.filter(file => file.fileName !== fileName);
+          return updatedFiles;
+        } else {
+          // 파일을 선택할 때
+          const updatedFiles = [
+            ...prevSelectedFiles,
+            {
+              fileName: fileName || '',
+              subTitle,
+              createdAt: new Date(createdAt),
+            },
+          ];
+          return updatedFiles;
+        }
+      };
+
+      // 상태 업데이트 한 번에 처리
+      setPendingFiles(updatePendingFiles);
+      setMultipleSelectFiles(updateMultipleSelectFiles);
 
       // 선택된 파일의 내용을 가져옴
       const res: RepositoryContentsProps = await getRepoContents({
@@ -339,16 +360,16 @@ export function RepoSide({ params }: RepoSideProps) {
 
       if (!res.content) {
         console.error('파일 내용을 가져오는데 실패했습니다.');
-        return null; // 파일 내용을 가져오지 못했을 때 null 반환
+        return null;
       }
 
       const decodedCode = Buffer.from(res.content, 'base64').toString('utf-8');
       setCodeType(filePath.split('.').pop() || '');
       setCurrentCode(decodedCode);
-      return null; // 모든 로직이 완료되었을 때 null 반환
+      return null;
     } catch (error) {
       console.error('파일 처리 중 오류가 발생했습니다:', error);
-      return null; // 오류 발생 시 null 반환
+      return null;
     }
   };
 
@@ -373,6 +394,60 @@ export function RepoSide({ params }: RepoSideProps) {
     setCodeType(filePath.split('.').pop() || '');
     setCurrentCode(decodedCode);
     return null;
+  };
+
+  const handleSelectAllFiles = async () => {
+    const newPendingFiles: string[] = [];
+    const removePendingFiles: string[] = [];
+    const newMultipleSelectFiles: { fileName: string; subTitle: string; createdAt: Date }[] = [];
+    const removeMultipleSelectFiles: string[] = [];
+
+    await Promise.all(
+      currentData
+        .filter(repo => repo.type === 'file')
+        .map(async repo => {
+          try {
+            const fileName = repo.path.split('/').pop();
+            const fullPath = `${params.userName}/${params.repoName}/${repo.path}`;
+
+            const response = await getFileDetail({
+              owner: params.userName,
+              repo: params.repoName,
+              path: repo.path,
+            });
+
+            if (!response) {
+              console.error('파일의 정보를 불러오는데 실패하였습니다.');
+              return;
+            }
+
+            const { createdAt, subTitle }: FileContentsResponse = response;
+
+            if (pendingFiles.includes(fullPath)) {
+              removePendingFiles.push(fullPath);
+              removeMultipleSelectFiles.push(fileName || '');
+            } else {
+              newPendingFiles.push(fullPath);
+              newMultipleSelectFiles.push({
+                fileName: fileName || '',
+                subTitle,
+                createdAt: new Date(createdAt),
+              });
+            }
+          } catch (error) {
+            console.error('파일 처리 중 오류가 발생했습니다:', error);
+          }
+        }),
+    );
+
+    setPendingFiles(prev => [
+      ...prev.filter(path => !removePendingFiles.includes(path)),
+      ...newPendingFiles,
+    ]);
+    setMultipleSelectFiles(prev => [
+      ...prev.filter(file => !removeMultipleSelectFiles.includes(file.fileName)),
+      ...newMultipleSelectFiles,
+    ]);
   };
 
   const getFileItemType = (filePath: string) => {
@@ -443,6 +518,7 @@ export function RepoSide({ params }: RepoSideProps) {
             isSortOpen={isSortOpen}
             onListClick={handleSortOpen}
             onChangeSortType={handleSortType}
+            onFileSelect={handleSelectAllFiles}
           />
           {currentPath === '' ? (
             <div
@@ -454,7 +530,7 @@ export function RepoSide({ params }: RepoSideProps) {
           ) : (
             <div className="flex h-[4.4rem] w-[24.7rem] items-center overscroll-x-auto border-t p-[1rem] px-[1.5rem] text-[1.6rem]">
               <div
-                className="mr-[0.2rem] w-[5.9rem] cursor-pointer text-gray-middle hover:underline"
+                className="w-[5.6rem] cursor-pointer text-gray-middle hover:underline"
                 onClick={() => handleFolderClick('')}
               >
                 All Files
@@ -501,6 +577,9 @@ export function RepoSide({ params }: RepoSideProps) {
                   isSelected={isSelectedFilePath.includes(contents.path)}
                   onFileClick={() => handleFileClick(contents.path)}
                   onCheckClick={() => handleCheckClick(contents.path)}
+                  isChecked={pendingFiles.includes(
+                    `${params.userName}/${params.repoName}/${contents.path}`,
+                  )}
                 />
               ),
             )}
