@@ -27,6 +27,7 @@ export default async function RootLayout({
 }>) {
   const session = await getServerSession(authOptions);
   const isLoggedIn = !!session;
+  const userId = session?.user.id;
 
   return (
     <html lang="ko">
@@ -48,7 +49,7 @@ export default async function RootLayout({
           <Providers>
             <div id="modal" />
             <div className="flex min-h-screen flex-col">
-              <Header isLoggedIn={isLoggedIn} />
+              <Header isLoggedIn={isLoggedIn} userId={userId} />
               <AOSWrapper>
                 <div className="flex-1">{children}</div>
               </AOSWrapper>

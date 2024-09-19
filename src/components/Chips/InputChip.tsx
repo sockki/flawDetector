@@ -34,7 +34,7 @@ export default function InputChip({
       role="button"
       tabIndex={0}
       className={twMerge(
-        `flex w-full ${maxWidth} items-center justify-between rounded-[0.8rem] px-[1.2rem] py-[0.8rem] text-[1.6rem] text-[#3f3f3f] selection:border selection:border-[#c3c3c3] selection:bg-purple-dark selection:shadow-button hover:bg-purple-light focus:bg-purple-dark focus:outline-none`,
+        `flex w-full ${maxWidth} items-center justify-between rounded-[0.8rem] px-[1.2rem] py-[0.8rem] text-[1.6rem] text-gray-black selection:border selection:border-gray-middle selection:bg-purple-dark selection:shadow-button hover:bg-purple-light focus:bg-purple-dark focus:outline-none`,
         className,
       )}
     >

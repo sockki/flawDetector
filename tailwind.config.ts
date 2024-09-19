@@ -55,6 +55,7 @@ const config: Config = {
         'purple-dark': '#e3e1e7',
         'red-light': '#ffefef',
         'gray-light': '#f1f1f1',
+        'gray-middle': '#c3c3c3',
         'gray-dark': '#c2c2c2',
         'gray-default': '#969696',
         'gray-black': '#3F3F3F',

@@ -12,7 +12,7 @@ export default function ScrapCard({ title, date, label }: ScrapCardProps) {
   const { labelStyle, labelText } = elementByLabel[label];
 
   return (
-    <div className="relative flex h-[21.7rem] w-[42.2rem] flex-col rounded-[0.8rem] border-[0.1rem] border-[#c3c3c3] bg-white p-[2.8rem]">
+    <div className="relative flex h-[21.7rem] w-[42.2rem] flex-col rounded-[0.8rem] border-[0.1rem] border-gray-middle bg-white p-[2.8rem]">
       <label
         className={twMerge(
           'flex h-[3.5rem] w-fit items-center justify-center rounded-full px-[1.2rem] py-[0.8rem] text-[1.6rem] font-regular leading-[1.936rem]',

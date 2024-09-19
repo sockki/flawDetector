@@ -31,7 +31,7 @@ export default function Button({
 
   const variantDisabledStyles = {
     filled: 'bg-gray-light text-gray-default',
-    outlined: 'bg-gray-light text-gray-default border-[#c3c3c3] border-[0.1rem]',
+    outlined: 'bg-gray-light text-gray-default border-gray-middle border-[0.1rem]',
     tonal: 'bg-purple-light text-primary-100',
   };
 
