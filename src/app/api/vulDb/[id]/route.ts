@@ -46,7 +46,7 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
 
       const relativeQuery = query(
         collection(db, 'vulDb'),
-        where('company', '==', articleDetailData.company),
+        where('company', '==', articleDetailData.company ? articleDetailData.company : 'other'),
         limit(6),
       );
 
