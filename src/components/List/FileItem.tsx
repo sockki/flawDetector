@@ -14,6 +14,7 @@ type FileItemProps = {
   isMarked?: boolean;
   onFileClick: () => void;
   onCheckClick: () => void;
+  isChecked: boolean;
 };
 
 export function FileItem({
@@ -23,6 +24,7 @@ export function FileItem({
   isMarked: initialIsMarked = false,
   onFileClick,
   onCheckClick,
+  isChecked,
 }: FileItemProps) {
   const containerStyles = twMerge(
     'group flex h-[5.2rem] w-[24.7rem] flex-col justify-center gap-[0.4rem] border-t border-gray-300 p-[1rem] align-middle hover:bg-purple-light cursor-pointer',
@@ -34,7 +36,6 @@ export function FileItem({
   const infoStyles = 'flex gap-[0.7rem] items-center text-[1.6rem] text-gray-black';
 
   const [isMarked, setIsMarked] = useState(initialIsMarked);
-  const [isChecked, setIsChecked] = useState(false);
 
   const handleBookmark = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -48,7 +49,6 @@ export function FileItem({
   const handleCheckClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
-      setIsChecked(prevIsMarked => !prevIsMarked);
       onCheckClick();
     },
     [], // 의존성 배열
