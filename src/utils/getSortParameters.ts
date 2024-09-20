@@ -1,6 +1,4 @@
-import { SortOption } from '@/types/sortAndFilter';
-
-export const getSortParameters = (sortOption: SortOption): [string, 'asc' | 'desc'] => {
+export const getSortParameters = (sortOption: string): [string, 'asc' | 'desc'] => {
   let orderField = 'pushedAt';
   let direction: 'asc' | 'desc' = 'desc';
 
