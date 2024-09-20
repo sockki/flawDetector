@@ -1,5 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/(.*)',
+        has: [
+          {
+            type: 'host',
+            value: 'flawdetector.co.kr',
+          },
+        ],
+        destination: `${process.env.NEXT_PUBLIC_API_ORIGIN}/:path*`,
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'avatars.githubusercontent.com', port: '', pathname: '/**' },
