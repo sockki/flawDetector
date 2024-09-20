@@ -1,28 +1,36 @@
 'use client';
 
-import { getFirestoreRepositories } from '@/firebase/firebaseRepository';
 import { DetectFileCardArrowIcon, DetectFileCardBugIcon, DetectFileCardStar } from '@/public/index';
 import { useRepoStore } from '@/stores/useRepoStore';
-import type { DetectFileCardProps, ElementByLabel } from '@/types/detectedFileCard';
+import type {
+  DetectFileCardProps,
+  DetectFileLabelType,
+  ElementByLabel,
+} from '@/types/detectedFileCard';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 async function updateBookmarkStatus(userId: string, repoName: string, isBookmarked: boolean) {
-  const response = await fetch('/api/repositories', {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      userId,
-      repoName,
-      isBookmarked,
-    }),
-  });
-  if (!response.ok) {
-    throw new Error('북마크 상태 업데이트 실패');
+  try {
+    const response = await fetch('/api/repositories', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId,
+        repoName,
+        isBookmarked,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error('북마크 상태 업데이트 실패');
+    }
+  } catch (error) {
+    console.error('북마크 상태 업데이트 에러:', error);
+    throw error;
   }
 }
 
@@ -35,18 +43,27 @@ export default function DetectFileCard({ title, date, userId, userName }: Detect
   const [isChecked] = useState(repos?.isChecked || 'before');
 
   useEffect(() => {
-    const fetchRepoStatus = async () => {
-      const updatedRepos = await getFirestoreRepositories(userId.toString(), '최신순');
-      if (updatedRepos) {
-        updatedRepos.repos.forEach(repo => {
-          updateRepoStatus(repo.name, repo.isChecked);
-        });
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/api/repositories/status?userId=${userId}`);
+        const data = await res.json();
+
+        if (data.repos) {
+          data.repos.forEach((repo: { name: string; isChecked: DetectFileLabelType }) => {
+            const existingRepo = repositories.find(r => r.name === repo.name);
+
+            if (existingRepo && existingRepo.isChecked !== repo.isChecked) {
+              updateRepoStatus(repo.name, repo.isChecked);
+            }
+          });
+        }
+      } catch (error) {
+        console.error('API 요청 실패:', error);
       }
     };
-    fetchRepoStatus();
-  }, [userId, updateRepoStatus]);
 
-  if (!repos) return null;
+    fetchData();
+  }, [updateRepoStatus]);
 
   const elementByLabel: ElementByLabel = {
     before: {
@@ -72,23 +89,25 @@ export default function DetectFileCard({ title, date, userId, userName }: Detect
   const { labelStyle, labelText, buttonStyle, buttonText } = elementByLabel[isChecked];
 
   const onClickBookmark = async () => {
-    try {
-      setIsBookmark(prev => !prev);
+    setIsBookmark(prev => !prev);
 
-      setRepositories(
-        repositories.map(repo =>
-          repo.name === title ? { ...repo, isBookmarked: !isBookmark } : repo,
-        ),
-      );
+    setRepositories(
+      repositories.map(repo =>
+        repo.name === title ? { ...repo, isBookmarked: !isBookmark } : repo,
+      ),
+    );
+    try {
       await updateBookmarkStatus(userId, title, !isBookmark);
     } catch (error) {
-      console.error(error);
+      setIsBookmark(prev => !prev);
     }
   };
 
   const onClickCheckStatus = () => {
-    addRecentViewed(repos);
-    router.push(`/repos/${userName}/${title}`);
+    if (repos) {
+      addRecentViewed(repos);
+      router.push(`/repos/${userName}/${title}`);
+    }
   };
 
   return (

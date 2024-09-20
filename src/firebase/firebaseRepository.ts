@@ -10,7 +10,6 @@ import {
   orderBy,
 } from 'firebase/firestore';
 import { GitHubRepoData } from '@/types/repository';
-import { SortOption } from '@/types/sortAndFilter';
 import { getSortParameters } from '@/utils/getSortParameters';
 import { countRepoFiles } from '@/utils/countRepoFiles';
 import { db } from './firebaseConfig';
@@ -49,20 +48,21 @@ export const saveRepositories = async (userId: string, repoData: GitHubRepoData[
   }
 };
 
-export const getFirestoreRepositories = async (userId: string, sortOption: SortOption) => {
+export const getFirestoreRepositories = async (userId: string, sortOption: string) => {
   const userRepoRef = collection(db, 'users', userId.toString(), 'repositories');
   const [orderField, direction] = getSortParameters(sortOption);
+
   const repoQuery = query(userRepoRef, orderBy(orderField, direction));
 
   try {
     const querySnapshot = await getDocs(repoQuery);
+
     const repos = querySnapshot.docs.map(repoDoc => ({
       id: repoDoc.id,
       name: repoDoc.data().name,
       isChecked: repoDoc.data().isChecked,
       ...repoDoc.data(),
     }));
-
     return { repos };
   } catch (error) {
     console.error('Firestore에서 레포지토리 조회 중 오류 발생:', error);
