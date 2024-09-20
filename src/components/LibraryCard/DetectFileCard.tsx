@@ -2,7 +2,11 @@
 
 import { DetectFileCardArrowIcon, DetectFileCardBugIcon, DetectFileCardStar } from '@/public/index';
 import { useRepoStore } from '@/stores/useRepoStore';
-import type { DetectFileCardProps, ElementByLabel } from '@/types/detectedFileCard';
+import type {
+  DetectFileCardProps,
+  DetectFileLabelType,
+  ElementByLabel,
+} from '@/types/detectedFileCard';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
