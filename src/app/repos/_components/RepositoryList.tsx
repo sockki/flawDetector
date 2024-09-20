@@ -30,7 +30,6 @@ const perPage = 16;
 export default function RepositoryList({ user, repositories, searchParams }: RepositoryListProps) {
   const router = useRouter();
   const { setRepositories, filteredRepositories, setFilteredRepositories } = useRepoStore();
-  const [, setTypeFilter] = useState<TypeFilterOption>();
   const [selectedSortOption, setSelectedSortOption] = useState<string>('최신순');
 
   const userId = user?.id || '';
@@ -40,14 +39,13 @@ export default function RepositoryList({ user, repositories, searchParams }: Rep
   useEffect(() => {
     setRepositories(repositories);
     setFilteredRepositories(repositories);
-  }, [repositories, setRepositories, setFilteredRepositories]);
+  }, [repositories]);
 
   const totalPage = Math.ceil((filteredRepositories?.length || 0) / perPage);
   const pageData = filteredRepositories.slice((nowPage - 1) * perPage, nowPage * perPage);
 
   const handleTypeSelect = (v: string) => {
     const selectedType = v as TypeFilterOption;
-    setTypeFilter(selectedType);
 
     let filteredRepos = [...repositories];
     if (selectedType === '검사완료') {
