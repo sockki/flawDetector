@@ -1,6 +1,7 @@
 'use client';
 
 import { SearchIcon } from '@/public/index';
+import { useSession } from 'next-auth/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
@@ -11,6 +12,8 @@ export default function VulDbSearchInput() {
   const search = searchParams.get('search');
   const [searchValue, setSearchValue] = useState(search || '');
   const [searchError, setSearchError] = useState<string | null>(null);
+  const session = useSession();
+  const userId = session.data?.user.id;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -67,7 +70,8 @@ export default function VulDbSearchInput() {
             value={searchValue}
             onChange={handleChange}
             className="h-full w-full text-[2.4rem] font-regular leading-[3.36rem] placeholder:text-[#d6d6d6] focus:outline-none"
-            placeholder="검색어를 입력해주세요"
+            placeholder={userId ? '검색어를 입력해주세요' : '로그인 후 이용해주세요'}
+            disabled={!userId}
           />
           <button type="submit">
             <SearchIcon />

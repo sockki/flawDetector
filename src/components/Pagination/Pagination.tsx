@@ -1,6 +1,7 @@
 'use client';
 
 import { PaginationArrowIcon } from '@/public/index';
+import { useSession } from 'next-auth/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { twMerge } from 'tailwind-merge';
@@ -16,9 +17,15 @@ export default function Pagination({ nowPage, totalPage }: PaginationProps) {
   const params = new URLSearchParams(searchParams);
   const router = useRouter();
   const firstNumber = nowPage - (((nowPage - 1) % 10) + 1) + 1;
+  const session = useSession();
+  const userId = session.data?.user.id;
 
   if (totalPage === 1) {
     return null;
+  }
+
+  if (!userId) {
+    return <div />;
   }
 
   return (
