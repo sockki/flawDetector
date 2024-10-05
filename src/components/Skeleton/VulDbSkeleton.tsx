@@ -1,9 +1,6 @@
-export default function Loading() {
+export default function VulDbSkeleton() {
   return (
-    <div
-      role="status"
-      className="mb-[19.6rem] mt-[2.701rem] flex animate-pulse flex-col items-center gap-[7.6rem]"
-    >
+    <div className="mb-[19.6rem] mt-[2.701rem] flex animate-pulse flex-col items-center gap-[7.6rem]">
       <div className="flex gap-[3.4rem]">
         <div className="flex h-[39rem] w-[62.5rem] rounded-[2rem] bg-gray-300 p-[3.6rem]" />
         <div className="flex h-[39rem] w-[32rem] rounded-[2rem] bg-gray-300 p-[3.6rem]" />
