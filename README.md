@@ -7,7 +7,7 @@
 
 
 ## 🌐 웹사이트
-[Security-Vigilante](https://geekhub-gamma.vercel.app/)
+[FlawDetector](https://flaw-detector-vigilante.vercel.app/)
 
 
 ## 🙋‍♂️ 어떻게 사용하나요?
@@ -27,8 +27,8 @@
 ### 설치 절차
 1. 리포지토리를 클론합니다:
    ```bash
-   git clone https://github.com/security-vigilante/geekhub.git
-   cd geekhub
+   git clone https://github.com/sockki/flawDetector.git
+   cd flawDetector
    ```
 
 2. 의존성을 설치합니다:
@@ -58,28 +58,23 @@
 - **두환**
   - 📧 e-mail: [enghks2973@naver.com](mailto:enghks2973@naver.com)
   - 🐈‍⬛ GitHub: [chaduhwan](https://github.com/printjin-gmailcom)
-  - 🪩 디스코드: hwandu
 
 - **민준**
   - 📧 e-mail: [poohct327@gmail.com](mailto:poohct327@gmail.com)
   - 🐈‍⬛ GitHub: [sockki](https://github.com/sockki)
-  - 🪩 디스코드: poohct327@naver.com
 
 - **수빈**
   - 📧 e-mail: [room9light@naver.com](mailto:room9light@naver.com)
   - 🐈‍⬛ GitHub: [bang-wol](https://github.com/bang-wol)
-  - 🪩 디스코드: .bangsubeen
   - 🔥 Firebase: [milk011922@gmail.com](mailto:milk011922@gmail.com)
 
 - **연진**
   - 📧 e-mail: [printjin@gmail.com](mailto:printjin@gmail.com)
   - 🐈‍⬛ GitHub: [printjin-gmailcom](https://github.com/printjin-gmailcom)
-  - 🪩 디스코드: print_yeonjin
 
 - **영은**
   - 📧 e-mail: [popduddms@gmail.com](mailto:popduddms@gmail.com)
   - 🐈‍⬛ GitHub: [Young2un](https://github.com/Young2un)
-  - 🪩 디스코드: youngeun___
 
 
 ## 🐞 버그 및 디버그
@@ -100,8 +95,8 @@
 
 
 ## 🔄 버전 및 업데이트 정보
-- **현재 버전**: 1.0.0
-- **최신 업데이트**: 2024년 9월
+- **현재 버전**: 1.0.1
+- **최신 업데이트**: 2024년 10월 6일
 - **다음 업데이트 예정 기능**: 미정
 
 ## ❓ FAQ
