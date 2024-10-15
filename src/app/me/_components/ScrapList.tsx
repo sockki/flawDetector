@@ -32,7 +32,7 @@ export default function ScrapList({ searchParams, scrapData }: ScrapListProps) {
   const pageData = scrapData.slice((nowPage - 1) * pageItems, nowPage * pageItems);
 
   return (
-    <section className="flex min-h-screen flex-col gap-[2.4rem]">
+    <section className="flex min-h-screen flex-col gap-[2.4rem] px-[1rem]">
       <div className="flex items-center justify-between">
         <h3 className="text-[3.2rem] font-medium text-gray-black">Library</h3>
         <div className="flex gap-[1rem]">
@@ -40,7 +40,7 @@ export default function ScrapList({ searchParams, scrapData }: ScrapListProps) {
           <FilterChip label="Sort" options={sortOptions} hasIcon onSelect={handleSortSelect} />
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-[2.4rem]">
+      <div className="grid grid-cols-4 justify-items-stretch gap-[2.4rem]">
         {pageData.map(scrap => (
           <ScrapCard {...scrap} key={scrap.id} />
         ))}
