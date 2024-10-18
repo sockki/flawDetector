@@ -10,7 +10,7 @@ interface LayoutProps {
 export default function Layout({ children, params }: LayoutProps) {
   return (
     <div className="flex justify-center">
-      <div className="relative flex w-fit flex-col items-center justify-center gap-[2.0rem]">
+      <div className="relative flex w-fit flex-col items-center justify-center gap-[2rem]">
         <Title />
         <div className="flex gap-[2.8rem]">
           <RepoSide params={params} />
