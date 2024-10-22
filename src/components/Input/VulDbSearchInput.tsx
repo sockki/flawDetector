@@ -12,6 +12,7 @@ export default function VulDbSearchInput() {
   const search = searchParams.get('search');
   const [searchValue, setSearchValue] = useState(search || '');
   const [searchError, setSearchError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false); // 로딩 상태 추가
   const session = useSession();
   const userId = session.data?.user.id;
 
@@ -38,6 +39,8 @@ export default function VulDbSearchInput() {
       return;
     }
 
+    setLoading(true);
+
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/topics`, {
         method: 'POST',
@@ -56,6 +59,9 @@ export default function VulDbSearchInput() {
       setSearchError('검색어 저장 실패');
     } finally {
       setSearchValue(trimValue);
+      setTimeout(() => {
+        setLoading(false);
+      }, 700);
     }
   };
 
@@ -73,9 +79,13 @@ export default function VulDbSearchInput() {
             placeholder={userId ? '검색어를 입력해주세요' : '로그인 후 이용해주세요'}
             disabled={!userId}
           />
-          <button type="submit">
-            <SearchIcon />
-          </button>
+          {loading ? (
+            <span className="w-[6rem] text-[1.6rem] text-primary-400">검색중...</span>
+          ) : (
+            <button type="submit">
+              <SearchIcon />
+            </button>
+          )}
         </form>
       </div>
       {searchError && (
